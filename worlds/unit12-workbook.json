@@ -582,7 +582,7 @@
       "blurbEn": "Two pictures side by side, and what one of them looks like next to the other.",
       "instructionKo": "그림을 보고 [보기]와 같이 문장을 만들어 보세요.",
       "instructionEn": "Look at the pictures and complete each sentence as shown in the example.",
-      "noteEn": "Every sentence is a comparison — A가 B보다 — so the adjective is the only thing the blank supplies. The wrong buttons are the same adjective without the contraction (크아 보여요) and the adjective made into an adverb (넓게 보여요), which is a different sentence: 넓게 보여요 is about how you see it, 넓어 보여요 about how it looks.",
+      "noteEn": "Every sentence is a comparison — A가 B보다 — so the adjective is the only thing the blank supplies. The wrong buttons are the ways that adjective goes wrong in front of 보이다: the contraction not made (크아 보여요), the wrong vowel (길아 보여요, 넓아 보여요 — the stem’s own vowel picks 아 or 어), the modifier where -아/어 belongs (넓은 보여요, 날씬한 보여요), and a word that does not go with the noun (나이가 커 보여요). A-게 보이다 is not among them: 넓게 보여요 is good Korean too, as the National Institute of Korean Language confirms, so it is never offered as a mistake.",
       "example": {
         "lines": [
           {
@@ -608,7 +608,7 @@
             },
             {
               "id": "b",
-              "ko": "길게 보여요"
+              "ko": "길아 보여요"
             },
             {
               "id": "c",
@@ -617,7 +617,7 @@
           ],
           "en": "A looks longer than B.",
           "grammar": "길이 is the noun “length”, and the adjective that goes with it is 길다 — the ㄹ stays before -어요.",
-          "why": "길게 보여요 says you see it in a long way rather than that it looks long; the -게 of this unit makes adverbs, and this sentence wants 보이다. 깁니다 drops the 보이다 altogether."
+          "why": "길어 보여요 is right: the stem 길 has ㅣ, not ㅏ or ㅗ, so the ending is -어. 길아 보여요 picks the -아 that only ㅏ and ㅗ take, and 깁니다 drops the 보이다 altogether — it states the length instead of saying how it looks."
         },
         {
           "n": 2,
@@ -660,16 +660,16 @@
             },
             {
               "id": "b",
-              "ko": "넓게 보여요"
+              "ko": "넓아 보여요"
             },
             {
               "id": "c",
-              "ko": "커 보여요"
+              "ko": "넓은 보여요"
             }
           ],
           "en": "Room A looks more spacious than room B.",
-          "grammar": "A room is 넓다/좁다, the same pair as a forehead and a pair of shoulders.",
-          "why": "The key says 넓어 보여요: room A is nearly empty and room B is full of furniture, so it is the space that reads as bigger. 커 보여요 would be about the building rather than the room, and 넓게 보여요 is the adverb again."
+          "grammar": "A room is 넓다/좁다, the same pair as a forehead and a pair of shoulders. 방이 커 보여요 would be good Korean too — a room can be 크다 — but the key asks about space, and 넓다 is the word for it.",
+          "why": "The key says 넓어 보여요: room A is nearly empty and room B is full of furniture, so it is the space that reads as bigger. 넓아 보여요 takes the vowel from the wrong side — 넓 has ㅓ, so -어 — and 넓은 보여요 puts the modifier, which wants a noun after it, in front of 보이다."
         },
         {
           "n": 4,
@@ -716,12 +716,12 @@
             },
             {
               "id": "c",
-              "ko": "말라 보여요"
+              "ko": "날씬한 보여요"
             }
           ],
           "en": "A looks slimmer than B.",
-          "grammar": "A-아/어 보이다 attaches to the adjective stem, so the 하다 adjectives give 해 보여요 and the vowel stems contract: 크다 → 커 보여요, 좋다 → 좋아 보여요.",
-          "why": "날씬하 보여요 leaves the 하다 uncontracted. 말라 보여요 says thin in the sense of underfed — the book’s own key is 날씬해 보여요, and the difference between the two words is the whole reason 날씬하다 is a headword in this chapter."
+          "grammar": "A-아/어 보이다 attaches to the adjective stem, so the 하다 adjectives give 해 보여요 and the vowel stems contract: 크다 → 커 보여요, 좋다 → 좋아 보여요. 마르다 describes a thin figure as well — 말라 보여요 — but it leans towards too thin, and the key has the flattering word.",
+          "why": "날씬해 보여요 is the book’s key: 날씬하다 is a 하다 adjective, and 하 + -여 is always written 해. 날씬하 보여요 leaves the 하다 uncontracted, and 날씬한 보여요 puts the modifier — 날씬한 사람 — in front of 보이다, where no noun follows."
         }
       ]
     },
@@ -736,7 +736,7 @@
       "blurbEn": "You say what it looks like; they tell you why it is.",
       "instructionKo": "그림을 보고 [보기]와 같이 대화를 만들어 보세요.",
       "instructionEn": "Look at the pictures and complete each dialogue as shown in the example.",
-      "noteEn": "B’s line is printed and A’s is blank, so the reply is what the answer has to be built from: 옷이 두꺼워서 따뜻해요 gives 따뜻해 보이네요, not 두꺼워 보이네요. Every answer ends -네요 rather than -요, because A is remarking on something just noticed — which is what -네요 is for.",
+      "noteEn": "B’s line is printed and A’s is blank, so the reply is what the answer has to be built from: 옷이 두꺼워서 따뜻해요 gives 따뜻해 보이네요. Every answer ends -네요 rather than -요, because A is remarking on something just noticed — which is what -네요 is for. The wrong buttons are forms that cannot stand in front of 보이다: the modifier (따뜻한, 맛있는, 힘든), 보다 — the verb for trying something — in place of 보이다 (어려워 보네요, 피곤해 보네요), a stem left uncontracted or with its ㅂ kept, and a verb where the pattern wants an adjective.",
       "example": {
         "lines": [
           {
@@ -772,7 +772,7 @@
             },
             {
               "id": "b",
-              "ko": "옷이 두꺼워 보이네요"
+              "ko": "옷이 따뜻한 보이네요"
             },
             {
               "id": "c",
@@ -781,7 +781,7 @@
           ],
           "en": "A: Your coat looks warm. — B: Yes, it is thick, so it is warm.",
           "grammar": "보이다 reports what you can see of a state. What A can see is that the coat is warm on its wearer.",
-          "why": "The reply gives 두꺼워서 as the reason and 따뜻해요 as the result, so the thing A remarks on is the result: 옷이 따뜻해 보이네요. Answering 두꺼워 보이네요 makes B’s 그래서 pointless."
+          "why": "The reply gives 두꺼워서 as the reason and 따뜻해요 as the result, and the book keys the result: 옷이 따뜻해 보이네요. 옷이 따뜻한 보이네요 puts the modifier in front of 보이다, where no noun follows, and 옷이 따뜻하 보이네요 leaves 하 without the -여 that makes it 해."
         },
         {
           "n": 2,
@@ -807,12 +807,12 @@
             },
             {
               "id": "c",
-              "ko": "단어가 많아 보이네요"
+              "ko": "책이 어려워 보네요"
             }
           ],
           "en": "A: That book looks difficult. — B: Yes, there are a lot of words I do not know, so it is hard.",
           "grammar": "어렵다 is a ㅂ irregular: 어렵 + -어요 gives 어려워요, and the same 워 appears in front of 보이다.",
-          "why": "어렵어 보이네요 keeps the ㅂ. 단어가 많아 보이네요 repeats B’s reason instead of naming what A can see — and A cannot see which words B does not know."
+          "why": "어려워 보이네요 is right: 어렵다 is a ㅂ irregular, so it is 어려워 before 보이다. 어렵어 보이네요 keeps the ㅂ, and 어려워 보네요 is 보다 — the verb for trying something, as in 먹어 보세요 — where how the book looks needs 보이다."
         },
         {
           "n": 3,
@@ -834,7 +834,7 @@
             },
             {
               "id": "b",
-              "ko": "케이크가 맛있게 보이네요"
+              "ko": "케이크가 맛있는 보이네요"
             },
             {
               "id": "c",
@@ -843,7 +843,7 @@
           ],
           "en": "A: That cake looks delicious. — B: Yes, it really is. Do try some.",
           "grammar": "맛있다 already ends in 있다, so it takes -어요 and gives 맛있어. The thing being looked at is the subject, so it is 케이크가.",
-          "why": "케이크를 makes the cake an object, and 보이다 has no object — you do not look at it, it looks. 맛있게 보이네요 is the adverb, which describes how the looking is done."
+          "why": "케이크를 makes the cake an object, and 보이다 has no object — you do not look at it, it looks. 케이크가 맛있는 보이네요 puts the modifier 맛있는, which only a noun can follow, in front of 보이다."
         },
         {
           "n": 4,
@@ -865,7 +865,7 @@
             },
             {
               "id": "b",
-              "ko": "피곤하게 보이네요"
+              "ko": "피곤해 보네요"
             },
             {
               "id": "c",
@@ -873,8 +873,8 @@
             }
           ],
           "en": "A: You look tired. — B: Yes, I did not sleep well, so I am a bit tired.",
-          "grammar": "A-아/어 보이다 takes an adjective, and 잠을 못 자다 is a verb — which is why the third button cannot be right whatever it means.",
-          "why": "잠을 못 자 보이네요 puts a verb where the pattern wants an adjective. 피곤하게 보이네요 is the -게 adverb once more; the sentence the book keys is 피곤해 보이네요, and it is also the 자기 평가 answer on p.87 of the textbook."
+          "grammar": "A-아/어 보이다 takes an adjective, and 잠을 못 자다 is a verb — which is why 잠을 못 자 보이네요 cannot be right whatever it means.",
+          "why": "The book keys 피곤해 보이네요, and it is also the 자기 평가 answer on p.87 of the textbook. 피곤해 보네요 is 보다, the verb for trying something, where how someone looks needs 보이다, and 잠을 못 자 보이네요 puts a verb where the pattern wants an adjective."
         },
         {
           "n": 5,
@@ -900,12 +900,12 @@
             },
             {
               "id": "c",
-              "ko": "힘들게 보이네요"
+              "ko": "힘든 보이네요"
             }
           ],
           "en": "A: You look worn out. — B: Yes, I have been exercising a lot, so I am a bit worn out.",
           "grammar": "힘들다 keeps its ㄹ in front of -어요, so it is 힘들어요 and 힘들어 보여요.",
-          "why": "힘드러 보이네요 is [히므러] written down — the ㄹ moves in the sound and stays where it is on the page. 힘들게 보이네요 is the adverb again, the fourth row in a row to offer it."
+          "why": "힘드러 보이네요 is [히므러] written down — the ㄹ moves in the sound and stays where it is on the page. 힘든 보이네요 is the modifier of 힘든 일 in front of 보이다, where no noun follows."
         }
       ]
     },
@@ -1258,7 +1258,7 @@
       "blurbEn": "Not a fact — a leaning. And an adjective and a verb take different endings for it.",
       "instructionKo": "그림을 보고 [보기]와 같이 대화를 만들어 보세요.",
       "instructionEn": "Look at the pictures and complete each dialogue as shown in the example.",
-      "noteEn": "This is the chapter’s own title in exercise form, and the whole difficulty is which of two endings a word takes: an adjective gets -(으)ㄴ 편이다 and a verb gets -는 편이다. Every wrong button in this exercise is the other ending on the right word. 만들다 is the last row on purpose — its ㄹ drops before -는, so the answer is 만드는 편이에요 and not 만들는.",
+      "noteEn": "This is the chapter’s own title in exercise form, and the whole difficulty is which of two endings a word takes: an adjective gets -(으)ㄴ 편이다 and a verb gets -는 편이다. Most wrong buttons are the other ending on the right word; the rest are a shape 편 cannot follow, and on row 4 the honorific of A’s question copied onto B’s answer. 만들다 is the last row on purpose — its ㄹ drops before -는, so the answer is 만드는 편이에요 and not 만들는.",
       "example": {
         "lines": [
           {
@@ -1391,12 +1391,12 @@
             },
             {
               "id": "c",
-              "ko": "못 먹는 편이에요"
+              "ko": "안 먹는 편이세요"
             }
           ],
           "en": "A: Do you usually eat breakfast? — B: No, I have no time, so I tend not to.",
           "grammar": "안 stays in front of the verb and the 편이다 goes on the end: 안 먹는 편이에요.",
-          "why": "안 먹은 편이에요 is the adjective ending on a verb again. 못 먹는 편이에요 would say he is unable to eat, where 시간이 없어서 says he chooses not to."
+          "why": "안 먹은 편이에요 is the adjective ending on a verb again. 안 먹는 편이세요 copies the honorific of A’s question onto B’s own habit, and nobody honours themselves: A says 드세요 because it is B being asked about. With 시간이 없어서, 못 먹는 편이에요 would be good Korean too, but the key is 안 먹는 편이에요."
         },
         {
           "n": 5,
@@ -2032,7 +2032,7 @@
       "blurbEn": "Two words from the teacher; a sentence back.",
       "instructionKo": "[보기]와 같이 대답해 보세요.",
       "instructionEn": "Answer as shown in the example.",
-      "noteEn": "The teacher reads a noun and an adjective and you join them, so the particle is yours to supply as well as the ending: 성격 becomes 성격이, 키 becomes 키가. Every wrong button is the right adjective with the wrong contraction, because that is the only thing this drill can get wrong once the frame is heard.",
+      "noteEn": "The teacher reads a noun and an adjective and you join them, so the particle is yours to supply as well as the ending: 성격 becomes 성격이, 키 becomes 키가. The wrong buttons are what that join can get wrong: the particle (성격을), an adjective with no ending at all (좋 보여요), the contraction (크어, 어렵어), the modifier where -아/어 belongs (재미있는), 보다 in place of 보이다 (재미있어 봐요) and the wrong word for a person’s height (높아).",
       "example": {
         "lines": [
           {
@@ -2143,7 +2143,7 @@
             },
             {
               "id": "b",
-              "ko": "영화가 재미있게 보여요"
+              "ko": "영화가 재미있어 봐요"
             },
             {
               "id": "c",
@@ -2152,7 +2152,7 @@
           ],
           "en": "T: film, interesting — S: The film looks good.",
           "grammar": "재미있다 ends in 있다 and takes -어요, giving 재미있어 보여요.",
-          "why": "재미있게 보여요 is the -게 adverb from later in the same chapter and describes the watching. 재미있는 is the modifier and needs a noun after it.",
+          "why": "재미있어 보여요 is right. 영화가 재미있어 봐요 is 보다, the verb for trying something, where how the film looks needs 보이다, and 재미있는 is the modifier and needs a noun after it.",
           "audio": {
             "src": "audio/book/2b-u12-p1-3.mp3",
             "askEnd": 3

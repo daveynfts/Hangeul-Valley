@@ -188,6 +188,38 @@ ex.forEach((e) => e.items.forEach((row) => {
 assert(silent.length === 0, 'every note quotes at least one of its own buttons'
   + (silent.length ? ' — ' + silent.join(', ') : ''));
 
+// A wrong button has to be wrong. Eleven of this bank’s once were good Korean in their slot, and
+// all eleven are pinned so a later edit cannot bring them back:
+//   * A-게 보이다 — 길게 보여요, 넓게 보여요, 맛있게 보이네요, 피곤하게 보이네요, 힘들게 보이네요,
+//     재미있게 보여요. The National Institute of Korean Language answers that -게 보이다 and
+//     -아/어 보이다 are both correct (온라인가나다, qna_seq 316972); this chapter practises the
+//     second, which is a reason to key it, not to mark the first wrong.
+//   * 방이 커 보여요 — a room can be 크다; 말라 보여요 — 마르다 describes a thin figure too;
+//     옷이 두꺼워 보이네요 and 단어가 많아 보이네요 — B’s 네 answers either remark; and
+//     못 먹는 편이에요 after 시간이 없어서, which is if anything the more natural of the two.
+const wrongButRight = [];
+const PINNED = [
+  [null, /[가-힣]게 보(여요|이네요)$/],
+  ['u12-grammar-1-1:3', /^커 보여요$/], ['u12-grammar-1-1:5', /^말라 보여요$/],
+  ['u12-grammar-1-2:1', /^옷이 두꺼워 보이네요$/], ['u12-grammar-1-2:2', /^단어가 많아 보이네요$/],
+  ['u12-grammar-3-1:4', /^못 먹는 편이에요$/]
+];
+ex.forEach((e) => e.items.forEach((row) => {
+  const at = e.id + ':' + row.n;
+  [[row.choices, row.answer], [row.choices2, row.answer2]].forEach(([list, ans]) => {
+    (list || []).filter((c) => c.id !== ans).forEach((c) => {
+      PINNED.forEach(([where, re]) => {
+        if ((where === null || where === at) && re.test(nfc(c.ko))) wrongButRight.push(at + ' «' + c.ko + '»');
+      });
+    });
+  });
+}));
+assert(wrongButRight.length === 0, 'and no wrong button is one a Korean speaker would accept — -게 보이다 above all'
+  + (wrongButRight.length ? ' — ' + wrongButRight.join(', ') : ''));
+const geNote = ex.find((e) => e.id === 'u12-grammar-1-1');
+assert(/넓게 보여요 is good Korean/.test(geNote.noteEn) && /National Institute of Korean Language/.test(geNote.noteEn),
+  'and the page says why -게 보이다 is never offered as a mistake, and on whose authority');
+
 // ── 4. It drills what the chapter teaches ───────────────────────────────────
 console.log('\n--- 4. It drills what the chapter teaches ---');
 const allAnswers = [];
