@@ -3071,11 +3071,15 @@ class FarmScene extends Phaser.Scene {
   // wrong clears its plot (failReviewPlot), and a relearning word whose crop was lost to a level
   // change would otherwise wait for good. srsDueWords only offers words that have left their
   // learning steps, so nothing still growing is planted twice.
+  //
+  // Only what today holds is planted (srsReviewQueue): past SRS_CFG.DAILY_REVIEW_CAP the rest of
+  // a backlog waits for the next study day instead of refilling every plot as it empties.
   _plantDueReviews(){
     if(!this.plots) return 0;
     const now = Date.now();
-    const due = srsDueWords(now).filter(d => srsIsGraduated(d.entry) && !plantedWords.has(d.word.ko));
-    if(!due.length) return 0;
+    const queue = srsReviewQueue(now);
+    const due = queue.today.filter(d => srsIsGraduated(d.entry) && !plantedWords.has(d.word.ko));
+    if(!due.length) return { planted: 0, remaining: 0, waiting: queue.waiting, left: queue.left, cap: queue.cap };
 
     const freePlots = this.plots.filter(p => p.active && !p.ko);
     const RESERVED_FOR_NEW = 2;
@@ -3098,14 +3102,28 @@ class FarmScene extends Phaser.Scene {
     });
 
     if(planting.length) savePlotsFn();
-    return { planted: planting.length, remaining: due.length - planting.length };
+    return { planted: planting.length, remaining: due.length - planting.length,
+      waiting: queue.waiting, left: queue.left, cap: queue.cap };
   }
 
   // Called on farm entry, when the player returns from a minigame, and on the growth tick —
   // reviews come due during a session too, and a relearning step is only a minute long.
   _refreshDueReviews(announce = true){
     const res = this._plantDueReviews();
-    if(!res || !res.planted) return;
+    if(!res) return;
+    // The limit reached with reviews still owed: said once a study day, so the plots going
+    // quiet reads as a day's work done rather than as reviews that stopped arriving.
+    if(!res.planted && res.waiting > 0 && res.left === 0){
+      const day = srsDayStart(Date.now());
+      if(announce && this._capNoticeDay !== day){
+        this._capNoticeDay = day;
+        showToast(hvT(res.waiting === 1 ? 'ui.toast.review.capReached.one' : 'ui.toast.review.capReached',
+          { cap: res.cap, n: res.waiting }), 5200);
+      }
+      updateHUD();
+      return;
+    }
+    if(!res.planted) return;
     const msg = res.remaining > 0
       ? hvT(res.planted === 1 ? 'ui.toast.review.dueMore.one' : 'ui.toast.review.dueMore', { n: res.planted, more: res.remaining })
       : hvT(res.planted === 1 ? 'ui.toast.review.due.one' : 'ui.toast.review.due', { n: res.planted });

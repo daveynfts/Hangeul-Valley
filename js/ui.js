@@ -149,7 +149,8 @@ function updateHUD() {
   // The bar now tracks how much of the level has been learned, which persists across
   // sessions, rather than a session-local plant counter that reset every reload.
   const learnedPct = calcLevelProgress(currentLevelIndex);
-  const due = srsDueWords().length;
+  // What today asks for, not the whole backlog: the daily limit holds the rest back.
+  const due = srsReviewQueue().today.length;
   const maturePct = calcLevelMastery(currentLevelIndex);
   hudProgressEl.textContent = `${learnedPct}%`;
   hudProgressEl.title = hvT('ui.hud.progress.title', { learned: learnedPct, mature: maturePct })

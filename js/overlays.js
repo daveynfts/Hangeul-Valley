@@ -1491,8 +1491,10 @@ function renderProgressOverlay() {
   if (!grid) return;
 
   const totalWords = unlockedLevels.reduce((a, i) => a + (levelsData[i]?.words?.length || 0), 0);
+  const queue = srsReviewQueue();
   const cards = [
     { cls: 'gold',  val: s.dueNow,                       lbl: hvT('ui.prog.dueNow') },
+    { cls: '',      val: queue.answered + '/' + queue.cap, lbl: hvT('ui.prog.reviewsToday') },
     { cls: 'green', val: s.mature,                       lbl: hvT('ui.prog.mature', { d: SRS_CFG.MATURE_IVL }) },
     { cls: '',      val: s.graduated,                    lbl: hvT('ui.prog.learned') },
     { cls: '',      val: s.learning,                     lbl: hvT('ui.prog.learning') },
@@ -1500,6 +1502,10 @@ function renderProgressOverlay() {
     { cls: s.retention !== null && s.retention < 80 ? 'rose' : 'green',
       val: s.retention === null ? '—' : s.retention + '%', lbl: hvT('ui.prog.retention') },
   ];
+  // Reviews the daily limit is holding for later, beside the two it explains.
+  if (queue.waiting > 0) {
+    cards.splice(2, 0, { cls: 'rose', val: queue.waiting, lbl: hvT('ui.prog.waiting') });
+  }
   // Lifetime retention moves slowly once there is history behind it, so a rolling figure
   // over the last 50 answers is what actually reflects how the current session is going.
   const recent = recentAccuracy(50);

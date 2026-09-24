@@ -167,6 +167,22 @@ Once graduated, a word resurfaces on its own schedule. Open the farm and words t
 have come due are already standing there as ripe crops: harvesting one is its review.
 Two plots are always kept free so a review backlog never blocks learning something new.
 
+Reviews come due **by the day**. A due date is a timestamp — the last answer plus the
+interval — and read to the minute it drifted with the hour the player sat down: studying at
+nine one evening and at eight the next found yesterday's words not due yet. A review is owed
+from the start of the day its date falls on (the day turns over at local midnight, the same
+day the quest board keeps), but never before the scheduler would count the answer. A word
+answered at 23:00 falls due "tomorrow" an hour later, and offering it then would ask for a
+review that earns nothing, so it also waits until 80% of its interval has passed
+(`srsReviewAvailableAt` in `js/systems/srs.js`).
+
+**A day asks for 100 reviews at most** (`SRS_CFG.DAILY_REVIEW_CAP`). Past that the rest wait
+for the next day, most overdue first, and the HUD counts what today holds rather than the
+whole backlog; the progress panel shows the day as answered/limit and what is waiting.
+Relearning steps are neither counted nor held back — they finish a lapse already paid for.
+The count is read off the attempt log, where each scheduled review is flagged `rv`, so two
+devices' days add up when their saves merge. `tests/test_daily_review_cap.js` covers both.
+
 Answers are graded Again / Hard / Good / Easy, inferred from signals that cannot be
 gamed — a wrong attempt, a paid hint or a near-miss all mean Hard; a clean fast typed
 answer means Easy. Failing a review is a lapse: the word loses half its interval, its
@@ -854,21 +870,16 @@ an open one kept `test_m1_challenger_harness.js` from ever exiting.
    phone; installability is what is left. Phaser is vendored now (`vendor/`), so what remains
    is the manifest and a service worker — and deciding which of the CDN-served content
    (worlds, catalogues, audio) it caches.
-2. **Daily review cap and a "day rollover" notion.** Reviews currently come due at the
-   exact timestamp they were scheduled; a real study tool batches by day boundary and
-   caps how many land at once so a backlog cannot become unmanageable. More pressing than it
-   was: until the daily review loop was fixed no farm review was ever planted, so a player
-   who learned on the farm comes back to every one of those reviews overdue at once.
-3. **Cloud save through the desktop build.** Cloud save itself is done — Google sign-in,
+2. **Cloud save through the desktop build.** Cloud save itself is done — Google sign-in,
    per-account saves on R2, revisions and merging across devices (see Saves). The desktop
    wrapper serves no `/api/*`, so it has none; proxying `/api/save` and `/api/session` to the
    deployed site from `main.py` would give it one, once `http://127.0.0.1:8742` is an
    authorised origin of the Google client.
-4. **Vite / PWA modules.** Script-tag split of the engine is done (`js/*` + `js/manifest.json`).
+3. **Vite / PWA modules.** Script-tag split of the engine is done (`js/*` + `js/manifest.json`).
    Vite remains a later PR if we need minify, code-split, or a service worker.
-5. **Consider FSRS.** SM-2 is a solid baseline, but FSRS fits intervals to the learner's own
+4. **Consider FSRS.** SM-2 is a solid baseline, but FSRS fits intervals to the learner's own
    review log — and the log it needs is now being recorded (see below), so the input is there.
-6. **Stable item IDs.** `facts.json` and `srsData` key on `ko` alone, so two entries sharing
+5. **Stable item IDs.** `facts.json` and `srsData` key on `ko` alone, so two entries sharing
    a spelling would collide. All 1,500 headwords are currently unique, making this latent
    rather than live — a hash of `ko` + part of speech fixes it. The v6 → v7 respelling made
    the cost of the current scheme concrete: correcting a headword's spelling means a save
@@ -882,12 +893,12 @@ Every graded answer is appended to a bounded log (`attemptLog`, 500 entries, sav
 rest of the state): the word, the grade, which question mode produced it, the timestamp, and
 the resulting interval and state. SM-2 keeps only the current interval and ease and throws
 the history away, but retention analysis and FSRS both need it, and it cannot be
-reconstructed after the fact. Nothing depends on it yet beyond the dashboard's rolling
-accuracy and 14-day activity strip.
+reconstructed after the fact. Beyond the dashboard's rolling accuracy and 14-day activity
+strip, the daily review limit reads it: an answer to a scheduled review is flagged `rv`.
 
 Done in earlier passes: English unification, generated `facts.json`, Korean TTS, the
 SM-2 scheduler with its learning-step reconciliation, recognition and listening question
-modes, per-modality scheduling, fuzzy answer matching, the progress dashboard, the
+modes, per-modality scheduling, the study day and daily review limit, fuzzy answer matching, the progress dashboard, the
 origin-curation passes that took coverage from 30% to 100%, the 띄어쓰기 pass —
 space-insensitive grading, 64 headwords respelled, three corrected outright, six shared glosses
 split apart — closing the three paths that printed the answer during graded recall, and CI,

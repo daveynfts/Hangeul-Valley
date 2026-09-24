@@ -2743,14 +2743,18 @@ function gradeWord(ko, grade, mod = currentQuizMode, now = Date.now()){
   if (modality === PRIMARY_MODALITY && srsIsLearning(prev) && next.st === 'review') {
     graduateCompanionModalities(ko, now);
   }
-  attemptLog.push({
+  const attempt = {
     ko,
     g: grade,                     // 0 Again … 3 Easy
     m: modality,                  // which modality this answer scheduled
     at: now,
     ivl: next.ivl,                // interval the answer resulted in
     st: next.st
-  });
+  };
+  // A scheduled review, as against a learning or relearning step: what the daily limit counts.
+  // Kept on the log rather than in a counter so two devices' days add up when their logs merge.
+  if (prev.st === 'review') attempt.rv = 1;
+  attemptLog.push(attempt);
   if (attemptLog.length > ATTEMPT_LOG_MAX) attemptLog.splice(0, attemptLog.length - ATTEMPT_LOG_MAX);
   saveSRS();
   return next;
@@ -2776,19 +2780,68 @@ function srsDueWords(now = Date.now()){
   return out;
 }
 
-// Review forecast for the next `days` days. Counts every scheduled modality, since each one
-// is a separate thing the player will be asked to do.
+// ── The daily limit ──────────────────────────────────────────────────────────
+// Every review that has come due is owed at once, however many there are. A player back from
+// a fortnight away, or one whose recognition and listening tracks the v10 -> v11 migration
+// finally released, met the whole backlog as a stream that refilled every free plot as fast
+// as it was answered. SRS_CFG.DAILY_REVIEW_CAP bounds a day; the rest wait, most overdue first.
+
+// Scheduled reviews answered since the study day began, on any device whose log has merged.
+function reviewsAnsweredToday(now = Date.now()){
+  const from = srsDayStart(now);
+  let n = 0;
+  attemptLog.forEach((a) => { if (a && a.rv && a.at >= from) n++; });
+  return n;
+}
+
+// What today holds: `today` is what the farm may plant and the HUD counts — every relearning
+// step that is due, and scheduled reviews up to what the limit leaves. A review already on a
+// plot was taken out of today's allowance when it was planted, so it keeps its place ahead of
+// the rest. `waiting` is what the limit held back.
+function srsReviewQueue(now = Date.now()){
+  const cap = SRS_CFG.DAILY_REVIEW_CAP;
+  const answered = reviewsAnsweredToday(now);
+  const left = Math.max(0, cap - answered);
+  const onPlot = (d) => (typeof plantedWords !== 'undefined' && plantedWords && plantedWords.has(d.word.ko)) ? 1 : 0;
+  const due = srsDueWords(now);
+  const relearn = due.filter((d) => d.entry.st !== 'review');
+  const reviews = due.filter((d) => d.entry.st === 'review')
+    .sort((a, b) => (onPlot(b) - onPlot(a)) || (a.entry.due - b.entry.due));
+  const held = reviews.slice(0, left);
+  return {
+    today: relearn.concat(held),
+    waiting: reviews.length - held.length,
+    answered, left, cap
+  };
+}
+
+// Review forecast for the next `days` days, by study day: what each day will actually ask for.
+// Counts every scheduled modality, since each one is a separate thing the player answers.
+// What is already owed lands on today, where it used to fall off the chart, and whatever the
+// daily limit holds back is carried to the days after, so the chart agrees with the "waiting"
+// count beside it. Relearning steps are today's and are not limited.
 function srsForecast(days = 7, now = Date.now()){
-  const buckets = new Array(days).fill(0);
+  const reviews = new Array(days).fill(0);
+  let relearn = 0;
+  const today = srsDayStart(now);
   Object.values(srsData).forEach(rec => {
     if (!rec || !rec.m) return;
     Object.values(rec.m).forEach(e => {
       if (!srsIsGraduated(e) || !e.due) return;
-      const d = Math.floor((e.due - now) / DAY_MS);
-      if (d >= 0 && d < days) buckets[d]++;
+      if (e.st !== 'review') { relearn++; return; }
+      // Rounded, because a day that crosses a daylight-saving change is 23 or 25 hours long.
+      const d = Math.max(0, Math.round((srsDayStart(srsReviewAvailableAt(e)) - today) / DAY_MS));
+      if (d < days) reviews[d]++;
     });
   });
-  return buckets;
+  const cap = SRS_CFG.DAILY_REVIEW_CAP;
+  let carry = 0;
+  return reviews.map((n, d) => {
+    const owed = carry + n;
+    const asked = Math.min(owed, d === 0 ? Math.max(0, cap - reviewsAnsweredToday(now)) : cap);
+    carry = owed - asked;
+    return asked + (d === 0 ? relearn : 0);
+  });
 }
 
 // Word counts report the production track, so "learned" and "mature" mean the same thing they
@@ -2806,7 +2859,8 @@ function srsStats(){
     learning: primary.filter(srsIsLearning).length,
     graduated: primary.filter(srsIsGraduated).length,
     mature: primary.filter(srsIsMature).length,
-    dueNow: srsDueWords().length,
+    // What today will ask for, the same count the HUD shows; the daily limit applies.
+    dueNow: srsReviewQueue().today.length,
     // Share of reviews answered without a lapse — the closest thing to a retention rate
     // the game can measure without replaying the whole attempt log.
     retention: reps + lapses > 0 ? Math.round((reps / (reps + lapses)) * 100) : null,

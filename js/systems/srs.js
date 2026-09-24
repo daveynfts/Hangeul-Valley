@@ -42,6 +42,13 @@ const SRS_CFG = {
   // Fraction of the scheduled interval that must actually elapse before a correct answer
   // is allowed to grow it. Reviewing early is not punished, it just earns nothing.
   EARLY_REVIEW_RATIO: 0.8,
+  // The study day begins at this local hour: reviews come due by the day, and the daily limit
+  // below resets with it. Midnight, the same day the quest board keeps (questLocalDayKey).
+  DAY_ROLLOVER_HOUR: 0,
+  // Scheduled reviews asked per study day, at most. Past it the rest wait for the next day,
+  // most overdue first. Relearning steps are neither counted nor held back: they finish a
+  // lapse that has already been paid for.
+  DAILY_REVIEW_CAP: 100,
 };
 
 const GRADE = { AGAIN: 0, HARD: 1, GOOD: 2, EASY: 3 };
@@ -177,7 +184,34 @@ function srsIsLearning(e)  { return !!e && (e.st === 'learn' || e.st === 'relear
 // due modality — one of those two — and the farm, which plants reviews only, then dropped the
 // whole word. A production review that had come due was never planted, and the HUD's due
 // count held every word the player had ever learned.
-function srsReviewDue(e, now) { return srsIsGraduated(e) && e.due > 0 && now >= e.due; }
+function srsReviewDue(e, now) { return srsIsGraduated(e) && e.due > 0 && now >= srsReviewAvailableAt(e); }
+
+// ── The study day ────────────────────────────────────────────────────────────
+// Local time, calendar arithmetic rather than 24-hour steps, so a daylight-saving change does
+// not move the boundary off its hour.
+function srsDayStart(ts) {
+  const d = new Date(ts);
+  const h = SRS_CFG.DAY_ROLLOVER_HOUR || 0;
+  if (d.getHours() < h) d.setDate(d.getDate() - 1);
+  d.setHours(h, 0, 0, 0);
+  return d.getTime();
+}
+
+// When a review is owed. A due date is a timestamp — the moment of the last answer plus the
+// interval — and reading it to the minute made every review drift with the hour the player
+// happened to sit down: studying at nine one evening and at eight the next found yesterday's
+// words not due yet. A review is owed from the start of the day its date falls on.
+//
+// Never before the answer would count, though. The scheduler grows an interval only once
+// EARLY_REVIEW_RATIO of it has passed, and a word answered at 23:00 falls due "tomorrow" an
+// hour later; offering it then would ask for a review that earns nothing. So it waits for the
+// later of the two. Relearning steps are minutes long and keep their exact time.
+function srsReviewAvailableAt(e) {
+  if (!e || !(e.due > 0)) return 0;
+  if (e.st !== 'review') return e.due;
+  const earned = e.last > 0 ? e.last + e.ivl * DAY_MS * SRS_CFG.EARLY_REVIEW_RATIO : 0;
+  return Math.min(e.due, Math.max(srsDayStart(e.due), earned));
+}
 
 // ── The crop clock ───────────────────────────────────────────────────────────
 // The learning steps double as the plot's growth timers — 15s standing as a seedling, 45s
