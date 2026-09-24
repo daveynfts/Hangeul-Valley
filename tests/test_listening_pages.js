@@ -55,8 +55,8 @@ console.log('====================================================');
 // ── 1. Every page holds its gloss and plays something ────────────────────────
 console.log('\n--- 1. Every 듣기 page holds its English and plays a recording ---');
 const units = [...new Set(pages.map(({ f }) => f.replace(/-.*$/, '')))];
-assert(pages.length === 16 && units.length === 8,
-  'sixteen 듣기 pages across eight units (found ' + pages.length + ' across ' + units.join(', ') + ')');
+assert(pages.length === 18 && units.length === 9,
+  'eighteen 듣기 pages across nine units (found ' + pages.length + ' across ' + units.join(', ') + ')');
 const open = pages.filter(({ bank, ex }) => !(ex.holdGloss === true || bank.holdGloss === true)).map(({ ex }) => ex.id);
 assert(open.length === 0, 'every one holds its English gloss until the row is checked'
   + (open.length ? ' — ' + open.join(', ') : ''));

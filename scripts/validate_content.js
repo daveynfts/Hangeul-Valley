@@ -853,16 +853,14 @@ const overlayIds = [
   });
   check('every Unit 15 교과서 row is complete and its answer is among its choices',
     thin.length === 0, thin.slice(0, 6).join(', '));
-  // 듣기 1 and 듣기 2 are absent on purpose — both ask the learner to choose after
-  // listening, and the recording has not been supplied. Writing an answer key for a
-  // conversation nobody can hear would mean inventing one. If a 듣기 page ever appears
-  // here it has to bring an audio source with it.
+  // 듣기 1 and 듣기 2 were absent at first on purpose — both ask the learner to choose after
+  // listening, and until tracks 58 and 59 were scripted there was nothing to hear. Writing
+  // an answer key for a conversation nobody can hear would have meant inventing one. They
+  // arrived on 2026-09-24 with the tape behind every row, and this is what keeps it there:
+  // a 듣기 page here has to bring an audio source on every row.
   //
-  // This is a tripwire for a page that does not exist yet, so `listen` is empty and the
-  // check passes over nothing. That is intended, but an empty pass and a real pass read
-  // identically, and a filter that quietly stopped matching would look the same again —
-  // so the count goes in the message. `exs` is asserted non-empty above, which is what
-  // keeps the emptiness a fact about the content rather than about the filter.
+  // The count goes in the message, because an empty pass and a real pass read identically
+  // and a filter that quietly stopped matching would look like either.
   const listen = exs.filter((e) => String(e.section || '').indexOf('듣기') >= 0
     || String(e.no || '').indexOf('듣기') >= 0);
   check(`no Unit 15 듣기 page ships without a recording (${listen.length} on the page)`,
@@ -2773,7 +2771,7 @@ const overlayIds = [
         if (/^듣기/.test(String(ex.no || ''))) pages.push({ b, ex });
       });
     });
-  check(`the unit banks carry their 듣기 pages (${pages.length})`, pages.length >= 16, String(pages.length));
+  check(`the unit banks carry their 듣기 pages (${pages.length})`, pages.length >= 18, String(pages.length));
   const open = pages.filter(({ b, ex }) => !(ex.holdGloss === true || b.holdGloss === true)).map(({ ex }) => ex.id);
   check('every 듣기 page holds its English until the row is checked', open.length === 0, open.join(', '));
   const told = pages.filter(({ ex }) => /\b(?:gives|is|keys)\s*[①-⑩]/.test(String(ex.noteEn || '')))

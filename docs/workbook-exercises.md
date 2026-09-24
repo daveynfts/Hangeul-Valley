@@ -1626,6 +1626,27 @@ the flag surviving a save. Against the old renderer it fails on the three hold c
 against the old notes on four pages. `validate_content.js` holds every 듣기 page to the flag
 and to a recording on every row.
 
+## Unit 15, 듣고 말하기, and two pages the scan does not have
+
+`worlds/unit15-textbook.json` gains 듣기 1 and 듣기 2 (printed pp.148-149, tracks 58 and 59),
+thirteen pages and fifty-five rows in all. Two things were particular to it.
+
+- **The chapter's grammar was already drilled five times over.** Between the 익힘책, 문법과
+  표현 1-2, 말하기 1 and 자기 평가, 오기 전에, 졸업한 후에, 먹게 됐어요 and 익숙해졌어요 are keyed
+  again and again, and the tape uses all of them. So the 듣기 rows gap what the tape is
+  *about* — which dream, whose, how many staff, how many years — and leave the grammar in the
+  line around the gap, where it is heard in use instead of chosen a sixth time.
+- **The wrong buttons include the 준비 pictures.** The page opens on drawings of a police
+  officer, a scientist and a doctor, and a learner who has just talked about them half
+  expects to hear them; 경찰이 and 과학자가 sit among the dreams the tape does mention.
+
+The one printed section still missing is **말하기 2 on pp.146-147**, and it is missing from
+the scan, not from the book: the two pages were stuck to p.148 when the student book was
+scanned, and the edge of p.146 shows under the page number on image 140. Its dialogue is on
+the tape and in `worlds/unit15-cassette.json` (track 57, from a photograph of the page that
+arrived on 2026-09-06), but the 연습 columns under it are not, and a 말하기 page without its
+연습 is a transcript. Build it from the page, not from the tape.
+
 ## A third kind of bank: the exam world
 
 `worlds/topik2-questions.json` is the same file format again, but the world behind it is not

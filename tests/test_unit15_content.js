@@ -28,8 +28,36 @@ for (const [word, good, bad] of [
 }
 assert(world.level.words.find(w => w.ko === '수도').example.includes('서울'));
 const textbook = read('unit15-textbook');
-assert.strictEqual(textbook.exercises.length, 11);
-assert.strictEqual(textbook.exercises.flatMap(e => e.items).length, 44);
+assert.strictEqual(textbook.exercises.length, 13);
+assert.strictEqual(textbook.exercises.flatMap(e => e.items).length, 55);
+// 듣기 1 and 2 are keyed from 모범 답안 on printed p.267 — 1. ①, 2. 1) ② and 2) ②, ③. The
+// second question asks for all that apply, so its row asks for the one option that is not
+// one of his plans, which leaves ① — the book's own options, turned round.
+const page = id => textbook.exercises.find(e => e.id === id);
+const keyed = row => row.choices.find(c => c.id === row.answer).ko;
+assert(/^①/.test(keyed(page('u15sgk-listen-1').items[0])), '듣기 1 keys ①');
+assert(/^②/.test(keyed(page('u15sgk-listen-2').items[0])), '듣기 2 question 1 keys ②');
+const plans = page('u15sgk-listen-2').items.find(row => /하고 싶은 일/.test(row.lines[0].ko));
+assert(plans && /^①/.test(keyed(plans))
+  && plans.choices.filter(c => c.id !== plans.answer).map(c => c.ko.charAt(0)).sort().join('') === '②③',
+  '듣기 2 question 2 leaves ① once ② and ③, the answers 모범 답안 prints, are taken out');
+// Every row plays either its page's own track or a clip of one of its own lines, in the voice
+// the line is printed in.
+const clips = new Map(read('unit15-cassette').dictation.items.map(d => [d.audio.src, d]));
+for (const [id, track] of [['u15sgk-listen-1', 'trk58'], ['u15sgk-listen-2', 'trk59']]) {
+  const listen = page(id);
+  assert(listen.holdGloss === true, id + ': the English waits until the page is checked');
+  for (const row of [listen.example, ...listen.items]) {
+    const src = row.audio && row.audio.src;
+    assert(src && fs.existsSync(path.join(root, src)), id + ': every row plays a recording on disk');
+    const d = clips.get(src);
+    if (!d) { assert(src.endsWith(track + '.mp3'), id + ': a row with no clip plays ' + track); continue; }
+    const answer = row === listen.example ? row.answerKo : keyed(row);
+    const lines = row.lines.map(l => l.ko.replace('{}', answer));
+    const k = lines.indexOf(d.ko);
+    assert(k >= 0 && row.lines[k].who === d.who, id + ': ' + src + ' says its row’s own line, in its own voice');
+  }
+}
 for (const name of ['unit15-textbook', 'unit15-workbook']) {
   for (const e of read(name).exercises) {
     assert(e.example && e.example.answerKo && e.example.en, e.id + ': worked example');
