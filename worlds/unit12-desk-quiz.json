@@ -1,0 +1,200 @@
+{
+  "titleKo": "학습 책상",
+  "titleEn": "Faces and personalities quiz",
+  "sessionSize": 10,
+  "doneKo": "오늘 공부 끝!",
+  "againKo": "한 번 더",
+  "closeKo": "책상 닫기",
+  "correctKo": "맞아요!",
+  "wrongKo": "Answer:",
+  "artNote": "Original illustrations for 12과 are still to be drawn, so no question carries art yet. None of them needs one to be answerable: every question is about a form the chapter prints, a word on its 어휘 or 미용실 pages, the 붕어빵 of its culture page or its 받침 ㄻ rule — and one of them, 젊게 보여요, is there to say that a form the chapter does not practise is still good Korean.",
+  "questions": [
+    {
+      "id": 1,
+      "q": "What does 좋아 보여요 say that 좋아요 does not?",
+      "a": "B",
+      "choices": {
+        "A": "that the speaker has already tried it",
+        "B": "that the speaker is judging by how it looks",
+        "C": "that it used to be good but no longer is",
+        "D": "nothing — the two say the same thing"
+      }
+    },
+    {
+      "id": 2,
+      "q": "먹어 봐요 and 맛있어 보여요 both have a 보 in them. What does each one say?",
+      "a": "D",
+      "choices": {
+        "A": "both mean it looks tasty",
+        "B": "먹어 봐요 is it looks edible; 맛있어 보여요 is try it",
+        "C": "both mean try it",
+        "D": "먹어 봐요 is try eating it; 맛있어 보여요 is it looks tasty"
+      }
+    },
+    {
+      "id": 3,
+      "q": "Next to 젊어 보여요, is 젊게 보여요 wrong?",
+      "a": "A",
+      "choices": {
+        "A": "No — both are good Korean",
+        "B": "Yes — -게 cannot come before 보이다",
+        "C": "Yes — it means ‘see youthfully’",
+        "D": "Yes, except in writing"
+      }
+    },
+    {
+      "id": 4,
+      "q": "Which of these says “looks like a university student”?",
+      "a": "C",
+      "choices": {
+        "A": "대학생 보여요",
+        "B": "대학생 같은 보여요",
+        "C": "대학생처럼 보여요",
+        "D": "대학생해 보여요"
+      }
+    },
+    {
+      "id": 5,
+      "q": "인형 ___ 생겼어요 and 인형 ___ 얼굴: which pair fills the two gaps?",
+      "a": "A",
+      "choices": {
+        "A": "같이 · 같은",
+        "B": "같은 · 같이",
+        "C": "같이 · 같이",
+        "D": "같은 · 같은"
+      }
+    },
+    {
+      "id": 6,
+      "q": "Why is 가수처럼 written closed up, but 가수 같은 사람 with a space?",
+      "a": "C",
+      "choices": {
+        "A": "처럼 is shorter than 같은",
+        "B": "같은 always follows a space",
+        "C": "처럼 is a particle; 같은 is 같다",
+        "D": "either may be written either way"
+      }
+    },
+    {
+      "id": 7,
+      "q": "Which of these takes -는 편이다 rather than -(으)ㄴ 편이다?",
+      "a": "B",
+      "choices": {
+        "A": "조용하다",
+        "B": "잘 먹다",
+        "C": "많다",
+        "D": "비싸다"
+      }
+    },
+    {
+      "id": 8,
+      "q": "말이 없다 and 재미있다 take which ending before 편이에요?",
+      "a": "D",
+      "choices": {
+        "A": "-은, like other adjectives",
+        "B": "-아/어, like 보이다",
+        "C": "none at all — 없다 편이에요",
+        "D": "-는, as verbs do"
+      }
+    },
+    {
+      "id": 9,
+      "q": "Why is it 마른 편이에요 when 마르다 is a verb?",
+      "a": "C",
+      "choices": {
+        "A": "마르다 is really an adjective",
+        "B": "마른 is just another spelling of 마르는",
+        "C": "being thin is the result of 마르다",
+        "D": "the 르 irregular turns 마르는 into 마른"
+      }
+    },
+    {
+      "id": 10,
+      "q": "In 조용한 편이에요, what kind of word is 편?",
+      "a": "A",
+      "choices": {
+        "A": "a noun meaning side, plus 이다",
+        "B": "편지, a letter, cut short",
+        "C": "an ending, like -네요",
+        "D": "편하다, the word for comfortable"
+      }
+    },
+    {
+      "id": 11,
+      "q": "Why does 귀엽다 keep its ㅂ in 귀엽게 but not in 귀여워요?",
+      "a": "D",
+      "choices": {
+        "A": "-게 is never contracted",
+        "B": "-게 always keeps the dictionary form",
+        "C": "귀엽게 is simply an exception",
+        "D": "ㅂ changes only before a vowel"
+      }
+    },
+    {
+      "id": 12,
+      "q": "How is 짧게 pronounced, as in 더워서 짧게 잘랐어요?",
+      "a": "B",
+      "choices": {
+        "A": "[짭께]",
+        "B": "[짤께]",
+        "C": "[짤게]",
+        "D": "[짧게]"
+      }
+    },
+    {
+      "id": 13,
+      "q": "받침 ㄻ before a consonant, as in 젊네요, leaves which sound?",
+      "a": "B",
+      "choices": {
+        "A": "[ㄹ]",
+        "B": "[ㅁ]",
+        "C": "both, [ㄹㅁ]",
+        "D": "neither"
+      }
+    },
+    {
+      "id": 14,
+      "q": "How is 닮았어요 pronounced in 켈리 씨는 누구를 닮았어요?",
+      "a": "D",
+      "choices": {
+        "A": "[다마써요]",
+        "B": "[달아써요]",
+        "C": "[닮아써요]",
+        "D": "[달마써요]"
+      }
+    },
+    {
+      "id": 15,
+      "q": "A Korean friend looks at your family photo and says 완전히 붕어빵이네. What do they mean?",
+      "a": "A",
+      "choices": {
+        "A": "that you look like someone in it",
+        "B": "that the photo makes them feel hungry",
+        "C": "that everyone in it has a round face",
+        "D": "that the photo was taken in winter"
+      }
+    },
+    {
+      "id": 16,
+      "q": "At the hair salon, which of these asks only for a trim?",
+      "a": "C",
+      "choices": {
+        "A": "짧게 잘라 주세요",
+        "B": "파마해 주세요",
+        "C": "조금만 다듬어 주세요",
+        "D": "염색해 주세요"
+      }
+    },
+    {
+      "id": 17,
+      "q": "Someone reads alone while everyone around them chats. Their personality is most likely —",
+      "a": "B",
+      "choices": {
+        "A": "활발하다",
+        "B": "내성적이다",
+        "C": "성격이 급하다",
+        "D": "남성적이다"
+      }
+    }
+  ]
+}

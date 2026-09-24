@@ -468,6 +468,7 @@ const SOURCES = [
   { rel: 'worlds/unit10-cassette.json', label: 'Unit 10 · 듣기', unit: '2b-unit-10' },
   { rel: 'worlds/unit11-cassette.json', label: 'Unit 11 · 듣기', unit: '2b-unit-11' },
   { rel: 'worlds/unit12-workbook.json', label: 'Unit 12 · 익힘책', unit: '2b-unit-12' },
+  { rel: 'worlds/unit12-textbook.json', label: 'Unit 12 · 교과서', unit: '2b-unit-12' },
   { rel: 'worlds/unit16-workbook.json', label: 'Unit 16 · 익힘책', unit: '2b-unit-16' },
   { rel: 'worlds/unit16-textbook.json', label: 'Unit 16 · 교과서', unit: '2b-unit-16' },
   { rel: 'worlds/unit17-workbook.json', label: 'Unit 17 · 익힘책', unit: '2b-unit-17' },

@@ -345,7 +345,11 @@ console.log('\n--- 4b. Drag and drop ---');
   assert(/wbClickBlocked/.test(uiSrc), 'the click after a drag is dropped');
   ui.run('wbClickBlocked = false');
   ui.run('workbookState.focus = 2');
-  chips[4].onclick();
+  // Found by the chip it names, not by its place: a sitting deals the box in an order of its
+  // own, so the fifth chip on screen is whichever one the deal put there.
+  const stew = chips.find((c) => c.getAttribute('data-chip') === 'spicy_fish_stew');
+  assert(!!stew, 'the box draws the spicy fish stew chip');
+  stew.onclick();
   assert(ui.run('workbookState.fill[2]') === 'spicy_fish_stew',
     'a plain click still assigns a name');
   ui.run('wbClickBlocked = true');

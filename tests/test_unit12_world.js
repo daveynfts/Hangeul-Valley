@@ -24,9 +24,10 @@
  *      sentenceUses() is what validate_content runs, so it is what runs here.
  *   3. The unit is playable before a single icon is drawn — a hint emoji on every word.
  *
- * There is no desk quiz and no cassette bank yet, so nothing here asserts one. What is
- * asserted is that the farm resolves to the desk and the cassette player, because a world
- * with a station and no bank behind it is the failure this unit is next in line for.
+ * The banks behind the stations have their own suites — the 익힘책, the 교과서, the 퀴즈 and the
+ * cassette each in tests/test_unit12_*.js. What is asserted here is that the farm resolves to
+ * the desk and the cassette player, because a world with a station and no bank behind it is a
+ * station that silently offers nothing.
  *
  * Run: node tests/test_unit12_world.js
  */

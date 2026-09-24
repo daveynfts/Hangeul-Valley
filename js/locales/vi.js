@@ -890,6 +890,7 @@
   "ui.wb.head.closeWorkbook.aria": "Đóng sách bài tập",
   "ui.wb.perfect": "Trọn vẹn cả bộ!",
   "ui.wb.workbook": "Sách bài tập",
+  "ui.wb.youPut": "Bạn chọn:",
   "ui.world.click": "Bấm",
   "ui.world.tooFar": "Lại gần hơn"
 }

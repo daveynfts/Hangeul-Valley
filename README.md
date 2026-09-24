@@ -516,7 +516,7 @@ admin/           Express admin panel (writable locally; read-only on Vercel)
 api/             Vercel serverless functions (save, admin GET, Unit 10)
 ```
 
-The study desk offers up to three things, and every unit but 12 now carries all
+The study desk offers up to three things, and every unit, 10 to 18, now carries all
 three: 퀴즈 (multiple choice), 교과서 — the 교과서's own 말하기 / 듣기 / 읽기 / 과제 /
 문화 산책 / 발음 / 자기 평가 pages — and 연습 문제, the 익힘책's 어휘, 문법과 표현
 and 문형 연습 with the book's own audio on the pattern drills. Both exercise banks
@@ -525,6 +525,14 @@ of the desk menu that opened them, so nothing drills the same sentence twice.
 [docs/workbook-exercises.md](docs/workbook-exercises.md) covers the data model,
 the exercise types, cutting a drill track, and what to change when a second unit
 lands.
+
+A sitting deals each row's buttons, and each shared box's chips, in an order of its own
+(`wbDeal` in `js/ui.js`). The banks are written with the right answer first on nearly every
+row, and the renderer used to draw them in that order, so pressing 1 on every row scored full
+marks without reading a word. The order holds for the sitting and is dealt again on 다시 풀기;
+an exam bank (`drawOne`) keeps the paper's order, because its explanations cite options by
+number, and a row whose every button opens on the book's ①②③ is laid out in that order.
+`tests/test_workbook_button_order.js` drives the renderer with a seeded random source.
 
 The cassette player beside the desk plays the book's own tracks with the script alongside,
 and takes dictation one sentence at a time. Both screens draw the recording as a waveform:

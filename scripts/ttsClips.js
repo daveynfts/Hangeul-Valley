@@ -157,7 +157,7 @@ function collectTtsPhrases(root, worldId) {
     'worlds/2b-unit-18.json',
     'worlds/topik-2.json',
     'worlds/unit10-desk-quiz.json',
-    'worlds/unit11-desk-quiz.json', 'worlds/unit13-desk-quiz.json',
+    'worlds/unit11-desk-quiz.json', 'worlds/unit12-desk-quiz.json', 'worlds/unit13-desk-quiz.json',
     'worlds/unit14-desk-quiz.json', 'worlds/unit15-desk-quiz.json',
     'worlds/unit16-desk-quiz.json',
     'worlds/unit17-desk-quiz.json',

@@ -1,0 +1,2672 @@
+{
+  "id": "unit12-textbook",
+  "source": "Seoul National University Korean 2B (교과서), Unit 12 · 저는 좀 조용한 편이에요 (printed pp.68-87), with 모범 답안 on printed p.267",
+  "titleKo": "교과서",
+  "titleEn": "Textbook",
+  "pickKo": "어느 페이지를 풀까요?",
+  "pickEn": "The chapter’s own pages — one exercise at a time.",
+  "hintKo": "숫자 키로 고르고, 화살표로 옮기고, Enter로 확인해요.",
+  "checkKo": "확인",
+  "checkEn": "Check",
+  "againKo": "다시 풀기",
+  "backKo": "뒤로",
+  "doneKo": "닫기",
+  "artNote": "This chapter carries more of itself in pictures than in print: 어휘 1 is nine pairs of faces, 어휘 2 six drawings of personalities, 문법과 표현 1 연습 1 four people wearing the thing that makes them look a certain way, 문법과 표현 2 연습 1 a photograph for each noun, and 듣기 2 asks its one question with four hairstyles. Every row here is asked in the words that separate the pictures: 어휘 2’s drawings are a 그림 line saying what each one shows, the word a picture stood for is given in brackets, and the four hairstyles of 듣기 2 become short or long, permed or straight — the one question a picture decides is settled by 모범 답안 on printed p.267. Original illustrations for 12과 are still to be drawn; the rows carry no art yet.",
+  "omittedNote": "Nothing with an answer is left out; what is not here has none. The 준비 questions on pp.80, 82 and 85 ask about the learner. 말하기 1 연습 2 (p.75) and 말하기 2 연습 2 (p.79) are conversations about the learner’s own photographs and ideal type, and the 말하기 on p.81 is a role-play at the hairdresser’s. The 쓰기 half of 읽고 쓰기 (p.83) asks the learner to describe themselves, the 과제 on p.84 is a drawing game played in teams — only its model exchange is here — and the 생각 나누기 on p.85 asks about expressions in the learner’s own language. 자기 평가 1 is a tick-box of words. The personality test on p.82 has no right answer of its own either — which of each pair fits you is yours to say — so the 읽기 rows take the E형/I형 table the page prints on p.83 as their key.",
+  "exercises": [
+    {
+      "type": "build",
+      "section": "어휘",
+      "sectionEn": "Vocabulary",
+      "id": "u12sgk-vocab-1",
+      "no": "어휘 1",
+      "icon": "👀",
+      "pattern": "외모",
+      "blurbEn": "Nine pairs of faces, and the shape an adjective takes in front of 사람.",
+      "instructionKo": "[보기]와 같이 알맞은 말을 골라 문장을 완성하세요.",
+      "instructionEn": "Choose the right form, as in the example.",
+      "noteEn": "The page draws nine pairs of opposites — 눈이 크다 ↔ 작다 down to 키가 크다 ↔ 작다 — and asks the learner to say which they like, the way its 보기 does: 저는 눈이 큰 사람이 좋아요. Which half you like is yours to say, so each row names its half in brackets and asks only for the shape. That shape is what the 보기 teaches and the 익힘책 does not: the 익힘책’s 어휘 page drills these adjectives with -아요/어요, and here every one of them has to sit in front of a noun. The wrong buttons are the verb ending -는, a form that ends a sentence rather than describing a noun, and — on 두껍다 and 좁다 — the ㅂ irregular in the wrong place.",
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "저는 눈썹이 ___ 사람이 좋아요 (진하다)",
+          "lines": [
+            {
+              "ko": "저는 눈썹이 {} 사람이 좋아요."
+            }
+          ],
+          "answer": "jinhan",
+          "choices": [
+            {
+              "id": "jinhaneun",
+              "ko": "진하는"
+            },
+            {
+              "id": "jinhae",
+              "ko": "진해"
+            },
+            {
+              "id": "jinhan",
+              "ko": "진한"
+            }
+          ],
+          "en": "I like people with thick eyebrows.",
+          "why": "진한 is 진하다 with the adjective modifier -(으)ㄴ, the only shape that can sit in front of a noun like 사람. 진하는 puts the verb ending -는 on an adjective, and 진해 is how the sentence 눈썹이 진해 ends — it cannot describe anything.",
+          "grammar": "진하다 is a 하다 adjective, so the modifier is 진한 — the 하 takes ㄴ, just as 조용하다 gives 조용한 in the chapter title."
+        },
+        {
+          "n": 2,
+          "phraseKo": "저는 쌍꺼풀이 ___ 눈이 좋아요 (없다)",
+          "lines": [
+            {
+              "ko": "저는 쌍꺼풀이 {} 눈이 좋아요."
+            }
+          ],
+          "answer": "eobsneun",
+          "choices": [
+            {
+              "id": "eobsneun",
+              "ko": "없는"
+            },
+            {
+              "id": "eobseun",
+              "ko": "없은"
+            },
+            {
+              "id": "eobseo",
+              "ko": "없어"
+            }
+          ],
+          "en": "I like eyes without double eyelids.",
+          "why": "없는 is right because 있다 and 없다 take -는 in front of a noun, although they describe a state rather than an action. 없은 treats 없다 as an ordinary adjective, which it never is here, and 없어 ends a sentence instead of describing the eyes.",
+          "grammar": "있다/없다 take -는: 쌍꺼풀이 있는 눈, 쌍꺼풀이 없는 눈 — the same -는 as in 맛있는 and 재미없는."
+        },
+        {
+          "n": 3,
+          "phraseKo": "저는 입술이 ___ 사람이 좋아요 (두껍다)",
+          "lines": [
+            {
+              "ko": "저는 입술이 {} 사람이 좋아요."
+            }
+          ],
+          "answer": "dukkeoun",
+          "choices": [
+            {
+              "id": "dukkeobeun",
+              "ko": "두껍은"
+            },
+            {
+              "id": "dukkeoun",
+              "ko": "두꺼운"
+            },
+            {
+              "id": "dukkeobneun",
+              "ko": "두껍는"
+            }
+          ],
+          "en": "I like people with thick lips.",
+          "why": "두꺼운 is right: 두껍다 is a ㅂ irregular, and before the vowel of -은 its ㅂ turns into 우 — 두꺼우 + ㄴ. 두껍은 keeps the ㅂ as if the word were regular, and 두껍는 is the verb ending on an adjective.",
+          "grammar": "두껍다 → 두꺼워요, 두꺼운. Its opposite 얇다 does not do this: the 받침 of 얇 is ㄼ, not ㅂ, so it stays 얇아요, 얇은."
+        },
+        {
+          "n": 4,
+          "phraseKo": "저는 이마가 ___ 사람이 좋아요 (좁다)",
+          "lines": [
+            {
+              "ko": "저는 이마가 {} 사람이 좋아요."
+            }
+          ],
+          "answer": "jobeun",
+          "choices": [
+            {
+              "id": "jobun",
+              "ko": "좁운"
+            },
+            {
+              "id": "jobneun",
+              "ko": "좁는"
+            },
+            {
+              "id": "jobeun",
+              "ko": "좁은"
+            }
+          ],
+          "en": "I like people with narrow foreheads.",
+          "why": "좁은 is right, because 좁다 is a regular adjective that happens to end in ㅂ — it keeps the ㅂ everywhere: 좁아요, 좁은. 좁운 bends it the way 두껍다 bends, which is the mistake a ㅂ at the end of a stem invites, and 좁는 puts the verb ending on an adjective.",
+          "grammar": "Not every adjective ending in ㅂ is irregular. 좁다 is regular — 좁아요, 좁은 — while 두껍다, 가깝다 and 덥다 turn their ㅂ into 우: 두꺼워요, 가까워요, 더워요."
+        },
+        {
+          "n": 5,
+          "phraseKo": "저는 키가 ___ 사람이 좋아요 (작다)",
+          "lines": [
+            {
+              "ko": "저는 키가 {} 사람이 좋아요."
+            }
+          ],
+          "answer": "jageun",
+          "choices": [
+            {
+              "id": "jageun",
+              "ko": "작은"
+            },
+            {
+              "id": "jagneun",
+              "ko": "작는"
+            },
+            {
+              "id": "jeogeun",
+              "ko": "적은"
+            }
+          ],
+          "en": "I like people who are short.",
+          "why": "작은 is 작다 with -은 after its 받침 ㄱ. 작는 puts the verb ending on an adjective, and 적은 is 적다, the word for a small amount — a person’s height is 작다, never 적다.",
+          "grammar": "작다 is about size and 적다 about quantity: 키가 작다 is short, 돈이 적다 is little money. Both form the modifier with -은: 작은, 적은."
+        }
+      ],
+      "example": {
+        "phraseKo": "보기 · 눈이 크다",
+        "lines": [
+          {
+            "ko": "저는 눈이 {} 사람이 좋아요."
+          }
+        ],
+        "answerKo": "큰",
+        "en": "I like people with big eyes."
+      }
+    },
+    {
+      "type": "build",
+      "section": "어휘",
+      "sectionEn": "Vocabulary",
+      "id": "u12sgk-vocab-2",
+      "no": "어휘 2",
+      "icon": "🙂",
+      "pattern": "성격",
+      "blurbEn": "Six drawings of six personalities, and 것 같아요 for saying what you see.",
+      "instructionKo": "그림을 보고 [보기]와 같이 알맞은 말을 고르세요.",
+      "instructionEn": "Read what each drawing shows and choose the right words, as in the example.",
+      "noteEn": "The page puts six personality words under six drawings and asks, as its 보기 does, 성격이 어때요? — answered with a guess, 꼼꼼한 것 같아요, because a drawing only lets you guess. The drawings are here as a 그림 line saying what each one shows, and the 보기’s own word, 꼼꼼하다, is the example. Every row decides two things at once: which word the drawing is, and the shape it takes before 것 같아요 — -적이다 words become -적인, 하다 words -한. The wrong word on each row is the drawing opposite it on the page, 남성적이다 against 여성적이다 among them, so on this one page a wrong button can be another row’s right answer, and the check runs from the other side: every button is one of the page’s six words.",
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "성격이 ___ 것 같아요",
+          "lines": [
+            {
+              "who": "그림",
+              "ko": "다른 사람들은 이야기하고 있는데 혼자 조용히 책을 읽어요."
+            },
+            {
+              "who": "A",
+              "ko": "줄리앙 씨는 성격이 어때요?"
+            },
+            {
+              "who": "B",
+              "ko": "성격이 {} 것 같아요."
+            }
+          ],
+          "answer": "naeseongjeogin",
+          "choices": [
+            {
+              "id": "naeseongjeogin",
+              "ko": "내성적인"
+            },
+            {
+              "id": "naeseongjeoghan",
+              "ko": "내성적한"
+            },
+            {
+              "id": "hwalbalhan",
+              "ko": "활발한"
+            }
+          ],
+          "en": "In the drawing: reading quietly alone while the others talk. — What is Julien like? — Reserved, I think.",
+          "why": "내성적인 is right: the drawing keeps to itself while the others talk, and -적이다 is a noun with 이다, so before 것 같아요 it becomes 인 — 내성적인. 내성적한 treats it as a 하다 adjective, and 활발한 is the drawing beside it on the page, the one doing the talking.",
+          "grammar": "N-적이다 + -(으)ㄴ 것 같다 → N-적인 것 같다: 내성적인, 남성적인, 여성적인. The 하다 adjectives go the other way: 활발한, 꼼꼼한."
+        },
+        {
+          "n": 2,
+          "phraseKo": "성격이 ___ 것 같아요",
+          "lines": [
+            {
+              "who": "그림",
+              "ko": "태권도복을 입고 발차기를 하고 있어요."
+            },
+            {
+              "who": "A",
+              "ko": "유미 씨는 성격이 어때요?"
+            },
+            {
+              "who": "B",
+              "ko": "성격이 {} 것 같아요."
+            }
+          ],
+          "answer": "namseongjeogin",
+          "choices": [
+            {
+              "id": "namseongjeogineun",
+              "ko": "남성적이는"
+            },
+            {
+              "id": "namseongjeogin",
+              "ko": "남성적인"
+            },
+            {
+              "id": "yeoseongjeogin",
+              "ko": "여성적인"
+            }
+          ],
+          "en": "In the drawing: doing a kick in a taekwondo uniform. — What is Yumi like? — Masculine, I think.",
+          "why": "남성적인 is the word the page puts under the taekwondo kick, with 이다 turned into 인 before 것 같아요. 남성적이는 gives 이다 the verb ending -는, which it never takes, and 여성적인 is the drawing opposite it on the page.",
+          "grammar": "이다 takes -ㄴ before a noun, never -는: 남성적인 것, 학생인 것 — the same way an adjective does."
+        },
+        {
+          "n": 3,
+          "phraseKo": "성격이 ___ 것 같아요",
+          "lines": [
+            {
+              "who": "그림",
+              "ko": "강아지를 안고 부드럽게 웃고 있어요."
+            },
+            {
+              "who": "A",
+              "ko": "나나 씨는 성격이 어때요?"
+            },
+            {
+              "who": "B",
+              "ko": "성격이 {} 것 같아요."
+            }
+          ],
+          "answer": "yeoseongjeogin",
+          "choices": [
+            {
+              "id": "yeoseongjeoghan",
+              "ko": "여성적한"
+            },
+            {
+              "id": "namseongjeogin",
+              "ko": "남성적인"
+            },
+            {
+              "id": "yeoseongjeogin",
+              "ko": "여성적인"
+            }
+          ],
+          "en": "In the drawing: holding a puppy and smiling gently. — What is Nana like? — Feminine, I think.",
+          "why": "여성적인 matches the gentle drawing with the puppy, and it is the word the chapter uses for 나나 on track 25. 여성적한 conjugates the -적이다 word as though it were 하다, and 남성적인 is the drawing opposite, the one mid-kick.",
+          "grammar": "여성적이다 → 여성적인 것 같아요. The 그림 line’s 부드럽게 is this chapter’s A-게: 부드럽다 keeps its ㅂ before a consonant."
+        },
+        {
+          "n": 4,
+          "phraseKo": "성격이 ___ 것 같아요",
+          "lines": [
+            {
+              "who": "그림",
+              "ko": "전화를 하면서 빨리빨리 옷을 입고 나가요."
+            },
+            {
+              "who": "A",
+              "ko": "마리코 씨는 성격이 어때요?"
+            },
+            {
+              "who": "B",
+              "ko": "성격이 {} 것 같아요."
+            }
+          ],
+          "answer": "geubhan",
+          "choices": [
+            {
+              "id": "geubhan",
+              "ko": "급한"
+            },
+            {
+              "id": "geubhaneun",
+              "ko": "급하는"
+            },
+            {
+              "id": "kkomkkomhan",
+              "ko": "꼼꼼한"
+            }
+          ],
+          "en": "In the drawing: on the phone, throwing a coat on and rushing out. — What is Mariko like? — Hasty, I think.",
+          "why": "급한 fits the drawing — on the phone and into a coat at the same time, 빨리빨리 — and 성격이 급하다 is the page’s phrase for it. 급하는 puts the verb ending on an adjective, and 꼼꼼한 is the 보기’s word, for the careful one who writes everything down.",
+          "grammar": "성격이 급하다 is learnt whole, with 성격 as its subject: 성격이 급한 사람, 성격이 급해요."
+        }
+      ],
+      "example": {
+        "phraseKo": "보기 · 꼼꼼하다",
+        "lines": [
+          {
+            "who": "그림",
+            "ko": "공책에 할 일을 하나하나 적고 있어요."
+          },
+          {
+            "who": "A",
+            "ko": "유진 씨는 성격이 어때요?"
+          },
+          {
+            "who": "B",
+            "ko": "{} 것 같아요."
+          }
+        ],
+        "answerKo": "꼼꼼한",
+        "en": "In the drawing: writing down each thing to do in a notebook. — What is Yujin like? — Meticulous, I think."
+      }
+    },
+    {
+      "type": "build",
+      "section": "문법과 표현 1",
+      "sectionEn": "Grammar and expression 1",
+      "id": "u12sgk-gram-1",
+      "no": "문법 1",
+      "icon": "🔍",
+      "pattern": "A-아/어 보이다",
+      "blurbEn": "How something looks from the outside: the adjective, then 보이다.",
+      "instructionKo": "[보기]와 같이 알맞은 형태를 고르세요.",
+      "instructionEn": "Choose the right form, as in the example.",
+      "noteEn": "The 대화 on track 22, two of the three 예 on p.72, and two of the drawings from 연습 1, whose words the page prints in a box — 키가 크다, 날씬하다, 멋있다, 똑똑하다, 어리다, 뚱뚱하다 — with the one each row needs in brackets. The page’s own 보기, 그 구두를 신으니까 키가 커 보여요, is the example. The wrong buttons are the same three mistakes throughout: the -아/어 left uncontracted or missing (비싸아, 똑똑하), the modifier -(으)ㄴ put where -아/어 belongs (좋은, 무거운, 어린), and 보다 — the verb for trying something — where the adjective needs 보이다. One form is deliberately never offered as a mistake: A-게 보이다, as in 젊게 보여요, is good Korean too, and the National Institute of Korean Language says so. This page practises the other one.",
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "스티븐 씨, 오늘 기분이 아주 ___",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "스티븐 씨, 오늘 기분이 아주 {}."
+            },
+            {
+              "who": "B",
+              "ko": "네, 수업 끝나고 데이트가 있어요."
+            }
+          ],
+          "answer": "joha_boineyo",
+          "choices": [
+            {
+              "id": "joheun_boineyo",
+              "ko": "좋은 보이네요"
+            },
+            {
+              "id": "joha_boineyo",
+              "ko": "좋아 보이네요"
+            },
+            {
+              "id": "joha_boneyo",
+              "ko": "좋아 보네요"
+            }
+          ],
+          "en": "Steven, you look in a really good mood today. — Yes, I have a date after class.",
+          "why": "좋아 보이네요 is 좋다 with -아 and then 보이다: what A can see is Steven’s face, and the mood is a guess from it. 좋은 보이네요 puts the modifier where -아 belongs, and 좋아 보네요 is 보다 — the verb for trying something, as in 먹어 보세요 — where the adjective needs 보이다.",
+          "grammar": "좋다 has ㅗ in its stem, so it takes -아: 좋아 보이다. -네요 adds that A has only just noticed.",
+          "audio": {
+            "src": "audio/book/2b-u12-d01.mp3",
+            "labelEn": "Steven, you look in a really good mood today. — Yes, I have a date after class."
+          }
+        },
+        {
+          "n": 2,
+          "phraseKo": "시계가 ___ (비싸다)",
+          "lines": [
+            {
+              "ko": "시계가 {}."
+            }
+          ],
+          "answer": "bissa_boineyo",
+          "choices": [
+            {
+              "id": "bissaa_boineyo",
+              "ko": "비싸아 보이네요"
+            },
+            {
+              "id": "bissan_boineyo",
+              "ko": "비싼 보이네요"
+            },
+            {
+              "id": "bissa_boineyo",
+              "ko": "비싸 보이네요"
+            }
+          ],
+          "en": "That watch looks expensive.",
+          "why": "비싸 보이네요 is right, because the stem of 비싸다 already ends in ㅏ, and the -아 merges into it instead of being added again. 비싸아 보이네요 writes both, which nobody says, and 비싼 보이네요 puts the modifier in front of 보이다.",
+          "grammar": "A stem ending in ㅏ swallows the -아: 비싸 + 아 → 비싸, as in 싸요 and 가요."
+        },
+        {
+          "n": 3,
+          "phraseKo": "가방이 ___ 제가 들어 드릴까요 (무겁다)",
+          "lines": [
+            {
+              "ko": "가방이 {} 제가 들어 드릴까요?"
+            }
+          ],
+          "answer": "mugeowo_boineunde",
+          "choices": [
+            {
+              "id": "mugeowo_boineunde",
+              "ko": "무거워 보이는데"
+            },
+            {
+              "id": "mugeobeo_boineunde",
+              "ko": "무겁어 보이는데"
+            },
+            {
+              "id": "mugeoun_boineunde",
+              "ko": "무거운 보이는데"
+            }
+          ],
+          "en": "That bag looks heavy — shall I carry it for you?",
+          "why": "무거워 보이는데 is right: 무겁다 is a ㅂ irregular, so its ㅂ becomes 우 before -어 and the two contract to 워. 무겁어 keeps the ㅂ as a regular stem would, and 무거운 is the modifier, which needs a noun after it rather than 보이다.",
+          "grammar": "-는데 on 보이다 sets up the offer that follows: 무거워 보이는데 제가 들어 드릴까요? 보이다 is a verb, so it takes -는데."
+        },
+        {
+          "n": 4,
+          "phraseKo": "안경을 쓰니까 ___ (똑똑하다)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "제 안경 어때요?"
+            },
+            {
+              "who": "B",
+              "ko": "안경을 쓰니까 {}."
+            }
+          ],
+          "answer": "ttogttoghae_boyeoyo",
+          "choices": [
+            {
+              "id": "ttogttogha_boyeoyo",
+              "ko": "똑똑하 보여요"
+            },
+            {
+              "id": "ttogttoghae_boyeoyo",
+              "ko": "똑똑해 보여요"
+            },
+            {
+              "id": "ttogttoghae_bwayo",
+              "ko": "똑똑해 봐요"
+            }
+          ],
+          "en": "How are my glasses? — With them on, you look clever.",
+          "why": "똑똑해 보여요 is right: 똑똑하다 is a 하다 adjective, and 하 + -여 is written 해. 똑똑하 보여요 stops before the ending, and 똑똑해 봐요 is 보다, which would make it something to try rather than the way somebody looks.",
+          "grammar": "하다 adjectives: 똑똑하다 → 똑똑해 보여요, 피곤하다 → 피곤해 보여요. The word in brackets is from the page’s box, and the drawing it fits is the one pushing up a pair of glasses."
+        },
+        {
+          "n": 5,
+          "phraseKo": "머리를 그렇게 하니까 ___ (어리다)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "머리를 이렇게 해 봤어요."
+            },
+            {
+              "who": "B",
+              "ko": "머리를 그렇게 하니까 {}."
+            }
+          ],
+          "answer": "eoryeo_boyeoyo",
+          "choices": [
+            {
+              "id": "eorin_boyeoyo",
+              "ko": "어린 보여요"
+            },
+            {
+              "id": "eoryeo_bwayo",
+              "ko": "어려 봐요"
+            },
+            {
+              "id": "eoryeo_boyeoyo",
+              "ko": "어려 보여요"
+            }
+          ],
+          "en": "I tried doing my hair like this. — Doing it like that makes you look young.",
+          "why": "어려 보여요 is right: the ㅣ of 어리 and the -어 of the ending contract to ㅕ — 어리 + 어 → 어려. 어린 보여요 puts the modifier, as in 어린 아이, where the -어 belongs, and 어려 봐요 is 보다, something to try, rather than 보이다, how someone looks.",
+          "grammar": "ㅣ + 어 → ㅕ: 어리다 → 어려요, 어려 보여요, as 마시다 → 마셔요. The drawing it fits is the one with the hair in two bunches."
+        }
+      ],
+      "example": {
+        "phraseKo": "보기 · 키가 크다",
+        "lines": [
+          {
+            "who": "A",
+            "ko": "이 구두 어때요?"
+          },
+          {
+            "who": "B",
+            "ko": "그 구두를 신으니까 키가 {}."
+          }
+        ],
+        "answerKo": "커 보여요",
+        "en": "How are these shoes? — In those shoes you look taller."
+      }
+    },
+    {
+      "type": "build",
+      "section": "문법과 표현 1",
+      "sectionEn": "Grammar and expression 1",
+      "id": "u12sgk-gram-2",
+      "no": "문법 2",
+      "icon": "🪞",
+      "pattern": "N처럼[같이]",
+      "blurbEn": "Like a singer, like a doll: a noun standing for what it is typically like.",
+      "instructionKo": "알맞은 것을 골라 문장을 완성하세요.",
+      "instructionEn": "Choose the right words to complete each sentence.",
+      "noteEn": "The 예 and the 보기 on p.73 with the noun and its particle taken out, and one row built on the page’s 연습 1 photographs, whose point is that the noun stands for what it is typically like — a swimmer swims. The 대화 on track 23 is the example rather than a row, because the 익힘책 already drills its sentence. Two wrong buttons recur: 같은, which is 같다 made into a modifier and so needs a noun after it (인형 같은 얼굴), where 처럼 and 같이 go straight in front of a verb; and the noun with a particle that makes it the one doing the thing, or the thing being done.",
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "제 동생은 열 살인데 ___ 말해요",
+          "lines": [
+            {
+              "ko": "제 동생은 열 살인데 {} 말해요."
+            }
+          ],
+          "answer": "eoreungati",
+          "choices": [
+            {
+              "id": "eoreun_gateun",
+              "ko": "어른 같은"
+            },
+            {
+              "id": "eoreunboda",
+              "ko": "어른보다"
+            },
+            {
+              "id": "eoreungati",
+              "ko": "어른같이"
+            }
+          ],
+          "en": "My younger sibling is ten but talks like an adult.",
+          "why": "어른같이 is 같이 on the noun, and like 처럼 it goes straight in front of the verb: 어른같이 말해요. 어른 같은 is the modifier and would need a noun next — 어른 같은 말 — and 어른보다 compares, which needs something to be more of: 어른보다 말을 잘해요.",
+          "grammar": "N같이 is written closed up, as 처럼 is: 어른같이. It is the particle, not the adjective 같다, which is written apart — 어른 같은 아이."
+        },
+        {
+          "n": 2,
+          "phraseKo": "나나 씨는 ___ 생겼어요",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "나나 씨는 어떻게 생겼어요?"
+            },
+            {
+              "who": "B",
+              "ko": "나나 씨는 {} 생겼어요."
+            }
+          ],
+          "answer": "inhyeonggati",
+          "choices": [
+            {
+              "id": "inhyeonggati",
+              "ko": "인형같이"
+            },
+            {
+              "id": "inhyeong_gateun",
+              "ko": "인형 같은"
+            },
+            {
+              "id": "inhyeongi",
+              "ko": "인형이"
+            }
+          ],
+          "en": "What does Nana look like? — Nana looks like a doll.",
+          "why": "인형같이 생겼어요 is the 보기’s own sentence: 같이 on the noun, then the verb. 인형 같은 is a modifier with no noun to modify, and 인형이 생겼어요 is good Korean for something else — the other 생기다, a doll has come Nana’s way — which does not answer 어떻게 생겼어요.",
+          "grammar": "생기다 has two lives: 어떻게 생겼어요? asks what someone looks like, always in the past form, and 문제가 생겼어요 says something has come about."
+        },
+        {
+          "n": 3,
+          "phraseKo": "제 친구는 ___ 수영을 잘해요",
+          "lines": [
+            {
+              "ko": "제 친구는 {} 수영을 잘해요."
+            }
+          ],
+          "answer": "suyeong_seonsucheoreom",
+          "choices": [
+            {
+              "id": "inhyeongcheoreom",
+              "ko": "인형처럼"
+            },
+            {
+              "id": "suyeong_seonsucheoreom",
+              "ko": "수영 선수처럼"
+            },
+            {
+              "id": "yorisacheoreom",
+              "ko": "요리사처럼"
+            }
+          ],
+          "en": "My friend swims as well as a real swimmer.",
+          "why": "수영 선수처럼 is the only one of the page’s photographs whose typical thing is swimming, and that is what 처럼 compares: the noun stands for what it is known for. 인형처럼 and 요리사처럼 are well formed, but a doll is known for its face and a cook for the food, so neither says anything about swimming.",
+          "grammar": "N처럼 compares with what the noun is typically like: 가수처럼 노래를 잘해요, 수영 선수처럼 수영을 잘해요, 인형같이 생겼어요."
+        }
+      ],
+      "example": {
+        "phraseKo": "대화 · track 23",
+        "lines": [
+          {
+            "who": "A",
+            "ko": "이 사람은 누구예요?"
+          },
+          {
+            "who": "B",
+            "ko": "제일 친한 친구예요. 어릴 때부터 {} 지냈어요."
+          }
+        ],
+        "answerKo": "가족처럼",
+        "en": "Who is this? — My closest friend. We have been like family since we were little.",
+        "audio": {
+          "src": "audio/book/2b-u12-trk23.mp3",
+          "labelEn": "Track 23 · the 대화 on p.73"
+        }
+      }
+    },
+    {
+      "type": "build",
+      "section": "말하기 1",
+      "sectionEn": "Speaking 1",
+      "id": "u12sgk-speak-1",
+      "no": "말하기 1",
+      "icon": "📸",
+      "pattern": "외모 묘사하기",
+      "blurbEn": "Mariko shows Nana a Christmas photo, and the friend who looks just like her.",
+      "instructionKo": "대화를 듣고 빈칸에 알맞은 말을 고르세요.",
+      "instructionEn": "Listen to the conversation and choose the right words for each blank.",
+      "noteEn": "Four of the nine turns on p.74, each playing off track 24, and one row off the 연습 1 column the page prints under it — 대학교 졸업식, 행복하다, 가족, 안경을 쓰다 / 머리 모양이 비슷하다 — which swaps new words into the same frame, so the frame decides the shape. 마리코 is the older of the two and speaks 반말 throughout, which is why those lines end in -아/어 and 이야 rather than -요. 연습 2 on p.75 asks the learner to talk about a photograph of their own and has no answer to mark.",
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "참 ___",
+          "lines": [
+            {
+              "who": "마리코",
+              "ko": "응, 작년 크리스마스 때 찍었어."
+            },
+            {
+              "who": "나나",
+              "ko": "참 {}."
+            }
+          ],
+          "answer": "jeulgeowo_boyeoyo",
+          "choices": [
+            {
+              "id": "jeulgeowo_boyeoyo",
+              "ko": "즐거워 보여요"
+            },
+            {
+              "id": "jeulgeobeo_boyeoyo",
+              "ko": "즐겁어 보여요"
+            },
+            {
+              "id": "jeulgeoun_boyeoyo",
+              "ko": "즐거운 보여요"
+            }
+          ],
+          "en": "Yeah, I took it last Christmas. — You all look like you really enjoyed it.",
+          "why": "즐거워 보여요 is right: 즐겁다 is a ㅂ irregular, and before -어 its ㅂ turns to 우 and contracts — 즐거워. 즐겁어 keeps the ㅂ, and 즐거운 is the modifier, which would need a noun rather than 보여요 after it.",
+          "grammar": "즐겁다 → 즐거워요, 즐거워 보여요, 즐거운 시간: the ㅂ becomes 우 before any vowel.",
+          "audio": {
+            "src": "audio/book/2b-u12-d09.mp3",
+            "labelEn": "Yeah, I took it last Christmas. — You all look like you really enjoyed it."
+          }
+        },
+        {
+          "n": 2,
+          "phraseKo": "나하고 제일 친한 친구야. 어릴 때부터 ___ 지냈어",
+          "lines": [
+            {
+              "who": "나나",
+              "ko": "언니 옆에 있는 사람은 누구예요?"
+            },
+            {
+              "who": "마리코",
+              "ko": "나하고 제일 친한 친구야. 어릴 때부터 {} 지냈어."
+            }
+          ],
+          "answer": "jamaecheoreom",
+          "choices": [
+            {
+              "id": "jamae_gateun",
+              "ko": "자매 같은"
+            },
+            {
+              "id": "jamaecheoreom",
+              "ko": "자매처럼"
+            },
+            {
+              "id": "jamaereul",
+              "ko": "자매를"
+            }
+          ],
+          "en": "Who is the person next to you? — My closest friend. We have been like sisters since we were little.",
+          "why": "자매처럼 is right: 처럼 goes straight in front of the verb 지냈어, and 자매 — sisters — is what the two friends are being compared to. 자매 같은 is a modifier with no noun after it, and 자매를 지냈어 makes the sisters something spent, which is not what 지내다 does with a person.",
+          "grammar": "자매처럼 지내다 is how Korean says two people are close: 가족처럼 지내다, 친구처럼 지내다. 마리코 drops the -요 because 나나 is younger — 지냈어, not 지냈어요.",
+          "audio": {
+            "src": "audio/book/2b-u12-trk24.mp3",
+            "labelEn": "Track 24 · 마리코’s room and the Christmas photo"
+          }
+        },
+        {
+          "n": 3,
+          "phraseKo": "우리 둘 다 이마가 넓고 눈이 ___ 그런 것 같아",
+          "lines": [
+            {
+              "who": "나나",
+              "ko": "언니하고 얼굴도 닮은 것 같아요."
+            },
+            {
+              "who": "마리코",
+              "ko": "우리 둘 다 이마가 넓고 눈이 {} 그런 것 같아."
+            }
+          ],
+          "answer": "keoseo",
+          "choices": [
+            {
+              "id": "keueoseo",
+              "ko": "크어서"
+            },
+            {
+              "id": "keosseoseo",
+              "ko": "컸어서"
+            },
+            {
+              "id": "keoseo",
+              "ko": "커서"
+            }
+          ],
+          "en": "You look like each other, too. — I think it is because we both have wide foreheads and big eyes.",
+          "why": "커서 is right: 크다 drops its ㅡ before -어서, so 크 + 어서 becomes 커서. 크어서 keeps the ㅡ, and 컸어서 puts a past tense inside -아/어서, which never takes one — the tense goes at the end of the sentence instead.",
+          "grammar": "-아/어서 gives the reason here: 눈이 커서 그런 것 같아 — it is because of the big eyes. ㅡ drops before 아/어: 크다 → 커서, 바쁘다 → 바빠서.",
+          "audio": {
+            "src": "audio/book/2b-u12-d14.mp3",
+            "labelEn": "You look like each other, too. — I think it is because we both have wide foreheads and big eyes."
+          }
+        },
+        {
+          "n": 4,
+          "phraseKo": "나는 ___ 성격인데 내 친구는 내성적이야",
+          "lines": [
+            {
+              "who": "나나",
+              "ko": "성격도 비슷해요?"
+            },
+            {
+              "who": "마리코",
+              "ko": "나는 {} 성격인데 내 친구는 내성적이야."
+            }
+          ],
+          "answer": "hwalbalhan",
+          "choices": [
+            {
+              "id": "hwalbalhan",
+              "ko": "활발한"
+            },
+            {
+              "id": "hwalbalhaneun",
+              "ko": "활발하는"
+            },
+            {
+              "id": "hwalbalhae",
+              "ko": "활발해"
+            }
+          ],
+          "en": "Are you alike in personality too? — No: I am outgoing, but my friend is introverted.",
+          "why": "활발한 is right because 성격 is a noun and 활발하다 has to be a modifier to go in front of it: 활발한 성격. 활발하는 gives an adjective the verb ending -는, and 활발해 finishes a sentence, which leaves 성격인데 with nothing describing it.",
+          "grammar": "Two ways to say the same thing about someone: 활발한 성격이다, with the modifier, or 성격이 활발하다. The chapter uses both.",
+          "audio": {
+            "src": "audio/book/2b-u12-d17.mp3",
+            "labelEn": "Are you alike in personality too? — No: I am outgoing, but my friend is introverted."
+          }
+        },
+        {
+          "n": 5,
+          "phraseKo": "우리 둘 다 ___ 머리 모양이 비슷해서 그런 것 같아 (안경을 쓰다)",
+          "lines": [
+            {
+              "who": "마리코",
+              "ko": "우리 둘 다 {} 머리 모양이 비슷해서 그런 것 같아."
+            }
+          ],
+          "answer": "angyeongeul_sseugo",
+          "choices": [
+            {
+              "id": "angyeongeul_sseogo",
+              "ko": "안경을 써고"
+            },
+            {
+              "id": "angyeongeul_sseugo",
+              "ko": "안경을 쓰고"
+            },
+            {
+              "id": "angyeongeul_sseun",
+              "ko": "안경을 쓴"
+            }
+          ],
+          "en": "I think it is because we both wear glasses and have similar hairstyles.",
+          "why": "안경을 쓰고 is right: -고 joins two things that are both true, and it goes straight onto the stem 쓰 with nothing changed. 안경을 써고 carries the 써 of 써요 to a place where no -어 comes, and 안경을 쓴 is the modifier, which would make the glasses describe the hairstyle.",
+          "grammar": "The ㅡ of 쓰다 drops only before -아/어: 써요, 써서, but 쓰고, 쓰지만, 쓴. This row is the 연습 1 column 2), put into the frame of 이마가 넓고 눈이 커서."
+        }
+      ]
+    },
+    {
+      "type": "build",
+      "section": "문법과 표현 2",
+      "sectionEn": "Grammar and expression 2",
+      "id": "u12sgk-gram-3",
+      "no": "문법 3",
+      "icon": "⚖️",
+      "pattern": "A-(으)ㄴ 편이다, V-는 편이다",
+      "blurbEn": "On the quiet side, keen on sport: what something is mostly like.",
+      "instructionKo": "[보기]와 같이 알맞은 형태를 고르세요.",
+      "instructionEn": "Choose the right form, as in the example.",
+      "noteEn": "The 대화 on track 25 is the example; the rows are p.76’s first two 예, both of its 연습 1 보기, and — for a verb — a line from the model conversation on p.79, since the page’s own verb 예, 잘 먹는 편이에요, is also the answer to 자기 평가 3. The rule is on the ending: an adjective takes -(으)ㄴ 편이다 and a verb -는 편이다. One word here bends it: 마르다 is a verb, but being thin is the result of it, so Korean says 마른 편이에요 with the past modifier, the way it says 잘생긴 사람 — and 문화 산책 does the same with 닮은 편입니다. And 편이다 is not 편하다: 편해요 in place of 편이에요 is the adjective for comfortable.",
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "제 동생은 좀 ___ (마르다)",
+          "lines": [
+            {
+              "ko": "제 동생은 좀 {}."
+            }
+          ],
+          "answer": "mareun_pyeonieyo",
+          "choices": [
+            {
+              "id": "mareuneun_pyeonieyo",
+              "ko": "마르는 편이에요"
+            },
+            {
+              "id": "mareun_pyeonieyo",
+              "ko": "마른 편이에요"
+            },
+            {
+              "id": "malreun_pyeonieyo",
+              "ko": "말른 편이에요"
+            }
+          ],
+          "en": "My younger sibling is on the skinny side.",
+          "why": "마른 편이에요 is right even though 마르다 is a verb: being thin is the result of it, so Korean uses the past modifier, 마른, the way it says 잘생긴 사람. 마르는 편이에요 is what laundry does, drying quickly, and 말른 borrows the 말 of 말라요, which only appears before -아/어.",
+          "grammar": "마르다 is a 르 irregular: 말라요 before -아/어, but 마른 before -ㄴ. The same verb gives 빨래가 잘 마르는 편이에요, the laundry tends to dry fast."
+        },
+        {
+          "n": 2,
+          "phraseKo": "이 식당은 사람이 ___ (많다)",
+          "lines": [
+            {
+              "ko": "이 식당은 사람이 {}."
+            }
+          ],
+          "answer": "manheun_pyeonieyo",
+          "choices": [
+            {
+              "id": "manhneun_pyeonieyo",
+              "ko": "많는 편이에요"
+            },
+            {
+              "id": "maneun_by_ear",
+              "ko": "만은 편이에요"
+            },
+            {
+              "id": "manheun_pyeonieyo",
+              "ko": "많은 편이에요"
+            }
+          ],
+          "en": "This restaurant is usually on the busy side.",
+          "why": "많은 편이에요 is right: 많다 is an adjective, so it takes -은, and its ㅎ stays on the page though it is never heard — 많은 is said [마는]. 많는 gives it the verb ending -는, and 만은 is [마는] written down by ear, losing the ㅎ the spelling keeps.",
+          "grammar": "사람이 많다 is crowded: 이 식당은 사람이 많은 편이에요. The ㅎ of 많 is silent before a vowel, which is why the sound and the spelling part ways here."
+        },
+        {
+          "n": 3,
+          "phraseKo": "우리 형은 성격이 급하고 ___ (남성적이다)",
+          "lines": [
+            {
+              "ko": "우리 형은 성격이 급하고 {}."
+            }
+          ],
+          "answer": "namseongjeogin_pyeonieyo",
+          "choices": [
+            {
+              "id": "namseongjeogin_pyeonieyo",
+              "ko": "남성적인 편이에요"
+            },
+            {
+              "id": "namseongjeoghan_pyeonieyo",
+              "ko": "남성적한 편이에요"
+            },
+            {
+              "id": "namseongjeogin_pyeonhaeyo",
+              "ko": "남성적인 편해요"
+            }
+          ],
+          "en": "My older brother is hasty and on the masculine side.",
+          "why": "남성적인 편이에요 is right: -적이다 is a noun with 이다, and 이다 takes -ㄴ before 편, so 남성적인. 남성적한 treats it as a 하다 word, and 남성적인 편해요 has turned 편이다 into 편하다, the adjective for comfortable.",
+          "grammar": "편 is a noun here, a side or a leaning, so it takes 이다: 편이에요, 편이지만, 편이라서. It has nothing to do with 편하다."
+        },
+        {
+          "n": 4,
+          "phraseKo": "제 친구 샤오밍은 수업 시간에는 ___ 친구들과 놀 때는 아주 활발해요 (조용하다)",
+          "lines": [
+            {
+              "ko": "제 친구 샤오밍은 수업 시간에는 {} 친구들과 놀 때는 아주 활발해요."
+            }
+          ],
+          "answer": "joyonghan_pyeonijiman",
+          "choices": [
+            {
+              "id": "joyonghaneun_pyeonijiman",
+              "ko": "조용하는 편이지만"
+            },
+            {
+              "id": "joyonghan_pyeonijiman",
+              "ko": "조용한 편이지만"
+            },
+            {
+              "id": "joyonghan_pyeoniraseo",
+              "ko": "조용한 편이라서"
+            }
+          ],
+          "en": "My friend Xiaoming is on the quiet side in class, but very lively when out with friends.",
+          "why": "조용한 편이지만 is right on both counts: 조용하다 is an adjective, so -ㄴ, and -지만 sets class against playtime, which is the whole point of the sentence. 조용하는 편이지만 gives the adjective a verb ending, and 조용한 편이라서 would make being quiet the reason for being lively.",
+          "grammar": "편이다 takes any ending 이다 takes: 조용한 편이에요, 조용한 편이지만, 조용한 편이라서 — the last one is 켈리’s line on track 27."
+        },
+        {
+          "n": 5,
+          "phraseKo": "저는 운동을 ___ (좋아하다)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "어떤 성격의 여자를 좋아해요?"
+            },
+            {
+              "who": "B",
+              "ko": "저는 운동을 {}."
+            }
+          ],
+          "answer": "johahaneun_pyeonieyo",
+          "choices": [
+            {
+              "id": "johahan_pyeonieyo",
+              "ko": "좋아한 편이에요"
+            },
+            {
+              "id": "joheun_pyeonieyo",
+              "ko": "좋은 편이에요"
+            },
+            {
+              "id": "johahaneun_pyeonieyo",
+              "ko": "좋아하는 편이에요"
+            }
+          ],
+          "en": "What sort of personality do you like in a woman? — I am quite keen on sport.",
+          "why": "좋아하는 편이에요 is right, because 좋아하다 is a verb — it has an object, 운동을 — and a verb takes -는 편이다. 좋아한 편이에요 puts a finished event where a habit belongs, and 좋은 편이에요 is 좋다, an adjective, which cannot take 운동을 as its object.",
+          "grammar": "좋다 and 좋아하다 are the classic pair: 운동이 좋아요, with the thing as the subject, and 운동을 좋아해요, with it as the object. Only the second is a verb, so only it takes -는 편이다."
+        }
+      ],
+      "example": {
+        "phraseKo": "대화 · track 25",
+        "lines": [
+          {
+            "who": "A",
+            "ko": "나나 씨는 성격이 어때요?"
+          },
+          {
+            "who": "B",
+            "ko": "여성적이고 {}."
+          }
+        ],
+        "answerKo": "조용한 편이에요",
+        "en": "What is Nana like? — Feminine, and on the quiet side.",
+        "audio": {
+          "src": "audio/book/2b-u12-d19.mp3",
+          "labelEn": "What is Nana like? — Feminine, and on the quiet side."
+        }
+      }
+    },
+    {
+      "type": "build",
+      "section": "문법과 표현 2",
+      "sectionEn": "Grammar and expression 2",
+      "id": "u12sgk-gram-4",
+      "no": "문법 4",
+      "icon": "✂️",
+      "pattern": "A-게",
+      "blurbEn": "Cut short, helped kindly: an adjective made into the way something is done.",
+      "instructionKo": "[보기]와 같이 알맞은 형태를 고르세요.",
+      "instructionEn": "Choose the right form, as in the example.",
+      "noteEn": "The 대화 on track 26, and four of the seven lines of 연습 1 — a table of people to find in the class — turned into the sentence the 보기 makes of them: 켈리 씨는 다른 사람들을 항상 친절하게 도와줘요. Whose name goes in is the class’s business, so the names here are the chapter’s own cast; the lines the 익힘책 already has — 재미있게, 늦게, 예쁘게 — are left to it. Every wrong button is the adjective in a shape that cannot stand in front of a verb: the modifier -(으)ㄴ, which needs a noun; the -아/어 form, which ends a sentence; or -고, which adds a second fact rather than describing the first.",
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "네, 더워서 ___ 잘랐어요",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "머리를 잘랐네요?"
+            },
+            {
+              "who": "B",
+              "ko": "네, 더워서 {} 잘랐어요."
+            }
+          ],
+          "answer": "jjalbge",
+          "choices": [
+            {
+              "id": "jjalbeun",
+              "ko": "짧은"
+            },
+            {
+              "id": "jjalge",
+              "ko": "짤게"
+            },
+            {
+              "id": "jjalbge",
+              "ko": "짧게"
+            }
+          ],
+          "en": "You have had your hair cut? — Yes, it was hot, so I cut it short.",
+          "why": "짧게 is right: -게 turns 짧다 into the way the hair was cut, and it goes straight onto the stem. 짧은 is the modifier, which needs a noun (짧은 머리), and 짤게 writes down what you hear — before a consonant the ㄼ of 짧 is read [ㄹ] and the ㄱ after it tenses, [짤께] — where the spelling keeps both letters.",
+          "grammar": "짧게 is said [짤께]: ㄼ before a consonant is read [ㄹ] and tenses what follows. The same 받침 is in 넓다 [널따] and 얇다 [얄따].",
+          "audio": {
+            "src": "audio/book/2b-u12-d21.mp3",
+            "labelEn": "You have had your hair cut? — Yes, it was hot, so I cut it short."
+          }
+        },
+        {
+          "n": 2,
+          "phraseKo": "켈리 씨는 다른 사람들을 항상 ___ 도와줘요 (친절하다)",
+          "lines": [
+            {
+              "ko": "켈리 씨는 다른 사람들을 항상 {} 도와줘요."
+            }
+          ],
+          "answer": "chinjeolhage",
+          "choices": [
+            {
+              "id": "chinjeolhage",
+              "ko": "친절하게"
+            },
+            {
+              "id": "chinjeolhan",
+              "ko": "친절한"
+            },
+            {
+              "id": "chinjeolhago",
+              "ko": "친절하고"
+            }
+          ],
+          "en": "Kelly always helps other people kindly.",
+          "why": "친절하게 is right: -게 turns 친절하다 into the way 켈리 helps, and it sits in front of 도와줘요 the way an adverb does. 친절한 is the modifier and wants a noun — 친절한 사람 — and 친절하고 adds kindness as a second fact, which leaves 다른 사람들을 without its verb.",
+          "grammar": "친절하게 도와주다 is on this unit’s word list as one phrase. 하다 adjectives keep their 하 before -게: 친절하게, 조용하게, 편하게."
+        },
+        {
+          "n": 3,
+          "phraseKo": "아키라 씨는 약속 시간을 ___ 지켜요 (정확하다)",
+          "lines": [
+            {
+              "ko": "아키라 씨는 약속 시간을 {} 지켜요."
+            }
+          ],
+          "answer": "jeonghwaghage",
+          "choices": [
+            {
+              "id": "jeonghwaghan",
+              "ko": "정확한"
+            },
+            {
+              "id": "jeonghwaghage",
+              "ko": "정확하게"
+            },
+            {
+              "id": "jeonghwaghae",
+              "ko": "정확해"
+            }
+          ],
+          "en": "Akira keeps to the time of an appointment exactly.",
+          "why": "정확하게 is right: it says how Akira keeps the time — exactly. 정확한 is the modifier, which would need a noun (정확한 시간), and 정확해 is the form that ends a sentence, 시간이 정확해요, and cannot describe 지켜요.",
+          "grammar": "시간을 지키다 is to be on time. 정확하게 has a shorter twin, 정확히, which is just as good here — the page uses -게 because -게 is what it teaches."
+        },
+        {
+          "n": 4,
+          "phraseKo": "줄리앙 씨는 옷을 ___ 입어요 (멋있다)",
+          "lines": [
+            {
+              "ko": "줄리앙 씨는 옷을 {} 입어요."
+            }
+          ],
+          "answer": "meosissge",
+          "choices": [
+            {
+              "id": "meosissneun",
+              "ko": "멋있는"
+            },
+            {
+              "id": "meosisseo",
+              "ko": "멋있어"
+            },
+            {
+              "id": "meosissge",
+              "ko": "멋있게"
+            }
+          ],
+          "en": "Julien dresses stylishly.",
+          "why": "멋있게 is right: -게 goes on the stem 멋있 and describes how the clothes are worn. 멋있는 is the modifier — 멋있는 옷 — and needs a noun, and 멋있어 is the end of a sentence (옷이 멋있어요), not a way of doing something.",
+          "grammar": "멋있다 keeps its 있 before -게: 멋있게 입다, to dress stylishly. Its near twin 멋지다 gives 멋지게."
+        },
+        {
+          "n": 5,
+          "phraseKo": "나나 씨는 항상 ___ 웃어요 (귀엽다)",
+          "lines": [
+            {
+              "ko": "나나 씨는 항상 {} 웃어요."
+            }
+          ],
+          "answer": "gwiyeobge",
+          "choices": [
+            {
+              "id": "gwiyeobge",
+              "ko": "귀엽게"
+            },
+            {
+              "id": "gwiyeowoge",
+              "ko": "귀여워게"
+            },
+            {
+              "id": "gwiyeoun",
+              "ko": "귀여운"
+            }
+          ],
+          "en": "Nana always has such a cute laugh.",
+          "why": "귀엽게 is right: 귀엽다 is a ㅂ irregular, but the ㅂ only changes before a vowel, and -게 begins with a consonant, so it stays — 귀엽게. 귀여워게 carries the 워 of 귀여워요 to a place where no -어 comes, and 귀여운 is the modifier, which needs a noun rather than 웃어요 after it.",
+          "grammar": "ㅂ irregulars change before a vowel only: 귀여워요, 귀여운, but 귀엽게, 귀엽고, 귀엽지만."
+        }
+      ],
+      "example": {
+        "phraseKo": "보기 · 재미있다",
+        "lines": [
+          {
+            "ko": "스티븐 씨는 이야기를 {} 해요."
+          }
+        ],
+        "answerKo": "재미있게",
+        "en": "Steven tells stories in a fun way."
+      }
+    },
+    {
+      "type": "build",
+      "section": "말하기 2",
+      "sectionEn": "Speaking 2",
+      "id": "u12sgk-speak-2",
+      "no": "말하기 2",
+      "icon": "💬",
+      "pattern": "성격 표현하기",
+      "blurbEn": "Kelly’s ideal type, and a friend of Steven’s worth meeting.",
+      "instructionKo": "대화를 듣고 빈칸에 알맞은 말을 고르세요.",
+      "instructionEn": "Listen to the conversation and choose the right words for each blank.",
+      "noteEn": "Three turns of the conversation on p.78, each playing off track 27, and three rows off the 연습 1 column printed beneath it — 말이 없다, 분위기를 편하게 만들다, 한국 생활이 힘들다 — each dropped into the frame of the line it replaces. The column is where this page’s grammar gets hard: 없다 takes -는 like a verb, 만들다 loses its ㄹ before -는, and 힘들다 needs nothing added before 때. 연습 2 on p.79 is an interview about the learner’s own ideal type and has no answer to mark.",
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "제가 좀 ___ 활발한 사람이 좋아요",
+          "lines": [
+            {
+              "who": "스티븐",
+              "ko": "켈리 씨의 이상형은 어떤 사람이에요?"
+            },
+            {
+              "who": "켈리",
+              "ko": "제가 좀 {} 활발한 사람이 좋아요."
+            }
+          ],
+          "answer": "joyonghan_pyeoniraseo",
+          "choices": [
+            {
+              "id": "joyonghan_pyeoniraseo",
+              "ko": "조용한 편이라서"
+            },
+            {
+              "id": "joyonghaneun_pyeoniraseo",
+              "ko": "조용하는 편이라서"
+            },
+            {
+              "id": "joyonghan_pyeonhaeseo",
+              "ko": "조용한 편해서"
+            }
+          ],
+          "en": "What is your ideal type, Kelly? — I am a little on the quiet side, so I like outgoing people.",
+          "why": "조용한 편이라서 is right: 조용하다 is an adjective, so -ㄴ 편이다, and -라서 is 이다’s way of giving a reason — being quiet is why 켈리 likes someone lively. 조용하는 편이라서 gives the adjective a verb ending, and 조용한 편해서 has turned the noun 편 into 편하다, comfortable.",
+          "grammar": "편이다 + -아/어서 → 편이라서, or 편이어서: 이다 takes the reason ending the way it does in 학생이라서.",
+          "audio": {
+            "src": "audio/book/2b-u12-d23.mp3",
+            "labelEn": "What is your ideal type, Kelly? — I am a little on the quiet side, so I like outgoing people."
+          }
+        },
+        {
+          "n": 2,
+          "phraseKo": "제 친구 중에 괜찮은 친구가 있는데 한번 ___",
+          "lines": [
+            {
+              "who": "스티븐",
+              "ko": "제 친구 중에 괜찮은 친구가 있는데 한번 {}?"
+            }
+          ],
+          "answer": "manna_bolraeyo",
+          "choices": [
+            {
+              "id": "manna_boilraeyo",
+              "ko": "만나 보일래요"
+            },
+            {
+              "id": "manna_bolraeyo",
+              "ko": "만나 볼래요"
+            },
+            {
+              "id": "manna_bolgeyo",
+              "ko": "만나 볼게요"
+            }
+          ],
+          "en": "There is a friend of mine who is really nice — would you like to meet once?",
+          "why": "만나 볼래요 is right: -아/어 보다 is trying something out, and -(으)ㄹ래요 asks what 켈리 would like to do. 만나 보일래요 swaps in 보이다, the look of this chapter’s grammar, which cannot follow a verb like 만나다, and 만나 볼게요 is a promise about the speaker — it would make 스티븐 the one going to the meeting.",
+          "grammar": "보다 and 보이다 are this chapter’s trap: V-아/어 보다 is to try doing (만나 보다, 먹어 보다); A-아/어 보이다 is to look a certain way (좋아 보이다).",
+          "audio": {
+            "src": "audio/book/2b-u12-d25.mp3",
+            "labelEn": "There is a friend of mine who is really nice — would you like to meet once?"
+          }
+        },
+        {
+          "n": 3,
+          "phraseKo": "___ 한번 만나 보세요",
+          "lines": [
+            {
+              "who": "켈리",
+              "ko": "그래요? 학생이에요?"
+            },
+            {
+              "who": "스티븐",
+              "ko": "아니요, 회사원이에요."
+            },
+            {
+              "who": "스티븐",
+              "ko": "{} 한번 만나 보세요."
+            }
+          ],
+          "answer": "pyeonhage",
+          "choices": [
+            {
+              "id": "pyeonhan",
+              "ko": "편한"
+            },
+            {
+              "id": "pyeonhaeseo",
+              "ko": "편해서"
+            },
+            {
+              "id": "pyeonhage",
+              "ko": "편하게"
+            }
+          ],
+          "en": "A student? — No, an office worker. Meet up once and keep it casual.",
+          "why": "편하게 is right: -게 makes 편하다 the way to meet — relaxed, no pressure. 편한 is the modifier and needs a noun (편한 사람), and 편해서 gives a reason, which Korean does not put in front of a request: -아/어서 cannot be followed by -(으)세요.",
+          "grammar": "-아/어서 for a reason cannot end in a request or a suggestion — 편하니까 만나 보세요 is how that would be said. 편하게 is not a reason at all, only the manner.",
+          "audio": {
+            "src": "audio/book/2b-u12-d28.mp3",
+            "labelEn": "A student? — No, an office worker. Meet up once and keep it casual."
+          }
+        },
+        {
+          "n": 4,
+          "phraseKo": "제가 좀 ___ 활발한 사람이 좋아요 (말이 없다)",
+          "lines": [
+            {
+              "who": "켈리",
+              "ko": "제가 좀 {} 활발한 사람이 좋아요."
+            }
+          ],
+          "answer": "mali_eobsneun_pyeoniraseo",
+          "choices": [
+            {
+              "id": "mali_eobsneun_pyeoniraseo",
+              "ko": "말이 없는 편이라서"
+            },
+            {
+              "id": "mali_eobseun_pyeoniraseo",
+              "ko": "말이 없은 편이라서"
+            },
+            {
+              "id": "maleul_eobsneun_pyeoniraseo",
+              "ko": "말을 없는 편이라서"
+            }
+          ],
+          "en": "I am a person of few words, so I like outgoing people.",
+          "why": "말이 없는 편이라서 is right: 없다, like 있다, takes -는 before a noun even though it describes a state — the same 없는 as in 재미없는. 말이 없은 gives it the ordinary adjective ending, and 말을 없는 makes 말 an object, which 없다 does not take: what there is none of is its subject.",
+          "grammar": "말이 없다, a person of few words, is one item on this unit’s list. 있다/없다 and everything built on them take -는 편이다: 말이 없는 편, 재미있는 편."
+        },
+        {
+          "n": 5,
+          "phraseKo": "분위기를 편하게 ___ 사람이면 더 좋고요 (만들다)",
+          "lines": [
+            {
+              "who": "켈리",
+              "ko": "분위기를 편하게 {} 사람이면 더 좋고요."
+            }
+          ],
+          "answer": "mandeuneun",
+          "choices": [
+            {
+              "id": "mandeulneun",
+              "ko": "만들는"
+            },
+            {
+              "id": "mandeuneun",
+              "ko": "만드는"
+            },
+            {
+              "id": "mandeuleun",
+              "ko": "만들은"
+            }
+          ],
+          "en": "Someone who puts people at ease would be even better.",
+          "why": "만드는 is right: 만들다 is a verb with a ㄹ stem, and the ㄹ drops before -는 — 만들 + 는 → 만드는. 만들는 keeps the ㄹ, and 만들은 is no Korean form at all: the past modifier of 만들다 is 만든.",
+          "grammar": "ㄹ drops before ㄴ, ㅂ and ㅅ: 만드는, 만듭니다, 만드세요. The line is the column’s 분위기를 편하게 만들다 in the place of 말을 재미있게 하다."
+        },
+        {
+          "n": 6,
+          "phraseKo": "___ 저를 많이 도와준 한국 친구인데 성격도 좋고 친절해요 (한국 생활이 힘들다)",
+          "lines": [
+            {
+              "who": "스티븐",
+              "ko": "{} 저를 많이 도와준 한국 친구인데 성격도 좋고 친절해요."
+            }
+          ],
+          "answer": "hangug_saenghwali_himdeul_ttae",
+          "choices": [
+            {
+              "id": "hangug_saenghwali_himdeuleul_ttae",
+              "ko": "한국 생활이 힘들을 때"
+            },
+            {
+              "id": "hangug_saenghwali_himdeuneun_ttae",
+              "ko": "한국 생활이 힘드는 때"
+            },
+            {
+              "id": "hangug_saenghwali_himdeul_ttae",
+              "ko": "한국 생활이 힘들 때"
+            }
+          ],
+          "en": "A Korean friend who helped me a lot when life here was hard — good-natured, and kind.",
+          "why": "힘들 때 is right: 힘들다 has a ㄹ stem, and a ㄹ stem takes -(으)ㄹ 때 with nothing added — its own ㄹ is the ending: 힘들 때. 힘들을 때 adds 을 as a consonant stem would, and 힘드는 때 puts a verb’s -는 on an adjective, which -(으)ㄹ 때 does not take.",
+          "grammar": "-(으)ㄹ 때 with a ㄹ stem: 힘들 때, 살 때, 만들 때 — nothing is added. This is the column’s 한국 생활이 힘들다 in the place of 한국어 공부하다."
+        }
+      ]
+    },
+    {
+      "type": "build",
+      "section": "듣고 말하기",
+      "sectionEn": "Listening and speaking",
+      "id": "u12sgk-listen-1",
+      "no": "듣기 1",
+      "icon": "💇",
+      "pattern": "기분 전환",
+      "blurbEn": "Mariko has had her hair cut short after a bad exam, and knows a good salon.",
+      "instructionKo": "잘 듣고 맞지 않는 것을 고르세요.",
+      "instructionEn": "Listen carefully and choose the one that is different from the conversation.",
+      "noteEn": "The book asks one question about this tape — which of three statements it contradicts — and 모범 답안 on printed p.267 gives ②: the salon 마리코 went to is not expensive. That is row 1, with the book’s own three options in the book’s own order. Rows 2 to 4 are three lines the conversation turns on, one for each option, so the answer can be worked out from the recording rather than guessed: 시험을 못 봐서 is why 마리코 was down, 시원해 보여요 is what the new hair looks like, and 비싸지 않고 is the line that makes ② wrong. Row 1 plays the whole of track 28; the others play their own lines.",
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "맞지 않는 것",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "잘 듣고 맞지 않는 것을 고르세요."
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "expensive",
+          "choices": [
+            {
+              "id": "changed",
+              "ko": "① 마리코는 머리 모양을 바꿨습니다."
+            },
+            {
+              "id": "expensive",
+              "ko": "② 마리코가 간 미용실은 값이 비싼 편입니다."
+            },
+            {
+              "id": "exam",
+              "ko": "③ 마리코는 시험 때문에 기분이 안 좋았습니다."
+            }
+          ],
+          "en": "Which of these does not match the conversation? — That the salon Mariko went to is on the expensive side.",
+          "why": "② 마리코가 간 미용실은 값이 비싼 편입니다 is the one the tape contradicts: 마리코 says of the salon, 값도 비싸지 않고 잘하는 편이에요 — not expensive, and good at it. ① is true, since the conversation opens on 머리를 짧게 잘랐네요, and ③ is 마리코’s own reason: 시험을 못 봐서 기분이 좀 안 좋았어요.",
+          "grammar": "맞지 않는 것 asks for the false statement. 값이 비싼 편이다 and 비싸지 않은 편이다 are opposites, and the tape has the second.",
+          "audio": {
+            "src": "audio/book/2b-u12-trk28.mp3",
+            "labelEn": "Track 28 · 마리코’s new haircut"
+          }
+        },
+        {
+          "n": 2,
+          "phraseKo": "공부를 열심히 했는데 시험을 ___",
+          "lines": [
+            {
+              "who": "여1",
+              "ko": "무슨 일 있어요?"
+            },
+            {
+              "who": "여2",
+              "ko": "공부를 열심히 했는데 시험을 {}…"
+            }
+          ],
+          "answer": "mos_bwaseo",
+          "choices": [
+            {
+              "id": "jal_bwaseo",
+              "ko": "잘 봐서"
+            },
+            {
+              "id": "an_bwaseo",
+              "ko": "안 봐서"
+            },
+            {
+              "id": "mos_bwaseo",
+              "ko": "못 봐서"
+            }
+          ],
+          "en": "Is something the matter? — I studied hard, but I did badly in the exam, so…",
+          "why": "못 봐서 is what 마리코 says: 시험을 못 보다 here is to do badly in an exam, and it is why the mood was bad. 잘 봐서 would have made it a good day, and 안 봐서 means 마리코 did not sit the exam at all, which is not what the tape says.",
+          "grammar": "시험을 잘 보다 / 못 보다 are to do well or badly in an exam. 못 here is about the result, not about being unable to go.",
+          "audio": {
+            "src": "audio/book/2b-u12-d33.mp3",
+            "labelEn": "Is something the matter? — I studied hard, but I did badly in the exam, so…"
+          }
+        },
+        {
+          "n": 3,
+          "phraseKo": "그렇게 자르니까 ___",
+          "lines": [
+            {
+              "who": "여1",
+              "ko": "짧은 머리가 잘 어울리네요."
+            },
+            {
+              "who": "여1",
+              "ko": "그렇게 자르니까 {}."
+            }
+          ],
+          "answer": "siwonhae_boyeoyo",
+          "choices": [
+            {
+              "id": "siwonhae_boyeoyo",
+              "ko": "시원해 보여요"
+            },
+            {
+              "id": "mugeowo_boyeoyo",
+              "ko": "무거워 보여요"
+            },
+            {
+              "id": "eoryeo_boyeoyo",
+              "ko": "어려 보여요"
+            }
+          ],
+          "en": "Short hair really suits you. Cut like that, it looks cool and fresh.",
+          "why": "시원해 보여요 is what the tape says, and it fits: the hair is short now and the weather is hot, so it looks cool. 무거워 보여요 is what the customer in 듣기 2 says about long hair — the opposite case — and 어려 보여요 is good Korean the tape never uses.",
+          "grammar": "시원하다 is cool in the pleasant way — a breeze, a cold drink, a short haircut in summer. 시원해 보이다 is how it looks from outside.",
+          "audio": {
+            "src": "audio/book/2b-u12-d36.mp3",
+            "labelEn": "Short hair really suits you. Cut like that, it looks cool and fresh."
+          }
+        },
+        {
+          "n": 4,
+          "phraseKo": "값도 ___ 잘하는 편이에요",
+          "lines": [
+            {
+              "who": "여2",
+              "ko": "그럼 어제 제가 간 미용실을 소개해 줄까요?"
+            },
+            {
+              "who": "여2",
+              "ko": "값도 {} 잘하는 편이에요."
+            }
+          ],
+          "answer": "bissaji_anhgo",
+          "choices": [
+            {
+              "id": "bissago",
+              "ko": "비싸고"
+            },
+            {
+              "id": "bissaji_anhgo",
+              "ko": "비싸지 않고"
+            },
+            {
+              "id": "ssaji_anhgo",
+              "ko": "싸지 않고"
+            }
+          ],
+          "en": "Shall I tell you about the salon I went to yesterday? It is not expensive, either, and they are good.",
+          "why": "비싸지 않고 is on the tape, and it is the line that makes ② wrong: the salon is not expensive. 비싸고 says the opposite, and 싸지 않고 means not cheap — which is ② again, the statement the question is about.",
+          "grammar": "-지 않다 negates an adjective: 비싸지 않다, not expensive. -고 then adds a second good point, 잘하는 편이에요 — they tend to do a good job.",
+          "audio": {
+            "src": "audio/book/2b-u12-d40.mp3",
+            "labelEn": "Shall I tell you about the salon I went to yesterday? It is not expensive, either, and they are good."
+          }
+        }
+      ]
+    },
+    {
+      "type": "build",
+      "section": "듣고 말하기",
+      "sectionEn": "Listening and speaking",
+      "id": "u12sgk-listen-2",
+      "no": "듣기 2",
+      "icon": "💈",
+      "pattern": "미용실에서",
+      "blurbEn": "A customer without a booking, a short wait, and a perm.",
+      "instructionKo": "잘 듣고 질문에 답하세요.",
+      "instructionEn": "Listen carefully and answer the questions.",
+      "noteEn": "The book asks one question here, with four drawings of hair to choose from, and 모범 답안 on printed p.267 gives ④. The drawings differ in two things only — long or short, permed or straight — so the four options are those two things said in words, in the page’s order. Rows 2 to 4 are the lines the answer turns on, each playing its own clip off track 29, and row 5 asks how long it will take, which the tape answers twice over: twenty minutes to wait, two hours in the chair.",
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "머리를 어떻게 하려고 합니까",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "여자는 머리를 어떻게 하려고 합니까?"
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "short_perm",
+          "choices": [
+            {
+              "id": "long_straight",
+              "ko": "① 머리를 자르지 않고 파마도 하지 않으려고 합니다."
+            },
+            {
+              "id": "short_straight",
+              "ko": "② 머리를 짧게 자르기만 하려고 합니다."
+            },
+            {
+              "id": "long_perm",
+              "ko": "③ 긴 머리에 파마만 하려고 합니다."
+            },
+            {
+              "id": "short_perm",
+              "ko": "④ 머리를 짧게 자르고 파마를 하려고 합니다."
+            }
+          ],
+          "en": "What is the woman going to have done to her hair? — Cut short, and permed.",
+          "why": "④ 머리를 짧게 자르고 파마를 하려고 합니다 is the answer: the hairdresser suggests 머리를 좀 짧게 자르고 파마를 해 보시는 게 어때요, and the customer answers 그럼 그렇게 해 주세요 — both halves at once. ② stops at the cut, ③ keeps the length, and ① is where she started: 긴 머리가 무거워 보여서 좀 자르고 싶은데요.",
+          "grammar": "그렇게 해 주세요 accepts the whole suggestion, so both the 자르다 and the 파마를 하다 are in the answer.",
+          "audio": {
+            "src": "audio/book/2b-u12-trk29.mp3",
+            "labelEn": "Track 29 · at the hair salon"
+          }
+        },
+        {
+          "n": 2,
+          "phraseKo": "긴 머리가 ___ 좀 자르고 싶은데요",
+          "lines": [
+            {
+              "who": "미용사",
+              "ko": "이쪽으로 앉으세요. 머리 어떻게 해 드릴까요?"
+            },
+            {
+              "who": "손님",
+              "ko": "긴 머리가 {} 좀 자르고 싶은데요."
+            }
+          ],
+          "answer": "mugeowo_boyeoseo",
+          "choices": [
+            {
+              "id": "mugeowo_boyeoseo",
+              "ko": "무거워 보여서"
+            },
+            {
+              "id": "mugeobeo_boyeoseo",
+              "ko": "무겁어 보여서"
+            },
+            {
+              "id": "gabyeowo_boyeoseo",
+              "ko": "가벼워 보여서"
+            }
+          ],
+          "en": "Please sit here. How would you like it done? — My long hair looks heavy, so I would like it cut a bit.",
+          "why": "무거워 보여서 is the customer’s reason, and 무겁다 is a ㅂ irregular: 무거워. 무겁어 keeps the ㅂ, and 가벼워 보여서 — looks light — would be no reason to cut it at all.",
+          "grammar": "보여서 is 보이다 + -어서: a reason, here for wanting it cut. 무거워 보이는데 on p.72 was the same adjective with -는데.",
+          "audio": {
+            "src": "audio/book/2b-u12-d46.mp3",
+            "labelEn": "Please sit here. How would you like it done? — My long hair looks heavy, so I would like it cut a bit."
+          }
+        },
+        {
+          "n": 3,
+          "phraseKo": "파마를 ___ 어때요",
+          "lines": [
+            {
+              "who": "손님",
+              "ko": "긴 머리가 무거워 보여서 좀 자르고 싶은데요."
+            },
+            {
+              "who": "미용사",
+              "ko": "파마를 {} 어때요?"
+            }
+          ],
+          "answer": "hae_bosineun_ge",
+          "choices": [
+            {
+              "id": "hae_boisineun_ge",
+              "ko": "해 보이시는 게"
+            },
+            {
+              "id": "hae_bosineun_ge",
+              "ko": "해 보시는 게"
+            },
+            {
+              "id": "hae_bwassneun_ge",
+              "ko": "해 봤는 게"
+            }
+          ],
+          "en": "My long hair looks heavy, so I would like it cut a bit. — How about trying a perm?",
+          "why": "해 보시는 게 is right: -아/어 보다 is trying something, 시 is the hairdresser’s politeness to the customer, and -는 게 어때요 makes it a suggestion. 해 보이시는 게 puts in 보이다, which is about how things look rather than trying them, and 해 봤는 게 puts a past tense in front of -는, which does not happen.",
+          "grammar": "V-는 게 어때요? suggests; V-아/어 보다 softens it into a try. Together: 파마를 해 보시는 게 어때요?",
+          "audio": {
+            "src": "audio/book/2b-u12-d47.mp3",
+            "labelEn": "My long hair looks heavy, so I would like it cut a bit. — How about trying a perm?"
+          }
+        },
+        {
+          "n": 4,
+          "phraseKo": "앞머리는 조금만 ___",
+          "lines": [
+            {
+              "who": "미용사",
+              "ko": "앞머리도 좀 잘라 드릴까요?"
+            },
+            {
+              "who": "손님",
+              "ko": "앞머리는 조금만 {}."
+            }
+          ],
+          "answer": "dadeumeo_juseyo",
+          "choices": [
+            {
+              "id": "jalra_juseyo",
+              "ko": "잘라 주세요"
+            },
+            {
+              "id": "pamahae_juseyo",
+              "ko": "파마해 주세요"
+            },
+            {
+              "id": "dadeumeo_juseyo",
+              "ko": "다듬어 주세요"
+            }
+          ],
+          "en": "Shall I cut your bangs a bit as well? — Just trim the bangs a little.",
+          "why": "다듬어 주세요 is what the customer asks for: 앞머리를 다듬다 is to trim the bangs, taking off only a little. 잘라 주세요 is what the hairdresser offered and the customer turned down, and 파마해 주세요 is for the rest of the hair, not the bangs.",
+          "grammar": "다듬다 is to trim or tidy up; 조금만 다듬어 주세요 is the stock request at a salon, and on p.81 it is the model answer too.",
+          "audio": {
+            "src": "audio/book/2b-u12-d52.mp3",
+            "labelEn": "Shall I cut your bangs a bit as well? — Just trim the bangs a little."
+          }
+        },
+        {
+          "n": 5,
+          "phraseKo": "시간이 얼마나 걸립니까",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "파마를 하면 시간이 얼마나 걸립니까?"
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "two_hours",
+          "choices": [
+            {
+              "id": "two_hours",
+              "ko": "두 시간쯤"
+            },
+            {
+              "id": "twenty_minutes",
+              "ko": "20분쯤"
+            },
+            {
+              "id": "one_hour",
+              "ko": "한 시간쯤"
+            }
+          ],
+          "en": "How long will the perm take? — About two hours.",
+          "why": "두 시간쯤 is the hairdresser’s answer to 그런데 시간은 얼마나 걸려요? at the very end of the tape. 20분쯤 is on the tape too, but it is the wait before the customer sits down — 20분 정도만 기다리시면 돼요 — and 한 시간쯤 is never said.",
+          "grammar": "쯤 and 정도 both mean about: 두 시간쯤, 20분 정도. Numbers are worth listening for twice, because a tape often has more than one.",
+          "audio": {
+            "src": "audio/book/2b-u12-trk29.mp3",
+            "labelEn": "Track 29 · at the hair salon"
+          }
+        }
+      ]
+    },
+    {
+      "type": "build",
+      "section": "읽고 쓰기",
+      "sectionEn": "Reading and writing",
+      "id": "u12sgk-read-1",
+      "no": "읽기",
+      "icon": "📋",
+      "pattern": "성격 테스트",
+      "blurbEn": "A ten-question personality test, and what the answers say about you.",
+      "instructionKo": "다음을 읽고 질문에 답하세요.",
+      "instructionEn": "Read the passage and answer the questions.",
+      "noteEn": "p.82 is a personality test — ten pairs of sentences, tick the one more like you — and p.83 scores it: more ①s make you E형, more ②s I형, with a table of what each type is like. The ticks are the learner’s own, so nothing on p.82 can be marked; the table on p.83 can. Rows 1 and 2 are asked of that table, and rows 3 to 5 are three of the test’s own sentences with the chapter’s grammar taken out — two -게 adverbs and a 편이다. The 쓰기 half of the page asks the learner to describe themselves and has nothing to mark.",
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "E형은 스트레스가 쌓일 때",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "E형인 사람은 문제가 있거나 스트레스가 쌓일 때 어떻게 합니까?"
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "talk_it_over",
+          "choices": [
+            {
+              "id": "talk_it_over",
+              "ko": "다른 사람들과 이야기를 합니다."
+            },
+            {
+              "id": "alone",
+              "ko": "혼자 시간을 보냅니다."
+            },
+            {
+              "id": "keep_it_in",
+              "ko": "속마음을 잘 표현하지 않습니다."
+            }
+          ],
+          "en": "What does an E type do when there is a problem or stress builds up? — Talks it over with other people.",
+          "why": "다른 사람들과 이야기를 합니다 is the E형 column of the table on p.83. 혼자 시간을 보냅니다 is the I형 answer to the same question, set beside it, and 속마음을 잘 표현하지 않습니다 is another line from the I형 column.",
+          "grammar": "스트레스가 쌓이다 is stress piling up — 쌓이다 is to be stacked. -거나 gives either of two: 문제가 있거나 스트레스가 쌓일 때."
+        },
+        {
+          "n": 2,
+          "phraseKo": "I형이 보는 E형",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "I형인 사람은 E형을 보고 어떻게 생각합니까?"
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "talkative",
+          "choices": [
+            {
+              "id": "hard_to_read",
+              "ko": "마음을 잘 알 수 없는 사람이라고 생각합니다."
+            },
+            {
+              "id": "talkative",
+              "ko": "말이 많은 사람이라고 생각합니다."
+            },
+            {
+              "id": "quiet",
+              "ko": "조용한 사람이라고 생각합니다."
+            }
+          ],
+          "en": "What does an I type think on seeing an E type? — That they talk a lot.",
+          "why": "말이 많은 사람이라고 생각합니다 is the last line of the I형 column: E형을 보고 말이 많은 사람이라고 생각합니다. 마음을 잘 알 수 없는 사람 is the other way round — how an E type sees an I type — and 조용한 사람 is what nobody would call an E type.",
+          "grammar": "N을/를 보고 A-(으)ㄴ 사람이라고 생각하다: to look at someone and take them for a certain sort of person. 말이 많다 is to talk a lot."
+        },
+        {
+          "n": 3,
+          "phraseKo": "내 생각을 사람들에게 ___ 표현하지 않습니다",
+          "lines": [
+            {
+              "ko": "② 내 생각을 사람들에게 {} 표현하지 않습니다."
+            }
+          ],
+          "answer": "swibge",
+          "choices": [
+            {
+              "id": "swiun",
+              "ko": "쉬운"
+            },
+            {
+              "id": "swiwoge",
+              "ko": "쉬워게"
+            },
+            {
+              "id": "swibge",
+              "ko": "쉽게"
+            }
+          ],
+          "en": "② I do not readily tell people what I think.",
+          "why": "쉽게 is right: 쉽다 is a ㅂ irregular, but -게 begins with a consonant, so the ㅂ stays — 쉽게. 쉬워게 carries the 워 of 쉬워요 into a place where no -어 comes, and 쉬운 is the modifier, which needs a noun after it (쉬운 문제).",
+          "grammar": "쉽게 표현하지 않다 is not to express readily. 내 is 나의 contracted: the test talks to itself in 나 rather than the humble 저."
+        },
+        {
+          "n": 4,
+          "phraseKo": "말할 때 제스처가 ___",
+          "lines": [
+            {
+              "ko": "① 말할 때 제스처가 {}."
+            }
+          ],
+          "answer": "keun_pyeonibnida",
+          "choices": [
+            {
+              "id": "keun_pyeonibnida",
+              "ko": "큰 편입니다"
+            },
+            {
+              "id": "keuneun_pyeonibnida",
+              "ko": "크는 편입니다"
+            },
+            {
+              "id": "keo_pyeonibnida",
+              "ko": "커 편입니다"
+            }
+          ],
+          "en": "① I tend to use big gestures when I talk.",
+          "why": "큰 편입니다 is right: 크다 is an adjective here, a gesture being big, so it takes -ㄴ 편이다 — 크 + ㄴ → 큰. 크는 편입니다 is the verb ending, and 크다 is a verb only when it means to grow; 커 편입니다 puts the -어 form in front of a noun.",
+          "grammar": "크다 as an adjective is big (제스처가 크다); as a verb it is to grow (아이가 크는 편이에요 — the child is growing fast)."
+        },
+        {
+          "n": 5,
+          "phraseKo": "천천히 ___ 말하는 편입니다",
+          "lines": [
+            {
+              "ko": "② 천천히 {} 말하는 편입니다."
+            }
+          ],
+          "answer": "jagge",
+          "choices": [
+            {
+              "id": "jageun",
+              "ko": "작은"
+            },
+            {
+              "id": "jagge",
+              "ko": "작게"
+            },
+            {
+              "id": "jaga",
+              "ko": "작아"
+            }
+          ],
+          "en": "② I tend to speak slowly and quietly.",
+          "why": "작게 is right: -게 makes 작다 the way of speaking — quietly, with the voice kept small — and it pairs with 천천히. 작은 is the modifier, which needs a noun (작은 목소리), and 작아 is the end of a sentence, not a way of doing something.",
+          "grammar": "Korean measures a voice by size: 목소리가 크다 is loud, 작게 말하다 is to speak quietly. 천천히 is already an adverb, so it needs no -게."
+        }
+      ]
+    },
+    {
+      "type": "build",
+      "section": "과제",
+      "sectionEn": "Task",
+      "id": "u12sgk-task-1",
+      "no": "과제",
+      "icon": "🎨",
+      "pattern": "인물의 외모와 성격 묘사하기",
+      "blurbEn": "Describe a photo so well that the team can draw it — the model exchange on p.84.",
+      "instructionKo": "다음 대화를 읽고 알맞은 말을 고르세요.",
+      "instructionEn": "Read the exchange and choose the right words.",
+      "noteEn": "The 과제 is a drawing game: one person in each team describes a photograph and the others draw what they hear. The game has nothing to mark, but the page prints the model exchange the describer is meant to use, and that exchange is the one place in the chapter where all four grammar points turn up together — 대학생처럼 보여요, 작은 편이에요, 친절해 보여요, 기분 좋게 웃고 있어요. The rows take them in order, with one question from the other side, 키가 큰 편이에요?",
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "이 사람은 여자인데 ___ 보여요",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "그 사람은 남자예요? 여자예요?"
+            },
+            {
+              "who": "B",
+              "ko": "이 사람은 여자인데 {} 보여요."
+            }
+          ],
+          "answer": "daehagsaengcheoreom",
+          "choices": [
+            {
+              "id": "daehagsaeng_gateun",
+              "ko": "대학생 같은"
+            },
+            {
+              "id": "daehagsaengcheoreom",
+              "ko": "대학생처럼"
+            },
+            {
+              "id": "daehagsaengi",
+              "ko": "대학생이"
+            }
+          ],
+          "en": "Is it a man or a woman? — A woman, and she looks like a university student.",
+          "why": "대학생처럼 보여요 is right: 보이다 takes an adjective with -아/어 (좋아 보여요), but a noun cannot join it that way, and 처럼 is the page’s way round that. 대학생 같은 is a modifier with no noun to modify, and 대학생이 보여요 means a student can be seen, which answers nothing.",
+          "grammar": "N처럼 보이다 is where this chapter’s first two grammar points meet: 대학생처럼 보여요, 인형처럼 보여요."
+        },
+        {
+          "n": 2,
+          "phraseKo": "쌍꺼풀이 없고 좀 ___",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "눈이 어떻게 생겼어요?"
+            },
+            {
+              "who": "B",
+              "ko": "쌍꺼풀이 없고 좀 {}."
+            }
+          ],
+          "answer": "jageun_pyeonieyo",
+          "choices": [
+            {
+              "id": "jagneun_pyeonieyo",
+              "ko": "작는 편이에요"
+            },
+            {
+              "id": "jaga_pyeonieyo",
+              "ko": "작아 편이에요"
+            },
+            {
+              "id": "jageun_pyeonieyo",
+              "ko": "작은 편이에요"
+            }
+          ],
+          "en": "What are the eyes like? — No double eyelids, and a little on the small side.",
+          "why": "작은 편이에요 is right: 작다 is an adjective ending in a consonant, so it takes -은 편이다. 작는 편이에요 is the verb ending, and 작아 편이에요 puts the -아 form in front of 편, which is a noun and needs a modifier.",
+          "grammar": "좀 softens 편이다 further: 좀 작은 편이에요, a little on the small side. The sentence is also on the unit’s word list, under 쌍꺼풀이 없다."
+        },
+        {
+          "n": 3,
+          "phraseKo": "키가 ___",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "키가 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "크지도 않고 작지도 않아요. 보통이에요."
+            }
+          ],
+          "answer": "keun_pyeonieyo",
+          "choices": [
+            {
+              "id": "keun_pyeonieyo",
+              "ko": "큰 편이에요"
+            },
+            {
+              "id": "keueun_pyeonieyo",
+              "ko": "크은 편이에요"
+            },
+            {
+              "id": "keuneun_pyeonieyo",
+              "ko": "크는 편이에요"
+            }
+          ],
+          "en": "Is the person on the tall side? — Neither tall nor short: average.",
+          "why": "큰 편이에요 is right: 크 ends in a vowel, so the modifier is just ㄴ — 큰. 크은 adds the 으 that only a consonant stem needs, and 크는 is the verb ending, which would make 크다 mean to grow.",
+          "grammar": "-지도 않고 -지도 않다 is neither one nor the other: 크지도 않고 작지도 않아요. 보통이다 closes it — average."
+        },
+        {
+          "n": 4,
+          "phraseKo": "성격은 ___",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "성격은 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "친절해 보여요."
+            }
+          ],
+          "answer": "eottae_boyeoyo",
+          "choices": [
+            {
+              "id": "eotteon_boyeoyo",
+              "ko": "어떤 보여요"
+            },
+            {
+              "id": "eottae_boyeoyo",
+              "ko": "어때 보여요"
+            },
+            {
+              "id": "eottaeyo_boyeoyo",
+              "ko": "어때요 보여요"
+            }
+          ],
+          "en": "What does the personality look like? — Kind, by the look of it.",
+          "why": "어때 보여요 is right: 어떻다 is a ㅎ irregular, and with -어 it becomes 어때 — the same 어때 as in 어때요 — before 보여요. 어떤 is the modifier (어떤 사람), which needs a noun, and 어때요 보여요 leaves a finished sentence stranded in front of another verb.",
+          "grammar": "어떻다 → 어때요, 어때 보여요, 어떤: the ㅎ goes and the vowel changes. B answers in kind, with the same pattern: 친절해 보여요."
+        },
+        {
+          "n": 5,
+          "phraseKo": "친절해 보여요. 지금 기분 ___ 웃고 있어요",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "성격은 어때 보여요?"
+            },
+            {
+              "who": "B",
+              "ko": "친절해 보여요. 지금 기분 {} 웃고 있어요."
+            }
+          ],
+          "answer": "johge",
+          "choices": [
+            {
+              "id": "joheun",
+              "ko": "좋은"
+            },
+            {
+              "id": "joke",
+              "ko": "조케"
+            },
+            {
+              "id": "johge",
+              "ko": "좋게"
+            }
+          ],
+          "en": "What does the personality look like? — Kind, by the look of it. Smiling happily just now.",
+          "why": "좋게 is right: 기분 좋게 웃다 is to smile happily, and -게 is what makes 좋다 the way of smiling. 좋은 is the modifier (좋은 기분), which needs a noun, and 조케 is [조케] written down by ear — the ㅎ of 좋 and the ㄱ of 게 fuse into [ㅋ] in speech, but the spelling keeps them apart.",
+          "grammar": "좋게 is said [조케]: ㅎ + ㄱ → [ㅋ], the rule from 13과. 기분 좋게 drops the 이 of 기분이 좋다, as set phrases often do."
+        }
+      ]
+    },
+    {
+      "type": "build",
+      "section": "문화 산책",
+      "sectionEn": "Culture note",
+      "id": "u12sgk-culture-1",
+      "no": "알아보기",
+      "icon": "🐟",
+      "pattern": "붕어빵",
+      "blurbEn": "Why a Korean friend looked at a family photo and said 붕어빵.",
+      "instructionKo": "다음을 읽고 질문에 답하세요.",
+      "instructionEn": "Read the passage and answer the questions.",
+      "noteEn": "p.85 is a short piece by a learner whose Korean friend saw a family photo and said 완전히 붕어빵이네 — a complete 붕어빵. A 붕어빵 is the fish-shaped pastry sold from street stalls in winter, baked in an iron mould, so every one comes out the same shape; calling two people 붕어빵 means they could have come out of one mould. Row 1 asks what the word means in the passage, and rows 2 to 4 are three of its sentences with the chapter’s grammar taken out. The 준비 question and 생각 나누기 ask about the learner’s own family and language, and have nothing to mark.",
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "‘붕어빵’은 어떤 사람",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "이 글에서 ‘붕어빵’은 어떤 사람을 말합니까?"
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "lookalike",
+          "choices": [
+            {
+              "id": "likes_the_pastry",
+              "ko": "붕어빵을 좋아하는 사람"
+            },
+            {
+              "id": "looks_young",
+              "ko": "나이보다 젊어 보이는 사람"
+            },
+            {
+              "id": "lookalike",
+              "ko": "얼굴이 아주 많이 닮은 사람"
+            }
+          ],
+          "en": "In this passage, who is a ‘붕어빵’? — Someone whose face is very like another’s.",
+          "why": "얼굴이 아주 많이 닮은 사람 is what the friend means: the line before it is 너, 아버지하고 진짜 많이 닮았다, and 붕어빵 come out of one mould all alike. 붕어빵을 좋아하는 사람 takes the word literally, and 나이보다 젊어 보이는 사람 is said of the father in the passage, but it is not what 붕어빵 means.",
+          "grammar": "완전히 붕어빵이네: 완전히, completely, and -네 for something just noticed. The friend speaks 반말, so it is 붕어빵이네, not 붕어빵이네요."
+        },
+        {
+          "n": 2,
+          "phraseKo": "저는 아버지와 얼굴이 많이 ___",
+          "lines": [
+            {
+              "ko": "저는 아버지와 얼굴이 많이 {}."
+            }
+          ],
+          "answer": "dalmeun",
+          "choices": [
+            {
+              "id": "dalmeun",
+              "ko": "닮은 편입니다"
+            },
+            {
+              "id": "by_ear",
+              "ko": "달믄 편입니다"
+            },
+            {
+              "id": "put_in",
+              "ko": "담은 편입니다"
+            }
+          ],
+          "en": "My face is quite a lot like my father’s.",
+          "why": "닮은 편입니다 is right: 닮다 is a verb, but looking like someone is a state already reached, so it takes the past modifier 닮은 — as 마른 편이에요 does. 달믄 is 닮은 written by ear, since before a vowel both the ㄹ and the ㅁ are heard — [달믄]. 담은 is 담다, to put something into a container, which the consonant rule for ㄻ might suggest and the spelling does not.",
+          "grammar": "닮은 is said [달믄]: before a vowel both halves of ㄻ are heard, the ㅁ moving across. Before a consonant only [ㅁ] is left — 닮고 [담꼬] — which is this chapter’s 발음 page."
+        },
+        {
+          "n": 3,
+          "phraseKo": "아버지는 연세보다 ___ 키도 저와 비슷합니다",
+          "lines": [
+            {
+              "ko": "아버지는 연세보다 {} 키도 저와 비슷합니다."
+            }
+          ],
+          "answer": "honorific",
+          "choices": [
+            {
+              "id": "plain",
+              "ko": "젊어 보이고"
+            },
+            {
+              "id": "honorific",
+              "ko": "젊어 보이시고"
+            },
+            {
+              "id": "by_ear",
+              "ko": "절머 보이시고"
+            }
+          ],
+          "en": "My father looks young for his age, and he is about my height, too.",
+          "why": "젊어 보이시고 is right: the sentence is about the writer’s father, and 연세 — the honorific word for age — has already set the level, so 보이다 takes 시: 보이시고. 젊어 보이고 drops the honorific that 연세 calls for, and 절머 writes down the sound [절머] and loses the spelling 젊어.",
+          "grammar": "The 시 goes on 보이다, not on 젊다: 젊어 보이시다. 연세 is to 나이 what 드시다 is to 먹다."
+        },
+        {
+          "n": 4,
+          "phraseKo": "너, 아버지하고 진짜 많이 ___",
+          "lines": [
+            {
+              "who": "친구",
+              "ko": "너, 아버지하고 진짜 많이 {}. 완전히 붕어빵이네."
+            }
+          ],
+          "answer": "plain",
+          "choices": [
+            {
+              "id": "polite",
+              "ko": "닮았어요"
+            },
+            {
+              "id": "honorific",
+              "ko": "닮으셨다"
+            },
+            {
+              "id": "plain",
+              "ko": "닮았다"
+            }
+          ],
+          "en": "You really do look like your father. A complete 붕어빵.",
+          "why": "닮았다 is right: the friend calls the writer 너, so the rest has to be 반말 too, and 닮았다 is the plain past a friend exclaims in. 닮았어요 is polite, which clashes with 너, and 닮으셨다 would honour the writer — nobody honours the person they have just called 너.",
+          "grammar": "닮다 is said in the past about a likeness that is there now: 아버지를 닮았어요, you take after your father. 닮았다 is said [달맏따], both sounds of ㄻ kept before the vowel."
+        }
+      ]
+    },
+    {
+      "type": "build",
+      "section": "발음",
+      "sectionEn": "Pronunciation",
+      "id": "u12sgk-pron-1",
+      "no": "규칙",
+      "icon": "🔈",
+      "pattern": "받침 ㄻ",
+      "blurbEn": "Before a consonant ㄻ leaves only [ㅁ], and it tenses the consonant after it.",
+      "instructionKo": "잘 듣고 발음을 고르세요.",
+      "instructionEn": "Listen carefully and choose the pronunciation.",
+      "noteEn": "The page states two rules and plays seven sentences on tracks 30 and 31. When a consonant follows ㄻ, only [ㅁ] is heard: 젊네요 [점네요]. When that consonant is ㄱ, ㄷ, ㅅ or ㅈ it is tensed as well: 닮고 [담꼬], 닮지 [담찌]. The rows take five of the sentences, each playing its own line, and ask for the sound. The last row is the case the page does not state but prints in red anyway: before a vowel both letters of ㄻ are heard and the ㅁ moves across — 닮았어요 is [달마써요]. On every row the spelling itself is one of the wrong buttons, because what is written is not what is said.",
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "젊네요 ⟶ ___",
+          "lines": [
+            {
+              "ko": "형이 참 젊네요."
+            },
+            {
+              "who": "발음",
+              "ko": "젊네요 ⟶ {}"
+            }
+          ],
+          "answer": "jeomneyo",
+          "choices": [
+            {
+              "id": "jeomneyo",
+              "ko": "[점네요]"
+            },
+            {
+              "id": "jeolneyo",
+              "ko": "[절네요]"
+            },
+            {
+              "id": "jeolmneyo",
+              "ko": "[젊네요]"
+            }
+          ],
+          "en": "Your older brother looks so young. — 젊네요 is said [점네요].",
+          "why": "[점네요] is right: a consonant follows ㄻ — the ㄴ of 네 — so only the [ㅁ] is heard. [절네요] keeps the ㄹ of ㄻ instead of the ㅁ, and [젊네요] is the spelling read letter by letter.",
+          "grammar": "ㄻ + consonant → [ㅁ]: 젊네요 [점네요], 닮는 [담는]. The ㄹ is written and never said.",
+          "audio": {
+            "src": "audio/book/2b-u12-d54.mp3",
+            "labelEn": "Your older brother looks so young. — 젊네요 is said [점네요]."
+          }
+        },
+        {
+          "n": 2,
+          "phraseKo": "닮고 ⟶ ___",
+          "lines": [
+            {
+              "ko": "저는 아버지를 닮고 싶어요."
+            },
+            {
+              "who": "발음",
+              "ko": "닮고 ⟶ {}"
+            }
+          ],
+          "answer": "damkko",
+          "choices": [
+            {
+              "id": "damkko",
+              "ko": "[담꼬]"
+            },
+            {
+              "id": "damgo",
+              "ko": "[담고]"
+            },
+            {
+              "id": "dalkko",
+              "ko": "[달꼬]"
+            },
+            {
+              "id": "dalmgo",
+              "ko": "[닮고]"
+            }
+          ],
+          "en": "I want to take after my father. — 닮고 is said [담꼬].",
+          "why": "[담꼬] is right on both counts: before the ㄱ only [ㅁ] is left, and a ㄱ after the stem of 닮다 is tensed to [ㄲ]. [담고] stops at the first half of the rule, [달꼬] keeps the wrong letter of ㄻ, and [닮고] is the spelling read as written.",
+          "grammar": "The tensing belongs to verb and adjective stems ending in ㄴ or ㅁ — 신고 [신꼬], 닮고 [담꼬], 젊다 [점따]. A noun does not do it: 삶과 is [삼과].",
+          "audio": {
+            "src": "audio/book/2b-u12-d55.mp3",
+            "labelEn": "I want to take after my father. — 닮고 is said [담꼬]."
+          }
+        },
+        {
+          "n": 3,
+          "phraseKo": "닮지 ⟶ ___",
+          "lines": [
+            {
+              "ko": "동생과 저는 닮지 않았어요."
+            },
+            {
+              "who": "발음",
+              "ko": "닮지 ⟶ {}"
+            }
+          ],
+          "answer": "damjji",
+          "choices": [
+            {
+              "id": "damji",
+              "ko": "[담지]"
+            },
+            {
+              "id": "dalmji",
+              "ko": "[닮지]"
+            },
+            {
+              "id": "damjji",
+              "ko": "[담찌]"
+            }
+          ],
+          "en": "My younger sibling and I do not look alike. — 닮지 is said [담찌].",
+          "why": "[담찌] is right: ㄻ before the ㅈ of -지 leaves [ㅁ], and the ㅈ is tensed. [담지] misses the tensing that a ㅁ-final stem gives -지, and [닮지] is the spelling, which nobody reads aloud as written.",
+          "grammar": "-지 않다 after a ㄻ stem: 닮지 않다 [담찌 안타], 젊지 않다 [점찌 안타].",
+          "audio": {
+            "src": "audio/book/2b-u12-d56.mp3",
+            "labelEn": "My younger sibling and I do not look alike. — 닮지 is said [담찌]."
+          }
+        },
+        {
+          "n": 4,
+          "phraseKo": "젊게 ⟶ ___",
+          "lines": [
+            {
+              "ko": "우리 할아버지는 참 젊게 사세요."
+            },
+            {
+              "who": "발음",
+              "ko": "젊게 ⟶ {}"
+            }
+          ],
+          "answer": "jeomkke",
+          "choices": [
+            {
+              "id": "jeomge",
+              "ko": "[점게]"
+            },
+            {
+              "id": "jeolkke",
+              "ko": "[절께]"
+            },
+            {
+              "id": "jeomkke",
+              "ko": "[점께]"
+            },
+            {
+              "id": "jeolmge",
+              "ko": "[젊게]"
+            }
+          ],
+          "en": "My grandfather lives very youthfully. — 젊게 is said [점께].",
+          "why": "[점께] is right: the -게 of A-게 begins with ㄱ, so ㄻ leaves [ㅁ] and the ㄱ is tensed. [점게] misses the tensing, [절께] keeps the ㄹ, which is how 짧게 [짤께] goes — with ㄼ, not ㄻ — and [젊게] is the spelling read as written.",
+          "grammar": "젊게 살다 is to live young at heart, and it is A-게 from this chapter: 젊다 → 젊게. The same tensing is in 젊다 [점따] and 젊습니다 [점씁니다].",
+          "audio": {
+            "src": "audio/book/2b-u12-d57.mp3",
+            "labelEn": "My grandfather lives very youthfully. — 젊게 is said [점께]."
+          }
+        },
+        {
+          "n": 5,
+          "phraseKo": "닮았어요 ⟶ ___",
+          "lines": [
+            {
+              "ko": "눈은 아빠를 닮고 코는 엄마를 닮았어요."
+            },
+            {
+              "who": "발음",
+              "ko": "닮았어요 ⟶ {}"
+            }
+          ],
+          "answer": "dalmasseoyo",
+          "choices": [
+            {
+              "id": "damasseoyo",
+              "ko": "[다마써요]"
+            },
+            {
+              "id": "dalasseoyo",
+              "ko": "[달아써요]"
+            },
+            {
+              "id": "dalmasseoyo_2",
+              "ko": "[닮았어요]"
+            },
+            {
+              "id": "dalmasseoyo",
+              "ko": "[달마써요]"
+            }
+          ],
+          "en": "My eyes are my dad’s and my nose is my mum’s. — 닮았어요 is said [달마써요].",
+          "why": "[달마써요] is right: before a vowel nothing is dropped — the ㄹ stays in the first syllable and the ㅁ moves across to the next. [다마써요] applies the consonant rule where there is no consonant, [달아써요] keeps the ㄹ but loses the ㅁ altogether, and [닮았어요] is the spelling, which nobody reads aloud as it is written.",
+          "grammar": "The page’s rule is for ㄻ before a consonant. Before a vowel both letters are heard: 닮아 [달마], 젊어 [절머], 닮은 [달믄]. This one line has both cases — 닮고 [담꼬] first, 닮았어요 [달마써요] second.",
+          "audio": {
+            "src": "audio/book/2b-u12-d60.mp3",
+            "labelEn": "My eyes are my dad’s and my nose is my mum’s. — 닮았어요 is said [달마써요]."
+          }
+        }
+      ]
+    },
+    {
+      "type": "build",
+      "section": "발음",
+      "sectionEn": "Pronunciation",
+      "id": "u12sgk-pron-2",
+      "no": "연습",
+      "icon": "✍️",
+      "pattern": "들은 것을 받아 적기",
+      "blurbEn": "The tape gives the sound; the blank wants the spelling — and [담] can be two words.",
+      "instructionKo": "잘 듣고 빈칸에 알맞은 말을 고르세요.",
+      "instructionEn": "Listen carefully and choose the spelling of what you hear.",
+      "noteEn": "The book has you repeat these lines aloud, which nothing can mark. Turned round, the tape gives the sound and the blank wants the spelling — the direction that costs marks in a dictation, and one with a trap of its own here: [담] is also 담다, to put something into a container, so [담꼬] and [담는] sound exactly like forms of 담다. Only the sentence tells them apart, and that is what these rows are about. Each plays its own line.",
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "아이는 부모를 ___ 것 같아요 · [담는]",
+          "lines": [
+            {
+              "ko": "아이는 부모를 {} 것 같아요."
+            }
+          ],
+          "answer": "dalmneun",
+          "choices": [
+            {
+              "id": "damneun",
+              "ko": "담는"
+            },
+            {
+              "id": "dalmneun",
+              "ko": "닮는"
+            },
+            {
+              "id": "dalmeun",
+              "ko": "닮은"
+            }
+          ],
+          "en": "Children seem to take after their parents.",
+          "why": "닮는 is the spelling: [담는] is 닮다 with -는, the ㄹ of ㄻ silent before the ㄴ. 담는 sounds the same and is 담다, to put into something, which the sentence cannot mean — the parents are being resembled, not packed. 닮은 is said [달믄] and is the past modifier, a different sound.",
+          "grammar": "아이는 부모를 닮는다 is a general truth, so the present -는 — unlike 얼굴이 닮은 편이에요, a likeness already there.",
+          "audio": {
+            "src": "audio/book/2b-u12-d58.mp3",
+            "labelEn": "Children seem to take after their parents."
+          }
+        },
+        {
+          "n": 2,
+          "phraseKo": "켈리 씨는 누구를 ___ · [달마써요]",
+          "lines": [
+            {
+              "ko": "켈리 씨는 누구를 {}?"
+            }
+          ],
+          "answer": "dalmasseoyo",
+          "choices": [
+            {
+              "id": "damasseoyo",
+              "ko": "담았어요"
+            },
+            {
+              "id": "dalmasseoyo_2",
+              "ko": "달맜어요"
+            },
+            {
+              "id": "dalmasseoyo",
+              "ko": "닮았어요"
+            }
+          ],
+          "en": "Who do you take after, Kelly?",
+          "why": "닮았어요 is the spelling of [달마써요]: before a vowel both letters of ㄻ are heard, so the ㄹ in the first syllable is the first half of ㄻ. 담았어요 would be said [다마써요], with no ㄹ at all — it is 담다 — and 달맜어요 writes the sound down and puts the ㅁ in the wrong syllable.",
+          "grammar": "누구를 닮았어요? is the everyday way to ask who someone takes after. 닮다 takes 을/를: 아버지를 닮다.",
+          "audio": {
+            "src": "audio/book/2b-u12-d59.mp3",
+            "labelEn": "Who do you take after, Kelly?"
+          }
+        },
+        {
+          "n": 3,
+          "phraseKo": "눈은 아빠를 ___ 코는 엄마를 닮았어요 · [담꼬]",
+          "lines": [
+            {
+              "ko": "눈은 아빠를 {} 코는 엄마를 닮았어요."
+            }
+          ],
+          "answer": "dalmgo",
+          "choices": [
+            {
+              "id": "dalmgo",
+              "ko": "닮고"
+            },
+            {
+              "id": "damgo",
+              "ko": "담고"
+            },
+            {
+              "id": "damkko",
+              "ko": "담꼬"
+            }
+          ],
+          "en": "My eyes are my dad’s and my nose is my mum’s.",
+          "why": "닮고 is the spelling: [담꼬] is 닮다 with -고, the ㄹ silent and the ㄱ tensed. 담고 sounds exactly the same — 담다 tenses its -고 too — so the sentence has to decide, and 아빠 is being resembled, not put anywhere. 담꼬 is the sound written down.",
+          "grammar": "-고 joins the two halves: 눈은 아빠를 닮고 코는 엄마를 닮았어요. The tense goes on the last verb only.",
+          "audio": {
+            "src": "audio/book/2b-u12-d60.mp3",
+            "labelEn": "My eyes are my dad’s and my nose is my mum’s."
+          }
+        }
+      ]
+    },
+    {
+      "type": "build",
+      "section": "자기 평가",
+      "sectionEn": "Self-check",
+      "id": "u12sgk-check-1",
+      "no": "자기 평가",
+      "icon": "✅",
+      "pattern": "네 가지 문법",
+      "blurbEn": "The chapter’s four grammar points, one dialogue each.",
+      "instructionKo": "알맞은 것을 골라 대화를 만들어 보세요.",
+      "instructionEn": "Complete each dialogue using the word in brackets and the right form from the box.",
+      "noteEn": "The page prints four dialogues and a box holding -아/어 보이다, 처럼[같이], -는 편이다 and -게 — one each — and the answers are printed upside down at the foot of p.87: 피곤해 보여요, 즐겁게, 잘 먹는 편이에요, 한국 사람처럼. The word each row starts from is in brackets above it. Since every form is used exactly once, a row keyed to the wrong one would take an answer another row needs, and the suite checks that the four keyed answers use the four different forms. The word list in 자기 평가 1 is a tick-box and is not here.",
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "왜 이렇게 ___ (피곤하다)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "왜 이렇게 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "어제 잠을 잘 못 잤어요."
+            }
+          ],
+          "answer": "pigonhae_boyeoyo",
+          "choices": [
+            {
+              "id": "pigonhan_pyeonieyo",
+              "ko": "피곤한 편이에요"
+            },
+            {
+              "id": "pigonha_boyeoyo",
+              "ko": "피곤하 보여요"
+            },
+            {
+              "id": "pigonhae_boyeoyo",
+              "ko": "피곤해 보여요"
+            }
+          ],
+          "en": "Why do you look so tired? — I did not sleep well last night.",
+          "why": "피곤해 보여요 is the key the book prints: A can see B’s face, and -아/어 보이다 is for what can be seen. 피곤한 편이에요 would ask why B is tired as a rule, where B’s answer is about last night, and 피곤하 보여요 leaves 하 without the -여 that makes it 해.",
+          "grammar": "왜 이렇게 + 보여요 is how Korean says “you look so…”: 왜 이렇게 피곤해 보여요? The 하다 adjective contracts: 피곤하 + 여 → 피곤해."
+        },
+        {
+          "n": 2,
+          "phraseKo": "친구들이 재미있어서 아주 ___ 공부하고 있어요 (즐겁다)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "요즘 한국어 수업은 어때요?"
+            },
+            {
+              "who": "B",
+              "ko": "친구들이 재미있어서 아주 {} 공부하고 있어요."
+            }
+          ],
+          "answer": "jeulgeobge",
+          "choices": [
+            {
+              "id": "jeulgeobge",
+              "ko": "즐겁게"
+            },
+            {
+              "id": "jeulgeoun",
+              "ko": "즐거운"
+            },
+            {
+              "id": "jeulgeowoge",
+              "ko": "즐거워게"
+            }
+          ],
+          "en": "How are your Korean classes these days? — My classmates are fun, so I am enjoying studying a lot.",
+          "why": "즐겁게 is the key: -게 turns 즐겁다 into the way B is studying, and the ㅂ stays because -게 starts with a consonant. 즐거운 is the modifier and needs a noun, and 즐거워게 carries the 워 of 즐거워요 to a place where no vowel follows.",
+          "grammar": "즐겁게 공부하다 is on the unit’s word list. The ㅂ irregulars change only before a vowel: 즐거워요, 즐거운, but 즐겁게."
+        },
+        {
+          "n": 3,
+          "phraseKo": "네, ___ (잘 먹다)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "매운 음식 잘 먹어요?"
+            },
+            {
+              "who": "B",
+              "ko": "네, {}."
+            }
+          ],
+          "answer": "jal_meogneun_pyeonieyo",
+          "choices": [
+            {
+              "id": "jal_meogeun_pyeonieyo",
+              "ko": "잘 먹은 편이에요"
+            },
+            {
+              "id": "jal_meogneun_pyeonieyo",
+              "ko": "잘 먹는 편이에요"
+            },
+            {
+              "id": "jal_meogeo_boyeoyo",
+              "ko": "잘 먹어 보여요"
+            }
+          ],
+          "en": "Do you eat spicy food? — Yes, I can handle it pretty well.",
+          "why": "잘 먹는 편이에요 is the key: 먹다 is a verb, so -는 편이다, and B is describing a habit. 잘 먹은 편이에요 would grade one meal already eaten, and 잘 먹어 보여요 describes how someone looks from outside — nobody tells you how they look to you.",
+          "grammar": "V-는 편이다 hedges a habit: 매운 음식을 잘 먹는 편이에요 — I manage it, mostly. The same sentence is the third 예 on p.76."
+        },
+        {
+          "n": 4,
+          "phraseKo": "___ 말할 수 있을 때까지 공부할 거예요 (한국 사람)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "언제까지 한국어를 공부할 거예요?"
+            },
+            {
+              "who": "B",
+              "ko": "{} 말할 수 있을 때까지 공부할 거예요."
+            }
+          ],
+          "answer": "hangug_saramcheoreom",
+          "choices": [
+            {
+              "id": "hangug_saram_gateun",
+              "ko": "한국 사람 같은"
+            },
+            {
+              "id": "hangug_sarami",
+              "ko": "한국 사람이"
+            },
+            {
+              "id": "hangug_saramcheoreom",
+              "ko": "한국 사람처럼"
+            }
+          ],
+          "en": "How long are you going to study Korean? — Until I can speak like a Korean.",
+          "why": "한국 사람처럼 is the key: 처럼 goes straight in front of the verb 말할 and says whose way of speaking B means. 한국 사람 같은 is a modifier with no noun after it, and 한국 사람이 makes a Korean the one who will be able to speak — which says nothing about B.",
+          "grammar": "The noun is the whole of 한국 사람, so 처럼 goes on the last word: 한국 사람처럼, written apart from 한국 and closed up to 사람."
+        }
+      ]
+    }
+  ]
+}

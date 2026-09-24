@@ -1282,6 +1282,69 @@ const overlayIds = [
   const i18nSrc = read(path.join('js', 'i18n.js'));
   check('Unit 12 is a translatable source', i18nSrc.indexOf("'worlds/2b-unit-12.json'") >= 0);
   check('and so is its cassette', i18nSrc.indexOf("'worlds/unit12-cassette.json'") >= 0);
+  // The desk used to offer Unit 12 its 익힘책 and nothing else: the one unit of nine without a
+  // 교과서 or a 퀴즈. Both are here now, and each has to be claimed by name — a bank nothing
+  // resolves is a desk row that silently never appears.
+  const uiSrc = read(path.join('js', 'ui.js'));
+  check('the 교과서 and the 퀴즈 both resolve to Unit 12 banks',
+    /isUnit12World\(\)\) return '\/worlds\/unit12-textbook\.json'/.test(uiSrc)
+    && /isUnit12World\(\)\) return '\/worlds\/unit12-desk-quiz\.json'/.test(uiSrc));
+  check('TTS harvest and the translation list both carry the Unit 12 quiz',
+    ttsSrc.indexOf('worlds/unit12-desk-quiz.json') >= 0 && i18nSrc.indexOf("'worlds/unit12-desk-quiz.json'") >= 0);
+  check('and the Unit 12 교과서 is a translatable source', i18nSrc.indexOf("'worlds/unit12-textbook.json'") >= 0);
+  check('the admin panel lists the Unit 12 quiz',
+    /QUIZ_UNITS = \[[^\]]*'unit12'/.test(read(path.join('admin', 'lib', 'content.js'))));
+}());
+
+// ── 2B Unit 12 desk quiz (17 rows, 10 to a sitting) ──────────────────────────
+// Written after both banks, so it is revision rather than a third syllabus: no button may be
+// a sentence either bank already gaps, and no wrong button may be an answer either bank keys.
+(function checkUnit12DeskQuiz() {
+  const rel = path.join('worlds', 'unit12-desk-quiz.json');
+  if (!check(rel + ' exists', fs.existsSync(path.join(ROOT, rel)))) return;
+  let bank;
+  try { bank = JSON.parse(read(rel)); } catch (e) { check(rel + ' is valid JSON', false, e.message); return; }
+  const qs = bank.questions || [];
+  check('Unit 12 desk quiz has 17 questions', qs.length === 17, `found ${qs.length}`);
+  check('and plays 10 of them a sitting, so two sittings are not the same ten',
+    bank.sessionSize === 10 && qs.length > bank.sessionSize, String(bank.sessionSize));
+  const bad = [];
+  qs.forEach((q, i) => {
+    const keys = Object.keys((q && q.choices) || {}).sort().join('');
+    if (keys !== 'ABCD') bad.push(`q${i + 1} choices are ${keys || 'missing'}`);
+    if (!q || !q.choices || !q.choices[q.a]) bad.push(`q${i + 1} answer is not a choice`);
+    const vals = Object.values((q && q.choices) || {});
+    if (new Set(vals).size !== vals.length) bad.push(`q${i + 1} repeats a choice`);
+  });
+  check('Unit 12 desk quiz rows are complete', bad.length === 0, bad.slice(0, 6).join(', '));
+  const letters = qs.map((q) => q.a).join('');
+  const most = Math.max(...['A', 'B', 'C', 'D'].map((k) => letters.split(k).length - 1));
+  check('and the Unit 12 answers use all four letters, none of them more than a third of the key',
+    new Set(letters.split('')).size === 4 && most <= Math.ceil(qs.length / 3), letters);
+  const flatq = (s) => String(s == null ? '' : s).normalize('NFC').replace(/[\s.,?!()]/g, '');
+  const drilled = new Set();
+  const keyed = new Set();
+  ['worlds/unit12-textbook.json', 'worlds/unit12-workbook.json'].forEach((r) => {
+    const full = path.join(ROOT, r);
+    if (!fs.existsSync(full)) return;
+    JSON.parse(fs.readFileSync(full, 'utf8')).exercises.forEach((ex) => (ex.items || []).forEach((it) => {
+      const one = ((it.choices || []).find((c) => c.id === it.answer) || {}).ko || '';
+      const two = ((it.choices2 || []).find((c) => c.id === it.answer2) || {}).ko || '';
+      [one, two].filter(Boolean).forEach((k) => keyed.add(flatq(k)));
+      const words = [one, two].filter(Boolean);
+      let k = 0;
+      drilled.add(flatq((it.lines || []).map((l) => String(l.ko).replace(/\{\}/g, () => words[k++] || '')).join(' ')));
+    }));
+  });
+  const repeats = [];
+  const liars = [];
+  qs.forEach((q) => Object.keys(q.choices || {}).forEach((k) => {
+    if (drilled.has(flatq(q.choices[k]))) repeats.push(`q${q.id}${k}`);
+    if (k !== q.a && keyed.has(flatq(q.choices[k]))) liars.push(`q${q.id}${k}`);
+  }));
+  check('and no Unit 12 quiz button is a sentence the 교과서 or 익힘책 already drills', repeats.length === 0, repeats.join(', '));
+  check('and no wrong button on it is an answer either bank keys', liars.length === 0, liars.join(', '));
+  check('the Unit 12 quiz records why it carries no artwork yet', String(bank.artNote || '').length > 150);
 }());
 
 (function checkUnit13World() {
@@ -2573,7 +2636,8 @@ const overlayIds = [
     { unit: 'unit10', label: 'Unit 10', world: 'isUnit10World', exs: 7, rows: 30 },
     { unit: 'unit13', label: 'Unit 13', world: 'isUnit13World', exs: 16, rows: 78 },
     { unit: 'unit11', label: 'Unit 11', world: 'isUnit11World', exs: 14, rows: 63 },
-    { unit: 'unit16', label: 'Unit 16', world: 'isUnit16World', exs: 14, rows: 59 }
+    { unit: 'unit16', label: 'Unit 16', world: 'isUnit16World', exs: 14, rows: 59 },
+    { unit: 'unit12', label: 'Unit 12', world: 'isUnit12World', exs: 16, rows: 73 }
   ];
   const TYPES = ['fill', 'match', 'dialogue', 'experience', 'build'];
   const gameJs = readGameSource();
