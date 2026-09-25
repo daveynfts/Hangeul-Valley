@@ -890,6 +890,290 @@
       }
     },
     {
+      "id": "u15sgk-speak-2",
+      "type": "build",
+      "no": "연습 1",
+      "pattern": "정우와 히엔 · 지금은 익숙해졌어요",
+      "section": "말하기 2",
+      "icon": "💬",
+      "instructionKo": "[보기]와 같이 바꿔서 이야기해 보세요.",
+      "instructionEn": "Substitute the phrases into the conversation, as in the example.",
+      "blurbEn": "Hien on getting used to Korea, then the same conversation with the second column.",
+      "noteEn": "The page prints the conversation on track 57 and, under it, two columns of phrases to say it again with, colour for colour. The first column is the conversation itself, whose grammar this chapter’s grammar pages already drill, so rows 1 to 4 take four of its turns with a word from the page’s vocabulary box taken out, three of them playing their own line. Rows 5 to 7 are the second column, each phrase dropped into the frame of the one it replaces: 한국 문화를 잘 모르다 and 좀 이해하다, 대학교에 다니다, then 졸업하다 and 대학원에 가다. 연습 2 on p.147 is a conversation about the learner’s own life in Korea, with pictures of what is hard and words for what changes, and has no answer to mark.",
+      "bank": [],
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "___ 한국 생활이 많이 힘들어요",
+          "lines": [
+            {
+              "who": "정우",
+              "ko": "히엔 씨, 요즘 잘 지내요?"
+            },
+            {
+              "who": "정우",
+              "ko": "{} 한국 생활이 많이 힘들어요?"
+            }
+          ],
+          "answer": "ajigdo",
+          "choices": [
+            {
+              "id": "beolsseo",
+              "ko": "벌써"
+            },
+            {
+              "id": "ije",
+              "ko": "이제"
+            },
+            {
+              "id": "ajigdo",
+              "ko": "아직도"
+            }
+          ],
+          "en": "Hien, how are you these days? Is life in Korea still hard?",
+          "why": "아직도 is what 정우 asks, and it is a word from the page’s vocabulary box: still — 정우 knows it was hard at first and asks whether it still is. 벌써 would be already, as if 히엔 had only just arrived, and 이제 would be now, as if it had only just become hard; 히엔’s answer, 처음 왔을 때는 힘들었지만, fits neither.",
+          "grammar": "아직 is still or yet, and 아직도 leans on it: 아직도 힘들어요? — is it still hard, even now? With a negative 아직 is not yet: 아직 못 했어요.",
+          "audio": {
+            "src": "audio/book/2b-u15-d42.mp3",
+            "labelEn": "말하기 2 · the line itself"
+          }
+        },
+        {
+          "n": 2,
+          "phraseKo": "매운 음식을 잘 못 먹어서 ___ 지금은 잘 먹게 되었어요",
+          "lines": [
+            {
+              "who": "정우",
+              "ko": "처음에 뭐가 제일 힘들었어요?"
+            },
+            {
+              "who": "히엔",
+              "ko": "매운 음식을 잘 못 먹어서 {} 지금은 잘 먹게 되었어요."
+            }
+          ],
+          "answer": "gosaenghaessneunde",
+          "choices": [
+            {
+              "id": "gosaenghaessneunde",
+              "ko": "고생했는데"
+            },
+            {
+              "id": "gosaenghaneunde",
+              "ko": "고생하는데"
+            },
+            {
+              "id": "gosaenghaesseoseo",
+              "ko": "고생했어서"
+            }
+          ],
+          "en": "What was the hardest thing at first? — I couldn’t eat spicy food, so I had a hard time, but now I’ve come to eat it well.",
+          "why": "고생했는데 is right: 고생하다, to have a hard time, is the word from the page’s box, and it is over — past, with -는데 turning to how things are now. 고생하는데 puts the hard time in the present, which 지금은 잘 먹게 되었어요 contradicts, and 고생했어서 puts the past tense before -어서, which never carries it.",
+          "grammar": "-았/었는데 sets a past state against the present: 고생했는데 지금은 잘 먹게 되었어요. 못 먹어서 in front of it gives the cause: I couldn’t eat it, so it was hard.",
+          "audio": {
+            "src": "audio/book/2b-u15-d45.mp3",
+            "labelEn": "말하기 2 · the line itself"
+          }
+        },
+        {
+          "n": 3,
+          "phraseKo": "그래요? ___",
+          "lines": [
+            {
+              "who": "정우",
+              "ko": "그래요? {}."
+            }
+          ],
+          "answer": "dahaengineyo",
+          "choices": [
+            {
+              "id": "dahaengiseyo",
+              "ko": "다행이세요"
+            },
+            {
+              "id": "dahaengineyo",
+              "ko": "다행이네요"
+            },
+            {
+              "id": "bulhaengineyo",
+              "ko": "불행이네요"
+            }
+          ],
+          "en": "Really? That’s a relief.",
+          "why": "다행이네요 is right: 다행이다, to be fortunate, is the page’s own word, and -네요 is the speaker reacting to news just heard — 히엔 can eat spicy food now. 다행이세요 puts 시 on it, but 다행이다 describes how things turned out, not a person to be honoured, and 불행이네요 would call the news unfortunate.",
+          "grammar": "다행이다 is said of a situation: 다행이네요, 정말 다행이에요. -네요 marks a reaction to something just learned."
+        },
+        {
+          "n": 4,
+          "phraseKo": "히엔 씨는 열심히 하니까 ___",
+          "lines": [
+            {
+              "who": "히엔",
+              "ko": "한국에서 취직하려고 하는데 할 수 있을지 모르겠어요."
+            },
+            {
+              "who": "정우",
+              "ko": "히엔 씨는 열심히 하니까 {}."
+            }
+          ],
+          "answer": "jaldoel_geoyeyo",
+          "choices": [
+            {
+              "id": "jaldwaesseoyo",
+              "ko": "잘됐어요"
+            },
+            {
+              "id": "jaldwaesseul_geoyeyo",
+              "ko": "잘됐을 거예요"
+            },
+            {
+              "id": "jaldoel_geoyeyo",
+              "ko": "잘될 거예요"
+            }
+          ],
+          "en": "I’m trying to get a job in Korea, but I don’t know whether I can. — You work hard, so it’ll go well.",
+          "why": "잘될 거예요 is right: 잘되다, to go well, is the last word in the page’s box, and -(으)ㄹ 거예요 is 정우’s guess about the future — 히엔 has not found a job yet. 잘됐어요 says it already went well, and 잘됐을 거예요 guesses about something already over; neither fits a job hunt that has not happened yet.",
+          "grammar": "잘되다, to go well, is written closed up as one word. 열심히 하니까 gives the reason for the guess: you work hard, so it will work out.",
+          "audio": {
+            "src": "audio/book/2b-u15-d50.mp3",
+            "labelEn": "말하기 2 · the line itself"
+          }
+        },
+        {
+          "n": 5,
+          "phraseKo": "___ 고생했는데 지금은 ___ (한국 문화를 잘 모르다 / 좀 이해하다)",
+          "lines": [
+            {
+              "who": "히엔",
+              "ko": "{} 고생했는데 지금은 {}."
+            }
+          ],
+          "answer": "hangug_munhwareul_jal_molraseo",
+          "choices": [
+            {
+              "id": "hangug_munhwareul_jal_molraseo",
+              "ko": "한국 문화를 잘 몰라서"
+            },
+            {
+              "id": "hangug_munhwareul_jal_molreoseo",
+              "ko": "한국 문화를 잘 몰러서"
+            },
+            {
+              "id": "hangug_munhwareul_jal_molrasseoseo",
+              "ko": "한국 문화를 잘 몰랐어서"
+            }
+          ],
+          "answer2": "jom_ihaehage_doeeosseoyo",
+          "choices2": [
+            {
+              "id": "jom_ihaehaejyeosseoyo",
+              "ko": "좀 이해해졌어요"
+            },
+            {
+              "id": "jom_ihaehage_doeeosseoyo",
+              "ko": "좀 이해하게 되었어요"
+            },
+            {
+              "id": "jom_ihaehage_dwaeeosseoyo",
+              "ko": "좀 이해하게 돼었어요"
+            }
+          ],
+          "en": "I didn’t know Korean culture well, so I had a hard time, but now I’ve come to understand it a little.",
+          "why": "몰라서 is right: 모르다 is a 르 irregular, so before -아서 it doubles its ㄹ and takes 아 — 몰라서 — and -아서 gives the reason for the hard time. 몰러서 takes the wrong vowel, and 몰랐어서 puts the past tense before -어서. In the second blank, 이해하게 되었어요 is the change -게 되다 is for — understanding came about. 이해해졌어요 gives a verb -아/어지다, which belongs to adjectives, and 돼었어요 writes 되 twice over: 돼 is already 되어.",
+          "grammar": "The second column drops into the frame of the first: 매운 음식을 잘 못 먹어서 → 한국 문화를 잘 몰라서, 잘 먹게 되었어요 → 좀 이해하게 되었어요. 되었어요 and 됐어요 are the same word."
+        },
+        {
+          "n": 6,
+          "phraseKo": "그런데 히엔 씨는 ___ 어떤 일을 했어요 (대학교에 다니다)",
+          "lines": [
+            {
+              "who": "정우",
+              "ko": "그런데 히엔 씨는 {} 어떤 일을 했어요?"
+            }
+          ],
+          "answer": "daehaggyoe_danigi_jeone",
+          "choices": [
+            {
+              "id": "daehaggyoe_danyeossgi_jeone",
+              "ko": "대학교에 다녔기 전에"
+            },
+            {
+              "id": "daehaggyoe_danigi_jeone",
+              "ko": "대학교에 다니기 전에"
+            },
+            {
+              "id": "daehaggyoe_danin_jeone",
+              "ko": "대학교에 다닌 전에"
+            }
+          ],
+          "en": "By the way, Hien, what did you do before you went to university?",
+          "why": "다니기 전에 is right: -기 전에 goes on the bare stem, and the tense sits on the last verb, 했어요. 다녔기 전에 puts the past on the verb before 전에, which never carries it, and 다닌 전에 gives 전에 the modifier that belongs with 후에 — 다닌 후에, after.",
+          "grammar": "대학교에 다니다, to attend university, fills the slot where the conversation has 한국에 오다, and the -기 전에 is the same either way: 한국에 오기 전에, 대학교에 다니기 전에."
+        },
+        {
+          "n": 7,
+          "phraseKo": "___ 뭘 할 거예요? · ___ 할 수 있을지 모르겠어요 (졸업하다 / 대학원에 가다)",
+          "lines": [
+            {
+              "who": "정우",
+              "ko": "{} 뭘 할 거예요?"
+            },
+            {
+              "who": "히엔",
+              "ko": "{} 할 수 있을지 모르겠어요."
+            }
+          ],
+          "answer": "joleobhan_hueneun",
+          "choices": [
+            {
+              "id": "joleobhagi_hueneun",
+              "ko": "졸업하기 후에는"
+            },
+            {
+              "id": "joleobhaneun_hueneun",
+              "ko": "졸업하는 후에는"
+            },
+            {
+              "id": "joleobhan_hueneun",
+              "ko": "졸업한 후에는"
+            }
+          ],
+          "answer2": "daehagwone_garyeogo_haneunde",
+          "choices2": [
+            {
+              "id": "daehagwone_garyeogo_haneunde",
+              "ko": "대학원에 가려고 하는데"
+            },
+            {
+              "id": "daehagwone_galryeogo_haneunde",
+              "ko": "대학원에 갈려고 하는데"
+            },
+            {
+              "id": "daehagwone_garyeogo_hande",
+              "ko": "대학원에 가려고 한데"
+            }
+          ],
+          "en": "What will you do after you graduate? — I’m planning to go to graduate school, but I don’t know whether I can.",
+          "why": "졸업한 후에는 is right: 후에 takes the past modifier -(으)ㄴ, and 는 sets the time apart as the topic. 졸업하기 후에는 borrows the -기 of 전에, and 졸업하는 후에는 the present modifier. In the second blank, 가려고 하는데 is the plan, with -는데 leading into the doubt that follows. 갈려고 is a spelling heard everywhere and still wrong — -(으)려고 adds no ㄹ to a vowel stem — and 가려고 한데 gives 하다, a verb, the -ㄴ데 that belongs to adjectives.",
+          "grammar": "V-(으)려고 하다 is an intention: 가려고 하다, 취직하려고 하다. V-(으)ㄴ 후에는 fills the blue slot in both columns: 마친 후에는, 졸업한 후에는."
+        }
+      ],
+      "example": {
+        "phraseKo": "녹음에서",
+        "lines": [
+          {
+            "who": "히엔",
+            "ko": "아니요, 처음 왔을 때는 힘들었지만 지금은 {}."
+          }
+        ],
+        "answerKo": "익숙해졌어요",
+        "en": "No, it was hard when I first came, but I’ve got used to it now.",
+        "audio": {
+          "src": "audio/book/2b-u15-d43.mp3",
+          "labelEn": "말하기 2 · the line itself"
+        }
+      }
+    },
+    {
       "id": "u15sgk-listen-1",
       "type": "build",
       "no": "듣기 1",

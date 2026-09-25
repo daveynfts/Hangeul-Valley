@@ -1629,7 +1629,8 @@ and to a recording on every row.
 ## Unit 15, 듣고 말하기, and two pages the scan does not have
 
 `worlds/unit15-textbook.json` gains 듣기 1 and 듣기 2 (printed pp.148-149, tracks 58 and 59),
-thirteen pages and fifty-five rows in all. Two things were particular to it.
+thirteen pages and fifty-five rows in all, and then 말하기 2 (below). Two things were
+particular to the 듣기 pages.
 
 - **The chapter's grammar was already drilled five times over.** Between the 익힘책, 문법과
   표현 1-2, 말하기 1 and 자기 평가, 오기 전에, 졸업한 후에, 먹게 됐어요 and 익숙해졌어요 are keyed
@@ -1640,12 +1641,24 @@ thirteen pages and fifty-five rows in all. Two things were particular to it.
   officer, a scientist and a doctor, and a learner who has just talked about them half
   expects to hear them; 경찰이 and 과학자가 sit among the dreams the tape does mention.
 
-The one printed section still missing is **말하기 2 on pp.146-147**, and it is missing from
-the scan, not from the book: the two pages were stuck to p.148 when the student book was
-scanned, and the edge of p.146 shows under the page number on image 140. Its dialogue is on
-the tape and in `worlds/unit15-cassette.json` (track 57, from a photograph of the page that
-arrived on 2026-09-06), but the 연습 columns under it are not, and a 말하기 page without its
-연습 is a transcript. Build it from the page, not from the tape.
+**말하기 2 (pp.146-147) came from photographs, because the scan does not have it.** The two
+pages were stuck to p.148 when the student book was scanned, and the edge of p.146 shows
+under the page number on image 140. Its dialogue had been on the tape and in
+`worlds/unit15-cassette.json` since 2026-09-06 (track 57), but the 연습 columns under it are
+only on the page, and a 말하기 page without its 연습 is a transcript. The first photographs
+to arrive were of pp.146-147 of **2A** — same page numbers, tab 6과 비행기로 보내면 얼마예요? —
+so check the tab reads 15과 한국 생활에 익숙해졌어요 before building anything.
+
+The page prints the conversation with two columns of phrases under it, colour for colour, and
+every form in the first column — 먹게 되었어요, 오기 전에, 마친 후에는 — is already keyed
+somewhere on this desk. So the page is built the other way round from 말하기 1: four rows take
+four turns of the conversation with a word from the page's vocabulary box taken out (아직도,
+고생했는데, 다행이네요, 잘될 거예요), three of them on their own clip, and three rows drop the
+**second** column into the frame it replaces — 몰라서 and 이해하게 되었어요, 다니기 전에,
+졸업한 후에는 and 가려고 하는데 — where the wrong buttons are the mistakes those new words
+invite: 몰러서 for a 르 irregular, 이해해졌어요 for a verb, 돼었어요, and the 갈려고 heard
+everywhere. 연습 2 on p.147 is the learner's own life in Korea and is left out. The bank is
+now fourteen pages and sixty-two rows.
 
 ## A third kind of bank: the exam world
 
