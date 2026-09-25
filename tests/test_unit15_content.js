@@ -28,8 +28,8 @@ for (const [word, good, bad] of [
 }
 assert(world.level.words.find(w => w.ko === '수도').example.includes('서울'));
 const textbook = read('unit15-textbook');
-assert.strictEqual(textbook.exercises.length, 13);
-assert.strictEqual(textbook.exercises.flatMap(e => e.items).length, 55);
+assert.strictEqual(textbook.exercises.length, 14);
+assert.strictEqual(textbook.exercises.flatMap(e => e.items).length, 62);
 // 듣기 1 and 2 are keyed from 모범 답안 on printed p.267 — 1. ①, 2. 1) ② and 2) ②, ③. The
 // second question asks for all that apply, so its row asks for the one option that is not
 // one of his plans, which leaves ① — the book's own options, turned round.
@@ -71,6 +71,33 @@ for (const name of ['unit15-textbook', 'unit15-workbook']) {
       if (row.choices) assert.strictEqual(new Set(row.choices.map(c => c.ko)).size, row.choices.length);
     }
   }
+}
+// 말하기 2 is built from photographs of printed pp.146-147, which the scan of the student book
+// does not have. Rows 1-4 are four turns of track 57 with a word from the page's vocabulary box
+// taken out; rows 5-7 are the second column of 연습 1, each dropped into the frame it replaces.
+const speak2 = page('u15sgk-speak-2');
+assert.strictEqual(speak2.items.length, 7);
+const order = textbook.exercises.map(e => e.id);
+assert(order.indexOf('u15sgk-gram-4') + 1 === order.indexOf('u15sgk-speak-2')
+  && order.indexOf('u15sgk-speak-2') + 1 === order.indexOf('u15sgk-listen-1'),
+  '말하기 2 sits between 문법과 표현 2 and 듣고 말하기, as printed');
+assert.deepStrictEqual(speak2.items.slice(0, 4).map(keyed), ['아직도', '고생했는데', '다행이네요', '잘될 거예요'],
+  'rows 1-4 key the words of the page’s vocabulary box, in the forms the conversation uses');
+const cues = speak2.items.slice(4).flatMap(row => ((row.phraseKo.match(/\(([^)]*)\)$/) || [])[1] || '').split(' / '));
+assert.deepStrictEqual(cues, ['한국 문화를 잘 모르다', '좀 이해하다', '대학교에 다니다', '졸업하다', '대학원에 가다'],
+  'rows 5-7 are the second column of 연습 1, in order');
+const keyed2 = row => row.choices2.find(c => c.id === row.answer2).ko;
+assert.deepStrictEqual([keyed(speak2.items[4]), keyed2(speak2.items[4]), keyed(speak2.items[5]),
+  keyed(speak2.items[6]), keyed2(speak2.items[6])],
+['한국 문화를 잘 몰라서', '좀 이해하게 되었어요', '대학교에 다니기 전에', '졸업한 후에는', '대학원에 가려고 하는데'],
+'and each is keyed in the form its slot in the conversation takes');
+for (const row of [speak2.example, ...speak2.items].filter(r => r.audio)) {
+  const d = clips.get(row.audio.src);
+  assert(d && d.track === 57, 'u15sgk-speak-2: ' + row.audio.src + ' is a clip of track 57');
+  const answer = row === speak2.example ? row.answerKo : keyed(row);
+  const lines = row.lines.map(l => l.ko.replace('{}', answer));
+  const k = lines.indexOf(d.ko);
+  assert(k >= 0 && row.lines[k].who === d.who, 'u15sgk-speak-2: ' + row.audio.src + ' says its row’s own line, in its own voice');
 }
 const reading = textbook.exercises.find(e => e.id === 'u15sgk-read-1');
 assert(reading.items.every(row => row.lines.some(l => l.who === '읽기 요약')), 'reading has visible context');
