@@ -636,7 +636,7 @@
           ],
           "en": "Since when has it been hurting? — Since yesterday evening, without a break.",
           "why": "The honorific goes on before the tense, never after: 아프 + 시 + 었어요 → 아프셨어요. 아팠으세요 has put the past first and then tried to add the respect, which Korean does not allow. 아프섰어요 has the order right and the vowel wrong — 시 + 었 contracts to 셨, not 섰.",
-          "grammar": "Order inside a verb: stem, then -(으)시-, then tense, then ending. 아프셨어요, 가셨어요, 드셨어요. The reply drops the honorific because Nana is talking about herself.",
+          "grammar": "Order inside a verb: stem, then -(으)시-, then tense, then ending. 아프셨어요, 가셨어요, 드셨어요. The reply drops the honorific because the pain is Nana’s own, and -(으)시- is never used of oneself.",
           "audio": {
             "src": "audio/book/2b-u11-d08.mp3",
             "labelEn": "말하기 1 · the line itself"
@@ -1034,7 +1034,7 @@
             }
           ],
           "en": "Yes — I swim every morning, and it puts me in a good mood and works the stress off.",
-          "why": "하다 is a verb, so the connector is -는데: 하는데. 한데 is the shape an adjective would take, and 하은데 has inserted an 으 that -는데 never wants. The clause is background rather than a reason: it says what he does, and then what comes of it.",
+          "why": "하다 is a verb, so the connector is -는데: 하는데. 한데 is the shape an adjective would take, and 하은데 has inserted an 으 that -는데 never wants. The clause is background rather than a reason: it says what Minsu does, and then what comes of it.",
           "grammar": "V-는데 / A-(으)ㄴ데, setting something up before the point of the sentence. 하는데, 가는데, 좋은데, 바쁜데.",
           "audio": {
             "src": "audio/book/2b-u11-d21.mp3",
@@ -1356,8 +1356,8 @@
               "ko": "건강을 위해 먹는 특별한 음식이 있습니다."
             }
           ],
-          "en": "Which of these matches what is said? — He is the oldest of the runners who took part.",
-          "why": "참가한 선수 중에서 나이가 가장 많습니다. is how the interviewer introduces him: 이번 대회에 참가한 선수 중에 가장 연세가 많으신 김인창 씨. The other two are both denied outright — 마라톤은 이번이 처음입니다 rules out the first, and 특별히 먹는 음식은 없고 rules out the third.",
+          "en": "Which of these matches what is said? — This runner is the oldest of those who took part.",
+          "why": "참가한 선수 중에서 나이가 가장 많습니다. is how the interviewer introduces the runner: 이번 대회에 참가한 선수 중에 가장 연세가 많으신 김인창 씨. The other two are both denied outright — 마라톤은 이번이 처음입니다 rules out the first, and 특별히 먹는 음식은 없고 rules out the third.",
           "grammar": "연세 is the honorific for 나이 and only ever describes somebody else: 연세가 많으시다. The statement uses 나이 because it is the question talking, not the interviewer.",
           "audio": {
             "src": "audio/book/2b-u11-trk19.mp3",
@@ -1443,6 +1443,7 @@
       "instructionKo": "다음을 읽고 질문에 답하세요.",
       "instructionEn": "Read the passage and answer the following questions.",
       "noteEn": "The two printed questions are rows 1 and 2 — the first is a gap to fill from the passage and the second is three statements. The 쓰기 box under them asks for a healthy habit of your own on eight blank lines, and the key gives no answer, so it is not here. Rows 3 to 6 are sentences of the passage with one join taken out of each, and one of them is the trap the chapter is built around: 씻다 ends in ㅅ and is perfectly regular.",
+      "holdGloss": true,
       "pattern": "건강한 생활 습관",
       "items": [
         {

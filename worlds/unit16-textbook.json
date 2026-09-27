@@ -532,7 +532,7 @@
       "no": "말하기 1",
       "icon": "🚉",
       "pattern": "고향에 내려가는 이야기",
-      "blurbEn": "Steven asks Jiyeon what Koreans do at New Year, and how she got a ticket.",
+      "blurbEn": "Steven asks Jiyeon what Koreans do at New Year, and how Jiyeon got a ticket.",
       "instructionKo": "대화를 듣고 빈칸에 알맞은 말을 고르세요.",
       "instructionEn": "Listen to the dialogue and choose the right words.",
       "noteEn": "Five of the ten printed turns, each with the word the turn exists for taken out. Every row plays the line it comes from, cut from track 64, so the tape settles the answer rather than the reader’s guess. The 연습 1 substitutions under the dialogue are not rows: they are two columns of phrases to swap in, and the swapping is the exercise.",
@@ -596,7 +596,7 @@
           ],
           "en": "Yes, I booked the train tickets a month ago.",
           "grammar": "The page’s own V-아/어 놓다, with 미리 in front of it doing the same work twice over.",
-          "why": "예매했어요 is not wrong Korean and loses what 미리 is there for — the ticket is booked and still booked. 사고 있어요 would have her at the counter while she is speaking.",
+          "why": "예매했어요 is not wrong Korean and loses what 미리 is there for — the ticket is booked and still booked. 사고 있어요 would put Jiyeon at the counter mid-sentence.",
           "audio": {
             "src": "audio/book/2b-u16-d06.mp3",
             "labelEn": "Yes, I booked the train tickets a month ago."
@@ -699,7 +699,7 @@
           ],
           "en": "A: Jiyeon, do you know how to make tteokguk? — B: Of course. I’ll make it for you when you come to my place.",
           "grammar": "끓이다 is the transitive one — you boil something; 끓다 is what the soup does by itself.",
-          "why": "끓을 줄 알아요 asks whether Jiyeon knows how to come to the boil. 끓일 수 있어요 asks whether she is able to right now, where the page is asking whether she has the skill.",
+          "why": "끓을 줄 알아요 asks whether Jiyeon knows how to come to the boil. 끓일 수 있어요 asks whether Jiyeon is able to right now, where the page is asking about the skill.",
           "audio": {
             "src": "audio/book/2b-u16-d13.mp3",
             "labelEn": "Jiyeon, do you know how to make tteokguk?"
@@ -912,9 +912,9 @@
               "ko": "못 받으 테니까"
             }
           ],
-          "en": "He is in class now and will not be able to answer, so call later.",
+          "en": "In class now and will not be able to answer, so call later.",
           "grammar": "못 is the inability the 수업 중이라서 is a reason for; 안 would be a choice.",
-          "why": "안 받을 테니까 says he would rather not answer, where the class is what stops him. 못 받으 테니까 stops halfway through the ending."
+          "why": "안 받을 테니까 is choosing not to answer, where the class is what stands in the way. 못 받으 테니까 stops halfway through the ending."
         },
         {
           "n": 4,
@@ -980,7 +980,7 @@
       "no": "말하기 2",
       "icon": "🥟",
       "pattern": "추석 연휴 초대",
-      "blurbEn": "Julian invites the class over for Chuseok and finds out he cannot make songpyeon.",
+      "blurbEn": "Julien invites the class over for Chuseok and plans songpyeon — never having made it.",
       "instructionKo": "대화를 듣고 빈칸에 알맞은 말을 고르세요.",
       "instructionEn": "Listen to the dialogue and choose the right words.",
       "noteEn": "Five turns out of the ten, each playing the line it came from off track 67. The dialogue uses three of the chapter’s four grammar points in a row — 초대할까 하는데, 도와줄 테니까, 봐 놓을게 — which is why it is the one the page prints last, and why the wrong buttons here are other chapter forms rather than broken ones.",
@@ -1073,7 +1073,7 @@
           ],
           "en": "I know how to make songpyeon. I’ll help you, so don’t worry.",
           "grammar": "V-(으)ㄹ 줄 알다 is knowing how; V-(으)ㄹ 수 있다 is being able to right now.",
-          "why": "만들 수 있어 says she is free to, not that she has ever done it — and Julian’s problem is that he has not. 만들 줄 알다 is the dictionary form left unconjugated.",
+          "why": "만들 수 있어 says Kelly is free to, not that Kelly has ever done it — and Julien’s problem is never having done it. 만들 줄 알다 is the dictionary form left unconjugated.",
           "audio": {
             "src": "audio/book/2b-u16-d27.mp3",
             "labelEn": "I know how to make songpyeon. I’ll help you, so don’t worry."
@@ -1436,6 +1436,7 @@
       "instructionKo": "다음을 읽고 질문에 답하세요.",
       "instructionEn": "Read the passage and answer the following questions.",
       "noteEn": "The two questions the book asks, with the answers 모범 답안 gives on printed p.267 — 한 해 농사가 잘 끝난 것을 for the fill-in and ② for the choice. Rows 3 and 4 are two sentences of the passage with the word the sentence turns on taken out, so the page holds the vocabulary as well as the comprehension. The 쓰기 half of the spread asks the learner to write about a holiday in their own country and has no answer to mark.",
+      "holdGloss": true,
       "items": [
         {
           "n": 1,
@@ -1685,7 +1686,8 @@
           "en": "Which throw moves you two spaces? — Gae.",
           "grammar": "The five throws run 도 개 걸 윷 모 in the book’s own order of distance: 1, 2, 3, 4, 5.",
           "why": "도 is one space and 걸 is three. The order is the whole of what the box is teaching, and 개 sits between them at two.",
-          "art": "quiz/unit16_yut_gae.png"
+          "art": "quiz/unit16_yut_gae.png",
+          "holdGloss": true
         },
         {
           "n": 5,
@@ -1718,7 +1720,8 @@
           "en": "Which throw moves you five spaces? — Mo.",
           "grammar": "모 is the longest throw, and it is one of the two that earn a second one.",
           "why": "윷 is four and also earns a bonus throw, which is why the two are named together in the rules. 걸 is three and earns nothing.",
-          "art": "quiz/unit16_yut_mo.png"
+          "art": "quiz/unit16_yut_mo.png",
+          "holdGloss": true
         }
       ],
       "type": "build",

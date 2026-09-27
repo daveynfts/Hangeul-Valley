@@ -2782,12 +2782,83 @@ const overlayIds = [
     if (!(it.audio && it.audio.src)) silent.push(ex.id + ' row ' + it.n);
   }));
   check('every row on a 듣기 page plays a recording', silent.length === 0, silent.slice(0, 6).join(', '));
-  // The flag is only worth anything if the renderer reads it off the page and a save through
-  // the admin does not drop it — validateWorkbook rebuilds each page from a fixed field list.
-  check('the renderer honours holdGloss on a page as well as on a bank',
-    readGameSource().indexOf('(st.bank && st.bank.holdGloss) || ex.holdGloss') >= 0);
-  check('and the admin validator keeps it',
-    read(path.join('admin', 'lib', 'workbook.js')).indexOf('if (ex.holdGloss === true) out.holdGloss = true;') >= 0);
+  // A 읽기 page is the same case on paper — "Which is true…? — The atmosphere and the service are
+  // good." — and so is a question row on any other page, which holds its own gloss and leaves the
+  // rest of its page alone.
+  const reading = [];
+  const questions = [];
+  fs.readdirSync(path.join(ROOT, 'worlds')).filter((f) => /-(?:text|work)book\.json$/.test(f)).forEach((f) => {
+    const b = JSON.parse(read(path.join('worlds', f)));
+    (b.exercises || []).forEach((ex) => {
+      if (/^읽기/.test(String(ex.no || ''))) reading.push({ b, ex });
+      else if (!/^듣기/.test(String(ex.no || ''))) {
+        (ex.items || []).forEach((it) => {
+          if (Array.isArray(it.lines) && it.lines.some((l) => /^(Q|질문)$/.test(l.who || ''))
+            && it.lines.some((l) => String(l.ko).trim() === '{}')) questions.push({ b, ex, it });
+        });
+      }
+    });
+  });
+  const openReading = reading.filter(({ b, ex }) => !(ex.holdGloss === true || b.holdGloss === true)).map(({ ex }) => ex.id);
+  check(`every 읽기 page holds its English too (${reading.length})`, reading.length >= 9 && openReading.length === 0,
+    openReading.join(', '));
+  const openQ = questions.filter(({ b, ex, it }) => !(it.holdGloss === true || ex.holdGloss === true || b.holdGloss === true))
+    .map(({ ex, it }) => ex.id + ' row ' + it.n);
+  check(`and so does every question row on another page (${questions.length})`, openQ.length === 0, openQ.join(', '));
+  // The flag is only worth anything if the renderer reads it and a save through the admin does
+  // not drop it — validateWorkbook rebuilds each page and each row from a fixed field list.
+  check('the renderer honours holdGloss on a bank, a page or a row',
+    readGameSource().indexOf('(st.bank && st.bank.holdGloss) || ex.holdGloss || item.holdGloss') >= 0);
+  const wbSrc = read(path.join('admin', 'lib', 'workbook.js'));
+  check('and the admin validator keeps it on both',
+    wbSrc.indexOf('if (ex.holdGloss === true) out.holdGloss = true;') >= 0
+    && wbSrc.indexOf('if (item.holdGloss === true) out.holdGloss = true;') >= 0);
+}());
+
+// ── The 익힘책's 복습 ─────────────────────────────────────────────────
+// A review tests three units at once and belongs to none of them, so it is a bank of its own on
+// the desk of the unit it follows. It is a test, so the whole bank holds its English; and its
+// rows are the book's questions with the book's options, so every row has to be answerable and
+// every recording it names has to be there.
+(function checkReviewBanks() {
+  const REVIEWS = [
+    { n: 4, units: '10-12', world: 'isUnit12World', exs: 16, rows: 58 },
+    { n: 5, units: '13-15', world: 'isUnit15World', exs: 18, rows: 62 },
+    { n: 6, units: '16-18', world: 'isUnit18World', exs: 18, rows: 61 }
+  ];
+  const gameJs = readGameSource();
+  const wbLib = read(path.join('admin', 'lib', 'workbook.js'));
+  const i18nJs = read(path.join('js', 'i18n.js'));
+  REVIEWS.forEach((rv) => {
+    const U = '복습 ' + rv.n + ': ';
+    const rel = path.join('worlds', 'review' + rv.n + '-workbook.json');
+    if (!check(U + rel + ' exists', fs.existsSync(path.join(ROOT, rel)))) return;
+    let b;
+    try { b = JSON.parse(read(rel)); } catch (e) { check(U + rel + ' is valid JSON', false, e.message); return; }
+    check(U + 'the bank knows which review it is', b.id === 'review' + rv.n + '-workbook'
+      && b.source.indexOf('복습 ' + rv.n) >= 0 && b.source.indexOf('Units ' + rv.units) >= 0, String(b.id) + ' | ' + String(b.source));
+    check(U + 'and holds every row’s English until the row is checked', b.holdGloss === true);
+    const exs = b.exercises || [];
+    const rows = exs.reduce((k, e) => k + (e.items || []).length, 0);
+    check(U + rv.exs + ' pages and ' + rv.rows + ' rows', exs.length === rv.exs && rows === rv.rows, exs.length + ' / ' + rows);
+    const broken = [];
+    exs.forEach((ex) => (ex.items || []).forEach((it) => {
+      const at = ex.id + ' row ' + it.n;
+      if (!it.why || !it.grammar || !it.en) broken.push(at + ' prose');
+      const sets = (it.choices2 || it.answer2) ? 2 : 1;
+      const gaps = (it.lines || []).reduce((k, l) => k + String(l.ko || '').split('{}').length - 1, 0);
+      if (gaps !== sets) broken.push(at + ' has ' + gaps + ' blanks for ' + sets + ' choice sets');
+      if (!(it.choices || []).some((c) => c.id === it.answer)) broken.push(at + ' answer');
+      if (sets === 2 && !(it.choices2 || []).some((c) => c.id === it.answer2)) broken.push(at + ' answer2');
+      if (it.audio && !fs.existsSync(path.join(ROOT, it.audio.src))) broken.push(at + ' clip ' + it.audio.src);
+    }));
+    check(U + 'every row is complete, fillable, and plays what it names', broken.length === 0, broken.slice(0, 6).join(', '));
+    check(U + 'the desk offers it on the unit it follows',
+      gameJs.indexOf(rv.world + "()) return '/worlds/review" + rv.n + "-workbook.json'") >= 0 && gameJs.indexOf("key: 'review'") >= 0);
+    check(U + 'the admin registry can open it',
+      wbLib.indexOf('review' + rv.n + ": path.join('worlds', 'review" + rv.n + "-workbook.json')") >= 0);
+    check(U + 'and it is a translatable source', i18nJs.indexOf("'worlds/review" + rv.n + "-workbook.json'") >= 0);
+  });
 }());
 
 // ── The exam world ───────────────────────────────────────────────────

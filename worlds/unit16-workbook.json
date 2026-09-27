@@ -197,7 +197,7 @@
           ],
           "en": "A: Minsu, are you going to your hometown this Seollal? — B: Yes, I booked the train tickets last week.",
           "grammar": "이번 설날 is still ahead, so the plain present carries the future: 가요.",
-          "why": "The ticket was booked 지난주에 and the journey has not happened — 갔어요 would mean it already had. 가고 있어요 would have Minsu on the train while he is answering.",
+          "why": "The ticket was booked 지난주에 and the journey has not happened — 갔어요 would mean it already had. 가고 있어요 would put Minsu on the train mid-answer.",
           "art": "items/unit16_005_to_go_to_one_s_hometown.png"
         }
       ],
@@ -1007,7 +1007,7 @@
               "ko": "동생 대신 내가 운전을 했어요"
             }
           ],
-          "en": "My younger brother had been drinking, so I drove instead of him.",
+          "en": "My younger sibling had been drinking, so I drove instead.",
           "grammar": "With people, 대신 names the one who could not do it and the other takes 이/가.",
           "why": "나 대신 동생이 운전을 했어요 puts the drinker behind the wheel. 운전을 됐어요 is not a verb — 운전 goes with 하다."
         },
@@ -1181,7 +1181,7 @@
               "ko": "주소 대신 전화번호를"
             }
           ],
-          "en": "A: Could you give me Kelly’s address? — B: I don’t know her address — may I give you her number instead?",
+          "en": "A: Could you give me Kelly’s address? — B: I don’t know the address — may I give you the phone number instead?",
           "grammar": "가르쳐 주다 takes an object, so the thing offered carries 을/를.",
           "why": "전화번호 대신 주소를 offers the address B has just said they do not know. 전화번호가 makes the number the subject of 가르쳐 주다."
         },
@@ -1274,9 +1274,9 @@
               "ko": "지호 대신 제가 왔어요"
             }
           ],
-          "en": "A: Why did Steven come instead of Jiho? — B: Jiho had a class, so I came instead of him.",
+          "en": "A: Why did Steven come instead of Jiho? — B: Jiho had a class, so I came instead.",
           "grammar": "오다 and 가다 are chosen from where the speaker is: B is here, so B 왔어요.",
-          "why": "스티븐 대신 제가 왔어요 has Steven standing in for himself. 제가 대신 갔어요 uses 가다, which would mean B went somewhere else entirely."
+          "why": "스티븐 대신 제가 왔어요 has Steven, who is speaking, standing in for Steven. 제가 대신 갔어요 uses 가다, which would mean B went somewhere else entirely."
         }
       ],
       "type": "build"
@@ -1828,7 +1828,7 @@
           ],
           "en": "A: I’ll run the vacuum, so Minho, could you wipe the room down. — B: Yes, all right.",
           "grammar": "돌리다 ends in a vowel: 돌릴 테니까.",
-          "why": "민호 씨가 청소기를 돌릴 테니까 gives Minho both jobs in one sentence, and the line ends by asking him to do the second. 제가 청소기를 돌리 테니까 has no ㄹ."
+          "why": "민호 씨가 청소기를 돌릴 테니까 gives Minho both jobs in one sentence, and the line ends by asking Minho to do the second. 제가 청소기를 돌리 테니까 has no ㄹ."
         }
       ],
       "type": "build"
@@ -2010,9 +2010,9 @@
               "ko": "전화를 안 받으실 테니까"
             }
           ],
-          "en": "A: Can I speak to Mr Kim now? — B: He’s teaching, so he won’t be able to answer — try in an hour.",
+          "en": "A: Can I speak to Teacher Kim now? — B: Teacher Kim is in class, so won’t be able to answer — try in an hour.",
           "grammar": "The one who cannot answer is 선생님, so the verb takes the honorific 시: 받으실.",
-          "why": "못 받을 테니까 leaves the honorific off a teacher. 안 받으실 테니까 says he chooses not to answer, where 수업 중이라서 says he is unable to."
+          "why": "못 받을 테니까 leaves the honorific off a teacher. 안 받으실 테니까 is choosing not to answer, where 수업 중이라서 says answering is impossible."
         }
       ],
       "type": "build"
@@ -2667,7 +2667,7 @@
               "ko": "지금은 전화를 못 받을 테니까 나중에 전화했어요"
             }
           ],
-          "en": "T: not answering the phone now, call later — S: He won’t answer now, so call later.",
+          "en": "T: not answering the phone now, call later — S: Won’t be answering now, so call later.",
           "grammar": "받다 is consonant-final: 받을 테니까.",
           "why": "받으 테니까 stops halfway through the ending. 전화했어요 answers an instruction with a report, and the teacher’s second clause was 전화하다.",
           "audio": {

@@ -678,8 +678,8 @@
               "ko": "작하졌어요"
             }
           ],
-          "en": "He has got shorter.",
-          "why": "The flute player is drawn twice and the second one is smaller, so the sentence is about height falling rather than about him being short.",
+          "en": "Has got shorter.",
+          "why": "The flute player is drawn twice and the second one is smaller, so the sentence is about height falling rather than about being short.",
           "grammar": "작- has ㅏ and takes 아: 작아졌어요, said [자가저써요] with the ㄱ carrying over.",
           "lines": [
             {
@@ -706,7 +706,7 @@
               "ko": "긴졌어요"
             }
           ],
-          "en": "His hair has got longer.",
+          "en": "The hair has got longer.",
           "why": "Van Gogh appears twice with more hair the second time, and 머리 covers both the head and the hair on it.",
           "grammar": "길- has ㅣ, a dark vowel, so it takes 어 and not 아: 길어졌어요. The ㄹ stays because 어 is a vowel and there is no ㄴ or ㅂ to drop it before.",
           "lines": [
@@ -734,7 +734,7 @@
               "ko": "크아졌어요"
             }
           ],
-          "en": "Her nose has got bigger.",
+          "en": "The nose has got bigger.",
           "why": "The Mona Lisa twice, the second with a larger nose. 크다 is the size adjective; 커지다 is it growing.",
           "grammar": "크다 loses its ㅡ before an ending that starts with a vowel: 크 + 어 → 커. 크어졌어요 keeps a vowel that Korean deletes.",
           "lines": [
@@ -830,7 +830,7 @@
               "ko": "알으게 되었어요"
             }
           ],
-          "en": "No, I got to know him after coming to Korea.",
+          "en": "No, I got to know Xiaoming after coming to Korea.",
           "why": "알게 되다 is not deciding to know somebody — it is finding that you now do. That is the whole difference from 알았어요.",
           "grammar": "알- keeps its ㄹ before 게: 알게. The ㄹ only drops before ㄴ, ㅂ and ㅅ, which is why 아는 loses it and 알게 does not."
         },
@@ -996,7 +996,7 @@
             }
           ],
           "en": "Yes, a lot more since I changed companies.",
-          "why": "쓰다 here is to use, not to write — 한국말을 쓰다 is using the language. The new job made it happen; he did not choose it.",
+          "why": "쓰다 here is to use, not to write — 한국말을 쓰다 is using the language. The new job made it happen; Akira did not choose it.",
           "grammar": "쓰 + 게 → 쓰게, with the ㅡ intact because 게 is a consonant ending. It is 써 that loses it, before 어요."
         }
       ]
@@ -1043,7 +1043,7 @@
               "ko": "좋아해졌어요"
             }
           ],
-          "en": "I did not like him at first, but I gradually came to.",
+          "en": "I did not like that person at first, but I gradually came to.",
           "why": "점점 — gradually — is the word that rules out a decision, and 되다 is how Korean says a feeling arrived on its own.",
           "grammar": "좋아하다 is a verb, so it takes V-게 되다. 좋아해지다 would apply the adjective pattern from the previous page to a verb, which is the trap the two pages set together.",
           "lines": [
@@ -1072,7 +1072,7 @@
             }
           ],
           "en": "I could not eat spicy food at first, but now I can.",
-          "why": "잘 먹다 is not eating well but being able to eat something — the 잘 has to come along or the sentence says he eats a lot.",
+          "why": "잘 먹다 is not eating well but being able to eat something — the 잘 has to come along or the sentence says the speaker eats a lot.",
           "grammar": "먹 + 게 → 먹게, said [먹께]: the ㄱ tenses the following consonant and nothing in the spelling shows it.",
           "lines": [
             {

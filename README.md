@@ -516,10 +516,12 @@ admin/           Express admin panel (writable locally; read-only on Vercel)
 api/             Vercel serverless functions (save, admin GET, Unit 10)
 ```
 
-The study desk offers up to three things, and every unit, 10 to 18, now carries all
+The study desk offers up to four things, and every unit, 10 to 18, carries the first
 three: 퀴즈 (multiple choice), 교과서 — the 교과서's own 말하기 / 듣기 / 읽기 / 과제 /
 문화 산책 / 발음 / 자기 평가 pages — and 연습 문제, the 익힘책's 어휘, 문법과 표현
-and 문형 연습 with the book's own audio on the pattern drills. Both exercise banks
+and 문형 연습 with the book's own audio on the pattern drills. Units 12, 15 and 18 add a
+fourth, 복습: the 익힘책's review of the three units it closes, with its 듣기 cut from the
+review's own track. Both exercise banks
 are the same file format read by the same renderer; what separates them is the row
 of the desk menu that opened them, so nothing drills the same sentence twice.
 [docs/workbook-exercises.md](docs/workbook-exercises.md) covers the data model,
@@ -535,8 +537,10 @@ number, and a row whose every button opens on the book's ①②③ is laid out i
 `tests/test_workbook_button_order.js` drives the renderer with a seeded random source.
 
 A 듣기 page holds each row's English back until the page is checked (`holdGloss` on the
-page), because there the gloss is a transcript of what the tape is about to say; everywhere
-else it stays beside the row as the help it was written as. The note above a 듣기 page says
+page), because there the gloss is a transcript of what the tape is about to say, and so do
+the 읽기 pages and the 복습 banks; everywhere else it stays beside the row as the help it was
+written as. A held row with no recording of its own also has no 🔊 until then, since the
+browser voice would read it out with the answer in it. The note above a 듣기 page says
 where its key comes from and never what it is. `tests/test_listening_pages.js` drives the
 renderer to check both.
 

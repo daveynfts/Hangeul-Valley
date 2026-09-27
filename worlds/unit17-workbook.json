@@ -1066,7 +1066,7 @@
           ],
           "en": "After washing I ran to the bus stop. While running I nearly fell over.",
           "grammar": "-다가 marks an action interrupted by another: 뛰어가다가 is mid-run.",
-          "why": "넘어졌습니다 would have him on the pavement, and he keeps running. 넘어질 뻔했어요 is the right grammar in the wrong register — every other sentence here ends in -습니다. The 정답 gives 넘어질 뻔했습니다."
+          "why": "넘어졌습니다 would put the writer on the pavement, and the running goes on. 넘어질 뻔했어요 is the right grammar in the wrong register — every other sentence here ends in -습니다. The 정답 gives 넘어질 뻔했습니다."
         },
         {
           "n": 2,
@@ -1092,7 +1092,7 @@
           ],
           "en": "Then, while crossing the road, I was nearly hit by a car.",
           "grammar": "차에 부딪히다 — the thing you collide with takes 에, not 을/를.",
-          "why": "부딪혔습니다 would be a real collision, and he walks on to the cinema. 부딪힐 뻔합니다 leaves 뻔하다 in the present, which it never takes. The 정답 gives 부딪힐 뻔했습니다."
+          "why": "부딪혔습니다 would be a real collision, and the writer walks on to the cinema. 부딪힐 뻔합니다 leaves 뻔하다 in the present, which it never takes. The 정답 gives 부딪힐 뻔했습니다."
         },
         {
           "n": 3,
@@ -1118,7 +1118,7 @@
           ],
           "en": "Taking my phone out to ring my girlfriend, I nearly dropped it on the floor.",
           "grammar": "떨어지다 is what a thing does; 떨어뜨리다 is what you do to it.",
-          "why": "떨어질 뻔했습니다 makes the phone the subject, but the sentence already has one — he is the one 꺼내다가. 떨어뜨렸습니다 drops it for real. The 정답 gives 떨어뜨릴 뻔했습니다."
+          "why": "떨어질 뻔했습니다 makes the phone the subject, but the sentence already has one — the writer is the one 꺼내다가. 떨어뜨렸습니다 drops it for real. The 정답 gives 떨어뜨릴 뻔했습니다."
         },
         {
           "n": 4,
@@ -1144,7 +1144,7 @@
           ],
           "en": "And during the film it was so sad that I nearly cried in front of my girlfriend.",
           "grammar": "울다 is a ㄹ stem: the ㄹ is already there, so -(으)ㄹ adds nothing — 울 뻔했습니다.",
-          "why": "울을 뻔했습니다 is the mistake this row exists for, an 으 pushed into a stem that ends in ㄹ already. 울었습니다 would have him in tears, and 앞에서 says he managed not to be. The 정답 gives 울 뻔했습니다."
+          "why": "울을 뻔했습니다 is the mistake this row exists for, an 으 pushed into a stem that ends in ㄹ already. 울었습니다 would have the writer in tears, and 앞에서 says the writer managed not to be. The 정답 gives 울 뻔했습니다."
         },
         {
           "n": 5,
@@ -1170,7 +1170,7 @@
           ],
           "en": "On the way home I was so tired I fell asleep on the bus, so I nearly missed my stop.",
           "grammar": "못 sits in front of the whole thing: 못 내릴 뻔했습니다 is almost failing to get off.",
-          "why": "못 is already printed, so 못 내렸습니다 would mean he really did ride past his stop. 내릴 뻔했어요 is the -어요 ending again in a passage written throughout in -습니다. The 정답 gives 내릴 뻔했습니다."
+          "why": "못 is already printed, so 못 내렸습니다 would mean the writer really did ride past the stop. 내릴 뻔했어요 is the -어요 ending again in a passage written throughout in -습니다. The 정답 gives 내릴 뻔했습니다."
         }
       ],
       "type": "build"
@@ -2060,7 +2060,7 @@
           ],
           "en": "A: Jihoon, I have just arrived — where are you? — B: I am sitting inside the coffee shop.",
           "grammar": "어디에 있어요 is answered with a state, and 앉아 있다 is the state of being seated.",
-          "why": "앉고 있어요 answers a question nobody asked — A wants to know where Jihoon is, not what he is in the middle of doing. 앉아 있는 is the 관형형 with no noun after it. The 정답 gives 앉아 있어요."
+          "why": "앉고 있어요 answers a question nobody asked — A wants to know where Jihoon is, not what Jihoon is in the middle of doing. 앉아 있는 is the 관형형 with no noun after it. The 정답 gives 앉아 있어요."
         },
         {
           "n": 3,
@@ -2774,7 +2774,7 @@
             }
           ],
           "en": "T: doll, bag, be attached — S: A doll is hanging off the bag.",
-          "grammar": "달리다 is the passive of 달다 — this is the line 켈리 uses to describe her lost backpack.",
+          "grammar": "달리다 is the passive of 달다 — this is the line 켈리 uses to describe the lost backpack.",
           "why": "인형이 가방에 달고 있어요 has the doll doing the attaching. 인형이 가방에 달았어요 reports the moment it was attached rather than the state it is in now.",
           "audio": {
             "src": "audio/book/2b-u17-p4-2.mp3",

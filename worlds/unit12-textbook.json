@@ -1765,6 +1765,7 @@
       "instructionKo": "다음을 읽고 질문에 답하세요.",
       "instructionEn": "Read the passage and answer the questions.",
       "noteEn": "p.82 is a personality test — ten pairs of sentences, tick the one more like you — and p.83 scores it: more ①s make you E형, more ②s I형, with a table of what each type is like. The ticks are the learner’s own, so nothing on p.82 can be marked; the table on p.83 can. Rows 1 and 2 are asked of that table, and rows 3 to 5 are three of the test’s own sentences with the chapter’s grammar taken out — two -게 adverbs and a 편이다. The 쓰기 half of the page asks the learner to describe themselves and has nothing to mark.",
+      "holdGloss": true,
       "items": [
         {
           "n": 1,
@@ -2131,7 +2132,8 @@
           ],
           "en": "In this passage, who is a ‘붕어빵’? — Someone whose face is very like another’s.",
           "why": "얼굴이 아주 많이 닮은 사람 is what the friend means: the line before it is 너, 아버지하고 진짜 많이 닮았다, and 붕어빵 come out of one mould all alike. 붕어빵을 좋아하는 사람 takes the word literally, and 나이보다 젊어 보이는 사람 is said of the father in the passage, but it is not what 붕어빵 means.",
-          "grammar": "완전히 붕어빵이네: 완전히, completely, and -네 for something just noticed. The friend speaks 반말, so it is 붕어빵이네, not 붕어빵이네요."
+          "grammar": "완전히 붕어빵이네: 완전히, completely, and -네 for something just noticed. The friend speaks 반말, so it is 붕어빵이네, not 붕어빵이네요.",
+          "holdGloss": true
         },
         {
           "n": 2,

@@ -350,6 +350,25 @@ const absent = clips.map((a) => a.src).filter((s) => !batch.has(s));
 assert(absent.length === 0, 'and all twenty clips go up with it'
   + (absent.length ? ' — ' + absent.slice(0, 3).join(', ') : ''));
 
+// ── A gender the Korean never gives ──────────────────────────────────────────
+// 스티븐 씨는 한국말을 잘해요? — 네, 한국 사람처럼 말해요 says nothing about Steven's gender, and
+// 옷을 멋있게 입어요 has no subject at all, yet the English had "he talks like a Korean" and "He
+// dresses well" — twenty-six of them. The Vietnamese pronoun carries gender and age, so an English
+// "she" forced a choice on the translator that the book never made. The English uses the name, or
+// no pronoun; one is left, where the Korean itself says 언니.
+console.log('\n--- A gender the Korean never gives ---');
+const PRONOUN = /\b(he|she|him|her|his|himself|herself)\b/i;
+const GENDERED = /언니|누나|오빠|형|여자|남자|어머니|아버지|엄마|아빠|할머니|할아버지/;
+const invented = [];
+wb.exercises.forEach((e) => [...(e.example ? [e.example] : []), ...(e.items || [])].forEach((it) => {
+  const ko = (it.lines || []).map((l) => l.ko).join(' ') + ' ' + (it.stemKo || '');
+  ['en', 'why', 'grammar'].forEach((f) => {
+    if (PRONOUN.test(it[f] || '') && !GENDERED.test(ko)) invented.push(e.id + ' ' + (it.n || 'example') + ' ' + f);
+  });
+}));
+assert(invented.length === 0, 'no English gives a he or she that the Korean does not'
+  + (invented.length ? ' — ' + invented.slice(0, 5).join(', ') : ''));
+
 console.log('\n====================================================');
 console.log(passed + ' passed, ' + failed + ' failed');
 console.log('====================================================');

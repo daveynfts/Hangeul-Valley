@@ -766,7 +766,7 @@
         "track": 25,
         "who": "B",
         "ko": "여성적이고 조용한 편이에요.",
-        "en": "She is feminine and on the quiet side.",
+        "en": "Feminine, and on the quiet side.",
         "syl": 12,
         "why": "The page’s own A-(으)ㄴ 편이다, and the unit title is made of it. 조용한 is the -(으)ㄴ form of 조용하다, so the ㅎ that is not pronounced is still written.",
         "tags": [
@@ -857,7 +857,7 @@
         "track": 27,
         "who": "켈리",
         "ko": "말을 재미있게 하는 사람이면 더 좋고요.",
-        "en": "It would be even better if he tells things in a fun way.",
+        "en": "Someone who tells things in a fun way would be even better.",
         "syl": 16,
         "why": "A-게 on 재미있다. 좋고요 is said [조코요]: the ㅎ of 좋다 meets the ㄱ and the two come out as one aspirated [ㅋ] — the ㅎ is audible only in what it does to the next consonant.",
         "tags": [
@@ -876,7 +876,7 @@
         "track": 27,
         "who": "스티븐",
         "ko": "제 친구 중에 괜찮은 친구가 있는데 한번 만나 볼래요?",
-        "en": "I have a friend who is quite something — would you like to meet him?",
+        "en": "I have a friend who is quite something — would you like to meet up some time?",
         "syl": 21,
         "why": "괜찮은 is said [괜차는]: the ㅎ of the cluster drops and the ㄴ moves onto the 은. 있는데 is [인는데]. Neither of them sounds like the word it is.",
         "tags": [
@@ -895,7 +895,7 @@
         "track": 27,
         "who": "스티븐",
         "ko": "켈리 씨와 잘 어울릴 것 같아요.",
-        "en": "I think he would suit you well.",
+        "en": "I think you two would suit each other well.",
         "syl": 12,
         "why": "어울릴 것 같아요 is said [어울릴 껃 까타요] — the 것 tenses after the ㄹ and tenses the 같 after it. 잘 어울리다 is a 미용실 headword this dialogue borrows.",
         "tags": [
@@ -914,7 +914,7 @@
         "track": 27,
         "who": "스티븐",
         "ko": "아니요, 회사원이에요.",
-        "en": "No, he is an office worker.",
+        "en": "No, an office worker.",
         "syl": 9,
         "why": "회사원 ends in a consonant, so 이에요, and the whole thing runs as [회사워니에요]. The 이 belongs to the ending and not to 회사원.",
         "tags": [
@@ -933,7 +933,7 @@
         "track": 27,
         "who": "스티븐",
         "ko": "편하게 한번 만나 보세요.",
-        "en": "Just meet him once, no pressure.",
+        "en": "Just meet up once, no pressure.",
         "syl": 10,
         "why": "A-게 again, on 편하다. 한번 written closed up means \"once, some time\"; 한 번 with a space counts the times, and this sentence means the first.",
         "tags": [
@@ -952,7 +952,7 @@
         "track": 27,
         "who": "켈리",
         "ko": "어떤 사람인데요?",
-        "en": "What sort of person is he?",
+        "en": "What sort of person is this friend?",
         "syl": 7,
         "why": "-(으)ㄴ데요 asks without finishing the question, which is why it invites an answer where 어떤 사람이에요? would demand one. 사람인데요 runs together as [사라민데요].",
         "tags": [

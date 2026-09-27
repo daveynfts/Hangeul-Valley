@@ -169,7 +169,7 @@
           ],
           "en": "At about seven on the evening of 20 July I left my camera in the fourth-floor classroom.",
           "grammar": "두고 나오다 — you put it down and came out without it, which is how things get lost.",
-          "why": "잃어버렸습니다 is the outcome rather than the act, and the passage says the camera was still there when he walked out. 떨어뜨렸습니다 would have him drop it. This is the first sentence of the 읽기 notice on p.194."
+          "why": "잃어버렸습니다 is the outcome rather than the act, and the passage says the camera was still there when the writer walked out. 떨어뜨렸습니다 would have the writer drop it. This is the first sentence of the 읽기 notice on p.194."
         }
       ],
       "type": "build"
@@ -332,12 +332,12 @@
               "ko": "주황색"
             }
           ],
-          "en": "He was wearing a white t-shirt and black trousers, and a grey cap.",
+          "en": "Was wearing a white t-shirt and black trousers, and a grey cap.",
           "grammar": "까만색 is 까맣다 + -(으)ㄴ + 색, and 검은색 is the other name for it.",
           "why": "The t-shirt in the same sentence is already 하얀색 and the cap in the next one is 회색, so the trousers have to be the third colour — the woman is naming three different ones so the police can pick the man out. 주황색 is not in the recording at all. This is what answers the picture question on p.193.",
           "audio": {
             "src": "audio/book/2b-u17-d59.mp3",
-            "labelEn": "He was wearing a white t-shirt and black trousers, and a grey cap."
+            "labelEn": "Was wearing a white t-shirt and black trousers, and a grey cap."
           }
         }
       ],
@@ -619,7 +619,7 @@
       "no": "말하기 1",
       "icon": "✈️",
       "pattern": "공항에 모셔다 드리고",
-      "blurbEn": "샤오밍 sees his parents off, and very nearly does not.",
+      "blurbEn": "샤오밍 sees both parents off, and very nearly does not.",
       "instructionKo": "대화를 듣고 빈칸에 알맞은 말을 고르세요.",
       "instructionEn": "Listen to the conversation and choose the right words for each blank.",
       "noteEn": "The eight-turn conversation on p.186, which is where the chapter’s title sentence comes from. Five of its turns are here, each playing its own line off track 74 — so the row can be heard rather than reasoned. The two grammar points of the first half both run through it: 모셔다 드리다 for the parents, 놓칠 뻔했어요 for the flight.",
@@ -1569,6 +1569,7 @@
       "instructionKo": "다음을 읽고 질문에 답하세요.",
       "instructionEn": "Read the notice and answer the following questions.",
       "noteEn": "The notice on p.194 is one long description of a lost camera, and the two questions on p.195 both ask you to find things in it. The first prints three photographs and asks which belongs with the notice; the three are written out here, because what separates them is the colour of the camera and the colour of its strap, both of which the text states. The second is a 분실물 신고 form with four boxes, and 모범 답안 on printed p.268 fills all four. The 쓰기 half asks the learner to write a notice of their own and has nothing to mark.",
+      "holdGloss": true,
       "items": [
         {
           "n": 1,
@@ -1656,7 +1657,7 @@
           ],
           "en": "Date lost: 20 July.",
           "grammar": "날짜 is the date; 20분쯤 후에 in the same sentence is a length of time, not one.",
-          "why": "20분 후 is the trap the notice sets in its own second sentence — 20분쯤 후에 교실에 돌아왔는데 is when he came back, not when he lost it. 7월 21일 is a day out. The notice opens 7월 20일 저녁 7시쯤."
+          "why": "20분 후 is the trap the notice sets in its own second sentence — 20분쯤 후에 교실에 돌아왔는데 is when the writer came back, not when the camera was lost. 7월 21일 is a day out. The notice opens 7월 20일 저녁 7시쯤."
         },
         {
           "n": 4,

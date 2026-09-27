@@ -653,7 +653,7 @@
               "ko": "언제 만나을 수 있을지"
             }
           ],
-          "en": "A: When are you going to meet Yujin? — B: Hmm, she’s busy, so I’m not sure when I’ll be able to.",
+          "en": "A: When are you going to meet Yujin? — B: Hmm, Yujin’s busy, so I’m not sure when I’ll be able to.",
           "grammar": "A asks 만날 거예요 and B answers 만날 수 있을지 — the ability is added because the reason given is Yujin’s diary rather than B’s intention.",
           "why": "있을찌 is the sound written down: the ㅈ tenses after the ㄹ and the spelling never carries it. 만나을 수 is the 으 on a vowel stem."
         },
@@ -715,7 +715,7 @@
               "ko": "어떻게 도와줄 수 있는지"
             }
           ],
-          "en": "A: Julien seems to be having a hard time. How could we help him? — B: Hmm, I’d like to help too, but I’m not sure how.",
+          "en": "A: Julien seems to be having a hard time. How could we help Julien? — B: Hmm, I’d like to help too, but I’m not sure how.",
           "grammar": "도와주다 is 돕다 + -아 주다, and 돕다 is ㅂ-irregular — the ㅂ becomes 오 before the ending, giving 도와. The compound is then a plain vowel stem.",
           "why": "도와주을 수 is the 으 again. 있는지 asks about something already settled, and how to help Julien is precisely what has not been settled."
         }
@@ -1225,7 +1225,7 @@
               "ko": "했지만"
             }
           ],
-          "en": "My brother would be pleased if I bought him this watch, but it’s too expensive, so I don’t think I can.",
+          "en": "My younger sibling would be pleased if I bought this watch as a present, but it’s too expensive, so I don’t think I can.",
           "grammar": "-(으)면 sets a condition that has not been met, so what follows it is a guess: 하겠지만. The 겠 comes back at the end in 못 사겠어요.",
           "why": "하지만 asserts the brother’s pleasure about a watch nobody has bought. 했지만 puts it in a past that never happened."
         }
@@ -1848,7 +1848,7 @@
               "ko": "집 찾는 쉬워요"
             }
           ],
-          "en": "Mariko lives in a block of flats, so her place is easy to find.",
+          "en": "Mariko lives in a block of flats, so the place is easy to find.",
           "grammar": "쉽다 is ㅂ-irregular: before the vowel ending the ㅂ becomes 우, giving 쉬워요. -라서 is 이다 + -아/어서, which is why 아파트라서 has no 이.",
           "why": "쉬어요 is the ㅂ simply disappearing instead of turning into 우 — the commonest way to get this verb wrong. 찾는 is the modifier again.",
           "art": "items/apartment_block.png"
@@ -2068,7 +2068,7 @@
               "ko": "올 수 있는지 모르겠어요"
             }
           ],
-          "en": "T: Do you think Nana can come to school tomorrow? — S: Hmm, I don’t know whether she can.",
+          "en": "T: Do you think Nana can come to school tomorrow? — S: Hmm, I don’t know whether Nana can.",
           "grammar": "오다 is a vowel stem: 오 + ㄹ 수 → 올 수. The 을지 then goes on 있다, which has the 받침 that asks for the 으.",
           "why": "오을 수 gives the vowel stem a 으. 있는지 asks after a settled fact, and tomorrow is not one.",
           "audio": {
@@ -2103,9 +2103,9 @@
               "ko": "일찍 도착했을지 모르겠어요"
             }
           ],
-          "en": "T: Do you think Akira can get there early? — S: Hmm, I don’t know whether he can.",
-          "grammar": "일찍 is kept in the answer because it is what is in doubt — not whether he arrives but whether he arrives early.",
-          "why": "도착하을 수 is the 으 on a vowel stem again. 도착했을지 puts the arriving in the past, which turns “can he make it” into “might he have made it” — a question about a train that has already gone.",
+          "en": "T: Do you think Akira can get there early? — S: Hmm, I don’t know whether Akira can.",
+          "grammar": "일찍 is kept in the answer because it is what is in doubt — not whether Akira arrives but whether Akira arrives early.",
+          "why": "도착하을 수 is the 으 on a vowel stem again. 도착했을지 puts the arriving in the past, which turns “can Akira make it” into “might Akira have made it” — a question about a train that has already gone.",
           "audio": {
             "src": "audio/book/2b-u13-p1-4.mp3",
             "askEnd": 3.89
