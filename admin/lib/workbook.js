@@ -62,6 +62,10 @@ const WORKBOOKS = {
   'unit13-textbook': path.join('worlds', 'unit13-textbook.json'),
   unit10: path.join('worlds', 'unit10-workbook.json'),
   'unit10-textbook': path.join('worlds', 'unit10-textbook.json'),
+  // The 익힘책's reviews of Units 10-12, 13-15 and 16-18, which belong to none of the units they cover.
+  review4: path.join('worlds', 'review4-workbook.json'),
+  review5: path.join('worlds', 'review5-workbook.json'),
+  review6: path.join('worlds', 'review6-workbook.json'),
   // Not a unit at all: the exam world's bank, which grows a question at a time rather than
   // arriving whole from a chapter. Same format, same validator, same editor.
   'topik2-questions': path.join('worlds', 'topik2-questions.json')

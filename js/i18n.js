@@ -463,6 +463,10 @@ const HV_CATALOG_SOURCES = [
   'worlds/unit13-workbook.json', 'worlds/unit13-textbook.json',
   'worlds/unit14-workbook.json', 'worlds/unit14-textbook.json',
   'worlds/unit15-workbook.json', 'worlds/unit15-textbook.json',
+  // The 익힘책's 복습 reviews three units at once and belongs to none of them, so it is a bank
+  // of its own on the desk of the unit it ends with: 복습 4 is Units 10-12, 복습 5 Units 13-15 and
+  // 복습 6 Units 16-18.
+  'worlds/review4-workbook.json', 'worlds/review5-workbook.json', 'worlds/review6-workbook.json',
   'worlds/topik2-questions.json',
   'worlds/unit10-desk-quiz.json', 'worlds/unit11-desk-quiz.json',
   'worlds/unit12-desk-quiz.json',

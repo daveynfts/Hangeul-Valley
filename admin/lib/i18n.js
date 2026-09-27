@@ -421,6 +421,9 @@ const LABELS = {
   'worlds/unit14-workbook.json': 'Unit 14 · workbook',
   'worlds/unit14-textbook.json': 'Unit 14 · textbook',
   'worlds/unit15-textbook.json': 'Unit 15 · textbook',
+  'worlds/review4-workbook.json': '복습 4 · review of Units 10-12',
+  'worlds/review5-workbook.json': '복습 5 · review of Units 13-15',
+  'worlds/review6-workbook.json': '복습 6 · review of Units 16-18',
   'worlds/topik2-questions.json': 'TOPIK II · questions'
 };
 function labelFor(src) {

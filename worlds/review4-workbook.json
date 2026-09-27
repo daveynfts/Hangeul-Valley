@@ -1,0 +1,2553 @@
+{
+  "id": "review4-workbook",
+  "source": "Seoul National University Korean 2B Workbook, 복습 4 — the review of Units 10-12 (printed pp.56-73), with the 정답 on printed p.204 and the 듣기 지문 on printed pp.196-197",
+  "titleKo": "복습 4",
+  "titleEn": "Review 4",
+  "pickKo": "어떤 문제를 풀까요?",
+  "pickEn": "Units 10-12 in one test — pick a part and work through it.",
+  "hintKo": "숫자 키로 고르고, 화살표로 옮기고, Enter로 확인해요.",
+  "checkKo": "확인",
+  "checkEn": "Check",
+  "againKo": "다시 풀기",
+  "backKo": "문제 목록",
+  "doneKo": "닫기",
+  "holdGloss": true,
+  "artNote": "The scan of the 익힘책 has no printed pp.62-63, and those two pages hold 평가하기 17-20 and the four drawings each for 듣기 1 and 2, so the bank has no picture question to write out. 읽기와 쓰기 1 is a menu with a drawing of stews beside it that no option depends on.",
+  "omittedNote": "Seven printed parts are not here. Printed pp.62-63 are missing from the scan of the 익힘책: they hold 평가하기 17-20 and 듣기 1-2, which the 정답 on p.204 keys ①④③④ and ②① but whose questions and pictures are on the missing pages; the two 듣기 conversations are on track 5 and in the 듣기 지문, ready for the day the pages are photographed. 정리하기 on pp.56-57 is a summary table, not an exercise. 확인하기’s 알아보기 has two sentences to correct and no answer in the 정답. 읽기와 쓰기 17 is a composition, and 말하기 on pp.72-73 is two speaking tasks, neither with a key. Everything else — 확인하기 연습, 평가하기 1-16, 듣기 3-15, 읽기와 쓰기 1-16 and the three 발음 tracks — is here, the write-in questions keyed to the model answers the 정답 prints.",
+  "exercises": [
+    {
+      "id": "r4-check",
+      "type": "build",
+      "section": "어휘와 문법",
+      "sectionEn": "Vocabulary and grammar",
+      "no": "확인하기",
+      "icon": "✅",
+      "blurbEn": "Five sentences with N처럼, N같이, N 같은 or N 같다 in them — keep the ones that are right, and put the right form in the ones that are not.",
+      "instructionKo": "맞는 문장에는 O, 틀린 문장에는 X 하세요. 틀린 문장은 틀린 곳을 찾아 바르게 고쳐 보세요.",
+      "instructionEn": "Mark each sentence O if it is right and X if it is wrong, and correct the wrong ones.",
+      "noteEn": "The book asks for an O or an X and then, for an X, the correction written in. Here the two are one choice: O keeps the sentence as printed, and the X button carries a correction beside it, written the way the 정답 on printed p.204 writes one — the words as printed, an arrow, the words that would replace them. Every sentence turns on Unit 12’s like: N처럼 or N같이 in front of a verb or an adjective, N 같은 in front of a noun, and N 같다 at the end of the sentence.",
+      "pattern": "N처럼[같이] · N 같은 · N 같다",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "영화배우같이 예쁘세요",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "우리 엄마는 영화배우같이 예쁘세요."
+            },
+            {
+              "who": "O/X",
+              "ko": "{}"
+            }
+          ],
+          "answer": "o",
+          "choices": [
+            {
+              "id": "o",
+              "ko": "O"
+            },
+            {
+              "id": "x",
+              "ko": "X (영화배우같이 → 영화배우 같은)"
+            }
+          ],
+          "en": "O — my mum is as beautiful as a film star.",
+          "why": "같이 closed up onto a noun means like, and it describes how: 영화배우같이 예쁘세요, beautiful like a film star. 영화배우 같은 is the modifier and needs a noun after it — 영화배우 같은 사람 — so the change on the X button would leave it in front of an adjective, where it cannot go.",
+          "grammar": "Unit 12’s N처럼 and N같이 are the same: like N, in front of a verb or an adjective — 영화배우처럼 예뻐요, 영화배우같이 예뻐요. N 같은 goes in front of a noun (봄 같은 날씨), and N 같다 ends the sentence (봄 같아요)."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "봄 같은 날씨",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "겨울인데 봄 같은 날씨예요."
+            },
+            {
+              "who": "O/X",
+              "ko": "{}"
+            }
+          ],
+          "answer": "o",
+          "choices": [
+            {
+              "id": "o",
+              "ko": "O"
+            },
+            {
+              "id": "x",
+              "ko": "X (봄 같은 → 봄같이)"
+            }
+          ],
+          "en": "O — it’s winter, but the weather is like spring.",
+          "why": "날씨 is a noun, so what describes it is the modifier: 봄 같은 날씨. 봄같이 is the adverb form and would need a verb or an adjective after it — 봄같이 따뜻해요 — not a noun, so there is nothing to correct.",
+          "grammar": "N 같은 + noun: 봄 같은 날씨, 가족 같은 친구, 인형 같은 아이. N인데 is Unit 10’s -(으)ㄴ데 on a noun: 겨울인데, it is winter, but."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "언니처럼이에요",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "내 친구는 저를 잘 도와줘서 언니처럼이에요."
+            },
+            {
+              "who": "O/X",
+              "ko": "{}"
+            }
+          ],
+          "answer": "x",
+          "choices": [
+            {
+              "id": "o",
+              "ko": "O"
+            },
+            {
+              "id": "x",
+              "ko": "X (언니처럼이에요 → 언니 같아요)"
+            }
+          ],
+          "en": "X — my friend helps me so much that my friend is like a big sister to me.",
+          "why": "처럼 belongs in the middle of a sentence, in front of what someone does or is like, and it cannot take 이에요. To say someone is like something at the end of the sentence, the form is N 같다: 언니 같아요, which is the 정답’s correction.",
+          "grammar": "N처럼/같이 + a verb or an adjective; N 같다 as the predicate: 언니 같아요, 꿈 같아요. 처럼이에요 is never a form."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "한국 사람처럼",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "한국 사람처럼 한국어를 잘하고 싶어요."
+            },
+            {
+              "who": "O/X",
+              "ko": "{}"
+            }
+          ],
+          "answer": "o",
+          "choices": [
+            {
+              "id": "o",
+              "ko": "O"
+            },
+            {
+              "id": "x",
+              "ko": "X (한국 사람처럼 → 한국 사람 같은)"
+            }
+          ],
+          "en": "O — I want to speak Korean as well as a Korean does.",
+          "why": "처럼 describes how you want to speak — 잘하고 싶어요, like a Korean — and it is the book’s own example of the pattern. The change on the X button would turn it into 한국 사람 같은, a modifier that could only describe the word 한국어 itself; the sentence is right as printed.",
+          "grammar": "The book’s example: 한국 사람처럼 한국어를 잘했으면 좋겠어요. -고 싶다 is a want; -았/었으면 좋겠다 is a wish."
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "한국 사람 같은 잘했으면",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "내년에도 한국어를 계속 공부할 거예요?"
+            },
+            {
+              "who": "B",
+              "ko": "네, 한국 사람 같은 잘했으면 좋겠어요."
+            },
+            {
+              "who": "O/X",
+              "ko": "{}"
+            }
+          ],
+          "answer": "x",
+          "choices": [
+            {
+              "id": "o",
+              "ko": "O"
+            },
+            {
+              "id": "x",
+              "ko": "X (한국 사람 같은 → 한국 사람같이)"
+            }
+          ],
+          "en": "X — will you carry on studying Korean next year too? — Yes, I wish I could speak it like a Korean.",
+          "why": "잘했으면 좋겠어요 is a verb, so what describes how is the adverb form: 한국 사람같이, or 한국 사람처럼. 같은 is for nouns and has nothing to attach to here — that is the 정답’s correction, 같은 → 같이.",
+          "grammar": "N같이 is written closed up, like 처럼; N 같은 and N 같다 take a space. V-았/었으면 좋겠다 = I wish: 잘했으면 좋겠어요."
+        }
+      ]
+    },
+    {
+      "id": "r4-test-1",
+      "type": "build",
+      "section": "어휘와 문법",
+      "sectionEn": "Vocabulary and grammar",
+      "no": "평가하기 1-2",
+      "icon": "🟰",
+      "blurbEn": "A face that looks alike and a pizza to order: find the word that means what the underlined one means.",
+      "instructionKo": "밑줄 친 것과 의미가 같은 것을 고르세요.",
+      "instructionEn": "Choose the one that means the same as the underlined word.",
+      "noteEn": "The book underlines one word in A’s line and prints four words that could stand in its place. The screen cannot underline, so the underlined word is repeated on a 밑줄 line under the dialogue, and the answer is the word that means the same, in the same form.",
+      "pattern": "밑줄 친 것과 의미가 같은 것",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "얼굴이 비슷한데",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "누구 사진이에요? 얼굴이 비슷한데 동생인가요?"
+            },
+            {
+              "who": "B",
+              "ko": "동생이 아니고 친구예요."
+            },
+            {
+              "who": "밑줄",
+              "ko": "비슷한데 → {}"
+            }
+          ],
+          "answer": "dalmanneunde",
+          "choices": [
+            {
+              "id": "malranneunde",
+              "ko": "말랐는데"
+            },
+            {
+              "id": "gwaenchaneunde",
+              "ko": "괜찮은데"
+            },
+            {
+              "id": "saeroun",
+              "ko": "새로운데"
+            },
+            {
+              "id": "dalmanneunde",
+              "ko": "닮았는데"
+            }
+          ],
+          "en": "Whose photo is this? You look alike — is it your younger sibling? — No, not my sibling, a friend.",
+          "why": "Faces that are alike — 얼굴이 비슷하다 — are faces that resemble each other, which is Unit 12’s 닮다: 얼굴이 닮았는데. 닮다 is a verb and describes a likeness you can see now in the past tense, which is why it is 닮았는데. 마르다 is thin, 괜찮다 all right, and 새롭다 new.",
+          "grammar": "N을/를 닮다 or N과/와 닮다 = to look like N: 아버지를 닮았어요. The past 닮았다 describes the likeness as it is now. -(으)ㄴ데/-는데 sets up the question: 비슷한데 동생인가요?"
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "피자를 시킬까요?",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "시간이 없는데 피자를 시킬까요?"
+            },
+            {
+              "who": "B",
+              "ko": "네, 좋아요. 무슨 피자 먹을래요?"
+            },
+            {
+              "who": "밑줄",
+              "ko": "시키다 → {}"
+            }
+          ],
+          "answer": "jumun",
+          "choices": [
+            {
+              "id": "jumun",
+              "ko": "주문하다"
+            },
+            {
+              "id": "chucheon",
+              "ko": "추천하다"
+            },
+            {
+              "id": "jeongni",
+              "ko": "정리하다"
+            },
+            {
+              "id": "sogae",
+              "ko": "소개하다"
+            }
+          ],
+          "en": "We don’t have much time — shall we order a pizza? — Yes, good idea. What pizza do you want?",
+          "why": "시키다 said of food is to order it — 피자를 시키다, 음식을 시키다 — and 주문하다 is the same in a more formal word. 추천하다 is to recommend, 정리하다 to tidy, and 소개하다 to introduce.",
+          "grammar": "V-(으)ㄹ까요? suggests: 시킬까요?, shall we order? V-(으)ㄹ래요? asks what the other person wants: 무슨 피자 먹을래요? — Unit 10."
+        }
+      ]
+    },
+    {
+      "id": "r4-test-2",
+      "type": "build",
+      "section": "어휘와 문법",
+      "sectionEn": "Vocabulary and grammar",
+      "no": "평가하기 3-4",
+      "icon": "🔄",
+      "blurbEn": "Clothes that make you look fat and a sister who is not feminine: find the word that runs the other way.",
+      "instructionKo": "밑줄 친 것과 의미가 반대되는 것을 고르세요.",
+      "instructionEn": "Choose the one that means the opposite of the underlined word.",
+      "noteEn": "The underlined word is repeated on its own 밑줄 line under the dialogue. This time the answer is its opposite, in the gap in B’s line.",
+      "pattern": "밑줄 친 것과 의미가 반대되는 것",
+      "items": [
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "뚱뚱해 보일 것 같아요",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "이 옷을 입으면 좀 뚱뚱해 보일 것 같아요."
+            },
+            {
+              "who": "B",
+              "ko": "아니에요. 이런 옷을 입으면 더 {} 보여요."
+            },
+            {
+              "who": "밑줄",
+              "ko": "뚱뚱해"
+            }
+          ],
+          "answer": "nalssin",
+          "choices": [
+            {
+              "id": "yalba",
+              "ko": "얇아"
+            },
+            {
+              "id": "joba",
+              "ko": "좁아"
+            },
+            {
+              "id": "dukkeowo",
+              "ko": "두꺼워"
+            },
+            {
+              "id": "nalssin",
+              "ko": "날씬해"
+            }
+          ],
+          "en": "I think this outfit would make me look a bit fat. — Not at all. Clothes like this make you look slimmer.",
+          "why": "뚱뚱하다 is fat, and its opposite for a person is 날씬하다, slim: 더 날씬해 보여요. 얇다 and 두껍다 are for things — thin paper, a thick book — and 좁다 is narrow.",
+          "grammar": "A-아/어 보이다 = to look A (Unit 12): 날씬해 보여요, 뚱뚱해 보일 것 같아요. 얇다 ↔ 두껍다 for things, 날씬하다 ↔ 뚱뚱하다 for people."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "여성적인 성격",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "마리코 씨 언니도 여성적인 성격이에요?"
+            },
+            {
+              "who": "B",
+              "ko": "아니요, 언니는 저하고 아주 달라요. 아주 {}."
+            },
+            {
+              "who": "밑줄",
+              "ko": "여성적인"
+            }
+          ],
+          "answer": "namseongjeok",
+          "choices": [
+            {
+              "id": "kkomkkom",
+              "ko": "꼼꼼해요"
+            },
+            {
+              "id": "joyong",
+              "ko": "조용해요"
+            },
+            {
+              "id": "namseongjeok",
+              "ko": "남성적이에요"
+            },
+            {
+              "id": "naeseongjeok",
+              "ko": "내성적이에요"
+            }
+          ],
+          "en": "Mariko, is your older sister feminine in character too? — No, my sister is very different from me. Very masculine.",
+          "why": "여성적이다 ↔ 남성적이다 is Unit 12’s pair, and B says the sister is very different: very 남성적. 꼼꼼하다, 조용하다 and 내성적이다 — meticulous, quiet and introverted — are personalities too, but none of them is the opposite of feminine.",
+          "grammar": "Unit 12’s personalities: 활발하다, 내성적이다, 꼼꼼하다, 여성적이다, 남성적이다, 성격이 급하다. N적이다 describes a type: 여성적인 성격."
+        }
+      ]
+    },
+    {
+      "id": "r4-test-3",
+      "type": "build",
+      "section": "어휘와 문법",
+      "sectionEn": "Vocabulary and grammar",
+      "no": "평가하기 5-10",
+      "icon": "🍲",
+      "blurbEn": "Six gaps from the vocabulary of Units 10-12 — a taste, a personality, a clinic, a habit, a stomach upset and a food that suits.",
+      "instructionKo": "(   )에 알맞은 것을 고르세요.",
+      "instructionEn": "Choose the word that fits the gap.",
+      "noteEn": "Every gap is a word from the three units’ vocabulary pages, and each exchange says enough to settle it: the salt A wants to add, a desk kept tidy, a stomach that aches, something done every time. Read the whole exchange — the clue is as often in the other speaker’s line as in the gapped one.",
+      "pattern": "어휘",
+      "items": [
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "찌개가 조금 싱겁지 않아?",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "찌개가 조금 싱겁지 않아? 소금을 좀 더 넣는 게 어때?"
+            },
+            {
+              "who": "B",
+              "ko": "그냥 먹자. 너무 {} 먹으면 건강에 나빠."
+            }
+          ],
+          "answer": "jjage",
+          "choices": [
+            {
+              "id": "dalge",
+              "ko": "달게"
+            },
+            {
+              "id": "sige",
+              "ko": "시게"
+            },
+            {
+              "id": "jjage",
+              "ko": "짜게"
+            },
+            {
+              "id": "maepge",
+              "ko": "맵게"
+            }
+          ],
+          "en": "Isn’t the stew a bit bland? How about adding a little more salt? — Let’s just eat it. Eating too salty is bad for you.",
+          "why": "A wants more salt, so what B warns against is salt: 너무 짜게 먹으면. 달게, 시게 and 맵게 — sweet, sour and spicy — are tastes too, but salt makes none of them.",
+          "grammar": "A-게 turns an adjective into how something is done (Unit 12): 짜게 먹다, 재미있게 놀다. Unit 10’s tastes: 달다, 짜다, 쓰다, 시다, 맵다, 싱겁다."
+        },
+        {
+          "n": 6,
+          "art": "",
+          "phraseKo": "책상 정리를 참 잘하시네요",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "아키라 씨, 책상 정리를 참 잘하시네요."
+            },
+            {
+              "who": "B",
+              "ko": "제가 좀 {} 편이라서 정리하는 것을 좋아해요."
+            }
+          ],
+          "answer": "kkomkkoman",
+          "choices": [
+            {
+              "id": "geupan",
+              "ko": "급한"
+            },
+            {
+              "id": "joyonghan",
+              "ko": "조용한"
+            },
+            {
+              "id": "dapdaphan",
+              "ko": "답답한"
+            },
+            {
+              "id": "kkomkkoman",
+              "ko": "꼼꼼한"
+            }
+          ],
+          "en": "Akira, you keep your desk really tidy. — I’m rather meticulous, so I like tidying up.",
+          "why": "Liking to tidy comes from being careful about details, which is 꼼꼼하다, meticulous. 급하다 is impatient, 조용하다 quiet and 답답하다 stuffy or frustrating, and none of them is a reason to like tidying.",
+          "grammar": "A-(으)ㄴ 편이다 = to be on the A side (Unit 12): 꼼꼼한 편이에요. -(이)라서 gives the reason: 편이라서."
+        },
+        {
+          "n": 7,
+          "art": "",
+          "phraseKo": "소화가 안되고 배가 아픈데",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "요즘 소화가 안되고 배가 자주 아픈데 근처에 {}가 있어요?"
+            },
+            {
+              "who": "B",
+              "ko": "네, 학교 근처에 좋은 병원이 있어요."
+            }
+          ],
+          "answer": "naegwa",
+          "choices": [
+            {
+              "id": "angwa",
+              "ko": "안과"
+            },
+            {
+              "id": "naegwa",
+              "ko": "내과"
+            },
+            {
+              "id": "pibugwa",
+              "ko": "피부과"
+            },
+            {
+              "id": "jeonghyeong",
+              "ko": "정형외과"
+            }
+          ],
+          "en": "My digestion is bad these days and my stomach often hurts — is there an internal medicine clinic nearby? — Yes, there’s a good clinic near the school.",
+          "why": "Indigestion and stomach aches go to 내과, internal medicine. 안과 is for eyes, 피부과 for skin, and 정형외과 for bones and joints.",
+          "grammar": "Unit 11’s clinics: 내과, 안과, 치과, 피부과, 정형외과, 이비인후과. -(으)ㄴ데/-는데 gives the background to a question: 배가 아픈데 … 있어요?"
+        },
+        {
+          "n": 8,
+          "art": "",
+          "phraseKo": "공부할 때마다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "공부할 때 항상 커피를 마셔요?"
+            },
+            {
+              "who": "B",
+              "ko": "네, 저는 공부할 때마다 커피를 마시는 {}이 있어요."
+            }
+          ],
+          "answer": "seupgwan",
+          "choices": [
+            {
+              "id": "saenggak",
+              "ko": "생각"
+            },
+            {
+              "id": "seupgwan",
+              "ko": "습관"
+            },
+            {
+              "id": "gyeongheom",
+              "ko": "경험"
+            },
+            {
+              "id": "seonggyeok",
+              "ko": "성격"
+            }
+          ],
+          "en": "Do you always drink coffee when you study? — Yes, I have a habit of drinking coffee every time I study.",
+          "why": "Something done every time — 공부할 때마다 — is a habit, 습관. 경험 is an experience you have had, 성격 a personality and 생각 a thought, and none of them is something you have of doing every time.",
+          "grammar": "N마다 = every N (Unit 11): 아침마다, 공부할 때마다. V-는 습관이 있다 = to have a habit of doing."
+        },
+        {
+          "n": 9,
+          "art": "",
+          "phraseKo": "배탈이",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "왜 점심을 안 먹어요? 배고프지 않아요?"
+            },
+            {
+              "who": "B",
+              "ko": "배탈이 {} 못 먹겠어요."
+            }
+          ],
+          "answer": "naseo",
+          "choices": [
+            {
+              "id": "naseo",
+              "ko": "나서"
+            },
+            {
+              "id": "dachyeoseo",
+              "ko": "다쳐서"
+            },
+            {
+              "id": "isseoseo",
+              "ko": "있어서"
+            },
+            {
+              "id": "geollyeoseo",
+              "ko": "걸려서"
+            }
+          ],
+          "en": "Why aren’t you eating lunch? Aren’t you hungry? — I’ve got an upset stomach, so I can’t eat.",
+          "why": "An upset stomach comes on — 배탈이 나다 — like 열이 나다 and 몸살이 나다. 다치다 is for injuries, 걸리다 goes with 감기에, and 배탈이 있다 is not the phrase Unit 11 teaches.",
+          "grammar": "Unit 11’s symptoms with 나다: 배탈이 나다, 열이 나다, 몸살이 나다, 얼굴에 뭐가 나다. A cold is 감기에 걸리다."
+        },
+        {
+          "n": 10,
+          "art": "",
+          "phraseKo": "한국 음식이 입에 잘",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "한국 음식이 입에 잘 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "네, 한국 음식이 고향 음식과 많이 비슷해요."
+            }
+          ],
+          "answer": "majayo",
+          "choices": [
+            {
+              "id": "joayo",
+              "ko": "좋아요"
+            },
+            {
+              "id": "majayo",
+              "ko": "맞아요"
+            },
+            {
+              "id": "eoullyeoyo",
+              "ko": "어울려요"
+            },
+            {
+              "id": "gwaenchanayo",
+              "ko": "괜찮아요"
+            }
+          ],
+          "en": "Does Korean food suit your taste? — Yes, Korean food is a lot like the food back home.",
+          "why": "Food that suits your taste is 입에 맞다, the set phrase from Unit 10. 입에 좋다 and 입에 괜찮다 are not said, and 어울리다 is for things that go well together or look good on someone.",
+          "grammar": "N이/가 입에 맞다 = N suits your taste. 어울리다: 옷이 잘 어울려요, the clothes suit you. N과/와 비슷하다 = to be like N."
+        }
+      ]
+    },
+    {
+      "id": "r4-test-4",
+      "type": "build",
+      "section": "어휘와 문법",
+      "sectionEn": "Vocabulary and grammar",
+      "no": "평가하기 11-12",
+      "icon": "❌",
+      "blurbEn": "Four sentences each time, and one of them breaks a rule of Units 10-12.",
+      "instructionKo": "틀린 문장을 고르세요.",
+      "instructionEn": "Choose the sentence that is wrong.",
+      "noteEn": "Each question is four sentences, and three of them are good Korean. The wrong one breaks a rule of the three units — this time banmal and the ㅅ-irregular verbs — so read the forms rather than the meaning. The buttons keep the book’s order and numbers.",
+      "pattern": "틀린 문장",
+      "items": [
+        {
+          "n": 11,
+          "art": "",
+          "phraseKo": "틀린 문장",
+          "lines": [
+            {
+              "who": "틀린 문장",
+              "ko": "{}"
+            }
+          ],
+          "answer": "jeohante",
+          "choices": [
+            {
+              "id": "jeohante",
+              "ko": "① 저녁에 저한테 전화해."
+            },
+            {
+              "id": "halgeoya",
+              "ko": "② 스티븐, 오늘 뭐 할 거야?"
+            },
+            {
+              "id": "malja",
+              "ko": "③ 오늘은 바쁘니까 만나지 말자."
+            },
+            {
+              "id": "motga",
+              "ko": "④ 미안해, 시간이 없어서 같이 못 가."
+            }
+          ],
+          "en": "The wrong one: “Call me this evening,” with the humble 저한테 in banmal.",
+          "why": "Banmal, Unit 10’s casual speech, has its own I and me: 나, 나한테. 저한테 is the humble form for polite speech, so 저녁에 저한테 전화해 mixes two levels — it should be 저녁에 나한테 전화해. The other three are consistent banmal: 할 거야?, 만나지 말자, 못 가.",
+          "grammar": "In 반말: 저 → 나, 제 → 내, 저한테 → 나한테; -아요/어요 → -아/어, -(으)ㄹ 거예요 → -(으)ㄹ 거야, 이에요/예요 → 이야/야. -지 말자 is let’s not."
+        },
+        {
+          "n": 12,
+          "art": "",
+          "phraseKo": "틀린 문장",
+          "lines": [
+            {
+              "who": "틀린 문장",
+              "ko": "{}"
+            }
+          ],
+          "answer": "nasayo",
+          "choices": [
+            {
+              "id": "bueun",
+              "ko": "① 눈이 좀 부은 것 같아요."
+            },
+            {
+              "id": "jitgo",
+              "ko": "② 예쁜 한국 이름을 짓고 싶어요."
+            },
+            {
+              "id": "jeoeoseo",
+              "ko": "③ 설탕을 넣었으니까 잘 저어서 드세요."
+            },
+            {
+              "id": "nasayo",
+              "ko": "④ 저녁에 감기약을 먹었는데 안 낫아요."
+            }
+          ],
+          "en": "The wrong one: “I took cold medicine this evening, but it isn’t getting better,” written 낫아요.",
+          "why": "낫다 is Unit 11’s ㅅ-irregular: before a vowel the ㅅ drops — 나아요, 나았어요 — so 낫아요 keeps a ㅅ the ending takes away. The other three handle it right: 부은 (붓다), 짓고 (the ㅅ stays before a consonant) and 저어서 (젓다).",
+          "grammar": "ㅅ-irregular: 낫다 → 나아요, 붓다 → 부어요, 짓다 → 지어요, 젓다 → 저어요 — the ㅅ drops before a vowel and stays before a consonant: 짓고, 낫지만. 씻다 and 웃다 are regular: 씻어요, 웃어요."
+        }
+      ]
+    },
+    {
+      "id": "r4-test-5",
+      "type": "build",
+      "section": "어휘와 문법",
+      "sectionEn": "Vocabulary and grammar",
+      "no": "평가하기 13-16",
+      "icon": "🧩",
+      "blurbEn": "Four gaps that each want a grammar point of Units 10-12 — a suggestion, a look, an arrangement and a contrast.",
+      "instructionKo": "(   )에 알맞은 것을 고르세요.",
+      "instructionEn": "Choose the form that fits the gap.",
+      "noteEn": "The book prints these as two pairs, 13-14 and 15-16, under the same instruction, and here they are one page. The options in each are all grammar from the three units, so every one is a real form: the question is which one says what the rest of the exchange needs.",
+      "pattern": "문법",
+      "items": [
+        {
+          "n": 13,
+          "art": "",
+          "phraseKo": "오늘 점심에 뭐 먹을래요?",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "오늘 점심에 뭐 먹을래요?"
+            },
+            {
+              "who": "B",
+              "ko": "{}?"
+            }
+          ],
+          "answer": "eottaeyo",
+          "choices": [
+            {
+              "id": "iragohaeyo",
+              "ko": "비빔밥이라고 해요"
+            },
+            {
+              "id": "meokgiro",
+              "ko": "비빔밥 먹기로 했어요"
+            },
+            {
+              "id": "eottaeyo",
+              "ko": "비빔밥 먹는 게 어때요"
+            },
+            {
+              "id": "mandeuljul",
+              "ko": "비빔밥 만들 줄 몰라요"
+            }
+          ],
+          "en": "What do you want for lunch today? — How about bibimbap?",
+          "why": "먹을래요? asks what B would like, and B answers with a suggestion: 비빔밥 먹는 게 어때요?, Unit 11’s -는 게 어때요?. 먹기로 했어요 reports a decision rather than answering what B would like; 비빔밥이라고 해요 gives a name; and 만들 줄 몰라요 is about cooking it.",
+          "grammar": "V-는 게 어때요? = how about doing (Unit 11). V-기로 하다 = to decide to (Unit 11). V-(으)ㄹ래요? asks what someone wants (Unit 10)."
+        },
+        {
+          "n": 14,
+          "art": "",
+          "phraseKo": "줄리앙 씨, 오늘 좀",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "줄리앙 씨, 오늘 좀 {}."
+            },
+            {
+              "who": "B",
+              "ko": "네, 좀 피곤해요. 어제 잠을 잘 못 잤어요."
+            }
+          ],
+          "answer": "boyeoyo",
+          "choices": [
+            {
+              "id": "pigonhande",
+              "ko": "피곤한데요"
+            },
+            {
+              "id": "boyeoyo",
+              "ko": "피곤해 보여요"
+            },
+            {
+              "id": "pigonhal",
+              "ko": "피곤할 거예요"
+            },
+            {
+              "id": "pyeon",
+              "ko": "피곤한 편이에요"
+            }
+          ],
+          "en": "Julien, you look a bit tired today. — Yes, I am a bit tired. I didn’t sleep well last night.",
+          "why": "A is saying how Julien looks, and Julien confirms it: 피곤해 보여요, Unit 12’s A-아/어 보이다. 피곤한데요 would have A telling Julien how Julien feels, 피곤할 거예요 is a guess about later, and 피곤한 편이에요 describes a tendency rather than today.",
+          "grammar": "A-아/어 보이다 = to look A: 피곤해 보여요, 기분이 좋아 보이네요. What you see is -아/어 보이다; what you feel is the adjective alone: 피곤해요."
+        },
+        {
+          "n": 15,
+          "art": "",
+          "phraseKo": "왜 이렇게 일찍 가요?",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "왜 이렇게 일찍 가요?"
+            },
+            {
+              "who": "B",
+              "ko": "친구랑 한 시간 후에 {} 지금 출발해야 돼요."
+            }
+          ],
+          "answer": "mannagiro",
+          "choices": [
+            {
+              "id": "mannal",
+              "ko": "만날 때"
+            },
+            {
+              "id": "mannaryeogo",
+              "ko": "만나려고"
+            },
+            {
+              "id": "mannago",
+              "ko": "만나고 나서"
+            },
+            {
+              "id": "mannagiro",
+              "ko": "만나기로 해서"
+            }
+          ],
+          "en": "Why are you leaving so early? — I’ve arranged to meet a friend in an hour, so I have to set off now.",
+          "why": "The reason B gives is an arrangement already made — Unit 11’s -기로 하다 — with -아/어서 for the reason: 만나기로 해서, because we have arranged to meet. 만나려고, in order to meet, would be understood, but it is a purpose, not the arrangement that makes leaving now necessary; 만날 때 puts the leaving at the meeting itself, and 만나고 나서 after it.",
+          "grammar": "V-기로 하다 = to arrange or decide to (Unit 11): 만나기로 했어요, 만나기로 해서. V-아/어야 되다 = to have to."
+        },
+        {
+          "n": 16,
+          "art": "",
+          "phraseKo": "맛이 없어요?",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "맛이 없어요? 왜 이렇게 조금 먹어요?"
+            },
+            {
+              "who": "B",
+              "ko": "맛은 {} 점심을 늦게 먹어서 배가 불러요."
+            }
+          ],
+          "answer": "inneunde",
+          "choices": [
+            {
+              "id": "itgo",
+              "ko": "있고"
+            },
+            {
+              "id": "isseoseo",
+              "ko": "있어서"
+            },
+            {
+              "id": "inneunde",
+              "ko": "있는데"
+            },
+            {
+              "id": "isseunikka",
+              "ko": "있으니까"
+            }
+          ],
+          "en": "Doesn’t it taste good? Why are you eating so little? — It’s tasty, but I had a late lunch, so I’m full.",
+          "why": "B grants that the food is good and then gives the real reason: a contrast, Unit 10’s -는데 — 맛은 있는데. 있다 takes -는데 like a verb. 있어서 and 있으니까 would make the taste the reason for eating little, and 있고 only adds one thing to another.",
+          "grammar": "A-(으)ㄴ데, V-는데, N인데 (Unit 10): 좋은데, 잘하는데, 여름인데. 있다 and 없다 take -는데: 맛있는데, 시간이 없는데. 은/는 on 맛은 marks the contrast too."
+        }
+      ]
+    },
+    {
+      "id": "r4-listen-2",
+      "type": "build",
+      "section": "듣기",
+      "sectionEn": "Listening",
+      "no": "듣기 3-7",
+      "icon": "🎧",
+      "blurbEn": "The same line four times with four different replies — only one of them answers it.",
+      "instructionKo": "잘 듣고 맞는 대화를 고르세요.",
+      "instructionEn": "Listen, and choose the exchange that makes sense.",
+      "noteEn": "The page prints nothing but ① ② ③ ④ for these five, and neither does the screen. Each question is four short exchanges on the tape, the same first line every time with a different reply, and the button is the number of the reply that really answers it. Each row plays its own question. The wrong replies are good Korean — they answer a different question, or give advice when a fact was asked for. (듣기 1-2 are picture questions on printed p.63, which the scan does not have.)",
+      "pattern": "맞는 대화",
+      "items": [
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "맞는 대화",
+          "lines": [
+            {
+              "who": "대화",
+              "ko": "{}"
+            }
+          ],
+          "answer": "n4",
+          "choices": [
+            {
+              "id": "n1",
+              "ko": "①"
+            },
+            {
+              "id": "n2",
+              "ko": "②"
+            },
+            {
+              "id": "n3",
+              "ko": "③"
+            },
+            {
+              "id": "n4",
+              "ko": "④"
+            }
+          ],
+          "en": "Does the food suit your taste? — Yeah, it’s a bit on the spicy side, but it’s good.",
+          "why": "입에 잘 맞아? asks whether the food suits you, and ④ answers it: 응, 좀 매운 편인데 맛있다. ① 그래. 분위기가 참 좋네 is about the atmosphere, not the food; ② 아니, 좀 작은 것 같은데 is about size, the answer to whether clothes fit; ③ 난 불고기를 제일 좋아해 names a favourite dish without saying whether this one suits.",
+          "grammar": "N이/가 입에 맞다 (Unit 10) is for food; 옷이 맞다 or 작다 is for clothes. A-(으)ㄴ 편이다: 매운 편인데 (Unit 12). 맛있다 at the end is banmal said as an exclamation.",
+          "audio": {
+            "src": "audio/book/2b-r4-l03.mp3",
+            "labelEn": "듣기 3 · from track 5"
+          }
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "맞는 대화",
+          "lines": [
+            {
+              "who": "대화",
+              "ko": "{}"
+            }
+          ],
+          "answer": "n1",
+          "choices": [
+            {
+              "id": "n1",
+              "ko": "①"
+            },
+            {
+              "id": "n2",
+              "ko": "②"
+            },
+            {
+              "id": "n3",
+              "ko": "③"
+            },
+            {
+              "id": "n4",
+              "ko": "④"
+            }
+          ],
+          "en": "What brings you in today? — I think I’ve come down with body aches.",
+          "why": "A doctor’s 어디가 아파서 오셨어요? asks what is wrong, and ① names it: 몸살이 난 것 같아요. ② 아직 다 안 나았어요 talks about getting over something already known; ③ 푹 쉬면 괜찮을 거예요 is the doctor’s own kind of advice, not a patient’s answer; ④ 쭉 가면 병원이 있어요 gives directions to a hospital.",
+          "grammar": "Unit 11: 몸살이 나다, 열이 나다, 배탈이 나다. -(으)ㄴ 것 같다 = I think it has: 몸살이 난 것 같아요. 낫다 → 나았어요 (ㅅ-irregular).",
+          "audio": {
+            "src": "audio/book/2b-r4-l04.mp3",
+            "labelEn": "듣기 4 · from track 5"
+          }
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "맞는 대화",
+          "lines": [
+            {
+              "who": "대화",
+              "ko": "{}"
+            }
+          ],
+          "answer": "n3",
+          "choices": [
+            {
+              "id": "n1",
+              "ko": "①"
+            },
+            {
+              "id": "n2",
+              "ko": "②"
+            },
+            {
+              "id": "n3",
+              "ko": "③"
+            },
+            {
+              "id": "n4",
+              "ko": "④"
+            }
+          ],
+          "en": "How about trying some exercise for your health? — I’d like to, but I don’t have time.",
+          "why": "-는 게 어때요? is a suggestion, and ③ answers it — willing, but with no time: 하고는 싶은데 할 시간이 없어요. ① 운동을 해서 건강해 보여요 comments on someone who already exercises; ② 매일 한 시간씩 하는 게 좋아요 hands advice back; ④ 사람마다 좋아하는 운동이 달라요 is a general remark.",
+          "grammar": "V-는 게 어때요? = how about (Unit 11). V-고는 싶은데 = I would like to, but. N마다 = every, each: 사람마다 (Unit 11).",
+          "audio": {
+            "src": "audio/book/2b-r4-l05.mp3",
+            "labelEn": "듣기 5 · from track 5"
+          }
+        },
+        {
+          "n": 6,
+          "art": "",
+          "phraseKo": "맞는 대화",
+          "lines": [
+            {
+              "who": "대화",
+              "ko": "{}"
+            }
+          ],
+          "answer": "n3",
+          "choices": [
+            {
+              "id": "n1",
+              "ko": "①"
+            },
+            {
+              "id": "n2",
+              "ko": "②"
+            },
+            {
+              "id": "n3",
+              "ko": "③"
+            },
+            {
+              "id": "n4",
+              "ko": "④"
+            }
+          ],
+          "en": "Jeongwoo, who do you take after? — I take after my mother a lot.",
+          "why": "누구를 닮았어요? asks whom Jeongwoo takes after, and ③ names someone: 저는 어머니를 많이 닮았어요. ① 저와 친구는 키가 비슷해요 compares Jeongwoo with a friend; ② 아버지를 닮았으면 좋겠어요 is a wish, not a fact; ④ 형과 저는 별로 닮지 않았어요 says whom Jeongwoo does not look like.",
+          "grammar": "N을/를 닮다 = to take after N (Unit 12): 어머니를 닮았어요. -았/었으면 좋겠다 = I wish.",
+          "audio": {
+            "src": "audio/book/2b-r4-l06.mp3",
+            "labelEn": "듣기 6 · from track 5"
+          }
+        },
+        {
+          "n": 7,
+          "art": "",
+          "phraseKo": "맞는 대화",
+          "lines": [
+            {
+              "who": "대화",
+              "ko": "{}"
+            }
+          ],
+          "answer": "n2",
+          "choices": [
+            {
+              "id": "n1",
+              "ko": "①"
+            },
+            {
+              "id": "n2",
+              "ko": "②"
+            },
+            {
+              "id": "n3",
+              "ko": "③"
+            },
+            {
+              "id": "n4",
+              "ko": "④"
+            }
+          ],
+          "en": "Which film have you decided to see tonight? — I’m going to see a comedy.",
+          "why": "보기로 했어요? asks about a plan already settled, and ② gives one: 코미디 영화를 볼 거예요. ① 저는 액션 영화를 볼래요 chooses on the spot rather than reporting a plan; ③ 그 영화는 어제 저녁에 봤어요 is about a film seen yesterday; ④ 저는 슬픈 영화를 자주 보는 편이에요 describes a habit.",
+          "grammar": "V-기로 하다 (Unit 11) is a decision already made; V-(으)ㄹ래요 (Unit 10) a choice made as you speak; V-(으)ㄹ 거예요 a plan. V-는 편이다 describes a tendency (Unit 12).",
+          "audio": {
+            "src": "audio/book/2b-r4-l07.mp3",
+            "labelEn": "듣기 7 · from track 5"
+          }
+        }
+      ]
+    },
+    {
+      "id": "r4-listen-3",
+      "type": "build",
+      "section": "듣기",
+      "sectionEn": "Listening",
+      "no": "듣기 8-9",
+      "icon": "💬",
+      "blurbEn": "Two short exchanges; name the topic in one word.",
+      "instructionKo": "다음은 무엇에 대해 말하고 있습니까?",
+      "instructionEn": "What are they talking about?",
+      "noteEn": "Each exchange is a question and one reply, and the topic is never said in so many words: the reply names things that belong to it, and the answer is the word that covers them all.",
+      "pattern": "무엇에 대해",
+      "items": [
+        {
+          "n": 8,
+          "art": "",
+          "phraseKo": "무엇에 대해",
+          "lines": [
+            {
+              "who": "주제",
+              "ko": "{}"
+            }
+          ],
+          "answer": "oemo",
+          "choices": [
+            {
+              "id": "jigeop",
+              "ko": "직업"
+            },
+            {
+              "id": "oemo",
+              "ko": "외모"
+            },
+            {
+              "id": "seonggyeok",
+              "ko": "성격"
+            },
+            {
+              "id": "seupgwan",
+              "ko": "습관"
+            }
+          ],
+          "en": "Wow, your boyfriend looks like a film star. — Really? I suppose it’s because he has thick eyebrows and big eyes. (Looks.)",
+          "why": "A film-star face, thick eyebrows and big eyes are all appearance, 외모 — Unit 12’s face and body words. Nothing is said about a job, a personality or a habit.",
+          "grammar": "Unit 12: 눈썹이 진하다, 눈이 크다, 쌍꺼풀이 있다, 코가 높다. N같이 생기다 = to look like N: 영화배우같이 생겼네요.",
+          "audio": {
+            "src": "audio/book/2b-r4-l08.mp3",
+            "labelEn": "듣기 8 · from track 5"
+          }
+        },
+        {
+          "n": 9,
+          "art": "",
+          "phraseKo": "무엇에 대해",
+          "lines": [
+            {
+              "who": "주제",
+              "ko": "{}"
+            }
+          ],
+          "answer": "isanghyeong",
+          "choices": [
+            {
+              "id": "geongang",
+              "ko": "건강"
+            },
+            {
+              "id": "chwimi",
+              "ko": "취미"
+            },
+            {
+              "id": "bunwigi",
+              "ko": "분위기"
+            },
+            {
+              "id": "isanghyeong",
+              "ko": "이상형"
+            }
+          ],
+          "en": "Kelly, what kind of person would you like to go out with? — I’d like to meet someone I can have fun talking with. (Your ideal type.)",
+          "why": "The kind of person someone would like to go out with is their ideal type, 이상형. It is not their health, a hobby, or the atmosphere of a place.",
+          "grammar": "사귀다 is to go out with as well as to make friends: 어떤 사람을 사귀고 싶어요? V-(으)ㄹ 수 있는 N = an N one can V with: 이야기할 수 있는 사람.",
+          "audio": {
+            "src": "audio/book/2b-r4-l09.mp3",
+            "labelEn": "듣기 9 · from track 5"
+          }
+        }
+      ]
+    },
+    {
+      "id": "r4-listen-4",
+      "type": "build",
+      "section": "듣기",
+      "sectionEn": "Listening",
+      "no": "듣기 10-11",
+      "icon": "🏥",
+      "blurbEn": "A stomach ache that medicine did not fix, and noodles ordered by phone.",
+      "instructionKo": "잘 듣고 대화 내용과 같은 것을 고르세요.",
+      "instructionEn": "Listen, and choose the statement that matches the conversation.",
+      "noteEn": "Two longer conversations, and four statements about each. The wrong statements take something that was said and change where the speakers are, who does what, or what season it must be, so listen for the detail rather than the topic.",
+      "pattern": "내용과 같은 것",
+      "items": [
+        {
+          "n": 10,
+          "art": "",
+          "phraseKo": "대화 내용과 같은 것",
+          "lines": [
+            {
+              "who": "내용",
+              "ko": "{}"
+            }
+          ],
+          "answer": "stillill",
+          "choices": [
+            {
+              "id": "hospital",
+              "ko": "① 두 사람은 지금 병원에 있습니다."
+            },
+            {
+              "id": "buymedicine",
+              "ko": "② 남자는 약을 사러 가려고 합니다."
+            },
+            {
+              "id": "nolunch",
+              "ko": "③ 여자는 아파서 점심을 못 먹었습니다."
+            },
+            {
+              "id": "stillill",
+              "ko": "④ 여자는 약을 먹었지만 계속 아픕니다."
+            }
+          ],
+          "en": "The woman took medicine but still feels ill.",
+          "why": "소화제를 먹었는데 계속 아파 — she took something for indigestion and it still hurts, ④. They are not at a hospital yet — he suggests going, 병원에 가 보는 게 어때? (①); he offers to go with her, not to buy medicine (②); and she did eat lunch — the pain started after it, 점심 먹고 소화가 잘 안돼서 (③).",
+          "grammar": "Unit 11: 속이 안 좋다, 토하다, 소화가 안되다, 소화제. -아/어 줄게 is an offer: 같이 가 줄게.",
+          "audio": {
+            "src": "audio/book/2b-r4-l10.mp3",
+            "labelEn": "듣기 10 · from track 5"
+          }
+        },
+        {
+          "n": 11,
+          "art": "",
+          "phraseKo": "대화 내용과 같은 것",
+          "lines": [
+            {
+              "who": "내용",
+              "ko": "{}"
+            }
+          ],
+          "answer": "bibimguksu",
+          "choices": [
+            {
+              "id": "summer",
+              "ko": "① 지금 계절은 여름입니다."
+            },
+            {
+              "id": "bibimguksu",
+              "ko": "② 남자는 비빔국수를 시켰습니다."
+            },
+            {
+              "id": "hanabuilding",
+              "ko": "③ 여자는 지금 하나빌딩에 있습니다."
+            },
+            {
+              "id": "nodelivery",
+              "ko": "④ 이 식당은 배달을 해 주지 않습니다."
+            }
+          ],
+          "en": "The man ordered bibim-guksu.",
+          "why": "With cold noodles off the menu, he asks for 비빔국수 두 그릇, so ② is right. 냉면은 여름 메뉴라서 안되고요 means it is not summer (①); it is he who is in the Hana Building, 여기 하나빌딩 2층인데요 (③); and the restaurant answers 곧 갖다 드리겠습니다 — it delivers (④).",
+          "grammar": "N(이)라서 = because it is N: 여름 메뉴라서. 갖다 주다 = to bring to someone; 갖다 드리다 is the polite form: 곧 갖다 드리겠습니다.",
+          "audio": {
+            "src": "audio/book/2b-r4-l11.mp3",
+            "labelEn": "듣기 11 · from track 5"
+          }
+        }
+      ]
+    },
+    {
+      "id": "r4-listen-5",
+      "type": "build",
+      "section": "듣기",
+      "sectionEn": "Listening",
+      "no": "듣기 12-15",
+      "icon": "🎙️",
+      "blurbEn": "A lost watch and a sister mistaken for a younger one — two questions on each.",
+      "instructionKo": "잘 듣고 질문에 맞는 답을 고르세요.",
+      "instructionEn": "Listen, and choose the right answer to each question.",
+      "noteEn": "The book prints these as two pairs, 12-13 and 14-15, under the same instruction, and each pair is one recording: Yujin on a quarrel with Steven, and Jeongwoo seen shopping with an older sister. Rows 12 and 13 play the first, rows 14 and 15 the second, and each row prints its question as the book does.",
+      "pattern": "질문에 맞는 답",
+      "items": [
+        {
+          "n": 12,
+          "art": "",
+          "phraseKo": "유진과 스티븐이 싸운 이유",
+          "lines": [
+            {
+              "who": "질문",
+              "ko": "유진과 스티븐이 싸운 이유는 무엇입니까?"
+            },
+            {
+              "who": "답",
+              "ko": "{}"
+            }
+          ],
+          "answer": "lostwatch",
+          "choices": [
+            {
+              "id": "alike",
+              "ko": "① 두 사람의 성격이 비슷해서"
+            },
+            {
+              "id": "expensive",
+              "ko": "② 유진이 물건을 비싸게 사서"
+            },
+            {
+              "id": "lostwatch",
+              "ko": "③ 스티븐이 시계를 잃어버려서"
+            },
+            {
+              "id": "nogift",
+              "ko": "④ 스티븐이 생일 선물을 안 줘서"
+            }
+          ],
+          "en": "Why did Yujin and Steven fight? — Because Steven lost the watch.",
+          "why": "스티븐이 제가 지난 생일에 선물한 시계를 잃어버렸어요 — Steven lost the watch Yujin gave as a birthday present, ③. Their personalities are different, not alike (①); the watch was expensive, but nobody overpaid (②); and the birthday present was given — it is the thing that was lost (④).",
+          "grammar": "N을/를 선물하다 = to give N as a present. -아/어 버리다 in 잃어버렸어요 = lost it, and that is that. -아/어서 gives the reason: 잃어버려서.",
+          "audio": {
+            "src": "audio/book/2b-r4-l12.mp3",
+            "labelEn": "듣기 12-13 · from track 5"
+          }
+        },
+        {
+          "n": 13,
+          "art": "",
+          "phraseKo": "유진의 성격",
+          "lines": [
+            {
+              "who": "질문",
+              "ko": "유진의 성격으로 맞지 않는 것은 무엇입니까?"
+            },
+            {
+              "who": "답",
+              "ko": "{}"
+            }
+          ],
+          "answer": "impatient",
+          "choices": [
+            {
+              "id": "meticulous",
+              "ko": "① 꼼꼼하다"
+            },
+            {
+              "id": "introverted",
+              "ko": "② 내성적이다"
+            },
+            {
+              "id": "impatient",
+              "ko": "③ 성격이 급하다"
+            },
+            {
+              "id": "quiet",
+              "ko": "④ 말이 별로 없다"
+            }
+          ],
+          "en": "Which does not describe Yujin? — Impatient.",
+          "why": "성격이 급하다, impatient, is how Yujin describes Steven: 스티븐은 성격이 급하고 꼼꼼하지 않아서. Yujin is the other way — 꼼꼼하고, 내성적이고 조용한 편 — which makes ①, ② and ④ true.",
+          "grammar": "A-(으)ㄴ 편이다: 조용한 편인데 (Unit 12). Unit 12’s opposites: 꼼꼼하다 ↔ 꼼꼼하지 않다, 활발하다 ↔ 내성적이다.",
+          "audio": {
+            "src": "audio/book/2b-r4-l12.mp3",
+            "labelEn": "듣기 12-13 · from track 5"
+          }
+        },
+        {
+          "n": 14,
+          "art": "",
+          "phraseKo": "여자는 왜 명동에 갔습니까?",
+          "lines": [
+            {
+              "who": "질문",
+              "ko": "여자는 왜 토요일에 명동에 갔습니까?"
+            },
+            {
+              "who": "답",
+              "ko": "{}"
+            }
+          ],
+          "answer": "friend",
+          "choices": [
+            {
+              "id": "meetjeongwoo",
+              "ko": "① 정우를 만나려고"
+            },
+            {
+              "id": "brother",
+              "ko": "② 오빠와 쇼핑을 하러"
+            },
+            {
+              "id": "gifts",
+              "ko": "③ 부모님 선물을 사려고"
+            },
+            {
+              "id": "friend",
+              "ko": "④ 친구와 약속이 있어서"
+            }
+          ],
+          "en": "Why did the woman go to Myeong-dong on Saturday? — She had arranged to meet a friend.",
+          "why": "거기서 친구하고 만나기로 해서 갔는데 — she went because she had arranged to meet a friend there, ④. Buying presents for his parents was Jeongwoo’s reason (③), she only saw him in passing (①), and the person with him was his older sister, not her brother (②).",
+          "grammar": "V-기로 하다 (Unit 11): 만나기로 해서. V-(으)러 가다 = to go in order to: 선물 사러 갔었는데.",
+          "audio": {
+            "src": "audio/book/2b-r4-l14.mp3",
+            "labelEn": "듣기 14-15 · from track 5"
+          }
+        },
+        {
+          "n": 15,
+          "art": "",
+          "phraseKo": "정우의 누나",
+          "lines": [
+            {
+              "who": "질문",
+              "ko": "정우의 누나에 대한 설명으로 맞지 않는 것은 무엇입니까?"
+            },
+            {
+              "who": "답",
+              "ko": "{}"
+            }
+          ],
+          "answer": "feminine",
+          "choices": [
+            {
+              "id": "feminine",
+              "ko": "① 성격이 여성적입니다."
+            },
+            {
+              "id": "close",
+              "ko": "② 정우와 친하게 지냅니다."
+            },
+            {
+              "id": "younglooking",
+              "ko": "③ 나이보다 어려 보입니다."
+            },
+            {
+              "id": "fouryears",
+              "ko": "④ 정우보다 네 살 더 많습니다."
+            }
+          ],
+          "en": "Which is not true of Jeongwoo’s older sister? — That her personality is feminine.",
+          "why": "우리 누나는 외모는 여성적인데 성격은 좀 남성적인 편이야 — she looks feminine but is rather masculine in character, so ① is the one that is not true. They get on like friends (②), she looks young for her age (③), and she is four years older, 나보다 네 살 많아 (④).",
+          "grammar": "N은/는 … N은/는 sets two things side by side: 외모는 여성적인데 성격은…. A-아/어 보이다: 어려 보여서 (Unit 12).",
+          "audio": {
+            "src": "audio/book/2b-r4-l14.mp3",
+            "labelEn": "듣기 14-15 · from track 5"
+          }
+        }
+      ]
+    },
+    {
+      "id": "r4-read-1",
+      "type": "build",
+      "section": "읽기와 쓰기",
+      "sectionEn": "Reading and writing",
+      "no": "읽기와 쓰기 1-2",
+      "icon": "📋",
+      "blurbEn": "A restaurant menu and a dentist’s hours — find the one statement the notice does not support.",
+      "instructionKo": "다음을 읽고 맞지 않는 것을 고르세요.",
+      "instructionEn": "Read the notices, and choose the statement that is NOT true.",
+      "noteEn": "This time the answer is the statement that is wrong. Three of the four say what the notice says in other words, and the fourth changes one detail — check each against the lines above it rather than against what seems likely.",
+      "pattern": "맞지 않는 것",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "메뉴",
+          "lines": [
+            {
+              "who": "제목",
+              "ko": "메뉴"
+            },
+            {
+              "ko": "된장찌개 5,000원 · 순두부찌개 6,000원 · 갈비탕 8,000원 · 불고기(2인분) 15,000원"
+            },
+            {
+              "ko": "* 불고기는 2인분부터 주문 받습니다."
+            },
+            {
+              "ko": "* 음식을 주문하시면 음료(커피, 콜라)를 드립니다."
+            },
+            {
+              "ko": "* 만 원 이상 배달됩니다."
+            },
+            {
+              "who": "맞지 않는 것",
+              "ko": "{}"
+            }
+          ],
+          "answer": "cheapdrink",
+          "choices": [
+            {
+              "id": "cheapest",
+              "ko": "① 음식 중에서 된장찌개가 제일 쌉니다."
+            },
+            {
+              "id": "nodelivery",
+              "ko": "② 순두부찌개 한 그릇은 배달이 안 됩니다."
+            },
+            {
+              "id": "cheapdrink",
+              "ko": "③ 음식을 먹으면 커피나 콜라를 싸게 줍니다."
+            },
+            {
+              "id": "twoportions",
+              "ko": "④ 불고기를 먹으려면 2인분 이상 시켜야 합니다."
+            }
+          ],
+          "en": "Menu: doenjang stew 5,000 won, soft tofu stew 6,000 won, galbitang 8,000 won, bulgogi for two 15,000 won. Bulgogi is ordered for two or more; with a meal you get a drink, coffee or cola; delivery for 10,000 won or more. — The one that is not true: that the drinks are sold cheap.",
+          "why": "The notice says a drink comes with the food — 음료(커피, 콜라)를 드립니다 — so it is free, not cheaper, and ③ is the statement the notice does not support. 된장찌개 is the cheapest at 5,000원 (①); one 순두부찌개 is 6,000원, under the 10,000원 delivery minimum (②); and bulgogi starts at two portions (④).",
+          "grammar": "N부터 = from N: 2인분부터. N 이상 = N or more: 만 원 이상. V-(으)려면 = if you want to: 먹으려면. -아/어 드리다 is the polite giving: 음료를 드립니다."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "서울치과",
+          "lines": [
+            {
+              "who": "제목",
+              "ko": "서울치과"
+            },
+            {
+              "ko": "❖ 진료 시간"
+            },
+            {
+              "ko": "평일: 오전 10:00 ~ 오후 6:00"
+            },
+            {
+              "ko": "토요일: 오전 10:00 ~ 오후 1:00"
+            },
+            {
+              "ko": "(점심시간: 오후 1:00 ~ 오후 2:00)"
+            },
+            {
+              "ko": "* 토요일에는 예약하신 분만 진료를 받을 수 있습니다."
+            },
+            {
+              "ko": "* 일요일과 휴일은 쉽니다."
+            },
+            {
+              "who": "맞지 않는 것",
+              "ko": "{}"
+            }
+          ],
+          "answer": "onepm",
+          "choices": [
+            {
+              "id": "holidays",
+              "ko": "① 휴일에는 병원 문을 열지 않습니다."
+            },
+            {
+              "id": "onepm",
+              "ko": "② 오후 진료는 한 시부터 시작합니다."
+            },
+            {
+              "id": "teeth",
+              "ko": "③ 이 병원은 이가 아플 때 가는 병원입니다."
+            },
+            {
+              "id": "saturday",
+              "ko": "④ 토요일에는 미리 예약한 사람만 갈 수 있습니다."
+            }
+          ],
+          "en": "Seoul Dental Clinic. Hours: weekdays 10 a.m. to 6 p.m., Saturdays 10 a.m. to 1 p.m.; lunch 1 to 2 p.m. On Saturdays only patients with an appointment are seen; closed Sundays and holidays. — The one that is not true: that afternoon appointments start at one.",
+          "why": "One to two is lunch — 점심시간: 오후 1:00 ~ 오후 2:00 — so the afternoon starts at two, and ② is the statement the notice does not support. The clinic closes on holidays (①), 치과 is the dentist’s (③), and on Saturdays only booked patients are seen (④).",
+          "grammar": "치과 = a dentist’s, one of Unit 11’s clinics. 진료 = seeing patients. N만 = only N: 예약하신 분만. ~ between two times is from … to."
+        }
+      ]
+    },
+    {
+      "id": "r4-read-2",
+      "type": "build",
+      "section": "읽기와 쓰기",
+      "sectionEn": "Reading and writing",
+      "no": "읽기와 쓰기 3-4",
+      "icon": "📄",
+      "blurbEn": "The best way to stay healthy, and a sister who is like a friend.",
+      "instructionKo": "다음을 읽고 글의 내용과 같은 것을 고르세요.",
+      "instructionEn": "Read the passages, and choose the statement that agrees with each.",
+      "noteEn": "Two short passages. The wrong statements borrow the passage’s own words — tennis, eating, height, a father’s looks — and claim more than it says or give them to the wrong person, so it is the detail that decides, not the vocabulary.",
+      "pattern": "글의 내용과 같은 것",
+      "items": [
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "건강하게 살기 위해서",
+          "lines": [
+            {
+              "ko": "건강하게 살기 위해서 몸에 좋은 약이나 특별한 음식을 먹는 사람들이 많습니다."
+            },
+            {
+              "ko": "그러나 제일 좋은 방법은 운동하는 것입니다."
+            },
+            {
+              "ko": "여러 가지 운동이 있지만 그중에서 테니스나 축구처럼 여러 사람이 같이하는 운동이 건강에 더 좋습니다."
+            },
+            {
+              "ko": "그리고 집 안에서 하는 것보다 집 밖에서 하는 운동이 더 좋습니다."
+            },
+            {
+              "who": "같은 것",
+              "ko": "{}"
+            }
+          ],
+          "answer": "outside",
+          "choices": [
+            {
+              "id": "alone",
+              "ko": "① 혼자 운동하는 것은 별로 좋지 않습니다."
+            },
+            {
+              "id": "tennisbest",
+              "ko": "② 운동 중에서 테니스가 제일 좋은 운동입니다."
+            },
+            {
+              "id": "eating",
+              "ko": "③ 운동하는 것보다 잘 먹는 것이 더 중요합니다."
+            },
+            {
+              "id": "outside",
+              "ko": "④ 집 안보다 밖에 나가서 하는 운동이 더 좋습니다."
+            }
+          ],
+          "en": "Many people take medicine or special food that is good for the body in order to live healthily. But the best way is to exercise. There are many kinds of exercise, and among them, sports played by several people together, like tennis or football, are better for your health. And exercise outdoors is better than exercise at home.",
+          "why": "집 안에서 하는 것보다 집 밖에서 하는 운동이 더 좋습니다 is ④ in other words. The passage says sports played together are better, not that exercising alone is bad (①); tennis is one example, 테니스나 축구처럼, not the best of all (②); and it calls exercise the best way, above special food (③).",
+          "grammar": "V-기 위해서 = in order to: 건강하게 살기 위해서. N처럼 introducing examples: 테니스나 축구처럼. N보다 … 더 = more than N."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "친구 같은 언니",
+          "lines": [
+            {
+              "ko": "저는 언니가 한 명 있습니다."
+            },
+            {
+              "ko": "언니는 저보다 한 살 많은데 저와 키도 비슷하고 얼굴도 비슷합니다."
+            },
+            {
+              "ko": "우리는 어머니를 닮아서 둘 다 눈이 크고 눈썹이 진합니다."
+            },
+            {
+              "ko": "그리고 아버지를 닮아서 둘 다 성격이 활발한 편입니다."
+            },
+            {
+              "ko": "언니와 싸울 때도 있지만 같이 있으면 재미있는 일이 많습니다."
+            },
+            {
+              "ko": "저는 친구 같은 언니가 있어서 참 좋습니다."
+            },
+            {
+              "who": "같은 것",
+              "ko": "{}"
+            }
+          ],
+          "answer": "likefriends",
+          "choices": [
+            {
+              "id": "different",
+              "ko": "① 이 사람은 언니와 성격이 다릅니다."
+            },
+            {
+              "id": "fatherseyes",
+              "ko": "② 이 사람은 눈이 아버지를 닮았습니다."
+            },
+            {
+              "id": "likefriends",
+              "ko": "③ 이 사람은 언니와 친구처럼 지냅니다."
+            },
+            {
+              "id": "shorter",
+              "ko": "④ 이 사람은 키가 작지만 언니는 큰 편입니다."
+            }
+          ],
+          "en": "I have one older sister. She is a year older than me, and we are about the same height and look alike. We take after our mother, so we both have big eyes and thick eyebrows. And we take after our father, so we are both rather outgoing. We fight sometimes, but when we are together lots of fun things happen. I am really glad to have a sister who is like a friend.",
+          "why": "친구 같은 언니가 있어서 참 좋습니다 — a sister who is like a friend — is ③. The two are alike in character, both outgoing, from their father (①); their eyes come from their mother (②); and they are about the same height, 키도 비슷하고 (④).",
+          "grammar": "N을/를 닮다 (Unit 12): 어머니를 닮아서 둘 다 눈이 크고. N 같은 + noun: 친구 같은 언니. A-(으)ㄴ 편이다: 활발한 편입니다."
+        }
+      ]
+    },
+    {
+      "id": "r4-read-3",
+      "type": "build",
+      "section": "읽기와 쓰기",
+      "sectionEn": "Reading and writing",
+      "no": "읽기와 쓰기 5-10",
+      "icon": "📚",
+      "blurbEn": "A stomach ache and a cancelled plan, spicy food from home, and a roommate who became a friend — two questions on each.",
+      "instructionKo": "다음을 읽고 질문에 답하세요.",
+      "instructionEn": "Read the passages and answer the questions.",
+      "noteEn": "Each passage carries two of the book’s questions, and here each passage is one row with both of them on it, in the book’s order; the row is right only when both are. Where the first question is a gap, it sits in the passage; the others are printed under it with their numbers.",
+      "pattern": "읽고 답하기",
+      "items": [
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "5-6 · 배가 아팠습니다",
+          "lines": [
+            {
+              "ko": "어제 저녁을 먹고 나서 배가 조금씩 아팠습니다. ( ㉠ )"
+            },
+            {
+              "ko": "밤에도 계속 아파서 잠을 잘 못 잤습니다. ( ㉡ )"
+            },
+            {
+              "ko": "약사에게 이야기를 하고 약을 사서 먹었는데 아직도 몸이 좋지 않습니다. ( ㉢ )"
+            },
+            {
+              "ko": "오후에 친구와 약속이 있는데 못 갈 것 같습니다. ( ㉣ )"
+            },
+            {
+              "ko": "그래서 친구에게 연락을 하고 집에서 푹 쉬기로 했습니다."
+            },
+            {
+              "who": "5",
+              "ko": "‘그래서 오늘 아침에 약국에 갔다 왔습니다.’가 들어갈 곳: {}"
+            },
+            {
+              "who": "6",
+              "ko": "이 글의 내용과 같은 것: {}"
+            }
+          ],
+          "answer": "g2",
+          "choices": [
+            {
+              "id": "g1",
+              "ko": "① ㉠"
+            },
+            {
+              "id": "g2",
+              "ko": "② ㉡"
+            },
+            {
+              "id": "g3",
+              "ko": "③ ㉢"
+            },
+            {
+              "id": "g4",
+              "ko": "④ ㉣"
+            }
+          ],
+          "answer2": "notbetter",
+          "choices2": [
+            {
+              "id": "morning",
+              "ko": "① 어제 아침부터 소화가 안됐습니다."
+            },
+            {
+              "id": "notbetter",
+              "ko": "② 약을 사 먹었지만 낫지 않았습니다."
+            },
+            {
+              "id": "hospital",
+              "ko": "③ 너무 아파서 밤에 병원에 갔습니다."
+            },
+            {
+              "id": "meetfriend",
+              "ko": "④ 이 사람은 오늘 친구를 만날 것입니다."
+            }
+          ],
+          "en": "After dinner yesterday my stomach started to hurt, little by little. It kept hurting through the night, so I couldn’t sleep well. So this morning I went to the pharmacy. I told the pharmacist, bought some medicine and took it, but I still don’t feel well. I have plans with a friend this afternoon, but I don’t think I can go. So I got in touch with my friend and decided to rest at home.",
+          "why": "The sentence opens with 그래서 and goes to a pharmacy, so it needs a reason in front of it and the pharmacist after it: ㉡ follows a night of pain and comes before 약사에게 이야기를 하고 약을 사서 먹었는데. At ㉠ it is still the evening before, ㉢ comes after the medicine, and ㉣ after the appointment it is about to cancel.\n\nFor question 6, 약을 사서 먹었는데 아직도 몸이 좋지 않습니다 is ②. The pain began after dinner, not in the morning (①); the writer went to a pharmacy in the morning, not to a hospital at night (③); and the plans with the friend are being cancelled (④).",
+          "grammar": "V-고 나서 = after doing: 저녁을 먹고 나서. V-기로 하다 (Unit 11): 쉬기로 했습니다. -(으)ㄹ 것 같다 = I don’t think I can: 못 갈 것 같습니다."
+        },
+        {
+          "n": 7,
+          "art": "",
+          "phraseKo": "7-8 · 매운 음식",
+          "lines": [
+            {
+              "ko": "저는 매운 음식을 좋아하는 편입니다."
+            },
+            {
+              "ko": "우리 고향 음식도 매운 음식이 많아서 한국 음식이 입에 잘 맞습니다."
+            },
+            {
+              "ko": "제가 특히 좋아하는 음식은 떡볶이인데 우리 고향 음식과 맛이 비슷해서 더 좋습니다."
+            },
+            {
+              "ko": "기회가 있으면 한국 친구들에게 우리 고향 음식을 소개해 주고 싶습니다."
+            },
+            {
+              "ko": "제가 {} 한국 친구들도 우리 고향 음식을 좋아할 것 같습니다."
+            },
+            {
+              "who": "8",
+              "ko": "이 글의 내용과 같은 것: {}"
+            }
+          ],
+          "answer": "cheoreom",
+          "choices": [
+            {
+              "id": "joahaeseo",
+              "ko": "매운 음식을 좋아해서"
+            },
+            {
+              "id": "sogaehae",
+              "ko": "고향 음식을 소개해 줘서"
+            },
+            {
+              "id": "mandeunikka",
+              "ko": "한국 음식을 잘 만드니까"
+            },
+            {
+              "id": "cheoreom",
+              "ko": "한국 음식을 잘 먹는 것처럼"
+            }
+          ],
+          "answer2": "spicyhome",
+          "choices2": [
+            {
+              "id": "makesbest",
+              "ko": "① 이 사람이 제일 잘 만드는 음식은 떡볶이입니다."
+            },
+            {
+              "id": "toldfriends",
+              "ko": "② 이 사람은 고향 친구들에게 떡볶이를 소개했습니다."
+            },
+            {
+              "id": "cooked",
+              "ko": "③ 이 사람은 한국 친구들에게 고향 음식을 해 주었습니다."
+            },
+            {
+              "id": "spicyhome",
+              "ko": "④ 이 사람의 고향에는 한국 음식처럼 매운 음식이 많습니다."
+            }
+          ],
+          "en": "I rather like spicy food. The food back home is often spicy too, so Korean food suits me well. My favourite is tteokbokki, which I like even more because it tastes like food from home. If I get the chance, I would like to introduce my home cooking to my Korean friends. I think my Korean friends will like the food from my home, just as I enjoy Korean food.",
+          "why": "한국 친구들도 — Korean friends too — says they will like the writer’s food the way the writer likes theirs, and a comparison is Unit 12’s 처럼: 제가 한국 음식을 잘 먹는 것처럼. 좋아해서 and 소개해 줘서 give reasons, and 도 is not about a reason; 한국 음식을 잘 만드니까 is about cooking, which the passage never mentions.\n\nFor question 8, 우리 고향 음식도 매운 음식이 많아서 is ④. Tteokbokki is the writer’s favourite, not a dish the writer makes (①); and introducing home cooking to Korean friends is still a wish, not something done (②, ③).",
+          "grammar": "V-는 것처럼 = just as: 한국 음식을 잘 먹는 것처럼. N이/가 입에 맞다 (Unit 10). A-(으)ㄴ 편이다, V-는 편이다 (Unit 12): 좋아하는 편입니다."
+        },
+        {
+          "n": 9,
+          "art": "",
+          "phraseKo": "9-10 · 룸메이트 지연 씨",
+          "lines": [
+            {
+              "ko": "저는 작년에 혼자 한국에 왔습니다."
+            },
+            {
+              "ko": "처음에는 한국 문화도 잘 모르고 친구도 없어서 좀 힘들었습니다."
+            },
+            {
+              "ko": "그때 제 룸메이트인 지연 씨가 저를 아주 친절하게 도와주었습니다."
+            },
+            {
+              "ko": "제가 한국말을 잘 못했는데 제 말을 잘 들어 주고 한국말도 가르쳐 주었습니다."
+            },
+            {
+              "ko": "1년이 지난 지금 저는 한국에서 즐겁게 살고 있습니다. 다른 한국 친구도 많이 사귀었습니다."
+            },
+            {
+              "ko": "{} 저의 가장 좋은 친구는 지금도 지연 씨입니다."
+            },
+            {
+              "ko": "저도 지연 씨가 힘들 때 도와줄 수 있는 친구가 되고 싶습니다."
+            },
+            {
+              "who": "10",
+              "ko": "이 글의 내용과 같은 것: {}"
+            }
+          ],
+          "answer": "geureochiman",
+          "choices": [
+            {
+              "id": "geureomyeon",
+              "ko": "그러면"
+            },
+            {
+              "id": "geuraeseo",
+              "ko": "그래서"
+            },
+            {
+              "id": "geureochiman",
+              "ko": "그렇지만"
+            },
+            {
+              "id": "geureonikka",
+              "ko": "그러니까"
+            }
+          ],
+          "answer2": "roommate",
+          "choices2": [
+            {
+              "id": "hardnow",
+              "ko": "① 이 사람은 요즘 한국 생활이 좀 힘듭니다."
+            },
+            {
+              "id": "roommate",
+              "ko": "② 이 사람은 지연 씨와 같은 방을 썼습니다."
+            },
+            {
+              "id": "helpedher",
+              "ko": "③ 이 사람은 지연 씨를 많이 도와주었습니다."
+            },
+            {
+              "id": "metthisyear",
+              "ko": "④ 이 사람은 올해 지연 씨를 처음 만났습니다."
+            }
+          ],
+          "en": "I came to Korea on my own last year. At first I didn’t know much about Korean culture and had no friends, so it was a bit hard. Then my roommate Jiyeon helped me very kindly. My Korean wasn’t good, but Jiyeon listened to me and taught me Korean too. Now, a year on, I am enjoying life in Korea, and I have made many other Korean friends. But my best friend is still Jiyeon. I want to be a friend who can help Jiyeon too when things are hard.",
+          "why": "Many other Korean friends — and yet the best friend is still Jiyeon: a contrast, so 그렇지만. 그래서 and 그러니까 would make the new friends the reason Jiyeon is still the best, and 그러면 means in that case.\n\nFor question 10, 제 룸메이트인 지연 씨 — Jiyeon was the roommate — is ②. Life in Korea is 즐겁게 now (①); it was Jiyeon who helped the writer, and helping Jiyeon is only a hope (③); and they met when the writer arrived, last year (④).",
+          "grammar": "그렇지만 = but; 그래서 = so; 그러니까 = so, therefore (often before a suggestion); 그러면 = in that case. -아/어 주다 on help received: 들어 주고, 가르쳐 주었습니다."
+        }
+      ]
+    },
+    {
+      "id": "r4-write-1",
+      "type": "build",
+      "section": "읽기와 쓰기",
+      "sectionEn": "Reading and writing",
+      "no": "읽기와 쓰기 11-15",
+      "icon": "✏️",
+      "blurbEn": "Five replies to write with the grammar of Units 10-12 — an invitation, a contrast, a look, a tendency and a plan.",
+      "instructionKo": "빈칸에 알맞은 것을 골라 대화를 만들어 보세요.",
+      "instructionEn": "Choose a pattern from the box and complete each dialogue.",
+      "noteEn": "The book gives a box of patterns — -(으)ㄹ래요, -기로 하다, -아/어 보이다, -(으)ㄴ데, -는데, -(으)ㄴ 편이다, -는 편이다 — and leaves the reply to you. Many replies would do; the 정답 on printed p.204 writes one model for each, and the model is the right button here. The other two use a pattern wrongly: a form that does not exist, a speech level that does not match the conversation, or a meaning the question rules out.",
+      "pattern": "대화 만들기",
+      "items": [
+        {
+          "n": 11,
+          "art": "",
+          "phraseKo": "오늘 시간 있으면 같이",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "아키라 씨, 오늘 시간 있으면 같이 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "아, 미안해요. 오늘은 회사 일 때문에 좀 바빠요."
+            }
+          ],
+          "answer": "bollaeyo",
+          "choices": [
+            {
+              "id": "bollaeyo",
+              "ko": "영화 볼래요"
+            },
+            {
+              "id": "bolgeyo",
+              "ko": "영화 볼게요"
+            },
+            {
+              "id": "bwasseullaeyo",
+              "ko": "영화 봤을래요"
+            }
+          ],
+          "en": "Akira, if you have time today, do you want to see a film together? — Oh, sorry. I’m a bit busy with work today.",
+          "why": "An invitation that asks what the other person wants is Unit 10’s -(으)ㄹ래요?: 같이 영화 볼래요?. -(으)ㄹ게요 is a promise about what I will do and does not make an invitation, and -(으)ㄹ래요 never takes the past: 봤을래요 is not a form.",
+          "grammar": "V-(으)ㄹ래요? = do you want to…? (Unit 10): 볼래요?, 먹을래요?, 갈래요? Declined with an apology and a reason: 미안해요, 바빠요."
+        },
+        {
+          "n": 12,
+          "art": "",
+          "phraseKo": "고향 음식은 한국 음식과 어떻게 달라요?",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "고향 음식은 한국 음식과 어떻게 달라요?"
+            },
+            {
+              "who": "B",
+              "ko": "{}."
+            }
+          ],
+          "answer": "maeunde",
+          "choices": [
+            {
+              "id": "maeunde",
+              "ko": "한국 음식은 매운데 고향 음식은 안 매워요"
+            },
+            {
+              "id": "maeuneunde",
+              "ko": "한국 음식은 매우는데 고향 음식은 안 매워요"
+            },
+            {
+              "id": "same",
+              "ko": "한국 음식은 매운데 고향 음식도 매워요"
+            }
+          ],
+          "en": "How is the food back home different from Korean food? — Korean food is spicy, but the food back home isn’t.",
+          "why": "A asks how the two differ, so the answer sets one against the other with Unit 10’s -(으)ㄴ데: 매운데 … 안 매워요. 맵다 is ㅂ-irregular, so the form is 매운데, never 매우는데; and 고향 음식도 매워요 makes the two the same, which does not say how they differ.",
+          "grammar": "A-(으)ㄴ데 sets two things against each other: 한국 음식은 매운데 고향 음식은 안 매워요, with 은/는 on both nouns. 맵다 → 매워요, 매운 (ㅂ-irregular)."
+        },
+        {
+          "n": 13,
+          "art": "",
+          "phraseKo": "아키라, 무슨 일 있어?",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "아키라, 무슨 일 있어? {}."
+            },
+            {
+              "who": "B",
+              "ko": "어제 잠을 좀 못 자서 그래."
+            }
+          ],
+          "answer": "boyeo",
+          "choices": [
+            {
+              "id": "boyeo",
+              "ko": "피곤해 보여"
+            },
+            {
+              "id": "boyeoyo",
+              "ko": "피곤해 보여요"
+            },
+            {
+              "id": "bwa",
+              "ko": "피곤해 봐"
+            }
+          ],
+          "en": "Akira, is something wrong? You look tired. — It’s because I didn’t sleep much last night.",
+          "why": "How Akira looks is Unit 12’s -아/어 보이다, and A is speaking banmal — 무슨 일 있어? — so it stays banmal: 피곤해 보여. 보여요 switches to polite speech in the middle of A’s turn, and 피곤해 봐 is -아/어 보다, try being tired, not look tired.",
+          "grammar": "A-아/어 보이다 = to look A; V-아/어 보다 = to try doing. 반말 drops the -요: 보여요 → 보여, 그래요 → 그래."
+        },
+        {
+          "n": 14,
+          "art": "",
+          "phraseKo": "나나 씨는 성격이 어때요?",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "나나 씨는 성격이 어때요?"
+            },
+            {
+              "who": "B",
+              "ko": "{}."
+            }
+          ],
+          "answer": "yeoseongjeogin",
+          "choices": [
+            {
+              "id": "yeoseongjeogin",
+              "ko": "여성적인 편이에요"
+            },
+            {
+              "id": "yeoseongjeogineun",
+              "ko": "여성적이는 편이에요"
+            },
+            {
+              "id": "yeoseongjeokan",
+              "ko": "여성적한 편이에요"
+            }
+          ],
+          "en": "What is Nana like? — On the feminine side.",
+          "why": "A tendency is Unit 12’s -(으)ㄴ 편이다, and 여성적 is a noun, so it is 여성적이다 → 여성적인 편이에요, with the 인 of 이다. 여성적이는 treats 이다 as a verb, and 여성적한 treats 여성적 as a 하다 word; neither form exists.",
+          "grammar": "N적이다 makes N적인 in front of a noun: 여성적인, 내성적인, 남성적인. The tendency is A-(으)ㄴ 편이다, V-는 편이다, N인 편이다."
+        },
+        {
+          "n": 15,
+          "art": "",
+          "phraseKo": "방학에 특별한 계획이 있어?",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "방학에 특별한 계획이 있어?"
+            },
+            {
+              "who": "B",
+              "ko": "응, {}."
+            }
+          ],
+          "answer": "gagiro",
+          "choices": [
+            {
+              "id": "gagiro",
+              "ko": "일본으로 여행 가기로 했어"
+            },
+            {
+              "id": "galgiro",
+              "ko": "일본으로 여행 갈기로 했어"
+            },
+            {
+              "id": "haesseoyo",
+              "ko": "일본으로 여행 가기로 했어요"
+            }
+          ],
+          "en": "Have you got any special plans for the holidays? — Yeah, I’ve decided to go travelling in Japan.",
+          "why": "A plan decided is Unit 11’s -기로 하다, on the bare stem: 가기로 했어. 갈기로 adds an ㄹ that -기 never takes, and 했어요 is polite speech after 응 in a banmal exchange.",
+          "grammar": "V-기로 하다 = to decide to: 가기로 했어, 먹기로 했어요. 반말: 응, 했어; polite: 네, 했어요."
+        }
+      ]
+    },
+    {
+      "id": "r4-write-2",
+      "type": "build",
+      "section": "읽기와 쓰기",
+      "sectionEn": "Reading and writing",
+      "no": "읽기와 쓰기 16",
+      "icon": "🏥",
+      "blurbEn": "No appetite, a little dizzy, and worried parents — and a decision about tomorrow.",
+      "instructionKo": "다음 글을 읽고 (   )에 알맞은 말을 쓰세요.",
+      "instructionEn": "Read the text, and write what fits the gap.",
+      "noteEn": "The book leaves this gap open for you to write in. The 정답 on printed p.204 gives one answer, and the other two buttons put the same verb into a form that does not fit in front of 했습니다.",
+      "pattern": "-기로 하다",
+      "items": [
+        {
+          "n": 16,
+          "art": "",
+          "phraseKo": "병원에 한번",
+          "lines": [
+            {
+              "ko": "요즘 입맛이 없어서 밥을 잘 못 먹습니다."
+            },
+            {
+              "ko": "보통 때는 괜찮은데 아침에 일어날 때 조금 어지럽습니다."
+            },
+            {
+              "ko": "부모님이 너무 걱정을 하셔서 내일 부모님과 함께 병원에 한번 {} 했습니다."
+            }
+          ],
+          "answer": "gagiro",
+          "choices": [
+            {
+              "id": "gagiro",
+              "ko": "가기로"
+            },
+            {
+              "id": "galgiro",
+              "ko": "갈기로"
+            },
+            {
+              "id": "gage",
+              "ko": "가게"
+            }
+          ],
+          "en": "These days I have no appetite and can’t eat much. Usually I’m fine, but I feel a little dizzy when I get up in the morning. My parents are very worried, so I have decided to go to the hospital with them tomorrow.",
+          "why": "했습니다 after the gap, and a decision about tomorrow, is Unit 11’s -기로 하다: 가기로 했습니다. 갈기로 adds an ㄹ that -기 does not take, and 가게 했습니다 is -게 하다, making someone else go.",
+          "grammar": "V-기로 하다 = to decide to; V-게 하다 = to make or let someone do. Unit 11’s symptoms: 입맛이 없다, 어지럽다."
+        }
+      ]
+    },
+    {
+      "id": "r4-pron",
+      "type": "build",
+      "section": "발음",
+      "sectionEn": "Pronunciation",
+      "no": "발음 1-3",
+      "icon": "🗣️",
+      "blurbEn": "Eleven items from tracks 6-8: a question’s tune, a consonant carried over, and the ㄻ of 닮다.",
+      "instructionKo": "잘 듣고 발음에 주의하여 읽어 보세요.",
+      "instructionEn": "Listen, then read each sentence aloud, minding the pronunciation.",
+      "noteEn": "The book’s three 발음 exercises — listen, listen and read, practise with a friend — are for repeating after the tape, and the 정답 prints nothing for them; the book draws arrows over three of the questions. The rows here are the rules the three units taught: whether a question rises or falls (Unit 10), a final consonant said as its final sound before it carries over to the next word (Unit 11), and the two ways ㄻ is said (Unit 12). Each row plays the book’s reading of its item, so check the choice against the tape.",
+      "pattern": "발음 복습",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "오늘 저녁에 바빠요?",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "오늘 저녁에 바빠요?"
+            },
+            {
+              "who": "억양",
+              "ko": "문장의 끝을 {}."
+            }
+          ],
+          "answer": "rise",
+          "choices": [
+            {
+              "id": "rise",
+              "ko": "올려서 말합니다"
+            },
+            {
+              "id": "fall",
+              "ko": "내려서 말합니다"
+            },
+            {
+              "id": "flat",
+              "ko": "그대로 말합니다"
+            }
+          ],
+          "en": "Are you busy this evening? — The end rises.",
+          "why": "바빠요? has no question word — it asks for a yes or a no — so its end rises, and the book’s arrow goes up. Said falling, it would sound like a statement, 바빠요, you are busy.",
+          "grammar": "Unit 10’s rule: a question with no question word asks for a yes or a no, and its end rises — 바빠요?↗; a question with 뭐, 어디, 누구, 언제 or 무슨 falls — 어디에 갈래요?↘. The same words can be both: 어디 가요?↘ is where are you going, 어디 가요?↗ are you going somewhere.",
+          "audio": {
+            "src": "audio/book/2b-r4-t06-1.mp3",
+            "labelEn": "발음 1 · from track 6"
+          }
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "못 올 것 같습니다",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "내일은 시간이 없어서 못 올 것 같습니다."
+            },
+            {
+              "who": "발음",
+              "ko": "못 올 → {}"
+            }
+          ],
+          "answer": "p1",
+          "choices": [
+            {
+              "id": "p1",
+              "ko": "[모돌]"
+            },
+            {
+              "id": "p2",
+              "ko": "[못 올]"
+            },
+            {
+              "id": "p3",
+              "ko": "[몯 올]"
+            }
+          ],
+          "en": "I have no time tomorrow, so I don’t think I can come. — 못 올 is said [모돌].",
+          "why": "못 and 올 are two words, so 못 is first said [몯] and the [ㄷ] then carries over onto 올: [모돌]. [못 올] reads the letters as spelt, and [몯 올] stops at the end of 못 without carrying over.",
+          "grammar": "Unit 11’s rule: when a word ends in a consonant and the next word begins with a vowel, the consonant is first said as one of the seven final sounds — ㅅ, ㅈ, ㅊ, ㅌ as [ㄷ], ㅍ as [ㅂ] — and only then carried over: 못 와요 [모돠요], 맛없어요 [마덥써요], 첫인상 [처딘상], 몇 월 [며둴]. A grammatical ending carries the letter over as it is: 옷이 [오시].",
+          "audio": {
+            "src": "audio/book/2b-r4-t06-2.mp3",
+            "labelEn": "발음 2 · from track 6"
+          }
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "별로 닮지 않았어요",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "형과 저는 별로 닮지 않았어요."
+            },
+            {
+              "who": "발음",
+              "ko": "닮지 → {}"
+            }
+          ],
+          "answer": "p1",
+          "choices": [
+            {
+              "id": "p1",
+              "ko": "[담찌]"
+            },
+            {
+              "id": "p2",
+              "ko": "[달지]"
+            },
+            {
+              "id": "p3",
+              "ko": "[담지]"
+            }
+          ],
+          "en": "My older brother and I don’t look much alike. — 닮지 is said [담찌].",
+          "why": "Before a consonant ㄻ is said [ㅁ], and after the [ㅁ] of a verb stem the ㅈ of -지 turns tense: [담찌]. [달지] says the ㄹ of the pair instead, and [담지] leaves the ending soft.",
+          "grammar": "Unit 12’s ㄻ: before a consonant it is said [ㅁ] — 닮고 [담꼬], 닮지 [담찌], 젊네요 [점네요] — and a ㄱ or ㅈ after the verb stem turns tense; before a vowel both letters are heard, the ㅁ carried over — 닮았어요 [달마써요], 젊어요 [절머요].",
+          "audio": {
+            "src": "audio/book/2b-r4-t06-3.mp3",
+            "labelEn": "발음 3 · from track 6"
+          }
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "주말에 어디에 갈래요?",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "주말에 어디에 갈래요?"
+            },
+            {
+              "who": "억양",
+              "ko": "문장의 끝을 {}."
+            }
+          ],
+          "answer": "fall",
+          "choices": [
+            {
+              "id": "rise",
+              "ko": "올려서 말합니다"
+            },
+            {
+              "id": "fall",
+              "ko": "내려서 말합니다"
+            },
+            {
+              "id": "flat",
+              "ko": "그대로 말합니다"
+            }
+          ],
+          "en": "Where would you like to go at the weekend? — The end falls.",
+          "why": "어디 makes this a where question, and a question with a question word falls at the end — the book’s arrow arches over and comes down. Said rising, the same words would ask are you going anywhere at the weekend?, a yes-or-no question.",
+          "grammar": "Unit 10’s rule: a question with no question word asks for a yes or a no, and its end rises — 바빠요?↗; a question with 뭐, 어디, 누구, 언제 or 무슨 falls — 어디에 갈래요?↘. The same words can be both: 어디 가요?↘ is where are you going, 어디 가요?↗ are you going somewhere.",
+          "audio": {
+            "src": "audio/book/2b-r4-t07-1.mp3",
+            "labelEn": "발음 4 · from track 7"
+          }
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "방학에 고향에 돌아가요?",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "방학에 고향에 돌아가요?"
+            },
+            {
+              "who": "억양",
+              "ko": "문장의 끝을 {}."
+            }
+          ],
+          "answer": "rise",
+          "choices": [
+            {
+              "id": "rise",
+              "ko": "올려서 말합니다"
+            },
+            {
+              "id": "fall",
+              "ko": "내려서 말합니다"
+            },
+            {
+              "id": "flat",
+              "ko": "그대로 말합니다"
+            }
+          ],
+          "en": "Are you going home for the holidays? — The end rises.",
+          "why": "No question word, so it asks for a yes or a no and rises at the end — the book’s arrow goes up. Said falling it would be a statement: you are going home.",
+          "grammar": "Unit 10’s rule: a question with no question word asks for a yes or a no, and its end rises — 바빠요?↗; a question with 뭐, 어디, 누구, 언제 or 무슨 falls — 어디에 갈래요?↘. The same words can be both: 어디 가요?↘ is where are you going, 어디 가요?↗ are you going somewhere.",
+          "audio": {
+            "src": "audio/book/2b-r4-t07-2.mp3",
+            "labelEn": "발음 5 · from track 7"
+          }
+        },
+        {
+          "n": 6,
+          "art": "",
+          "phraseKo": "정말 맛없어요",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "이 음식은 정말 맛없어요."
+            },
+            {
+              "who": "발음",
+              "ko": "맛없어요 → {}"
+            }
+          ],
+          "answer": "p1",
+          "choices": [
+            {
+              "id": "p1",
+              "ko": "[마덥써요]"
+            },
+            {
+              "id": "p2",
+              "ko": "[마섭써요]"
+            },
+            {
+              "id": "p3",
+              "ko": "[맏업써요]"
+            }
+          ],
+          "en": "This food is really not tasty. — 맛없어요 is said [마덥써요].",
+          "why": "맛없다 is 맛 and 없다 joined, so 맛 is said [맏] first and the [ㄷ] carries over: [마덥써요]. [마섭써요] carries the ㅅ over as spelt, and [맏업써요] does not carry it over at all. (맛있어요 is the one exception people meet: both [마디써요] and [마시써요] are standard — but 맛없어요 is only [마덥써요].)",
+          "grammar": "Unit 11’s rule: when a word ends in a consonant and the next word begins with a vowel, the consonant is first said as one of the seven final sounds — ㅅ, ㅈ, ㅊ, ㅌ as [ㄷ], ㅍ as [ㅂ] — and only then carried over: 못 와요 [모돠요], 맛없어요 [마덥써요], 첫인상 [처딘상], 몇 월 [며둴]. A grammatical ending carries the letter over as it is: 옷이 [오시].",
+          "audio": {
+            "src": "audio/book/2b-r4-t07-3.mp3",
+            "labelEn": "발음 6 · from track 7"
+          }
+        },
+        {
+          "n": 7,
+          "art": "",
+          "phraseKo": "닮고 · 닮았어요",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "얼굴은 아버지를 닮고, 성격은 어머니를 닮았어요."
+            },
+            {
+              "who": "발음",
+              "ko": "닮고 → {} · 닮았어요 → {}"
+            }
+          ],
+          "answer": "p1",
+          "choices": [
+            {
+              "id": "p1",
+              "ko": "[담꼬]"
+            },
+            {
+              "id": "p2",
+              "ko": "[달고]"
+            },
+            {
+              "id": "p3",
+              "ko": "[담고]"
+            }
+          ],
+          "answer2": "q1",
+          "choices2": [
+            {
+              "id": "q1",
+              "ko": "[달마써요]"
+            },
+            {
+              "id": "q2",
+              "ko": "[다마써요]"
+            },
+            {
+              "id": "q3",
+              "ko": "[담마써요]"
+            }
+          ],
+          "en": "I take after my father in looks and my mother in character. — Said [담꼬] and [달마써요].",
+          "why": "The two forms of 닮다 show both halves of the rule. Before the consonant of -고 the ㄻ is said [ㅁ] and the ㄱ turns tense: [담꼬] — not [달고], which keeps the wrong letter, nor [담고], which leaves the ㄱ soft. Before the vowel of -았- both letters are heard, the ㄹ staying and the ㅁ carrying over: [달마써요] — not [다마써요], which loses the ㄹ, nor [담마써요], which says the ㅁ twice.",
+          "grammar": "Unit 12’s ㄻ: before a consonant it is said [ㅁ] — 닮고 [담꼬], 닮지 [담찌], 젊네요 [점네요] — and a ㄱ or ㅈ after the verb stem turns tense; before a vowel both letters are heard, the ㅁ carried over — 닮았어요 [달마써요], 젊어요 [절머요].",
+          "audio": {
+            "src": "audio/book/2b-r4-t07-4.mp3",
+            "labelEn": "발음 7 · from track 7"
+          }
+        },
+        {
+          "n": 8,
+          "art": "",
+          "phraseKo": "제 첫인상이",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "제 첫인상이 어땠어요?"
+            },
+            {
+              "who": "B",
+              "ko": "좀 조용해 보였어요."
+            },
+            {
+              "who": "발음",
+              "ko": "첫인상 → {}"
+            }
+          ],
+          "answer": "p1",
+          "choices": [
+            {
+              "id": "p1",
+              "ko": "[처딘상]"
+            },
+            {
+              "id": "p2",
+              "ko": "[처신상]"
+            },
+            {
+              "id": "p3",
+              "ko": "[첟인상]"
+            }
+          ],
+          "en": "What was your first impression of me? — You seemed a bit quiet. — 첫인상 is said [처딘상].",
+          "why": "첫인상 is 첫 and 인상 joined, so 첫 is said [첟] first and the [ㄷ] carries over: [처딘상], the Unit 11 page’s own example. [처신상] carries the ㅅ over as spelt, and [첟인상] does not carry it over.",
+          "grammar": "Unit 11’s rule: when a word ends in a consonant and the next word begins with a vowel, the consonant is first said as one of the seven final sounds — ㅅ, ㅈ, ㅊ, ㅌ as [ㄷ], ㅍ as [ㅂ] — and only then carried over: 못 와요 [모돠요], 맛없어요 [마덥써요], 첫인상 [처딘상], 몇 월 [며둴]. A grammatical ending carries the letter over as it is: 옷이 [오시].",
+          "audio": {
+            "src": "audio/book/2b-r4-t08-1.mp3",
+            "labelEn": "발음 8 · from track 8"
+          }
+        },
+        {
+          "n": 9,
+          "art": "",
+          "phraseKo": "다 못 외웠어요",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "시험공부 다 했어요?"
+            },
+            {
+              "who": "B",
+              "ko": "아니요, 단어를 아직 다 못 외웠어요."
+            },
+            {
+              "who": "발음",
+              "ko": "못 외웠어요 → {}"
+            }
+          ],
+          "answer": "p1",
+          "choices": [
+            {
+              "id": "p1",
+              "ko": "[모되워써요]"
+            },
+            {
+              "id": "p2",
+              "ko": "[모쇠워써요]"
+            },
+            {
+              "id": "p3",
+              "ko": "[몯 외워써요]"
+            }
+          ],
+          "en": "Have you finished studying for the exam? — No, I still haven’t memorised all the words. — 못 외웠어요 is said [모되워써요].",
+          "why": "The same rule as 못 올: 못 is said [몯] and the [ㄷ] carries over onto 외: [모되워써요]. [모쇠워써요] carries the ㅅ over as spelt, and [몯 외워써요] stops before the next word.",
+          "grammar": "Unit 11’s rule: when a word ends in a consonant and the next word begins with a vowel, the consonant is first said as one of the seven final sounds — ㅅ, ㅈ, ㅊ, ㅌ as [ㄷ], ㅍ as [ㅂ] — and only then carried over: 못 와요 [모돠요], 맛없어요 [마덥써요], 첫인상 [처딘상], 몇 월 [며둴]. A grammatical ending carries the letter over as it is: 옷이 [오시].",
+          "audio": {
+            "src": "audio/book/2b-r4-t08-2.mp3",
+            "labelEn": "발음 9 · from track 8"
+          }
+        },
+        {
+          "n": 10,
+          "art": "",
+          "phraseKo": "몇 월에 시작해요?",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "봄 학기가 몇 월에 시작해요?"
+            },
+            {
+              "who": "B",
+              "ko": "삼월에 시작해요."
+            },
+            {
+              "who": "발음",
+              "ko": "몇 월 → {}"
+            }
+          ],
+          "answer": "p1",
+          "choices": [
+            {
+              "id": "p1",
+              "ko": "[며둴]"
+            },
+            {
+              "id": "p2",
+              "ko": "[며춸]"
+            },
+            {
+              "id": "p3",
+              "ko": "[멷 월]"
+            }
+          ],
+          "en": "Which month does the spring term start? — It starts in March. — 몇 월 is said [며둴].",
+          "why": "The ㅊ of 몇 is said [ㄷ] at the end of the word, and that [ㄷ] carries over onto 월: [며둴]. [며춸] carries the ㅊ over as spelt, and [멷 월] does not carry it over.",
+          "grammar": "Unit 11’s rule: when a word ends in a consonant and the next word begins with a vowel, the consonant is first said as one of the seven final sounds — ㅅ, ㅈ, ㅊ, ㅌ as [ㄷ], ㅍ as [ㅂ] — and only then carried over: 못 와요 [모돠요], 맛없어요 [마덥써요], 첫인상 [처딘상], 몇 월 [며둴]. A grammatical ending carries the letter over as it is: 옷이 [오시].",
+          "audio": {
+            "src": "audio/book/2b-r4-t08-3.mp3",
+            "labelEn": "발음 10 · from track 8"
+          }
+        },
+        {
+          "n": 11,
+          "art": "",
+          "phraseKo": "형하고 많이 닮았어요?",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "스티븐 씨는 형하고 많이 닮았어요?"
+            },
+            {
+              "who": "B",
+              "ko": "아니요, 별로 닮지 않았어요."
+            },
+            {
+              "who": "억양",
+              "ko": "A의 질문 — 문장의 끝을 {}."
+            }
+          ],
+          "answer": "rise",
+          "choices": [
+            {
+              "id": "rise",
+              "ko": "올려서 말합니다"
+            },
+            {
+              "id": "fall",
+              "ko": "내려서 말합니다"
+            },
+            {
+              "id": "flat",
+              "ko": "그대로 말합니다"
+            }
+          ],
+          "en": "Steven, do you look a lot like your older brother? — No, not really. — A’s question rises at the end.",
+          "why": "A’s question has no question word and B answers 아니요, so it was a yes-or-no question, and its end rises. B’s answer is a statement and falls.",
+          "grammar": "Unit 10’s rule: a question with no question word asks for a yes or a no, and its end rises — 바빠요?↗; a question with 뭐, 어디, 누구, 언제 or 무슨 falls — 어디에 갈래요?↘. The same words can be both: 어디 가요?↘ is where are you going, 어디 가요?↗ are you going somewhere.",
+          "audio": {
+            "src": "audio/book/2b-r4-t08-4.mp3",
+            "labelEn": "발음 11 · from track 8"
+          }
+        }
+      ]
+    }
+  ]
+}

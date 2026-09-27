@@ -57,6 +57,9 @@ const BANK_LABEL = {
   'unit15-textbook': 'Unit 15 · 교과서',
   unit10: 'Unit 10 · 연습 문제 (익힘책)',
   'unit10-textbook': 'Unit 10 · 교과서',
+  review4: '복습 4 · Units 10-12 (익힘책)',
+  review5: '복습 5 · Units 13-15 (익힘책)',
+  review6: '복습 6 · Units 16-18 (익힘책)',
   'topik2-questions': 'TOPIK II · 기출 문제'
 };
 

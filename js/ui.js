@@ -2914,6 +2914,22 @@ function textbookUrl() {
   return null;
 }
 
+// The 익힘책's 복습: a test on three units at once, printed after the third of them. It belongs
+// to none of the three, so it is a bank of its own, and it sits on the desk of the unit it
+// follows — 복습 4, the review of Units 10-12, on Unit 12's; 복습 5 on Unit 15's; 복습 6 on Unit 18's.
+function reviewUrl() {
+  if (typeof isUnit12World === 'function' && isUnit12World()) return '/worlds/review4-workbook.json';
+  if (typeof isUnit15World === 'function' && isUnit15World()) return '/worlds/review5-workbook.json';
+  if (typeof isUnit18World === 'function' && isUnit18World()) return '/worlds/review6-workbook.json';
+  return null;
+}
+// The units each review covers, for its row on the desk. The file is named for the review.
+const REVIEW_UNITS = {
+  '/worlds/review4-workbook.json': '10-12',
+  '/worlds/review5-workbook.json': '13-15',
+  '/worlds/review6-workbook.json': '16-18'
+};
+
 // The exam world's own bank. Same file format and same renderer as the two textbook banks —
 // what differs is that it has no chapter behind it: questions are added one at a time, so the
 // file grows for as long as the exam is being studied for.
@@ -2941,11 +2957,12 @@ function loadDeskBank(url) {
 
 function loadWorkbook() { return loadDeskBank(workbookUrl()); }
 function loadTextbook() { return loadDeskBank(textbookUrl()); }
+function loadReview() { return loadDeskBank(reviewUrl()); }
 function loadTopikBank() { return loadDeskBank(topikBankUrl()); }
 
 function openStudyDesk() {
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
-  Promise.all([loadTextbook(), loadWorkbook(), loadTopikBank()]).then(([tb, wb, tk]) => {
+  Promise.all([loadTextbook(), loadWorkbook(), loadReview(), loadTopikBank()]).then(([tb, wb, rv, tk]) => {
     // Every row is earned by content that actually loaded. 퀴즈 used to be added
     // unconditionally, which was fine while every desk belonged to a unit that had one — see
     // deskQuizUrl for what that cost the moment one did not.
@@ -2970,6 +2987,16 @@ function openStudyDesk() {
         en: 'Workbook — build the sentences',
         vi: 'Sách bài tập — ghép thành câu',
         run: () => openWorkbook(wb)
+      });
+    }
+    // After the unit's own two books, because it tests them together with the two before.
+    if (((rv && rv.exercises) || []).length) {
+      const units = REVIEW_UNITS[rv._url] || '';
+      deskMenuOptions.push({
+        key: 'review', icon: '🔁', ko: '복습',
+        en: 'Review — Units ' + units + ' together',
+        vi: 'Ôn tập — gộp Bài ' + units,
+        run: () => openWorkbook(rv)
       });
     }
     if (((tk && tk.exercises) || []).length) {

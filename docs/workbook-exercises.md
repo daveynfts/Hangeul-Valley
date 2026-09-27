@@ -1667,6 +1667,103 @@ invite: 몰러서 for a 르 irregular, 이해해졌어요 for a verb, 돼었어�
 everywhere. 연습 2 on p.147 is the learner's own life in Korea and is left out. The bank is
 now fourteen pages and sixty-two rows.
 
+### A review of the pages that were already there
+
+A read of every row of Unit 15's 교과서 found what Unit 12's 익힘책 had shown: **twenty-seven
+wrong buttons that were good Korean in their slot**, on seventeen rows. 한국 노래를 좋아해서 한국어를 배웠어요, 지금은 잘 먹어요, 곧 괜찮을
+거예요, 전 다음 달부터 중국에서 일할 거예요 — each is what a Korean speaker would say, and the
+page marked it wrong because it did not use the chapter's form. Every one was replaced with a
+form that is wrong in the slot, and the grammar notes now say that the old sentence is good
+Korean and why the key is the other one. The replacements are the mistakes these forms
+actually draw — 비싸아졌어요 (ㅏ + 아 left apart), 익숙하졌어요 (no 여), 더우지 (ㅂ changed, 어 lost),
+먹어졌어요 (-아/어지다 on a verb), 됬어요 and 거에요 (the two spellings natives get wrong too),
+안게 됐어요 (ㄹ dropped before 게), 온 전에 and 죽는 전에 (a modifier before 전에). The suite pins all
+twenty-seven out, and the 줄었습니다 the 읽기 page used to key with them (below).
+
+Three more things came out of the same read:
+
+- **The 읽기 key was not the book's.** 모범 답안 on p.267 gives 없어졌습니다 for 주택이 많이 ___,
+  and the bank keyed 줄었습니다 with a summary line written to fit it. The passage says the houses
+  are mostly flats now, and the summary now says so.
+- **Two 어휘 rows turned on a picture the screen does not show.** 전화 요금이 ___ is 내렸어요 only
+  because the drawing goes from 300원 to 100원, and 물건값이 ___ is 올랐어요 only because its tags
+  go up, so both rows print that in a 그림 line — the Unit 17 rule.
+- **No page named its section in English**, so the subtitle ended "pattern · " and the list
+  headings had no English at all; every page has `sectionEn` now.
+
+## A fourth row on the desk: the 익힘책's 복습
+
+The 익힘책 prints a review after every third unit — 복습 4 (Units 10-12, printed pp.56-73), 복습 5
+(Units 13-15, pp.116-135) and 복습 6 (Units 16-18, pp.176-195) — each with its answers in the 정답
+(pp.204, 207 and 210) and its 듣기 지문 in the appendix (pp.196-197, 197-198 and 199-200). A review
+tests three units at once and belongs to none of them, so each is a bank of its own,
+`worlds/review<N>-workbook.json`, on the desk of the unit it follows as a fourth row, 복습:
+`reviewUrl()` in `js/ui.js` resolves it, `REVIEW_UNITS` gives the row its label, and
+`review<N>` opens it in the admin. `tests/test_reviews.js` covers all three and
+`validate_content.js` checks each for shape and wiring.
+
+In the workbook PDF the image index is the printed page through p.61. Printed pp.62-63 are not in
+the scan, so image 62 is p.64, and from 복습 5 on the offset is −4: image 112 is p.116, 172 is
+p.176, 200 is p.204.
+
+- **The whole bank holds its English**, `holdGloss` on the bank as the exam bank has it. A review
+  is a test, and "The facilities are good, so it's comfortable" beside a 평가하기 gap is the
+  answer.
+- **A held row keeps its voice as well.** A row with no recording of its own reads itself aloud
+  with the right answers filled in — the model a drill wants, and on a held row the key — so a
+  held row without a clip gets no 🔊 until its page is checked. The 읽기 pages of the unit banks
+  had the same hole; `test_listening_pages.js` checks one.
+- **O or X with its correction is one choice.** 확인하기 asks for an O or an X and, for an X, the
+  correction written in. Each row has two buttons: O, and X with a correction written the way the
+  정답 writes one — `X (있었을 때는 → 있을 때는)`. On a row that is right as printed, the X carries
+  the change the sentence does not need.
+- **The underline is a 밑줄 line.** The screen cannot underline, so 평가하기 1-4 repeat the
+  underlined words on a line of their own.
+- **The key is the book's number.** Rows whose buttons are the book's words keep them in the
+  book's order in the file — the page deals them afresh — so the test reads each key as the
+  answer's place in its list; rows whose buttons are whole sentences open on ①-④ and are laid out
+  in that order.
+- **A picture question is 그림 lines and numbered buttons.** 듣기 1-2 print four drawings each, and
+  each drawing is written out on a line of its own — the place, and who is doing what — with ① ②
+  ③ ④ as the buttons, so the number the 정답 prints is the button to press.
+- **맞는 대화 (듣기 3-7) prints nothing but ①-④, and neither does the screen.** The row is one blank,
+  the buttons are the four numbers, and the row plays its own question. Once checked, its
+  explanation quotes all four replies, each under its number; the test holds them to the 듣기 지문.
+- **Two questions on one passage are one row with two blanks** (평가하기 17-20, 읽기와 쓰기 5-10).
+  Every row of a page is on screen at once, and a second row carrying the same passage with the
+  first gap filled in would answer the first.
+- **A write-in is keyed to the 정답's model answer.** 읽기와 쓰기 11-16 leave the reply to the learner;
+  many replies would do and the key prints one, which is the right button. The other two are wrong
+  rather than merely different — a form that does not exist (봐면, 편하졌어요, 갈기로), a yes that
+  says no, a speech level that breaks the conversation, or a tense the question rules out — and
+  they are pinned in the test so that a later edit cannot swap in another good answer.
+- **발음 has no key, so its rows are the units' rules.** The three 발음 tracks are listen-and-repeat.
+  Each row asks for the bracketed pronunciation, or the intonation, that the three units taught for
+  the one word in its sentence the rule changes, and plays the book's reading of the sentence.
+- **What is not here is said in the bank.** `omittedNote` names 정리하기 (a summary table), 알아보기
+  (no answer in the 정답), the 200-300 character composition and 말하기. For 복습 4 it also names the
+  missing pp.62-63: 평가하기 17-20 and 듣기 1-2, which the 정답 keys ①④③④ and ②① but whose questions
+  and pictures are on those pages. Photograph them to finish 복습 4; the two 듣기 conversations are
+  already on track 5 and in the 듣기 지문.
+
+### Cutting a review's tape
+
+A review track (Track05, Track12, Track19) is one question after another, and its pauses say where
+each question ends: about 6 seconds between questions, 3 between the four exchanges of a 3-7
+question, 1 between lines, and a spoken number in front of each question — after the dialogue, for
+the pairs 12-13 and 14-15. A silencedetect map at -35 dB and 0.5 s, matched to the 듣기 지문 segment
+by segment until every segment reads at 4-6 syllables a second, gives each question's span; each
+clip is cut 0.12 s before its first sound and 0.30 s after its last, mono at 64 kbps like every
+other clip. This is not the per-line segmentation `docs/cassette-timings.md` rules out: it cuts at
+the gaps between questions, which never occur inside one, and each span was checked line by line
+before it was cut. The 발음 tracks are cut the same way, one clip per printed item.
+
+`test_reviews.js` pins each clip's length, bands the four-exchange questions and the short
+exchanges separately by syllables per second of clip, and requires the longer script to have the
+longer clip (rank correlation above 0.9), which a clip handed to the wrong question breaks. 복습 4's
+four-exchange band sits lower than the other two — its replies are short against the same fixed
+pauses — and carries its own numbers.
+
 ## A third kind of bank: the exam world
 
 `worlds/topik2-questions.json` is the same file format again, but the world behind it is not

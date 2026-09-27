@@ -66,9 +66,13 @@ console.log('====================================================');
 
 // ── 1. Every page holds its gloss and plays something ────────────────────────
 console.log('\n--- 1. Every 듣기 page holds its English and plays a recording ---');
-const units = [...new Set(pages.map(({ f }) => f.replace(/-.*$/, '')))];
-assert(pages.length === 18 && units.length === 9,
-  'eighteen 듣기 pages across nine units (found ' + pages.length + ' across ' + units.join(', ') + ')');
+// Counted per unit: the 익힘책's 복습 banks carry 듣기 pages of their own, and belong to no unit.
+const unitPages = pages.filter(({ f }) => /^unit\d+-/.test(f));
+const units = [...new Set(unitPages.map(({ f }) => f.replace(/-.*$/, '')))];
+assert(unitPages.length === 18 && units.length === 9,
+  'eighteen 듣기 pages across the nine units (found ' + unitPages.length + ' across ' + units.join(', ') + ')');
+const reviewPages = pages.filter(({ f }) => /^review\d+-/.test(f));
+assert(reviewPages.length >= 5, 'and the 복습 banks their own (' + reviewPages.length + ')');
 const open = pages.filter(({ bank, ex }) => !(ex.holdGloss === true || bank.holdGloss === true)).map(({ ex }) => ex.id);
 assert(open.length === 0, 'every one holds its English gloss until the row is checked'
   + (open.length ? ' — ' + open.join(', ') : ''));
