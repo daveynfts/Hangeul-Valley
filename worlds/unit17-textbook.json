@@ -1569,6 +1569,7 @@
       "instructionKo": "다음을 읽고 질문에 답하세요.",
       "instructionEn": "Read the notice and answer the following questions.",
       "noteEn": "The notice on p.194 is one long description of a lost camera, and the two questions on p.195 both ask you to find things in it. The first prints three photographs and asks which belongs with the notice; the three are written out here, because what separates them is the colour of the camera and the colour of its strap, both of which the text states. The second is a 분실물 신고 form with four boxes, and 모범 답안 on printed p.268 fills all four. The 쓰기 half asks the learner to write a notice of their own and has nothing to mark.",
+      "holdGloss": true,
       "items": [
         {
           "n": 1,

@@ -1443,6 +1443,7 @@
       "instructionKo": "다음을 읽고 질문에 답하세요.",
       "instructionEn": "Read the passage and answer the following questions.",
       "noteEn": "The two printed questions are rows 1 and 2 — the first is a gap to fill from the passage and the second is three statements. The 쓰기 box under them asks for a healthy habit of your own on eight blank lines, and the key gives no answer, so it is not here. Rows 3 to 6 are sentences of the passage with one join taken out of each, and one of them is the trap the chapter is built around: 씻다 ends in ㅅ and is perfectly regular.",
+      "holdGloss": true,
       "pattern": "건강한 생활 습관",
       "items": [
         {

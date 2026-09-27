@@ -788,6 +788,7 @@
       "instructionKo": "다음을 읽고 질문에 답하세요.",
       "instructionEn": "Read the passage and answer the following questions.",
       "noteEn": "The book asks which description of the restaurant is correct and which statement does not match the passage. Both are here with the book's own three options, and rows 3-6 are the sentences the answers turn on — so the page is answerable from the review rather than from an impression of it.",
+      "holdGloss": true,
       "pattern": "〈큰사랑 한정식집〉을 추천합니다",
       "items": [
         {

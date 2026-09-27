@@ -273,6 +273,8 @@ function cleanChoiceItem(item, i, where, type) {
   if (!out.grammar) throw new Error(`${at}: needs a grammar note`);
   const audio = cleanAudio(item.audio, at);
   if (audio) out.audio = audio;
+  // A question row whose gloss states its own answer holds it until checked, like a 듣기 page.
+  if (item.holdGloss === true) out.holdGloss = true;
   return out;
 }
 

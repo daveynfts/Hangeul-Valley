@@ -5427,12 +5427,17 @@ function renderWorkbook() {
         // "put on thick clothes AND went out" hands over the sequence the blank is testing.
         // Opt-in per bank so the units keep the behaviour they were written for. An exercise
         // can ask for it too: on a 듣기 page the gloss is what the tape was going to say, so
-        // "I did badly in the exam" beside the row answers it before anyone presses play.
-        const holdGloss = !!((st.bank && st.bank.holdGloss) || ex.holdGloss) && !st.checked;
+        // "I did badly in the exam" beside the row answers it before anyone presses play. And
+        // so can one row — a question on a culture page whose gloss ends "— Winter."
+        const holdGloss = !!((st.bank && st.bank.holdGloss) || ex.holdGloss || item.holdGloss) && !st.checked;
         head.innerHTML = art +
           '<span class="wb-exp-phrase">' + vbEsc(item.phraseKo || '') + '</span>' +
           (holdGloss ? '' : '<span class="wb-exp-en">' + vbEsc(tr(item, 'en') || '') + '</span>');
-        const say = wbSayButton(wbRowSpeech(ex, item), item.audio);
+        // And the same row keeps its voice until then. With no recording of its own the button
+        // reads the row out with the right answers in it — the drill's model, and on a held row
+        // the key — so a held row without a clip gets the button once it has been checked.
+        const say = holdGloss && !(item.audio && item.audio.src) ? null
+          : wbSayButton(wbRowSpeech(ex, item), item.audio);
         if (say) head.appendChild(say);
         const line = document.createElement('div');
         line.className = 'wb-exp-line';

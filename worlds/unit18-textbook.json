@@ -1548,6 +1548,7 @@
       "instructionKo": "다음을 읽고 질문에 답하세요.",
       "instructionEn": "Read the passage and answer the questions.",
       "noteEn": "The passage on p.216 is a student’s speech from the 제8회 서울대학교 한국어 말하기 대회, as the book credits it. p.217 asks two questions and 모범 답안 on printed p.268 answers both: (3), and 한국어를 잘 못했기 때문에. Those come first, then three of the passage’s own sentences with their verbs gapped, two of them honorific. The 쓰기 half asks for the learner’s own memory of a Korean they met, and has nothing to mark.",
+      "holdGloss": true,
       "items": [
         {
           "n": 1,
@@ -1795,7 +1796,8 @@
           ],
           "en": "Which season is 「눈 내리는 밤」 about? — Winter.",
           "grammar": "눈 내리는 is 눈이 내리다 with the 이 left out, the way a title leaves it out.",
-          "why": "겨울 is the season the title names: 눈 내리는 밤 is a night with snow falling. 가을 and 봄 are the chapter’s other seasons, with their 단풍 and their 꽃."
+          "why": "겨울 is the season the title names: 눈 내리는 밤 is a night with snow falling. 가을 and 봄 are the chapter’s other seasons, with their 단풍 and their 꽃.",
+          "holdGloss": true
         }
       ],
       "type": "build"

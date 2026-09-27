@@ -554,6 +554,7 @@
       "instructionKo": "다음을 읽고 질문에 답하세요.",
       "instructionEn": "Read the passage and answer the questions.",
       "noteEn": "The book asks which of three statements does not match the passage, and then asks why heads may not be touched — an open answer nothing can mark. Both are here as blanks taken from the passage itself, so every answer is checkable against the printed text rather than against an opinion. Row 6 is the book's ③: it is wrong because of whose head was patted, and that is what the blank turns on.",
+      "holdGloss": true,
       "pattern": "우리 나라에서는 다른 사람의 머리를 만지면 안 돼요",
       "items": [
         {

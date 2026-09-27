@@ -2782,12 +2782,37 @@ const overlayIds = [
     if (!(it.audio && it.audio.src)) silent.push(ex.id + ' row ' + it.n);
   }));
   check('every row on a 듣기 page plays a recording', silent.length === 0, silent.slice(0, 6).join(', '));
-  // The flag is only worth anything if the renderer reads it off the page and a save through
-  // the admin does not drop it — validateWorkbook rebuilds each page from a fixed field list.
-  check('the renderer honours holdGloss on a page as well as on a bank',
-    readGameSource().indexOf('(st.bank && st.bank.holdGloss) || ex.holdGloss') >= 0);
-  check('and the admin validator keeps it',
-    read(path.join('admin', 'lib', 'workbook.js')).indexOf('if (ex.holdGloss === true) out.holdGloss = true;') >= 0);
+  // A 읽기 page is the same case on paper — "Which is true…? — The atmosphere and the service are
+  // good." — and so is a question row on any other page, which holds its own gloss and leaves the
+  // rest of its page alone.
+  const reading = [];
+  const questions = [];
+  fs.readdirSync(path.join(ROOT, 'worlds')).filter((f) => /-(?:text|work)book\.json$/.test(f)).forEach((f) => {
+    const b = JSON.parse(read(path.join('worlds', f)));
+    (b.exercises || []).forEach((ex) => {
+      if (/^읽기/.test(String(ex.no || ''))) reading.push({ b, ex });
+      else if (!/^듣기/.test(String(ex.no || ''))) {
+        (ex.items || []).forEach((it) => {
+          if (Array.isArray(it.lines) && it.lines.some((l) => /^(Q|질문)$/.test(l.who || ''))
+            && it.lines.some((l) => String(l.ko).trim() === '{}')) questions.push({ b, ex, it });
+        });
+      }
+    });
+  });
+  const openReading = reading.filter(({ b, ex }) => !(ex.holdGloss === true || b.holdGloss === true)).map(({ ex }) => ex.id);
+  check(`every 읽기 page holds its English too (${reading.length})`, reading.length >= 9 && openReading.length === 0,
+    openReading.join(', '));
+  const openQ = questions.filter(({ b, ex, it }) => !(it.holdGloss === true || ex.holdGloss === true || b.holdGloss === true))
+    .map(({ ex, it }) => ex.id + ' row ' + it.n);
+  check(`and so does every question row on another page (${questions.length})`, openQ.length === 0, openQ.join(', '));
+  // The flag is only worth anything if the renderer reads it and a save through the admin does
+  // not drop it — validateWorkbook rebuilds each page and each row from a fixed field list.
+  check('the renderer honours holdGloss on a bank, a page or a row',
+    readGameSource().indexOf('(st.bank && st.bank.holdGloss) || ex.holdGloss || item.holdGloss') >= 0);
+  const wbSrc = read(path.join('admin', 'lib', 'workbook.js'));
+  check('and the admin validator keeps it on both',
+    wbSrc.indexOf('if (ex.holdGloss === true) out.holdGloss = true;') >= 0
+    && wbSrc.indexOf('if (item.holdGloss === true) out.holdGloss = true;') >= 0);
 }());
 
 // ── The exam world ───────────────────────────────────────────────────

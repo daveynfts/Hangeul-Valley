@@ -1648,6 +1648,7 @@
       "instructionEn": "Read the learning summary supplied with each question and choose the answer.",
       "blurbEn": "A Seoul-born writer comes back and finds the city rearranged.",
       "noteEn": "The summaries are learning aids, not a full transcript of the book passage. For question 1, choose the statement that contradicts the summary. In the remaining questions, say how each thing has changed; 모범 답안 on printed p.267 keys all three.",
+      "holdGloss": true,
       "bank": [],
       "items": [
         {

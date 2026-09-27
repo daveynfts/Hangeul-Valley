@@ -1436,6 +1436,7 @@
       "instructionKo": "다음을 읽고 질문에 답하세요.",
       "instructionEn": "Read the passage and answer the following questions.",
       "noteEn": "The two questions the book asks, with the answers 모범 답안 gives on printed p.267 — 한 해 농사가 잘 끝난 것을 for the fill-in and ② for the choice. Rows 3 and 4 are two sentences of the passage with the word the sentence turns on taken out, so the page holds the vocabulary as well as the comprehension. The 쓰기 half of the spread asks the learner to write about a holiday in their own country and has no answer to mark.",
+      "holdGloss": true,
       "items": [
         {
           "n": 1,
@@ -1685,7 +1686,8 @@
           "en": "Which throw moves you two spaces? — Gae.",
           "grammar": "The five throws run 도 개 걸 윷 모 in the book’s own order of distance: 1, 2, 3, 4, 5.",
           "why": "도 is one space and 걸 is three. The order is the whole of what the box is teaching, and 개 sits between them at two.",
-          "art": "quiz/unit16_yut_gae.png"
+          "art": "quiz/unit16_yut_gae.png",
+          "holdGloss": true
         },
         {
           "n": 5,
@@ -1718,7 +1720,8 @@
           "en": "Which throw moves you five spaces? — Mo.",
           "grammar": "모 is the longest throw, and it is one of the two that earn a second one.",
           "why": "윷 is four and also earns a bonus throw, which is why the two are named together in the rules. 걸 is three and earns nothing.",
-          "art": "quiz/unit16_yut_mo.png"
+          "art": "quiz/unit16_yut_mo.png",
+          "holdGloss": true
         }
       ],
       "type": "build",

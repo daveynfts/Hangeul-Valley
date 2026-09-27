@@ -1620,6 +1620,11 @@ gives ②") and a fourth listed the three answers of its first three rows.
   once. Unit 18's 듣기 1 shipped with exactly this: row 4 printed 시작한 지 일 년이 되는 날입니다
   under row 2's blank for how long the programme had run. Its gap is now the length of time, so
   the line answers the question instead of giving it away.
+- **A 읽기 page is the same case, and so is one question row.** "Which is true of this
+  restaurant? — The atmosphere and the service are good." beside the row is the reading done
+  for the learner, so every 읽기 page holds its gloss as a 듣기 page does. A question row on any
+  other page — a 과제's "which throw moves you two spaces? — Gae." — holds its own with
+  `holdGloss` on the row, and the rest of that page keeps the glosses that help it.
 
 `tests/test_listening_pages.js` drives the shipped renderer and checks all of it: no gloss on a
 듣기 page until the page is checked, all of them afterwards, the gloss still up front on a

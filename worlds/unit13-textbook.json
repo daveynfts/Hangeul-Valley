@@ -1730,6 +1730,7 @@
       "instructionKo": "다음을 읽고 질문에 답하세요.",
       "instructionEn": "Read the passage and answer the following questions.",
       "noteEn": "The two printed questions are rows 1 and 2 with the book’s own three options each. The 쓰기 box underneath them is eight blank lines about your own place and the key gives no answer for it, so it is not here. Rows 3 to 6 are the sentences of the passage the two answers turn on, with one join taken out of each — which is also where the chapter’s four grammar points all happen to land inside one paragraph.",
+      "holdGloss": true,
       "pattern": "지금 살고 있는 집",
       "items": [
         {

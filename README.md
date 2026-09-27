@@ -535,8 +535,10 @@ number, and a row whose every button opens on the book's ①②③ is laid out i
 `tests/test_workbook_button_order.js` drives the renderer with a seeded random source.
 
 A 듣기 page holds each row's English back until the page is checked (`holdGloss` on the
-page), because there the gloss is a transcript of what the tape is about to say; everywhere
-else it stays beside the row as the help it was written as. The note above a 듣기 page says
+page), because there the gloss is a transcript of what the tape is about to say, and so do
+the 읽기 pages; everywhere else it stays beside the row as the help it was
+written as. A held row with no recording of its own also has no 🔊 until then, since the
+browser voice would read it out with the answer in it. The note above a 듣기 page says
 where its key comes from and never what it is. `tests/test_listening_pages.js` drives the
 renderer to check both.
 
