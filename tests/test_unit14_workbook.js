@@ -850,9 +850,13 @@ const exP3 = wb.exercises.find(e => e.id === 'u14-grammar-4-3');
     'item 1 offers the single negative — the form that means the opposite');
   assert(/opposite/i.test(exP3.items.find(i => i.n === 1).why),
     'and the note says so outright');
-  assert(exP3.items.find(i => i.n === 4).choices.some(c => c.ko === '안 받으면'),
-    'item 4 puts 안 against 못');
-  assert(/못/.test(exP3.items.find(i => i.n === 4).why), 'and explains why the parcel takes 못');
+  // 안 받으면 안 돼요 is good Korean too, on the pattern of items 1 to 3, so it is named in the
+  // note rather than offered as wrong; the button beside 못 받으면 is 못 with -면's vowel wrong.
+  const p3i4 = exP3.items.find(i => i.n === 4);
+  assert(!p3i4.choices.some(c => c.ko === '안 받으면') && p3i4.choices.some(c => c.ko === '못 받아면'),
+    'item 4 sets 못 against its own misspelling, not against 안');
+  assert(/안 받으면 안 돼요 would be good Korean too/.test(p3i4.why), 'and the note says 안 would do as well');
+  assert(/못/.test(p3i4.why), 'and explains why the parcel takes 못');
 
   // Two blanks per row: both are needed, both are scored, and one right half
   // does not mark the row right.

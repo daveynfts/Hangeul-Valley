@@ -1147,8 +1147,8 @@
               "ko": "못 가게 됐어요"
             },
             {
-              "id": "angage",
-              "ko": "안 가게 됐어요"
+              "id": "motgage_bad",
+              "ko": "못 가게 됬어요"
             },
             {
               "id": "gage",
@@ -1156,7 +1156,7 @@
             }
           ],
           "en": "Something came up, so I could not go to my friend’s birthday.",
-          "why": "갑자기 일이 생기다 is something coming up that you did not arrange — so the not-going is 못, outside your control, and not 안, which would be choosing not to.",
+          "why": "갑자기 일이 생기다 is something coming up that you did not arrange, so the not-going is 못, out of your control — though 안 가게 됐어요 would be good Korean too. 됬어요 is a spelling that does not exist: 되 + 었 contracts to 됐.",
           "grammar": "못 가다 is said [몯까다] with the ㄱ tensed. 못 and 안 both negate, but 못 is about being unable and 안 about being unwilling.",
           "lines": [
             {
@@ -1312,8 +1312,8 @@
               "ko": "손님들이 오시기 전에"
             },
             {
-              "id": "sonnimdeurogi",
-              "ko": "손님들이 오기 전에"
+              "id": "sonnimdeurosyeotgi",
+              "ko": "손님들이 오셨기 전에"
             },
             {
               "id": "sonnimdeurosin",
@@ -1321,7 +1321,7 @@
             }
           ],
           "en": "Get the food ready before the guests arrive.",
-          "why": "손님 are guests you are hosting, so they take 시 — the same reason the grandmother did two rows up.",
+          "why": "손님 are guests you are hosting, and 오시기 gives them the 시 the grandmother had two rows up — though 손님들이 오기 전에 is good Korean too, and often heard. What -기 전에 will not take is a tense: 오셨기 전에 puts a past inside it, and 오신 전에 puts a modifier where 전에 wants -기.",
           "grammar": "오 + 시 + 기 → 오시기. 손님들이 is said [손님드리], with the ㄹ of 들 carrying into the 이.",
           "lines": [
             {
@@ -1380,8 +1380,8 @@
               "ko": "졸업하기 전부터"
             },
             {
-              "id": "joreophagijeone",
-              "ko": "졸업하기 전에"
+              "id": "joreophanjeonbuteo",
+              "ko": "졸업한 전부터"
             },
             {
               "id": "joreophagijeonkkaji",
@@ -1389,7 +1389,7 @@
             }
           ],
           "en": "No, I was getting ready before I graduated.",
-          "why": "A asks whether it started after graduating; 아니요 means it started earlier and carried on — which is 전부터 and not the single point 전에.",
+          "why": "A asks whether it started after graduating; 아니요 means it started earlier and carried on, which is 전부터. 졸업하기 전에 준비했어요 would be good Korean as well. 졸업한 전부터 gives 전 the -(으)ㄴ that 후 takes — 졸업한 후 — where 전 takes only -기.",
           "grammar": "전부터 is 전 with the from-marker: everything from that moment backwards. 졸업하다 is said [조러파다], the ㅂ meeting the ㅎ."
         },
         {
@@ -1413,8 +1413,8 @@
               "ko": "한국에서 살기 전에도"
             },
             {
-              "id": "hangugeseosalgijeonbuteo",
-              "ko": "한국에서 살기 전부터"
+              "id": "hangugeseosagijeonedo",
+              "ko": "한국에서 사기 전에도"
             },
             {
               "id": "hangugeseosangijeon",
@@ -1422,7 +1422,7 @@
             }
           ],
           "en": "Yes, I ate kimchi well even before I lived in Korea.",
-          "why": "The 네 is what picks 전에도 — the 도 is agreeing that it was true then as well, which 전부터 would not say.",
+          "why": "The 네 is what picks 전에도 — the 도 agrees that it was true then as well — and 한국에서 살기 전부터 would be good Korean too, saying it has been true ever since. 사기 전에도 drops the ㄹ that -기 keeps, and turns living into buying.",
           "grammar": "살 + 기 → 살기, the ㄹ staying because 기 is not one of ㄴ/ㅂ/ㅅ. 전에도 is 전에 with 도 stacked on it."
         },
         {
@@ -1479,8 +1479,8 @@
               "ko": "저녁 먹기 전까지"
             },
             {
-              "id": "jeonyeokmeokgijeone",
-              "ko": "저녁 먹기 전에"
+              "id": "jeonyeokmeogeunjeonkkaji",
+              "ko": "저녁 먹은 전까지"
             },
             {
               "id": "jeonyeokmeokgijeonbuteo",
@@ -1488,7 +1488,7 @@
             }
           ],
           "en": "I can be back before dinner.",
-          "why": "몇 시까지 asks for a deadline, so the answer is 전까지 — up to that point at the latest.",
+          "why": "몇 시까지 asks for a deadline, and 전까지 gives one — up to that point at the latest; 저녁 먹기 전에 갈 수 있어요 would answer it just as well. 먹은 전까지 gives 전 the -(으)ㄴ that belongs to 후.",
           "grammar": "B says 갈 수 있어요 where A said 올 수 있어요: 오다 from the house’s point of view, 가다 from the speaker’s. Korean picks the verb by where the speaker is."
         },
         {
@@ -1545,8 +1545,8 @@
               "ko": "퇴근하기 전까지"
             },
             {
-              "id": "toegeunhagijeone",
-              "ko": "퇴근하기 전에"
+              "id": "toegeunhanjeonkkaji",
+              "ko": "퇴근한 전까지"
             },
             {
               "id": "toegeunhagijeonbuteo",
@@ -1554,7 +1554,7 @@
             }
           ],
           "en": "It has to be finished before I leave the office.",
-          "why": "The deadline reading once more, and 끝내야 돼요 is repeated back from the question — Korean answers by reusing the verb rather than saying yes.",
+          "why": "The deadline reading once more — 퇴근하기 전에 끝내야 돼요 would do as well — and 끝내야 돼요 is repeated back from the question: Korean answers by reusing the verb rather than saying yes. 퇴근한 전까지 gives 전 the -(으)ㄴ of 후.",
           "grammar": "퇴근 is leaving work and 출근 is arriving at it; the pair is worth learning together. 끝내다 is said [끈내다], the ㅌ closing to ㄴ before the ㄴ."
         }
       ]

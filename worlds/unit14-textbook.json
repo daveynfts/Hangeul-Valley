@@ -70,8 +70,8 @@
             }
           ],
           "en": "Today at the hospital my Korean went wrong and I was embarrassed. — I called the doctor 'uisanim' and everyone laughed.",
-          "why": "The joke only lands if the first blank is past. Steven is telling a story about something that already happened, and 갈 때 would make it a habit — every time I go to the hospital, my Korean goes wrong. The second blank is the word Steven should have used: 의사 선생님 is what you call a doctor, and 의사님 is the form Steven invented by bolting the honorific -님 straight onto the job title.",
-          "grammar": "가다 → 갔을 때. 가- + -았- contracts to 갔-, then -을 때. 가을 때 is the contraction skipped; 갈 때 is the plain future/habitual and says something else.",
+          "why": "The joke only lands if the first blank is past. Steven is telling a story about something that happened at the hospital, and 갈 때 would put it on the way there — before any doctor had been met, let alone called 의사님. The second blank is the word Steven should have used: 의사 선생님 is what you call a doctor, and 의사님 is the form Steven invented by bolting the honorific -님 straight onto the job title.",
+          "grammar": "가다 → 갔을 때. 가- + -았- contracts to 갔-, then -을 때. 가을 때 is the contraction skipped; 갈 때 is the time of the going itself, on the way there.",
           "audio": {
             "src": "audio/book/2b-u14-trk44.mp3",
             "labelEn": "말하기 1 · track 44"
@@ -102,8 +102,8 @@
               "ko": "집주인을 만나을 때"
             },
             {
-              "id": "jibjuin_pres",
-              "ko": "집주인을 만날 때"
+              "id": "jibjuin_n",
+              "ko": "집주인을 만난 때"
             }
           ],
           "answer2": "ajussi",
@@ -123,7 +123,7 @@
           ],
           "en": "Today when I met the landlord my Korean went wrong and I was flustered. — I called the landlord 'juinnim' and everyone laughed.",
           "why": "The same mistake in a second setting, which is the point of the table: 주인님 is not a way to address a person. Korean reaches for 아저씨 or 아주머니 with a role — 집주인 아저씨 — where English would use 'the owner'. 주인님 belongs to a dog and its owner, or to a period drama.",
-          "grammar": "만나다 → 만났을 때. 만나- + -았- contracts to 만났-. 만나을 때 is the same skipped contraction as row 1, and it is the mistake this exercise is really testing."
+          "grammar": "만나다 → 만났을 때. 만나- + -았- contracts to 만났-. 만나을 때 is the same skipped contraction as row 1, and it is the mistake this exercise is really testing. 만난 때 puts the past modifier in front of 때, which only ever takes -(으)ㄹ. 집주인을 만날 때 would be good Korean too — during the meeting — since the 있었어 at the end already puts it in the past."
         },
         {
           "n": 3,
@@ -798,13 +798,13 @@
               "ko": "여행을 가을 때"
             },
             {
-              "id": "went_pres",
-              "ko": "여행을 갈 때"
+              "id": "went_n",
+              "ko": "여행을 간 때"
             }
           ],
           "en": "When and where did you lose it? — I lost it last year, on a trip to Busan.",
-          "why": "작년에 has already fixed the story in the past, so 갈 때 contradicts the sentence it sits in. 가을 때 is the contraction left undone — the single most common way this pattern goes wrong, and the reason the chapter drills 갔을 rather than 가았을.",
-          "grammar": "가다 → 갔을 때. 가- + -았- → 갔-. Compare 만나다 → 만났을 때 and 오다 → 왔을 때: the vowel swallows the -았-."
+          "why": "가을 때 is the contraction left undone — the single most common way this pattern goes wrong, and the reason the chapter drills 갔을 rather than 가았을. 간 때 puts the past modifier in front of 때, which only ever takes -(으)ㄹ: 갈 때, 갔을 때.",
+          "grammar": "가다 → 갔을 때. 가- + -았- → 갔-. Compare 만나다 → 만났을 때 and 오다 → 왔을 때: the vowel swallows the -았-. 여행을 갈 때 잃어버렸어요 would be good Korean as well, with the bag lost on the way there; the past is already in 잃어버렸어요."
         },
         {
           "n": 3,
@@ -860,8 +860,8 @@
               "ko": "기억에 남는"
             },
             {
-              "id": "nameun",
-              "ko": "기억에 남은"
+              "id": "gieogi",
+              "ko": "기억이 남는"
             },
             {
               "id": "nameul",
@@ -869,8 +869,8 @@
             }
           ],
           "en": "Whose experience stayed with you most? — Steven's.",
-          "why": "기억에 남는 is fixed as a present modifier even though it describes something already over: the memory is still there now, which is the whole sense of it. 남은 turns it into leftovers, which is what 남다 means in a kitchen.",
-          "grammar": "남다 → 남는. A consonant stem takes -는 for the present modifier. Note the sound: 남는 is said [남는] and 남지 would be [남찌] — the ㄴ/ㅁ tensing rule this chapter's 발음 page teaches."
+          "why": "기억에 남는 is fixed as a present modifier even though it describes something already over: the memory is still there now, which is the whole sense of it. 기억이 남는 loses the 에 the phrase is built on — something stays in the memory, 기억에 남다 — and 남을 puts the memory in the future.",
+          "grammar": "남다 → 남는. A consonant stem takes -는 for the present modifier. Note the sound: 남는 is said [남는] and 남지 would be [남찌] — the ㄴ/ㅁ tensing rule this chapter’s 발음 page teaches. 기억에 남은 경험 is heard as well, looking back from now."
         }
       ]
     },
@@ -1481,8 +1481,8 @@
               "ko": "먹었을 때"
             },
             {
-              "id": "meogeul",
-              "ko": "먹을 때"
+              "id": "meogeun",
+              "ko": "먹은 때"
             },
             {
               "id": "meogeumyeon2",
@@ -1490,8 +1490,8 @@
             }
           ],
           "en": "What was it like the first time you ate kimchi? — A bit hot, but good.",
-          "why": "처음 and B's 매웠지만 both put this in the past, so 먹을 때 — whenever I eat kimchi — does not fit either side of it. 먹으면 turns the question into a condition, and 어땠어요 cannot ask about a condition.",
-          "grammar": "먹다 → 먹었을 때. -았/었- goes in before -을 때: 먹었을, 갔을, 왔을. A stem with ㅓ takes -었-."
+          "why": "먹은 때 puts the past modifier in front of 때, which only ever takes -(으)ㄹ — the past goes inside it instead: 먹었을 때. 먹으면 turns the question into a condition, and 어땠어요 cannot ask about a condition.",
+          "grammar": "먹다 → 먹었을 때. -았/었- goes in before -을 때: 먹었을, 갔을, 왔을. A stem with ㅓ takes -었-. 처음 먹을 때 어땠어요? would be good Korean too — 어땠어요 already puts it in the past."
         }
       ]
     }

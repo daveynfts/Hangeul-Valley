@@ -1696,6 +1696,49 @@ Three more things came out of the same read:
 - **No page named its section in English**, so the subtitle ended "pattern · " and the list
   headings had no English at all; every page has `sectionEn` now.
 
+## Every other bank, read for the same thing
+
+Units 12, 15 and 18 had each turned up wrong buttons that were good Korean, so the banks none of
+those reads had covered were read the same way: every row of Units 10, 11, 13, 14, 16 and 17,
+both books, and Unit 15's 익힘책 — Unit 13's 교과서 needed nothing. **113 more** came out of it.
+Read each row with every button filled into its blank, as the finished sentence a learner would
+hear; a fragment on a button hides what the sentence around it says, and 우리 반 친구 생일이고 is
+only plainly good Korean once it is in its line.
+
+They came in a few shapes, and the next unit will have them too:
+
+- **The plain form a chapter refines.** A page teaching -아/어 놓다, -(으)ㄹ까 하다, -(으)ㄹ 뻔하다
+  or -아/어 있다 cannot use the unrefined form as its wrong answer: 예매했어요, 쉴 거예요,
+  지각했어요 and 앉았어요 are what a Korean says when the refinement is not the point, and only the
+  page's 보기 makes them wrong. The 뻔했습니다 diary set each near miss against the plain past, and
+  넘어졌습니다, 울었습니다 and 못 내렸습니다 each tell a morning in good Korean — one where it happened.
+- **-(으)ㄹ 때 for a past event.** 아플 때 고향에 가고 싶었어요 is good Korean because the main
+  clause carries the past. Its place went to -(으)ㄴ 때, the mistake Unit 14 is really up against;
+  only 갈 때 and 올 때 stay, where the story rules out being on the way.
+- **전에 where the page wanted 전까지 or 전부터.** 퇴근하기 전에 끝내야 돼요 answers 언제까지 as well
+  as 전까지 does. Its place went to -(으)ㄴ 전, the mistake 후에 invites.
+- **안 where the context names a cause.** 수업 중이라서 안 받을 거예요 is good Korean; the cause is
+  why the key is 못, and the note says so rather than calling 안 wrong.
+- **A particle, a verb or a connective Korean allows as well.** 제주도를 가요, 지하철에 타다,
+  테니스를 하다, 문자를 하다, 세배를 드리다; 내려서 넘어질 뻔했어요 in a -다가 drill (stepping off,
+  then stumbling). 길을 건너고 사고가 날 뻔했어요 stays wrong: nobody nearly has an accident once
+  across.
+- **A culture note any adjective fits.** 꽃처럼 아름다웠습니다, 예쁜 색, 아이의 행복을 바라는 — the
+  note chose 무지개, 전통 and 건강, but the others are sayable. Their places went to words the
+  sentence cannot hold: 눈 and 밤 have no colours, 교통 and 날씨 make no jacket.
+
+The replacements are the mistakes each form draws: -(으)ㄴ before 때, 전 or 뻔하다; 뻔해요 in the
+present; the wrong vowel (놓었어요, 앉어, 찾어); a merged vowel written out (사아다, 가아야); an 으
+on a vowel stem (가을까, 드리을, 넘어지을); the spellings natives get wrong too (됬어요, 되요,
+놓을께); 있은 for 있는, and 다행히에요, which is the adverb with 이다 on it. On a 듣기 or 말하기
+row a wrong button is heard against the tape, so one that means something the tape did not say
+can stay — 고장이 날 뻔했어요 for 사고가 — but one that means the same cannot: 다행이었어요 for
+다행이에요, 큰일이에요 for 큰일 났네요.
+
+Every swapped row's notes say the old form would be good Korean too, as Unit 15's do, and name the
+new one. `tests/test_wrong_buttons.js` pins all 113 by bank, page and row. The read also caught one
+page note with its facts backwards — 문형 연습 2 said 죽다 was the verb that takes a bare -ㄹ.
+
 ## A fourth row on the desk: the 익힘책's 복습
 
 The 익힘책 prints a review after every third unit — 복습 4 (Units 10-12, printed pp.56-73), 복습 5

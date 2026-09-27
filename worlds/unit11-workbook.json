@@ -1449,8 +1449,8 @@
               "ko": "시험 때마다"
             },
             {
-              "id": "b",
-              "ko": "시험마다"
+              "id": "b2",
+              "ko": "시험 때마다에"
             },
             {
               "id": "c",
@@ -1458,8 +1458,8 @@
             }
           ],
           "en": "I study in the library every exam period.",
-          "grammar": "시험 때 is the time around the exams. Dropping 때 changes it to each individual exam.",
-          "why": "시험마다 would count exams; the sentence is about the period around them. The third puts 에 under 마다 again."
+          "grammar": "시험 때 is the time around the exams. 시험마다 would be good Korean as well — every exam rather than every exam period — but the sentence you are rewriting says 시험 때.",
+          "why": "시험 때 is the whole of the time phrase, and 마다 goes straight on it. 시험 때에마다 puts 에 under 마다 and 시험 때마다에 puts it after: 마다 already says when, so it takes no 에 on either side."
         },
         {
           "n": 3,
@@ -1534,13 +1534,13 @@
               "ko": "고향 음식을 먹는 때마다"
             },
             {
-              "id": "c",
-              "ko": "고향 음식 먹을 때마다"
+              "id": "c2",
+              "ko": "고향 음식을 먹을 때에마다"
             }
           ],
           "en": "I think of my parents every time I eat food from home.",
-          "grammar": "생각이 나다 — a thought comes up — is the same 나다 as 배탈이 나다 on the 어휘 page. The thought is the subject.",
-          "why": "먹는 때 is the wrong modifier. The third drops 을, which is allowed in speech but not what the book is asking you to write."
+          "grammar": "생각이 나다 — a thought comes up — is the same 나다 as 배탈이 나다 on the 어휘 page. The thought is the subject. 고향 음식 먹을 때마다, with the 을 dropped, is how it is often said, and good Korean too.",
+          "why": "먹는 때 is the wrong modifier: 때 takes -(으)ㄹ. 먹을 때에마다 puts 에 under 마다, which already says when."
         },
         {
           "n": 6,
@@ -1746,13 +1746,13 @@
               "ko": "지하철을 타은 게 어때요"
             },
             {
-              "id": "c",
-              "ko": "지하철에 타는 게 어때요"
+              "id": "c2",
+              "ko": "지하철이 타는 게 어때요"
             }
           ],
           "en": "A: Shall we take the bus? — B: It’s rush hour and the roads are jammed, so how about the subway?",
-          "grammar": "타다 takes 을/를 for what you get on: 지하철을 타다, 버스를 타다. English uses no object there at all.",
-          "why": "타은 게 puts the 으 on a vowel stem and uses the past modifier at once. 지하철에 marks it as a destination rather than the thing ridden."
+          "grammar": "타다 takes 을/를 for what you ride: 지하철을 타다, 버스를 타다. English uses no object there at all. 지하철에 타다 is Korean as well, for climbing aboard, but the way you travel takes 을/를.",
+          "why": "타은 게 puts the 으 on a vowel stem and uses the past modifier at once. 지하철이 makes the train the one doing the riding."
         }
       ]
     },
@@ -1838,13 +1838,13 @@
               "ko": "타고 갈 기로 했어요"
             },
             {
-              "id": "c",
-              "ko": "타고 가기로 됐어요"
+              "id": "c2",
+              "ko": "타고 가기를 했어요"
             }
           ],
           "en": "A: What are you taking to Busan? — B: We’ve decided on the KTX.",
-          "grammar": "-기 goes on the plain stem, so 가다 gives 가기 and never 갈 기. 타고 가다 is one verb phrase and the ending lands on the second half.",
-          "why": "갈 기로 uses the future modifier where the noun-maker belongs. 됐어요 says the decision made itself."
+          "grammar": "-기 goes on the plain stem, so 가다 gives 가기 and never 갈 기. 타고 가다 is one verb phrase and the ending lands on the second half. 가기로 됐어요 would be good Korean too — decided for you, by someone else — but the reply says who decided: 가기로 했어요.",
+          "why": "갈 기로 uses the future modifier where the noun-maker belongs. 가기를 했어요 swaps the 로 of -기로 하다 for the object marker, and the pattern does not come apart that way."
         },
         {
           "n": 3,
@@ -2672,13 +2672,13 @@
               "ko": "제주도로 갈기로 했어요"
             },
             {
-              "id": "c",
-              "ko": "제주도에 가기로 했어요"
+              "id": "c2",
+              "ko": "제주도로 가기로 했아요"
             }
           ],
           "en": "We’ve decided on Jeju.",
-          "grammar": "-기 goes on the plain stem: 가기, never 갈기. 로 marks the direction, matching the 어디로 of the question.",
-          "why": "갈기로 uses the future modifier. 제주도에 marks a destination arrived at rather than a direction chosen, and the question asked 어디로.",
+          "grammar": "-기 goes on the plain stem: 가기, never 갈기. 로 marks the direction, matching the 어디로 of the question — and 제주도에 가기로 했어요 would answer it just as well.",
+          "why": "갈기로 uses the future modifier. 했아요 gives 하다 the 아 of a stem with ㅏ or ㅗ; 하다 has its own form, 했어요.",
           "audio": {
             "src": "audio/book/2b-u11-p4-1.mp3",
             "askEnd": 4.54
@@ -2742,13 +2742,13 @@
               "ko": "가족들과 저녁을 먹으기로 했어요"
             },
             {
-              "id": "c",
-              "ko": "가족들과 저녁을 먹기로 됐어요"
+              "id": "c2",
+              "ko": "가족들과 저녁을 먹기를 했어요"
             }
           ],
           "en": "I’m having dinner with my family.",
-          "grammar": "들 marks the plural on 가족, which Korean uses only when the plurality matters. 과 joins it to you after a consonant.",
-          "why": "먹으기로 adds a 으 that -기 never takes. 됐어요 says the arrangement made itself.",
+          "grammar": "들 marks the plural on 가족, which Korean uses only when the plurality matters. 과 joins it to you after a consonant. 먹기로 됐어요 would be good Korean too, for a dinner someone else arranged.",
+          "why": "먹으기로 adds a 으 that -기 never takes. 먹기를 했어요 swaps the 로 of -기로 하다 for the object marker.",
           "audio": {
             "src": "audio/book/2b-u11-p4-3.mp3",
             "askEnd": 5.64

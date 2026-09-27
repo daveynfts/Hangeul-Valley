@@ -336,8 +336,8 @@
           "answer": "c",
           "choices": [
             {
-              "id": "a",
-              "ko": "잃어버렸는데"
+              "id": "a2",
+              "ko": "잃어버렸어서"
             },
             {
               "id": "b",
@@ -350,7 +350,7 @@
           ],
           "en": "A: You have bought a new wallet. — B: Yes, I lost mine last week so I bought another.",
           "grammar": "잃어버리다 + -아/어서 gives the reason the second thing happened.",
-          "why": "잃어버리면 makes it a condition that has not happened, and the wallet is already bought. 잃어버렸는데 would only set the scene; 지난주에 and 다시 샀어요 want a cause, and the 정답 gives 잃어버려서."
+          "why": "잃어버리면 makes it a condition that has not happened, and the wallet is already bought. 잃어버렸어서 puts the past tense on -아서, which never takes it — the tense goes at the end: 잃어버려서 다시 샀어요. 잃어버렸는데 would be good Korean too, setting the scene for the new wallet; the 정답 gives 잃어버려서."
         },
         {
           "n": 3,
@@ -717,8 +717,8 @@
               "ko": "사다 주세요"
             },
             {
-              "id": "b",
-              "ko": "사 주세요"
+              "id": "b2",
+              "ko": "사아다 주세요"
             },
             {
               "id": "c",
@@ -727,7 +727,7 @@
           ],
           "en": "A: Where are you? — B: At the supermarket. — A: Then sorry, but could you buy a milk on your way.",
           "grammar": "사다 주다 buys it there and carries it here; 사 주다 only buys it for you.",
-          "why": "사 주세요 is the form without the coming — it would be right if you were both in the shop. 사고 주세요 puts two finished actions side by side and loses the errand altogether. The 정답 gives 사다 주세요."
+          "why": "사아다 주세요 writes out the 아 that 사다 has already swallowed: 사 + 아다 is 사다. 사고 주세요 puts two finished actions side by side and loses the errand altogether. 사 주세요 would be good Korean too, buying it for A; 올 때 asks for it to come back with B, and the 정답 gives 사다 주세요."
         },
         {
           "n": 2,
@@ -783,8 +783,8 @@
           "answer": "c",
           "choices": [
             {
-              "id": "a",
-              "ko": "찾아 주세요"
+              "id": "a2",
+              "ko": "찾어다 주세요"
             },
             {
               "id": "b",
@@ -797,7 +797,7 @@
           ],
           "en": "A: Where are you? — B: At the dry cleaner’s. — A: Then sorry, but could you pick my clothes up on your way.",
           "grammar": "찾아다 주다 here is collecting something left at a counter, not searching for something lost.",
-          "why": "찾아 주세요 is asking them to search, which is what you say when a thing is missing rather than waiting at a counter. 찾고 주세요 is two actions with no errand between them. The 정답 gives 찾아다 주세요."
+          "why": "찾어다 주세요 gives 찾다 the 어 of another vowel — 찾 has ㅏ, so 찾아다. 찾고 주세요 is two actions with no errand between them. 찾아 주세요 would be good Korean too, since 옷을 찾다 is collecting it from the counter; 올 때 asks for it to be brought back, and the 정답 gives 찾아다 주세요."
         },
         {
           "n": 4,
@@ -1052,8 +1052,8 @@
           "answer": "c",
           "choices": [
             {
-              "id": "a",
-              "ko": "넘어졌습니다"
+              "id": "a2",
+              "ko": "넘어진 뻔했습니다"
             },
             {
               "id": "b",
@@ -1066,7 +1066,7 @@
           ],
           "en": "After washing I ran to the bus stop. While running I nearly fell over.",
           "grammar": "-다가 marks an action interrupted by another: 뛰어가다가 is mid-run.",
-          "why": "넘어졌습니다 would put the writer on the pavement, and the running goes on. 넘어질 뻔했어요 is the right grammar in the wrong register — every other sentence here ends in -습니다. The 정답 gives 넘어질 뻔했습니다."
+          "why": "넘어진 뻔했습니다 puts the past -(으)ㄴ where only -(으)ㄹ goes — the near miss is past, but 뻔했습니다 already says so. 넘어질 뻔했어요 is the right grammar in the wrong register — every other sentence here ends in -습니다. 넘어졌습니다 would be good Korean too, for a morning with a fall in it; the 정답 gives 넘어질 뻔했습니다."
         },
         {
           "n": 2,
@@ -1082,8 +1082,8 @@
               "ko": "부딪힐 뻔했습니다"
             },
             {
-              "id": "b",
-              "ko": "부딪혔습니다"
+              "id": "b2",
+              "ko": "부딪힌 뻔했습니다"
             },
             {
               "id": "c",
@@ -1092,7 +1092,7 @@
           ],
           "en": "Then, while crossing the road, I was nearly hit by a car.",
           "grammar": "차에 부딪히다 — the thing you collide with takes 에, not 을/를.",
-          "why": "부딪혔습니다 would be a real collision, and the writer walks on to the cinema. 부딪힐 뻔합니다 leaves 뻔하다 in the present, which it never takes. The 정답 gives 부딪힐 뻔했습니다."
+          "why": "부딪힌 뻔했습니다 gives 뻔하다 the past modifier, where it only ever takes -(으)ㄹ. 부딪힐 뻔합니다 leaves 뻔하다 in the present, which it never takes. 부딪혔습니다 would be good Korean too, about a real collision; the 정답 gives 부딪힐 뻔했습니다."
         },
         {
           "n": 3,
@@ -1112,13 +1112,13 @@
               "ko": "떨어뜨릴 뻔했습니다"
             },
             {
-              "id": "c",
-              "ko": "떨어뜨렸습니다"
+              "id": "c2",
+              "ko": "떨어뜨린 뻔했습니다"
             }
           ],
           "en": "Taking my phone out to ring my girlfriend, I nearly dropped it on the floor.",
           "grammar": "떨어지다 is what a thing does; 떨어뜨리다 is what you do to it.",
-          "why": "떨어질 뻔했습니다 makes the phone the subject, but the sentence already has one — the writer is the one 꺼내다가. 떨어뜨렸습니다 drops it for real. The 정답 gives 떨어뜨릴 뻔했습니다."
+          "why": "떨어질 뻔했습니다 makes the phone the subject, but the sentence already has one — the writer is the one 꺼내다가. 떨어뜨린 뻔했습니다 puts -(으)ㄴ where 뻔하다 takes -(으)ㄹ. 떨어뜨렸습니다 would be good Korean too, if the phone did hit the floor; the 정답 gives 떨어뜨릴 뻔했습니다."
         },
         {
           "n": 4,
@@ -1134,8 +1134,8 @@
               "ko": "울을 뻔했습니다"
             },
             {
-              "id": "b",
-              "ko": "울었습니다"
+              "id": "b2",
+              "ko": "운 뻔했습니다"
             },
             {
               "id": "c",
@@ -1144,7 +1144,7 @@
           ],
           "en": "And during the film it was so sad that I nearly cried in front of my girlfriend.",
           "grammar": "울다 is a ㄹ stem: the ㄹ is already there, so -(으)ㄹ adds nothing — 울 뻔했습니다.",
-          "why": "울을 뻔했습니다 is the mistake this row exists for, an 으 pushed into a stem that ends in ㄹ already. 울었습니다 would have the writer in tears, and 앞에서 says the writer managed not to be. The 정답 gives 울 뻔했습니다."
+          "why": "울을 뻔했습니다 is the mistake this row exists for, an 으 pushed into a stem that ends in ㄹ already. 운 is 울다 with the past -ㄴ, its ㄹ dropped before it, and 뻔하다 takes -(으)ㄹ: 울. 울었습니다 would be good Korean too, if the tears had come; the 정답 gives 울 뻔했습니다."
         },
         {
           "n": 5,
@@ -1160,8 +1160,8 @@
               "ko": "내릴 뻔했습니다"
             },
             {
-              "id": "b",
-              "ko": "내렸습니다"
+              "id": "b2",
+              "ko": "내린 뻔했습니다"
             },
             {
               "id": "c",
@@ -1170,7 +1170,7 @@
           ],
           "en": "On the way home I was so tired I fell asleep on the bus, so I nearly missed my stop.",
           "grammar": "못 sits in front of the whole thing: 못 내릴 뻔했습니다 is almost failing to get off.",
-          "why": "못 is already printed, so 못 내렸습니다 would mean the writer really did ride past the stop. 내릴 뻔했어요 is the -어요 ending again in a passage written throughout in -습니다. The 정답 gives 내릴 뻔했습니다."
+          "why": "내린 뻔했습니다 gives 뻔하다 the past -(으)ㄴ, where it only takes -(으)ㄹ. 내릴 뻔했어요 is the -어요 ending again in a passage written throughout in -습니다. 못 내렸습니다 would be good Korean too — the writer rode past the stop — and the 정답 gives 내릴 뻔했습니다."
         }
       ],
       "type": "build"
@@ -1740,8 +1740,8 @@
           "answer": "b",
           "choices": [
             {
-              "id": "a",
-              "ko": "하얘요"
+              "id": "a2",
+              "ko": "하야졌어요"
             },
             {
               "id": "b",
@@ -1754,7 +1754,7 @@
           ],
           "en": "A: Look outside. It has snowed a lot. — B: Wow, the snow has turned everything white.",
           "grammar": "-아/어지다 on 하얗다 gives 하얘지다: not white, but gone white.",
-          "why": "눈이 와서 says something changed, and 다 counts that change across everything outside — 하얘요 would just describe a white world with no snowfall behind it. 하얗아졌어요 keeps the ㅎ before -아지다. The 정답 gives 하얘졌어요."
+          "why": "하얗아졌어요 keeps the ㅎ before -아지다, and 하야졌어요 drops it without the vowel change that goes with it: ㅑ and 아 fuse to ㅒ, 하얘졌어요. 하얘요 would be good Korean too — everything outside is white — but 눈이 와서 tells how it got that way, and the 정답 gives 하얘졌어요."
         }
       ],
       "type": "build"
@@ -1932,13 +1932,13 @@
               "ko": "교실에 앉고 있어요"
             },
             {
-              "id": "c",
-              "ko": "교실에 앉았어요"
+              "id": "c2",
+              "ko": "교실에 앉어 있어요"
             }
           ],
           "en": "A: The classroom is quiet now. — B: Yes, the students are sitting in the classroom.",
           "grammar": "앉다 needs no passive — it is already something you do to yourself, so -아/어 있다 goes straight on.",
-          "why": "교실에 앉고 있어요 would be twenty students in the act of lowering themselves onto chairs. 교실에 앉았어요 reports the moment they sat down rather than the quiet that followed. The 정답 gives 교실에 앉아 있어요."
+          "why": "교실에 앉고 있어요 would be twenty students in the act of lowering themselves onto chairs. 교실에 앉어 있어요 gives 앉다 the 어 of another vowel — 앉 has ㅏ, so 앉아. 교실에 앉았어요 would be good Korean too — they have sat down — but the 정답 gives 교실에 앉아 있어요."
         },
         {
           "n": 6,
@@ -2342,7 +2342,7 @@
       "blurbEn": "Two verbs from the teacher, joined by -다가 and finished with 뻔했어요.",
       "instructionKo": "[보기]와 같이 대답해 보세요.",
       "instructionEn": "Answer as shown in the example.",
-      "noteEn": "The teacher gives two verbs in the dictionary form and you have to do two things to them at once: the first becomes -다가, and the second takes -(으)ㄹ 뻔했어요. Both of the 나다 cues keep their 이/가, and the last item is the only one whose verb takes a bare -ㄹ rather than -을, because 죽다 ends in a consonant and 죽을 is what comes out.",
+      "noteEn": "The teacher gives two verbs in the dictionary form and you have to do two things to them at once: the first becomes -다가, and the second takes -(으)ㄹ 뻔했어요. Both of the 나다 cues keep their 이/가, and the last item is the only one whose verb takes -을 rather than a bare -ㄹ, because 죽다 ends in a consonant.",
       "example": {
         "lines": [
           {
@@ -2386,13 +2386,13 @@
               "ko": "요리를 하다가 불이 날 뻔했어요"
             },
             {
-              "id": "c",
-              "ko": "요리를 해서 불이 날 뻔했어요"
+              "id": "c2",
+              "ko": "요리를 하다가 불이 날 뻔해요"
             }
           ],
           "en": "T: cook, a fire starts — S: I nearly started a fire while cooking.",
           "grammar": "-다가 is the join this drill wants: one action broken off by another.",
-          "why": "요리를 하다가 불을 날 뻔했어요 puts 을 on something 나다 cannot take. 요리를 해서 불이 날 뻔했어요 turns the cooking into the cause rather than the thing interrupted.",
+          "why": "요리를 하다가 불을 날 뻔했어요 puts 을 on something 나다 cannot take. 요리를 하다가 불이 날 뻔해요 leaves 뻔하다 in the present, and a near miss is only told once it is over. 요리를 해서 불이 날 뻔했어요 would be good Korean too, with the cooking as the cause; the drill asks for the -다가 of the 보기.",
           "audio": {
             "src": "audio/book/2b-u17-p2-1.mp3",
             "askEnd": 3.55
@@ -2456,13 +2456,13 @@
               "ko": "버스에서 내리다가 넘어진 뻔했어요"
             },
             {
-              "id": "c",
-              "ko": "버스에서 내려서 넘어질 뻔했어요"
+              "id": "c2",
+              "ko": "버스에서 내리다가 넘어지을 뻔했어요"
             }
           ],
           "en": "T: get off the bus, fall over — S: I nearly fell over getting off the bus.",
           "grammar": "넘어지다 is a vowel stem, so -(으)ㄹ is just ㄹ: 넘어질.",
-          "why": "버스에서 내리다가 넘어진 뻔했어요 uses -(으)ㄴ where only -(으)ㄹ goes. 버스에서 내려서 넘어질 뻔했어요 makes getting off the reason rather than the moment it happened in.",
+          "why": "버스에서 내리다가 넘어진 뻔했어요 uses -(으)ㄴ where only -(으)ㄹ goes, and 넘어지을 뻔했어요 gives the vowel stem an 으 it does not take. 버스에서 내려서 넘어질 뻔했어요 would be good Korean too, stepping off first and nearly falling after; the drill asks for the -다가 of the 보기.",
           "audio": {
             "src": "audio/book/2b-u17-p2-3.mp3",
             "askEnd": 3.8

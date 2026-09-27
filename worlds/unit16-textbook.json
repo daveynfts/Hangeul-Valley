@@ -282,8 +282,8 @@
               "ko": "예매해 놓았어요"
             },
             {
-              "id": "yemae_plain",
-              "ko": "예매했어요"
+              "id": "yemae_eo",
+              "ko": "예매해 놓었어요"
             },
             {
               "id": "yemae_bad",
@@ -291,8 +291,8 @@
             }
           ],
           "en": "A: It’s the weekend — do you think there are any tickets? — B: Don’t worry, I booked it in advance.",
-          "grammar": "예매하다 becomes 예매해 in front of 놓다, the same contraction every 하다 verb makes.",
-          "why": "예매했어요 says the booking happened and stops there; 예매해 놓았어요 says the ticket is still booked now, which is what answers 있을까요. 예매하 놓았어요 is the contraction not made.",
+          "grammar": "예매하다 becomes 예매해 in front of 놓다, the same contraction every 하다 verb makes. 제가 예매했어요 would be good Korean too, and answers the worry as well; 놓다 adds that the ticket is there waiting.",
+          "why": "예매해 놓았어요 says the ticket is booked and still booked now, which is what answers 있을까요. 예매하 놓았어요 is the contraction not made, and 예매해 놓었어요 gives 놓다 the 어 of another vowel — 놓 has ㅗ, so 놓았어요.",
           "audio": {
             "src": "audio/book/2b-u16-d01.mp3",
             "labelEn": "It’s the weekend — do you think there are any tickets?"
@@ -314,8 +314,8 @@
               "ko": "사 놓았어요"
             },
             {
-              "id": "sa_plain",
-              "ko": "샀어요"
+              "id": "sa_eo",
+              "ko": "사 놓었어요"
             },
             {
               "id": "sa_bad",
@@ -323,8 +323,8 @@
             }
           ],
           "en": "I bought a bag in advance to give to my younger sibling.",
-          "grammar": "사다 already ends in ㅏ, so the 아 is absorbed: 사 놓다, never 사아 놓다.",
-          "why": "샀어요 is a shopping trip; 사 놓았어요 is a bag waiting in a cupboard for someone, which is what 주려고 is for. 사아 놓았어요 writes out the vowel that has already merged.",
+          "grammar": "사다 already ends in ㅏ, so the 아 is absorbed: 사 놓다, never 사아 놓다. 동생에게 주려고 가방을 샀어요 would be good Korean too; 놓다 adds that it is put by.",
+          "why": "사 놓았어요 is a bag waiting in a cupboard for someone, which is what 주려고 is for. 사아 놓았어요 writes out the vowel that has already merged, and 사 놓었어요 gives 놓다 the wrong vowel: 놓 has ㅗ, so 놓았어요.",
           "art": "items/unit16_037_to_buy_something_in_advance.png"
         },
         {
@@ -342,8 +342,8 @@
               "ko": "열어 놓으세요"
             },
             {
-              "id": "yeoreo_plain",
-              "ko": "여세요"
+              "id": "yeoreo_a",
+              "ko": "열어 놓아세요"
             },
             {
               "id": "yeoreo_bad",
@@ -351,8 +351,8 @@
             }
           ],
           "en": "It’s hot, so leave the window open.",
-          "grammar": "열다 takes 어, and the ㄹ stays because 놓다 does not start with ㄴ, ㅂ or ㅅ: 열어 놓다.",
-          "why": "여세요 asks for the window to be opened and says nothing about leaving it that way, which is the only reason 더우니까 is in front of it. 열 놓으세요 has no ending on 열다 at all.",
+          "grammar": "열다 takes 어, and the ㄹ stays because 놓다 does not start with ㄴ, ㅂ or ㅅ: 열어 놓다. 더우니까 창문을 여세요 would be good Korean too — open it — without saying it should stay that way.",
+          "why": "열어 놓으세요 asks for the window to be left open, which is why 더우니까 is in front of it. 열 놓으세요 has no ending on 열다 at all, and 열어 놓아세요 puts the 아 of 놓아요 into -으세요, which takes the plain stem: 놓 + 으세요.",
           "art": "items/unit16_036_to_open_the_window.png"
         }
       ],
@@ -514,13 +514,13 @@
               "ko": "카드 대신"
             },
             {
-              "id": "hyeongeum_bad",
-              "ko": "현금을 대신해서"
+              "id": "hyeongeum_eul",
+              "ko": "현금을 대신"
             }
           ],
           "en": "I have to pay the taxi fare, but I have no cash. — You can pay by card instead of with cash.",
-          "grammar": "현금 is what is missing, so it is what 대신 attaches to.",
-          "why": "카드 대신 refuses the card and leaves the fare unpaid. 현금을 대신해서 is the verb 대신하다 conjugated, which is a different construction and not the one the page teaches."
+          "grammar": "현금 is what is missing, so it is what 대신 attaches to. 현금을 대신해서 would be good Korean as well, with the verb 대신하다; the page teaches the noun.",
+          "why": "카드 대신 refuses the card and leaves the fare unpaid. 현금을 대신 gives 대신 an object marker it cannot take: as a noun it goes straight after what is missing — 현금 대신 — and only the verb 대신하다 takes 을: 현금을 대신해서."
         }
       ],
       "type": "build"
@@ -586,8 +586,8 @@
               "ko": "예매해 놓았어요"
             },
             {
-              "id": "yemae_plain",
-              "ko": "예매했어요"
+              "id": "yemae_eo",
+              "ko": "예매해 놓었어요"
             },
             {
               "id": "sa",
@@ -596,7 +596,7 @@
           ],
           "en": "Yes, I booked the train tickets a month ago.",
           "grammar": "The page’s own V-아/어 놓다, with 미리 in front of it doing the same work twice over.",
-          "why": "예매했어요 is not wrong Korean and loses what 미리 is there for — the ticket is booked and still booked. 사고 있어요 would put Jiyeon at the counter mid-sentence.",
+          "why": "예매해 놓았어요 is what 미리 is there for — the ticket is booked and still booked — though 예매했어요 would be good Korean too. 예매해 놓었어요 gives 놓다 the wrong vowel: 놓 has ㅗ, so 놓았어요. 사고 있어요 would put Jiyeon at the counter mid-sentence.",
           "audio": {
             "src": "audio/book/2b-u16-d06.mp3",
             "labelEn": "Yes, I booked the train tickets a month ago."
@@ -656,13 +656,13 @@
               "ko": "밥하고"
             },
             {
-              "id": "bap_bad",
-              "ko": "밥 대신에"
+              "id": "bap_eul",
+              "ko": "밥 대신을"
             }
           ],
           "en": "A: Is there any special food on Seollal? — B: On Seollal we eat rice-cake soup instead of rice.",
           "grammar": "The chapter title, and the answer to 특별한 음식이 있어요 — special because it takes rice’s place.",
-          "why": "밥하고 떡국 serves both, which is not what makes the soup special. 밥 대신에 adds an 에 the book does not print and that 대신 does not need.",
+          "why": "밥하고 떡국 serves both, which is not what makes the soup special. 밥 대신을 gives 대신 an object marker: it is a noun meaning in place of, and takes 에 if anything — 밥 대신에, which is good Korean too, only longer than the tape’s 밥 대신.",
           "audio": {
             "src": "audio/book/2b-u16-d03.mp3",
             "labelEn": "Is there any special food eaten on Seollal?"
@@ -693,13 +693,13 @@
               "ko": "끓을 줄 알아요"
             },
             {
-              "id": "kkeurhil_su",
-              "ko": "끓일 수 있어요"
+              "id": "kkeurhil_eo",
+              "ko": "끓일 줄 알어요"
             }
           ],
           "en": "A: Jiyeon, do you know how to make tteokguk? — B: Of course. I’ll make it for you when you come to my place.",
-          "grammar": "끓이다 is the transitive one — you boil something; 끓다 is what the soup does by itself.",
-          "why": "끓을 줄 알아요 asks whether Jiyeon knows how to come to the boil. 끓일 수 있어요 asks whether Jiyeon is able to right now, where the page is asking about the skill.",
+          "grammar": "끓이다 is the transitive one — you boil something; 끓다 is what the soup does by itself. 떡국 끓일 수 있어요? would be good Korean too; -(으)ㄹ 줄 알다 is the page’s way of asking about a skill.",
+          "why": "끓을 줄 알아요 asks whether Jiyeon knows how to come to the boil. 끓일 줄 알어요 gives 알다 the 어 of a stem without ㅏ or ㅗ — 알 has ㅏ, so 알아요.",
           "audio": {
             "src": "audio/book/2b-u16-d13.mp3",
             "labelEn": "Jiyeon, do you know how to make tteokguk?"
@@ -772,17 +772,17 @@
               "ko": "갈까 해요"
             },
             {
-              "id": "gaseyo",
-              "ko": "가세요"
+              "id": "gakka2",
+              "ko": "가까 해요"
             },
             {
-              "id": "gago",
-              "ko": "가고 싶어요"
+              "id": "gasseulkka",
+              "ko": "갔을까 해요"
             }
           ],
           "en": "I am thinking of going to the sea for this summer holiday.",
-          "grammar": "-(으)ㄹ까 하다 is about the speaker’s own plan, which is why it cannot be an imperative.",
-          "why": "가세요 tells somebody else to go. 가고 싶어요 is a wish rather than a plan — it says nothing about whether anything has been arranged."
+          "grammar": "-(으)ㄹ까 하다 is about the speaker’s own plan, and it takes the plain stem: 가 + ㄹ까 해요 → 갈까 해요.",
+          "why": "가까 해요 has lost the ㄹ the whole form is built on, and 갔을까 해요 puts a plan in the past. 바다로 가세요 and 가고 싶어요 would both be good Korean here — advice, and a wish — but the sentence is the speaker’s own plan."
         },
         {
           "n": 3,
@@ -850,13 +850,13 @@
               "ko": "하 테니까"
             },
             {
-              "id": "haesseu",
-              "ko": "했으니까"
+              "id": "haesseul",
+              "ko": "했을 테니까"
             }
           ],
           "en": "A: Shall I do the cleaning? — B: I’ll do the cleaning, so could you wash the dishes.",
           "grammar": "하다 takes -ㄹ 테니까, and the 제가 in front of it is what makes the whole thing an offer.",
-          "why": "하 테니까 has no ㄹ. 했으니까 gives a reason drawn from cleaning that is already done, and A has only just offered to start.",
+          "why": "하 테니까 has no ㄹ. 했을 테니까 is a guess about something already done, and the cleaning has not started. 청소는 제가 했으니까 would be good Korean too — I have done it already — but A has only just offered.",
           "audio": {
             "src": "audio/book/2b-u16-d17.mp3",
             "labelEn": "Shall I do the cleaning?"
@@ -904,8 +904,8 @@
               "ko": "못 받을 테니까"
             },
             {
-              "id": "anbadeul",
-              "ko": "안 받을 테니까"
+              "id": "motbadneun",
+              "ko": "못 받는 테니까"
             },
             {
               "id": "motbadeu",
@@ -913,8 +913,8 @@
             }
           ],
           "en": "In class now and will not be able to answer, so call later.",
-          "grammar": "못 is the inability the 수업 중이라서 is a reason for; 안 would be a choice.",
-          "why": "안 받을 테니까 is choosing not to answer, where the class is what stands in the way. 못 받으 테니까 stops halfway through the ending."
+          "grammar": "못 is the inability the 수업 중이라서 is a reason for. 안 받을 테니까 would be good Korean too — in class, so not answering — but 못 is what the class makes it.",
+          "why": "못 받는 테니까 puts the present modifier where 테니까 takes -(으)ㄹ, and 못 받으 테니까 stops halfway through the ending."
         },
         {
           "n": 4,
@@ -1005,13 +1005,13 @@
               "ko": "초대할까 해요"
             },
             {
-              "id": "chodae_geo",
-              "ko": "초대할 건데"
+              "id": "chodae_eun",
+              "ko": "초대할까 하은데"
             }
           ],
           "en": "Then I’m thinking of inviting my classmates over on Saturday — do you want to come?",
           "grammar": "하는데 keeps the sentence open for 너도 올래, and the whole turn is 반말 to a friend.",
-          "why": "초대할까 해요 is polite where the rest of the line is not, and it closes the sentence. 초대할 건데 is a decision already made, which leaves 너도 올래 sounding like a summons.",
+          "why": "초대할까 해요 is polite where the rest of the line is not, and it closes the sentence. 초대할까 하은데 puts an 으 into -는데, which goes straight on the stem: 하는데. 초대할 건데 would be good Korean too — the plan settled, and the invitation still a friendly one.",
           "audio": {
             "src": "audio/book/2b-u16-d21.mp3",
             "labelEn": "Then I’m thinking of inviting my classmates over — do you want to come?"
@@ -1063,8 +1063,8 @@
               "ko": "만들 줄 알아"
             },
             {
-              "id": "su",
-              "ko": "만들 수 있어"
+              "id": "jul_eo",
+              "ko": "만들 줄 알어"
             },
             {
               "id": "jul_bad",
@@ -1072,8 +1072,8 @@
             }
           ],
           "en": "I know how to make songpyeon. I’ll help you, so don’t worry.",
-          "grammar": "V-(으)ㄹ 줄 알다 is knowing how; V-(으)ㄹ 수 있다 is being able to right now.",
-          "why": "만들 수 있어 says Kelly is free to, not that Kelly has ever done it — and Julien’s problem is never having done it. 만들 줄 알다 is the dictionary form left unconjugated.",
+          "grammar": "V-(으)ㄹ 줄 알다 is knowing how. 나 송편 만들 수 있어 would be good Korean too — -(으)ㄹ 수 있다 covers a skill as well — but the page teaches 줄 알다.",
+          "why": "만들 줄 알어 gives 알다 the 어 of a stem without ㅏ or ㅗ — 알 has ㅏ, so 알아. 만들 줄 알다 is the dictionary form left unconjugated.",
           "audio": {
             "src": "audio/book/2b-u16-d27.mp3",
             "labelEn": "I know how to make songpyeon. I’ll help you, so don’t worry."
@@ -1129,8 +1129,8 @@
               "ko": "미리 봐 놓을게"
             },
             {
-              "id": "mirib_plain",
-              "ko": "미리 볼게"
+              "id": "mirib_kke",
+              "ko": "미리 봐 놓을께"
             },
             {
               "id": "mirib_bad",
@@ -1139,7 +1139,7 @@
           ],
           "en": "That’s great. Then I’ll do the shopping in advance.",
           "grammar": "보다 becomes 봐 in front of 놓다, and 놓다 is what leaves the shopping done for Saturday.",
-          "why": "미리 볼게 is a trip to the shops and nothing waiting afterwards, which is not what a party on Saturday needs. 미리 보 놓을게 keeps the stem where 봐 is needed.",
+          "why": "미리 봐 놓을게 leaves the shopping done and waiting for Saturday, though 미리 볼게 would be good Korean too. 미리 보 놓을게 keeps the stem where 봐 is needed, and 봐 놓을께 spells the ㄹ게 of a promise with ㄲ — it is said [께] and written 게.",
           "audio": {
             "src": "audio/book/2b-u16-d28.mp3",
             "labelEn": "That’s great. Then I’ll do the shopping in advance."
@@ -1550,13 +1550,13 @@
               "ko": "나눠 주고"
             },
             {
-              "id": "meokgo",
-              "ko": "먹고"
+              "id": "meogeogo",
+              "ko": "나눠 먹어고"
             }
           ],
           "en": "People make songpyeon and share it with the neighbours, and enjoy talking with relatives they have not seen for a long time.",
           "grammar": "나눠 먹다 is sharing something and eating it together; 나눠 주다 is only handing it out.",
-          "why": "나눠 주고 gives the songpyeon away and leaves nobody eating together, which is what 이웃들과 is for. 먹고 drops the sharing entirely and makes 이웃들과 do work it cannot.",
+          "why": "나눠 주고 gives the songpyeon away and leaves nobody eating together, which is what 이웃들과 is for. 나눠 먹어고 puts -고 on the 먹어 of 먹어요, where -고 goes on the plain stem: 먹고. 이웃들과 먹고 would be good Korean too, eating with the neighbours, only without the sharing out.",
           "art": "items/unit16_104_to_share_food_out.png"
         }
       ],
@@ -1776,8 +1776,8 @@
               "ko": "전통"
             },
             {
-              "id": "myeongjeol",
-              "ko": "명절"
+              "id": "hyuil",
+              "ko": "휴일"
             },
             {
               "id": "yeonhyu",
@@ -1786,7 +1786,7 @@
           ],
           "en": "Do you know any Korean traditional game or song?",
           "grammar": "전통 놀이 is the phrase the 읽기 passage uses too — 추석에 하는 전통 놀이에는 씨름, 강강술래.",
-          "why": "명절 놀이 would narrow it to the holidays, and the question is about Korean tradition generally. 연휴 counts days off and cannot modify 놀이.",
+          "why": "휴일 and 연휴 count days off and cannot modify 놀이. 명절 놀이 would be good Korean too — holiday games — but the question is about Korean tradition generally.",
           "art": "items/unit16_019_tradition.png"
         },
         {
@@ -1833,17 +1833,17 @@
               "ko": "놀이를"
             },
             {
-              "id": "norae",
-              "ko": "노래를"
+              "id": "oseul",
+              "ko": "옷을"
             },
             {
-              "id": "eumsigeul",
-              "ko": "음식을"
+              "id": "chaegeul",
+              "ko": "책을"
             }
           ],
           "en": "What do people in your country play on traditional holidays?",
-          "grammar": "놀이를 하다 is playing a game; a song would take 부르다 and food would take 먹다.",
-          "why": "노래를 합니다 is not how Korean says singing — that is 노래를 부릅니다. 음식을 합니다 is cooking, and the 생각 나누기 question is about games.",
+          "grammar": "놀이를 하다 is playing a game, and 하다 goes with a good many nouns — 노래를 하다, 음식을 하다 — though not with every one: 옷은 입고 책은 읽어요.",
+          "why": "옷을 합니다 and 책을 합니다 are not Korean: clothes are worn, 옷을 입다, and a book is read, 책을 읽다. 어떤 노래를 합니까? and 어떤 음식을 합니까? would both be good Korean — singing and cooking — but the book’s 생각 나누기 question asks about games.",
           "art": "items/unit16_125_a_traditional_game_or_song.png"
         }
       ],
@@ -2072,8 +2072,8 @@
               "ko": "쉴까 해요"
             },
             {
-              "id": "swil",
-              "ko": "쉴 거예요"
+              "id": "swieul",
+              "ko": "쉬을까 해요"
             },
             {
               "id": "swieo",
@@ -2082,7 +2082,7 @@
           ],
           "en": "A: What are you doing this weekend? — B: I’m thinking of just resting at home.",
           "grammar": "The box gives each form once, and this row is the -(으)ㄹ까 하다 one.",
-          "why": "쉴 거예요 is a decision and uses none of the four forms in the box. 쉬어 놓았어요 takes the -아/어 놓다 that row 4 needs, and resting is not something you leave done."
+          "why": "쉬을까 해요 gives the vowel stem 쉬 an 으 it does not take: 쉴까 해요. 쉬어 놓았어요 takes the -아/어 놓다 that row 4 needs, and resting is not something you leave done. 쉴 거예요 would be good Korean too, but it uses none of the box’s four forms."
         },
         {
           "n": 2,
@@ -2140,13 +2140,13 @@
               "ko": "친구 대신"
             },
             {
-              "id": "jeoreul",
-              "ko": "저를 대신해서"
+              "id": "jeoreul2",
+              "ko": "저를 대신"
             }
           ],
           "en": "A: Why did someone else drive your car? — B: I had been drinking, so a friend drove instead of me.",
           "grammar": "This is the 대신 row, and the noun in brackets is 저 — the one who could not drive.",
-          "why": "친구 대신 has the friend replaced by the friend. 저를 대신해서 is the verb 대신하다, which is a different construction from the 대신 the box prints."
+          "why": "친구 대신 has the friend replaced by the friend. 저를 대신 gives the noun 대신 an object marker; 저를 대신해서 would be good Korean, with the verb 대신하다, but the box prints the noun."
         },
         {
           "n": 4,
@@ -2168,8 +2168,8 @@
               "ko": "사 놓았어요"
             },
             {
-              "id": "satt",
-              "ko": "샀어요"
+              "id": "sa_eo",
+              "ko": "사 놓었어요"
             },
             {
               "id": "salkka",
@@ -2178,7 +2178,7 @@
           ],
           "en": "A: You’re going home this time, aren’t you? Have you got presents for your parents? — B: Yes, I bought them all already.",
           "grammar": "This is the -아/어 놓다 row: the presents are bought and waiting to be taken.",
-          "why": "샀어요 is true and uses none of the box’s four forms. 살까 해요 takes the -(으)ㄹ까 하다 that row 1 needs, and it contradicts the 벌써 다 in front of it."
+          "why": "사 놓었어요 gives 놓다 the 어 of another vowel — 놓 has ㅗ, so 놓았어요. 살까 해요 takes the -(으)ㄹ까 하다 that row 1 needs, and it contradicts the 벌써 다 in front of it. 샀어요 would be good Korean too, but it uses none of the box’s forms."
         }
       ],
       "type": "build"

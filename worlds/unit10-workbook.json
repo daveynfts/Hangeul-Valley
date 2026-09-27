@@ -3937,8 +3937,8 @@
               "ko": "제주도에서"
             },
             {
-              "id": "jejudoreul",
-              "ko": "제주도를"
+              "id": "jejudoege",
+              "ko": "제주도에게"
             }
           ],
           "answer2": "gallaeyo",
@@ -3958,7 +3958,7 @@
           ],
           "en": "Shall we go to Jeju for the holidays?",
           "why": "The same island as the 문법과 표현 pages, and the same 이번 방학 as 연습 2. Going somewhere makes it a destination, so it takes 에.",
-          "grammar": "제주도에 갈래요. 에서 would be where something happens — 제주도에서 수영할래요 — and 가다 has no object, so 제주도를 is not available either. 갈게요 promises rather than asks, which is why it cannot end a question. 갈레요 is neither — just 래 written as 레.",
+          "grammar": "제주도에 갈래요. 에서 would be where something happens — 제주도에서 수영할래요 — and 에게 is for a person you go to, not a place: 친구에게 가요, but 제주도에 가요. You will also hear 제주도를 가요, since 을/를 can mark where you are going, but the pattern here is 에. 갈게요 promises rather than asks, which is why it cannot end a question. 갈레요 is neither — just 래 written as 레.",
           "audio": {
             "src": "audio/book/2b-u10-p3-1.mp3",
             "askEnd": 4.99
@@ -4041,8 +4041,8 @@
               "ko": "우리 집에서"
             },
             {
-              "id": "urijibeul",
-              "ko": "우리 집을"
+              "id": "urijiphante",
+              "ko": "우리 집한테"
             }
           ],
           "answer2": "ollaeyo",
@@ -4062,7 +4062,7 @@
           ],
           "en": "Do you want to come to mine on Sunday?",
           "why": "오다 rather than 가다, because the speaker is already where the listener would be coming to. 우리 집 is my place — Korean says our house for the one you live in, whoever else lives there.",
-          "grammar": "오다 → 올래요: a vowel stem, so no 으 goes in. 오을래요 spells out an 으 that only a consonant stem takes, as in 먹을래요 on the next row. 올게요 is a promise to come, which is not something you can ask somebody else.",
+          "grammar": "오다 → 올래요: a vowel stem, so no 으 goes in. 오을래요 spells out an 으 that only a consonant stem takes, as in 먹을래요 on the next row. 올게요 is a promise to come, which is not something you can ask somebody else. And the place you come to takes 에: 우리 집에서 would be where you set off from, and 한테 is for a person — 친구한테 와요, but 우리 집에 와요.",
           "audio": {
             "src": "audio/book/2b-u10-p3-3.mp3",
             "askEnd": 4.61
