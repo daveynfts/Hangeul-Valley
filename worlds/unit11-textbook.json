@@ -1616,13 +1616,13 @@
               "ko": "이나"
             },
             {
-              "id": "hago",
-              "ko": "하고"
+              "id": "geona",
+              "ko": "거나"
             }
           ],
           "en": "A lot of people take expensive supplements or eat food that is good for them.",
-          "why": "영양제 ends in a vowel, so the particle is 나 rather than 이나: 영양제나 몸에 좋은 음식. 이나 belongs after a consonant — 약이나, 밥이나. 하고 means and rather than or, and the sentence is listing alternatives, not both together.",
-          "grammar": "N(이)나 N, either … or, with the vowel rule every Korean particle pair follows: 나 after a vowel, 이나 after a consonant. The verb-level equivalent is the -거나 two lines above."
+          "why": "영양제 ends in a vowel, so the particle is 나 rather than 이나: 영양제나 몸에 좋은 음식. 이나 belongs after a consonant — 약이나, 밥이나. 거나 is the or of verbs and adjectives, the 짜거나 two lines above; a noun takes 나 or 이나.",
+          "grammar": "N(이)나 N, either … or, with the vowel rule every Korean particle pair follows: 나 after a vowel, 이나 after a consonant. The verb-level equivalent is the -거나 two lines above. 영양제하고 would be good Korean too, eating both rather than either; the passage offers them as alternatives."
         }
       ]
     },
@@ -1771,13 +1771,13 @@
               "ko": "있는"
             },
             {
-              "id": "gyesil",
-              "ko": "계실"
+              "id": "isseusin",
+              "ko": "있으신"
             }
           ],
           "en": "I think it would be good to send some to my parents back home as well.",
-          "why": "부모님 takes the honorific throughout the sentence — 부모님께도, not 부모님에게도 — so the verb in front of it has to be 계시다 rather than 있다: 고향에 계신 부모님. 있는 부모님 is grammatical and drops the respect the rest of the sentence keeps. 계실 is the future modifier and would put the parents somewhere they are not yet.",
-          "grammar": "있다 → 계시다 for a person you respect, and 에게/한테 → 께 with it: 부모님께 선물하다. The whole sentence agrees or none of it does."
+          "why": "부모님 takes the honorific throughout the sentence — 부모님께도, not 부모님에게도 — so the verb in front of it has to be 계시다 rather than 있다: 고향에 계신 부모님. 있는 부모님 is grammatical and drops the respect the rest of the sentence keeps. 있으신 puts the honorific on the wrong verb: 있으시다 is for what someone has — 시간이 있으세요? — and where a person is takes 계시다.",
+          "grammar": "있다 → 계시다 for a person you respect, and 에게/한테 → 께 with it: 부모님께 선물하다. The whole sentence agrees or none of it does. 고향에 계실 부모님 would be good Korean as well — the -(으)ㄹ of a letter, picturing them at home now."
         }
       ]
     },

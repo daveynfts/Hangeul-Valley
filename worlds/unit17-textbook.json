@@ -159,8 +159,8 @@
               "ko": "두고 나왔습니다"
             },
             {
-              "id": "irheo",
-              "ko": "잃어버렸습니다"
+              "id": "nohchyeot",
+              "ko": "놓쳤습니다"
             },
             {
               "id": "tteoreo",
@@ -168,8 +168,8 @@
             }
           ],
           "en": "At about seven on the evening of 20 July I left my camera in the fourth-floor classroom.",
-          "grammar": "두고 나오다 — you put it down and came out without it, which is how things get lost.",
-          "why": "잃어버렸습니다 is the outcome rather than the act, and the passage says the camera was still there when the writer walked out. 떨어뜨렸습니다 would have the writer drop it. This is the first sentence of the 읽기 notice on p.194."
+          "grammar": "두고 나오다 — you put it down and came out without it, which is how things get lost. 놓고 나오다 says the same; 놓치다 does not.",
+          "why": "놓쳤습니다 is a bus or a chance going on without you, or a thing slipping out of your hand — not a camera left behind on a desk. 떨어뜨렸습니다 would have the writer drop it. 잃어버렸습니다 would be good Korean too, usually with 교실에서, but the notice on p.194 begins with how the camera came to be left. This is the first sentence of that 읽기 notice."
         }
       ],
       "type": "build"
@@ -460,8 +460,8 @@
               "ko": "사다 주세요"
             },
             {
-              "id": "sajwo",
-              "ko": "사 주세요"
+              "id": "saada",
+              "ko": "사아다 주세요"
             },
             {
               "id": "sago",
@@ -469,8 +469,8 @@
             }
           ],
           "en": "Sorry, but could you buy a newspaper on your way home.",
-          "grammar": "집에 올 때 is what makes it 사다 주다 rather than 사 주다 — the buying happens elsewhere.",
-          "why": "사 주세요 is buying something for somebody where you both are, with no journey in it. 사고 주세요 puts two finished actions side by side and loses the errand."
+          "grammar": "집에 올 때 is what the -아다 is for: the buying happens elsewhere and the paper comes back with you. 사 and 아 merge, so it is spelled 사다 주다.",
+          "why": "사아다 주세요 writes out the 아 that 사다 has already swallowed: 사 + 아다 is 사다. 사고 주세요 puts two finished actions side by side and loses the errand. 사 주세요 would be good Korean too — buy me one — but 집에 올 때 is asking for the paper to come home with you."
         }
       ],
       "type": "build"
@@ -507,8 +507,8 @@
               "ko": "지각할 뻔했어요"
             },
             {
-              "id": "jigakhaet",
-              "ko": "지각했어요"
+              "id": "jigakppeonhae",
+              "ko": "지각할 뻔해요"
             },
             {
               "id": "jigakhalgeot",
@@ -517,7 +517,7 @@
           ],
           "en": "A: You are later than usual today. — B: Yes, the traffic was bad and I nearly arrived late.",
           "grammar": "지각하다 is being late for something you are expected at, and 뻔하다 says it was avoided.",
-          "why": "지각했어요 would mean B really was late, and A only says 늦게 왔네요 — later than usual, not late. 지각할 것 같아요 is a guess about something still ahead, and B is already here.",
+          "why": "지각할 뻔해요 puts 뻔하다 in the present, and a near miss is only ever told once it is over: 뻔했어요. 지각할 것 같아요 is a guess about something still ahead, and B is already here. 지각했어요 would be good Korean too, if B had in fact been late; 뻔했어요 says B only just made it.",
           "audio": {
             "src": "audio/book/2b-u17-d04.mp3",
             "labelEn": "A: You are later than usual today. — B: Yes, the traffic was bad and I nearly arrived late."
@@ -542,13 +542,13 @@
               "ko": "늦은 뻔했어요"
             },
             {
-              "id": "neujeot",
-              "ko": "늦었어요"
+              "id": "neujeul_a",
+              "ko": "늦을 뻔했아요"
             }
           ],
           "en": "I got up late and nearly missed my appointment.",
           "grammar": "뻔하다 takes -(으)ㄹ and nothing else: 늦을 뻔했어요.",
-          "why": "늦은 뻔했어요 puts -(으)ㄴ where only -(으)ㄹ goes. 늦었어요 drops the near miss altogether, and this page exists for the near miss. It is the second example under the rule on p.185."
+          "why": "늦은 뻔했어요 puts -(으)ㄴ where only -(으)ㄹ goes. 늦을 뻔했아요 gives 했 the 아 of a stem with ㅏ or ㅗ; 하다 has its own form, 했어요. 늦었어요 would be good Korean too, if the speaker did arrive late. It is the second example under the rule on p.185."
         },
         {
           "n": 3,
@@ -569,13 +569,13 @@
               "ko": "사고를 날 뻔했어요"
             },
             {
-              "id": "sagonat",
-              "ko": "사고가 났어요"
+              "id": "sagonaeul",
+              "ko": "사고가 나을 뻔했어요"
             }
           ],
           "en": "I nodded off at the wheel and nearly had an accident.",
           "grammar": "깜빡 졸다 is nodding off for a second — the page footnotes it beside 큰일이 나다.",
-          "why": "사고를 날 뻔했어요 puts the object particle on 나다, which never takes one. 사고가 났어요 makes it a real crash, and the reply printed after it on p.187 is 정말 큰일 날 뻔했네요 — which only makes sense about something avoided."
+          "why": "사고를 날 뻔했어요 puts the object particle on 나다, which never takes one. 사고가 나을 뻔했어요 gives the vowel stem 나 an 으 it never takes — 나을 belongs to 낫다, to get better. 사고가 났어요 would be good Korean too, about a real crash; the reply printed after it on p.187, 정말 큰일 날 뻔했네요, is what makes this one a near miss."
         },
         {
           "n": 4,
@@ -597,8 +597,8 @@
               "ko": "큰일 날 뻔했네요"
             },
             {
-              "id": "keunilnal",
-              "ko": "큰일 날 뻔했어요"
+              "id": "keunilhane",
+              "ko": "큰일 날 뻔하네요"
             },
             {
               "id": "keunirat",
@@ -606,8 +606,8 @@
             }
           ],
           "en": "A: I nodded off at the wheel and nearly had an accident. — B: That really could have been serious.",
-          "grammar": "-네요 is what you say about news you have just been given; -어요 is for your own story.",
-          "why": "큰일 날 뻔했어요 is the same thought told as if it had happened to B. 큰일이 났네요 says the disaster did happen, and A has just said it did not. The 보기 on p.187 prints this exchange in exactly these two endings."
+          "grammar": "-네요 is what you say about news you have just been given, which is why the page gives it to B rather than to A.",
+          "why": "큰일 날 뻔하네요 puts 뻔하다 in the present, and a near miss is only told once it is over: 뻔했네요. 큰일이 났네요 says the disaster did happen, and A has just said it did not. 큰일 날 뻔했어요 would be good Korean too, but the 보기 on p.187 prints this exchange with -네요 — B reacting to news just heard."
         }
       ],
       "type": "build"
@@ -780,8 +780,8 @@
               "ko": "다행이에요"
             },
             {
-              "id": "dahaengieot",
-              "ko": "다행이었어요"
+              "id": "dahaenghi",
+              "ko": "다행히에요"
             },
             {
               "id": "keunil",
@@ -789,8 +789,8 @@
             }
           ],
           "en": "Xiaoming: Yes, it was chaos. Still, I am glad we did not miss the flight.",
-          "grammar": "다행이다 is said in the present about a past escape — the relief is now.",
-          "why": "다행이었어요 puts the relief in the past along with the event, which Korean does not do here. 큰일이에요 is the opposite feeling, and 안 놓쳐서 has just said it went well. 정신(이) 없다 is footnoted on the same page.",
+          "grammar": "다행이다 is said in the present about a past escape — the relief is now. The adverb is 다행히: 다행히 안 놓쳤어요.",
+          "why": "다행히에요 puts 이에요 on 다행히, the adverb — fortunately — and an adverb cannot take 이다. The two sound almost alike, which is where the mix-up comes from. 큰일이에요 is the opposite feeling, and 안 놓쳐서 has just said it went well. 다행이었어요 would be good Korean too, telling the relief as part of the story; Xiaoming feels it still. 정신(이) 없다 is footnoted on the same page.",
           "audio": {
             "src": "audio/book/2b-u17-d12.mp3",
             "labelEn": "Xiaoming: Yes, it was chaos. Still, I am glad we did not miss the flight."
@@ -893,13 +893,13 @@
               "ko": "빨갛아져요"
             },
             {
-              "id": "ppalgae",
-              "ko": "빨개요"
+              "id": "ppalgajyeo",
+              "ko": "빨가져요"
             }
           ],
           "en": "My face goes red when I am embarrassed.",
           "grammar": "-아/어지다 on 빨갛다 gives 빨개지다: not red, but going red.",
-          "why": "빨갛아져요 keeps the ㅎ before -아지다. 빨개요 describes a face that is red all the time, and 창피하면 says it happens only when something does — the change is the point."
+          "why": "빨갛아져요 keeps the ㅎ before -아지다, and 빨가져요 drops it without the vowel change that goes with it: ㅏ and 아 fuse to ㅐ, 빨개져요. 빨개요 would be good Korean too — 창피하면 얼굴이 빨개요 is said — but this is the -아/어지다 page, and the change is the point."
         },
         {
           "n": 4,
@@ -994,13 +994,13 @@
               "ko": "서고 있는"
             },
             {
-              "id": "seon",
-              "ko": "선"
+              "id": "seoisseun",
+              "ko": "서 있은"
             }
           ],
           "en": "Who is that person standing over there?",
           "grammar": "서 있다 needs no passive — 서다 is already something you do to yourself.",
-          "why": "서고 있는 would be somebody in the act of getting to their feet. 선 is the plain past 관형형 and describes the moment of standing up rather than the state of standing there, which is what 저기 is pointing at."
+          "why": "서고 있는 would be somebody in the act of getting to their feet. 서 있은 gives 있다 the past -은, and 있다 takes -는 even about a state that began earlier: 서 있는. 선 would be good Korean too — 저기 선 사람 is how writing often puts it — but this page is -아/어 있다."
         },
         {
           "n": 3,
@@ -1021,13 +1021,13 @@
               "ko": "앉고 있어요"
             },
             {
-              "id": "anjat",
-              "ko": "앉았어요"
+              "id": "anjeo",
+              "ko": "앉어 있어요"
             }
           ],
           "en": "The students are sitting in the classroom.",
           "grammar": "앉아 있다 is the state of being seated; the classroom takes 에 rather than 에서.",
-          "why": "앉고 있어요 is a roomful of students in the act of lowering themselves onto chairs. 앉았어요 reports the moment they sat down rather than the lesson going on now."
+          "why": "앉고 있어요 is a roomful of students in the act of lowering themselves onto chairs. 앉어 있어요 gives 앉다 the 어 of another vowel — 앉 has ㅏ, so 앉아. 앉았어요 would be good Korean too — they have sat down and are there still — but this is the -아/어 있다 page."
         },
         {
           "n": 4,
@@ -1195,13 +1195,13 @@
               "ko": "큰일 날 뻔했네요"
             },
             {
-              "id": "keunirieyo",
-              "ko": "큰일이에요"
+              "id": "keunireul",
+              "ko": "큰일을 났네요"
             }
           ],
           "en": "Clerk: One moment. We have no bag like that. — Kelly: Really? I have to find it — this is bad.",
           "grammar": "큰일(이) 나다 is a real problem arriving, and -네요 is the moment you realise it.",
-          "why": "큰일 날 뻔했네요 says the trouble was avoided, and the clerk has just said the bag is not there. 큰일이에요 is the same thought without the realisation that -네요 carries, and 그래요? in front of it is exactly that realisation.",
+          "why": "큰일 날 뻔했네요 says the trouble was avoided, and the clerk has just said the bag is not there. 큰일을 났네요 puts the object particle on 나다, which never takes one: 큰일이 났네요, or 큰일 났네요 with the particle dropped the way speech drops it. 큰일이에요 would be good Korean too; what Kelly says is 큰일 났네요.",
           "audio": {
             "src": "audio/book/2b-u17-d26.mp3",
             "labelEn": "Clerk: One moment. We have no bag like that. — Kelly: Really? I have to find it — this is bad."
@@ -1227,8 +1227,8 @@
               "ko": "연락 드릴 테니까"
             },
             {
-              "id": "yeollakgeo",
-              "ko": "연락 드릴 거니까"
+              "id": "yeollakdeurieul",
+              "ko": "연락 드리을 테니까"
             },
             {
               "id": "yeollakhal",
@@ -1237,7 +1237,7 @@
           ],
           "en": "Clerk: I will ring you if we find it, so write your number down here before you go.",
           "grammar": "연락(을) 드리다 is the humble 하다 — the clerk is ringing a customer. 연락 is said [열락].",
-          "why": "연락 드릴 거니까 states a plan rather than making a promise the other person can act on, and -(으)ㄹ 테니까 is what leads into an instruction. 연락할 테니까 drops the politeness the whole conversation has been built on.",
+          "why": "연락 드리을 테니까 gives the vowel stem 드리 an 으 it does not take: 드릴. 연락할 테니까 drops the humble 드리다 that a clerk uses to a customer. 연락 드릴 거니까 would be good Korean too — the plan given as the reason — and what the clerk says is 드릴 테니까.",
           "audio": {
             "src": "audio/book/2b-u17-d27.mp3",
             "labelEn": "Clerk: I will ring you if we find it, so write your number down here before you go."
@@ -1387,13 +1387,13 @@
               "ko": "가져다 줘야"
             },
             {
-              "id": "gajigo_isseo",
-              "ko": "가지고 있어야"
+              "id": "gajigo_gaaya",
+              "ko": "가지고 가아야"
             }
           ],
           "en": "Man: Do you know what I need when I apply? — Woman: You have to take your passport with you.",
           "grammar": "가지고 가다 is taking a thing with you; 가져다 주다 is fetching it for somebody else.",
-          "why": "가져다 줘야 would have him deliver the passport to the office rather than carry it there. 가지고 있어야 only says he has to own one, and the question was what to bring. This is the line that makes option (3) of question 1 right.",
+          "why": "가져다 줘야 would have him deliver the passport to the office rather than carry it there. 가지고 가아야 writes out the 아 that 가다 has already swallowed: 가 + 아야 is 가야. 가지고 있어야 would be good Korean too — he needs a passport — but what the woman says is 가지고 가야. This is the line that makes option (3) of question 1 right.",
           "audio": {
             "src": "audio/book/2b-u17-d41.mp3",
             "labelEn": "Man: Do you know what I need when I apply? — Woman: You have to take your passport with you."
@@ -1745,17 +1745,17 @@
               "ko": "무지개"
             },
             {
-              "id": "kkot",
-              "ko": "꽃"
+              "id": "nun",
+              "ko": "눈"
             },
             {
-              "id": "haneul",
-              "ko": "하늘"
+              "id": "bam",
+              "ko": "밤"
             }
           ],
           "en": "The child was wearing a pretty hanbok, and the colours of the saekdong jacket were as beautiful as a rainbow.",
           "grammar": "처럼 attaches straight to a noun: 무지개처럼 아름다웠습니다.",
-          "why": "A 색동저고리 has many colours in stripes, and the only one of the three that is many colours at once is 무지개. 꽃 and 하늘 are both single-coloured comparisons. The word is footnoted on the same page."
+          "why": "A 색동저고리 has many colours in stripes, and 무지개 is the one of the three that is many colours at once. 눈 is white and 밤 is dark, so neither has colours to compare with. 꽃처럼 or 하늘처럼 would be good Korean too; the note says 무지개, and the word is footnoted on the same page."
         },
         {
           "n": 2,
@@ -1772,17 +1772,17 @@
               "ko": "전통"
             },
             {
-              "id": "yeppeun",
-              "ko": "예쁜"
+              "id": "gyotong",
+              "ko": "교통"
             },
             {
-              "id": "balgeun",
-              "ko": "밝은"
+              "id": "nalssi",
+              "ko": "날씨"
             }
           ],
           "en": "The saekdong jacket is made using several traditional Korean colours.",
           "grammar": "전통 색 — the colours are traditional, which is why the garment means something.",
-          "why": "예쁜 and 밝은 both describe how the colours look, and the sentence is saying where they come from. 여러 가지 한국의 in front of the blank is already pointing at a tradition rather than at an appearance."
+          "why": "교통 and 날씨 are nouns like 전통, but Korea’s traffic and weather have no colours to make a jacket from. 예쁜 or 밝은 would be good Korean too, describing how the colours look; the note is saying where they come from, and 여러 가지 한국의 in front of the blank is already pointing at a tradition."
         },
         {
           "n": 3,
@@ -1799,8 +1799,8 @@
               "ko": "건강"
             },
             {
-              "id": "haengbok",
-              "ko": "행복"
+              "id": "byeong",
+              "ko": "병"
             },
             {
               "id": "buja",
@@ -1809,7 +1809,7 @@
           ],
           "en": "There is a wish for the child’s health in it.",
           "grammar": "-을/를 바라다 is to wish for something, and 뜻이 있다 is that the thing carries the meaning.",
-          "why": "행복 is the obvious guess and the note does not say it. 부자 is a noun for a rich person rather than for wealth, so it will not take 바라다 here at all. A 돌잔치 marks a child surviving its first year, which is what makes 건강 the wish."
+          "why": "병 is the opposite wish — nobody hopes for a child’s illness. 부자 is a noun for a rich person rather than for wealth, and it would need 를 besides. 행복 would be good Korean too, and a 돌잔치 wishes for that as well; the note names 건강, because a first birthday marks a child getting through its first year."
         }
       ],
       "type": "build"
@@ -2028,8 +2028,8 @@
               "ko": "모셔다 드렸어요"
             },
             {
-              "id": "mosigo",
-              "ko": "모시고 갔어요"
+              "id": "mosyeojwo",
+              "ko": "모셔다 주었어요"
             },
             {
               "id": "deryeo",
@@ -2038,7 +2038,7 @@
           ],
           "en": "A: Did your parents get home all right? — B: Yes, I took them to the airport this morning.",
           "grammar": "The box gives each form once, and this row is the -아다/어다 주다 one.",
-          "why": "모시고 갔어요 uses 모시다 politely enough but takes none of the three forms in the box, and it has B going with them rather than delivering them and returning. 데려다 주었어요 is the right shape aimed at the wrong people — 부모님 take the humble pair."
+          "why": "모셔다 주었어요 starts humble and ends plain: the help is for the parents, so 주다 has to become 드리다 as well. 데려다 주었어요 is the right shape aimed at the wrong people — 부모님 take the humble pair. 모시고 갔어요 would be good Korean too, but it takes none of the box’s three forms."
         },
         {
           "n": 2,
@@ -2060,8 +2060,8 @@
               "ko": "놓칠 뻔했네요"
             },
             {
-              "id": "nohchilppeon",
-              "ko": "놓칠 뻔했어요"
+              "id": "nohchilhane",
+              "ko": "놓칠 뻔하네요"
             },
             {
               "id": "nohchyeot",
@@ -2070,7 +2070,7 @@
           ],
           "en": "A: If we had been a moment later we would have missed the train. — B: Yes, I am so glad we did not.",
           "grammar": "This is the -(으)ㄹ 뻔하다 row, and the page keys it with -네요.",
-          "why": "놓쳤어요 is contradicted by B’s own reply, 안 놓쳐서. 놓칠 뻔했어요 is the same form with the plain ending, and the answer printed upside down on p.199 gives 놓칠 뻔했네요 — A is remarking on a shared escape, which is what -네요 is for."
+          "why": "놓쳤어요 says the train was missed, and B’s own reply is 안 놓쳐서. 놓칠 뻔하네요 puts 뻔하다 in the present, and a near miss is only told once it is over: 뻔했네요. 놓칠 뻔했어요 would be good Korean too; the answer printed upside down on p.199 gives 놓칠 뻔했네요."
         },
         {
           "n": 3,
@@ -2096,13 +2096,13 @@
               "ko": "앉고 있는"
             },
             {
-              "id": "anjat",
-              "ko": "앉은"
+              "id": "anjaisseun",
+              "ko": "앉아 있은"
             }
           ],
           "en": "A: Who is that sitting next to Steven? — B: The one with glasses? That is Julien.",
           "grammar": "This is the -아/어 있다 row, and 사람 after the blank makes it the 관형형: 앉아 있는.",
-          "why": "앉고 있는 would be somebody lowering themselves onto a chair while being pointed at. 앉은 is grammatical but takes none of the three forms the box prints, and it names the moment of sitting rather than where the person is now."
+          "why": "앉고 있는 would be somebody lowering themselves onto a chair while being pointed at. 앉아 있은 gives 있다 the past -은, where it takes -는: 앉아 있는. 앉은 would be good Korean too, the way B says 안경 쓴 사람, but it takes none of the box’s three forms."
         }
       ],
       "type": "build"

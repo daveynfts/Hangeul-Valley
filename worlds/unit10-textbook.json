@@ -50,8 +50,8 @@
               "ko": "우리 반 친구 생일라서"
             },
             {
-              "id": "birthday_ko",
-              "ko": "우리 반 친구 생일이고"
+              "id": "birthday_iseo",
+              "ko": "우리 반 친구 생일이서"
             }
           ],
           "answer2": "spicy",
@@ -70,8 +70,8 @@
             }
           ],
           "en": "Next Saturday is a classmate's birthday, so I want to eat out with them. — They all eat well, but one of them cannot manage spicy food.",
-          "why": "생일이라서 needs the -이- that joins 이다 to -아서: a noun cannot take -아서 on its own, and 생일라서 is what dropping it looks like. The second blank has to stay negative — the whole point of the conversation is that the restaurant must suit someone who cannot eat spice.",
-          "grammar": "N(이)라서, the 이다 form of -아/어서. Consonant-final noun takes 이라서, vowel-final takes 라서: 생일이라서, 친구라서.",
+          "why": "생일이라서 is 이다 with -아서 on it, and a noun cannot take -아서 without it. 생일라서 drops the 이; 생일이서 keeps the 이 and loses the 어 that 생일이어서 has. The second blank has to stay negative and in the present — the whole point of the conversation is that the restaurant must suit someone who cannot eat spice.",
+          "grammar": "N(이)라서, the 이다 form of -아/어서. Consonant-final noun takes 이라서, vowel-final takes 라서: 생일이라서, 친구라서. 생일이고 would only set the two facts side by side, without making the birthday the reason for the dinner.",
           "audio": {
             "src": "audio/book/2b-u10-trk04.mp3",
             "labelEn": "말하기 1 · track 04"
@@ -1013,8 +1013,8 @@
               "ko": "먹을까"
             },
             {
-              "id": "meogeulrae",
-              "ko": "먹을래"
+              "id": "meogeulge",
+              "ko": "먹을게"
             },
             {
               "id": "meogeulkkayo",
@@ -1022,8 +1022,8 @@
             }
           ],
           "en": "Shall we go and eat at the traditional food festival for lunch? — Sure. What countries' food are they selling?",
-          "why": "-(으)ㄹ까 proposes something the two of them do together, which is what 오늘 점심은 … 가서 sets up. -(으)ㄹ래 asks what the other person wants, and the reply 좋아 is an agreement to a plan rather than an answer about a preference.",
-          "grammar": "V-(으)ㄹ까 for a suggestion, V-(으)ㄹ래 for asking a preference. Both are 반말; 먹을까요 would be the polite one, which does not match 좋아."
+          "why": "-(으)ㄹ까 proposes something the two of them do together, which is what 오늘 점심은 … 가서 sets up, and 좋아 takes it up. 먹을게 is a promise about what the speaker will do, and a promise cannot be asked: it has no question form.",
+          "grammar": "V-(으)ㄹ까 for a suggestion. 먹을래? would do here as well — asking what the other person wants is a way of suggesting, and 좋아 answers it just as well — but the page’s line is 먹을까. Both are 반말; 먹을까요 would be the polite one, which does not match 좋아."
         },
         {
           "n": 2,
@@ -1120,13 +1120,13 @@
               "ko": "만든데"
             },
             {
-              "id": "mandeureoseo",
-              "ko": "만들어서"
+              "id": "mandeulneunde",
+              "ko": "만들는데"
             }
           ],
           "en": "It is made with meat and vegetables, and it is very good.",
-          "why": "만들다 is a verb, so -는데 — and its ㄹ drops before the ㄴ: 만들 + 는데 → 만드는데. 만든데 is what you get by treating it as an adjective, and the dropped ㄹ makes that look almost right.",
-          "grammar": "ㄹ-stem verbs lose the ㄹ before ㄴ, ㅂ and ㅅ endings: 만드는데, 만듭니다, 만드세요 — but 만들어서, 만들고."
+          "why": "만들다 is a verb, so -는데 — and its ㄹ drops before the ㄴ: 만들 + 는데 → 만드는데. 만들는데 keeps the ㄹ that has to go. 만든데 is what you get by treating it as an adjective, and the dropped ㄹ makes that look almost right.",
+          "grammar": "ㄹ-stem verbs lose the ㄹ before ㄴ, ㅂ and ㅅ endings: 만드는데, 만듭니다, 만드세요 — but 만들어서, 만들고. 만들어서 아주 맛있어요 would be good Korean too, with the meat and vegetables as the reason it tastes good; the page’s line only sets them out, with -는데."
         }
       ]
     },
@@ -1613,13 +1613,13 @@
               "ko": "맞아요"
             },
             {
-              "id": "matni",
-              "ko": "맞니"
+              "id": "majeo",
+              "ko": "맞어"
             }
           ],
           "en": "Which Korean food suits you best?",
-          "why": "The 해요 of 맞아요 drops its 요 and nothing else changes — that is the whole of 반말 for this form. 맞니 is a different informal ending altogether, used downward rather than between equals, and the book's key gives 맞아.",
-          "grammar": "해요 → 해체: drop the 요. 맞아요 → 맞아, 좋아요 → 좋아, 먹어요 → 먹어.",
+          "why": "The 해요 of 맞아요 drops its 요 and nothing else changes — that is the whole of 반말 for this form, and the book’s key gives 맞아. 맞어 is how the word is often said and texted, but 맞 has ㅏ, so the ending stays 아.",
+          "grammar": "해요 → 해체: drop the 요. 맞아요 → 맞아, 좋아요 → 좋아, 먹어요 → 먹어. 맞니? is 반말 too — the -니 question, heard most from an older speaker to a younger one — but the page turns 해요 into 해체.",
           "audio": {
             "src": "audio/book/2b-u10-trk03.mp3",
             "labelEn": "반말 · track 03"

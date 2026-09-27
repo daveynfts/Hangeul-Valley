@@ -505,7 +505,7 @@
           ],
           "en": "I went when a friend from my home town came to Korea.",
           "why": "The question is about the 노래방, but the answer dates the visit by something else entirely — the friend arriving. That is what this clause is for: pinning one event to the moment another one happened.",
-          "grammar": "오다 → 왔을 때. ㅗ meeting 아 has nowhere to go but together: 오 + 았 = 왔. 올 때 is the same clause with no past marker at all, so it would mean whenever the friend comes rather than the one visit that happened."
+          "grammar": "오다 → 왔을 때. ㅗ meeting 아 has nowhere to go but together: 오 + 았 = 왔. 올 때 is the time of the coming itself — the journey here — and the 노래방 came after the friend had arrived."
         },
         {
           "n": 2,
@@ -532,13 +532,13 @@
               "ko": "떠나았을 때"
             },
             {
-              "id": "ddeonalttae",
-              "ko": "떠날 때"
+              "id": "ddeonanttae",
+              "ko": "떠난 때"
             }
           ],
           "en": "I realised it when the train had already pulled out.",
           "why": "The wallet was gone before this moment, but the knowing happened at it — and by then the train had left. -았을 때 is the tense for exactly that: the moment at which something had already finished.",
-          "grammar": "떠나다 → 떠났을 때. A stem ending in ㅏ absorbs the 았 rather than standing next to it: 떠나 + 았 = 떠났. 떠나았을 writes the same vowel twice."
+          "grammar": "떠나다 → 떠났을 때. A stem ending in ㅏ absorbs the 았 rather than standing next to it: 떠나 + 았 = 떠났. 떠나았을 writes the same vowel twice, and 떠난 때 puts the past modifier where 때 takes only -(으)ㄹ. 지하철이 떠날 때 알았어요 would be good Korean too, noticing as the doors closed."
         },
         {
           "n": 3,
@@ -565,13 +565,13 @@
               "ko": "하았을 때"
             },
             {
-              "id": "halttae",
-              "ko": "할 때"
+              "id": "hanttae",
+              "ko": "한 때"
             }
           ],
           "en": "I got angry when my friend lied to me.",
-          "why": "화가 나다 is something that happened to you at a particular moment, so the clause dating it has to be past as well. Note that Korean says the anger 났어요 — it arose — rather than that you were angry.",
-          "grammar": "하다 → 했을 때. 하 takes 여, not 았/었: 하 + 였 = 했, never 하았. It is the same 여 you already hear in 하다 → 해요."
+          "why": "화가 나다 is something that happened to you at a particular moment, and 했을 때 dates it to the lie. Note that Korean says the anger 났어요 — it arose — rather than that you were angry.",
+          "grammar": "하다 → 했을 때. 하 takes 여, not 았/었: 하 + 였 = 했, never 하았. It is the same 여 you already hear in 하다 → 해요. 한 때 puts the past modifier where 때 takes only -(으)ㄹ; 거짓말을 할 때 화가 났어요 would be good Korean too, angry while the lie was being told."
         },
         {
           "n": 4,
@@ -631,13 +631,13 @@
               "ko": "봤을 때"
             },
             {
-              "id": "bolttaebuteo",
-              "ko": "볼 때부터"
+              "id": "bonttaebuteo",
+              "ko": "본 때부터"
             }
           ],
           "en": "I’ve liked them from the first time I saw them.",
           "why": "A asked 언제부터, not 언제 — from when, not when. So the answer needs 부터 on it: the point is not that you liked them at that one moment, it is that you have liked them ever since. Reading which question was actually asked is half of this item.",
-          "grammar": "보다 → 봤을 때, then 부터: 봤을 때부터. 때 is an ordinary noun, so 부터 attaches to it exactly as it would to any other."
+          "grammar": "보다 → 봤을 때, then 부터: 봤을 때부터. 때 is an ordinary noun, so 부터 attaches to it exactly as it would to any other. 본 때부터 puts the past modifier where 때 takes only -(으)ㄹ — and 처음 볼 때부터 would be good Korean too."
         }
       ],
       "example": {
@@ -690,13 +690,13 @@
               "ko": "아프었을 때"
             },
             {
-              "id": "apeulttae",
-              "ko": "아플 때"
+              "id": "apeunttae",
+              "ko": "아픈 때"
             }
           ],
           "en": "Last month, when I was ill, I wanted to go home.",
           "why": "Being ill is when homesickness lands hardest, and the sentence dates the wish to that. 아프다 is one of the ㅡ stems, which means the vowel it takes is decided by the syllable before the ㅡ rather than by the ㅡ itself.",
-          "grammar": "아프다 → 아팠을 때. The ㅡ drops before a vowel ending, and 아프 looks back at its ㅏ to pick 아: 아프 + 아 = 아파, then 았을 때. 아프었을 keeps the ㅡ and takes the wrong vowel on top of it."
+          "grammar": "아프다 → 아팠을 때. The ㅡ drops before a vowel ending, and 아프 looks back at its ㅏ to pick 아: 아프 + 아 = 아파, then 았을 때. 아프었을 keeps the ㅡ and takes the wrong vowel on top of it. 아픈 때 puts the modifier -ㄴ where 때 takes only -(으)ㄹ; 지난달에 아플 때 would be good Korean too, since the sentence’s own 싶었어요 is past."
         },
         {
           "n": 2,
@@ -718,13 +718,13 @@
               "ko": "받었을 때"
             },
             {
-              "id": "badeulttae",
-              "ko": "받을 때"
+              "id": "badeunttae",
+              "ko": "받은 때"
             }
           ],
           "en": "I was really happy when I got the prize at the last graduation ceremony.",
           "why": "수료식 is the ceremony that closes a course, and the prize changes hands at one moment inside it. 받다 is a plain consonant stem, so nothing contracts here — the only decision is which vowel the ending takes.",
-          "grammar": "받다 → 받았을 때. Vowel harmony settles it: a stem whose vowel is ㅏ or ㅗ takes 았, everything else takes 었. 받 has ㅏ, so 받았을, not 받었을."
+          "grammar": "받다 → 받았을 때. Vowel harmony settles it: a stem whose vowel is ㅏ or ㅗ takes 았, everything else takes 었. 받 has ㅏ, so 받았을, not 받었을. 받은 때 puts the past modifier where 때 takes only -(으)ㄹ; 상을 받을 때 기뻤어요 would be good Korean too, happy at the moment itself."
         },
         {
           "n": 3,
@@ -746,13 +746,13 @@
               "ko": "할머니가 돌아갔을 때"
             },
             {
-              "id": "dorakasilttae",
-              "ko": "할머니가 돌아가실 때"
+              "id": "dorakasinttae",
+              "ko": "할머니가 돌아가신 때"
             }
           ],
           "en": "The saddest time was when my grandmother passed away.",
           "why": "돌아가시다 is how Korean says that someone has died, and the 시 inside it is not decoration — it is the honorific, and it is the entire reason the word is a respectful one. 돌아갔을 때 is the same verb with the 시 taken out, and means she went back somewhere.",
-          "grammar": "돌아가시다 → 돌아가셨을 때. 시 + 었 → 셨, the ordinary ㅣ contraction. 돌아가실 때 is future or general, which is not what a memory is."
+          "grammar": "돌아가시다 → 돌아가셨을 때. 시 + 었 → 셨, the ordinary ㅣ contraction. 돌아가신 때 puts the past modifier where 때 takes only -(으)ㄹ. 할머니가 돌아가실 때 would be good Korean too — at the time of her passing — since 슬펐어요 carries the past."
         },
         {
           "n": 4,
@@ -1371,8 +1371,8 @@
               "ko": "못 받으면"
             },
             {
-              "id": "anbadeumyeon",
-              "ko": "안 받으면"
+              "id": "motbadamyeon",
+              "ko": "못 받아면"
             },
             {
               "id": "badeumyeon",
@@ -1380,7 +1380,7 @@
             }
           ],
           "en": "I have to take delivery of the parcel today. → Missing it today will not do.",
-          "why": "This is the one item in the set that takes 못 rather than 안, and the difference is choice. 안 받으면 is refusing the parcel; 못 받으면 is failing to be there for it, which is the thing that actually goes wrong. A parcel is not something you decline.",
+          "why": "Rows 1 to 3 turned 꼭 해야 돼요 into 안 하면 안 돼요, and this one comes out as 못 instead: missing the parcel is what can go wrong, and it is out of your hands. 안 받으면 안 돼요 would be good Korean too, on the pattern of the rows above. 못 받아면 puts 아 where -면 takes 으 after a consonant: 받으면.",
           "grammar": "받아야 해요 → 못 받으면 안 돼요. 안 is chosen not to, 못 is unable to, and both sit in front of the verb. Note the prompt ends 해야 해요 rather than 해야 돼요 — 되다 and 하다 are interchangeable in that pattern."
         }
       ],
@@ -1620,13 +1620,13 @@
               "ko": "장학금을 받었을 때"
             },
             {
-              "id": "badeul",
-              "ko": "장학금을 받을 때"
+              "id": "badeun",
+              "ko": "장학금을 받은 때"
             }
           ],
           "en": "T: When were you happiest? — S: When I got the scholarship.",
           "why": "장학금 is a scholarship, and 받다 is the same verb the 문법과 표현 page used for 상을 받다. The answer repeats 제일 기뻤어요 from the question, which is what makes these drills quick to say out loud.",
-          "grammar": "받다 → 받았을 때. The stem vowel is ㅏ, so the ending is 았, not 었. 받을 때 drops the past entirely and would mean whenever you receive one.",
+          "grammar": "받다 → 받았을 때. The stem vowel is ㅏ, so the ending is 았, not 었. 받은 때 puts the past modifier where 때 takes only -(으)ㄹ. 장학금을 받을 때 would be good Korean too — 제일 기뻤어요 carries the past.",
           "audio": {
             "src": "audio/book/2b-u14-p2-1.mp3",
             "askEnd": 2.76
@@ -1657,13 +1657,13 @@
               "ko": "할머니가 돌아갔을 때"
             },
             {
-              "id": "dorakasilsseul",
-              "ko": "할머니가 돌아가실 때"
+              "id": "dorakasinttae",
+              "ko": "할머니가 돌아가신 때"
             }
           ],
           "en": "T: When were you saddest? — S: When my grandmother passed away.",
           "why": "The same sentence the 문법과 표현 page asked for, now said against the clock. 돌아가시다 keeps its 시 because that is the honorific, and taking it out leaves 돌아가다 — she went back somewhere.",
-          "grammar": "돌아가시다 → 돌아가셨을 때. 시 + 었 → 셨. Note 슬펐어요 in the question as well: 슬프다 is a ㅡ stem, so 슬프 + 어 → 슬퍼, then 었.",
+          "grammar": "돌아가시다 → 돌아가셨을 때. 시 + 었 → 셨. Note 슬펐어요 in the question as well: 슬프다 is a ㅡ stem, so 슬프 + 어 → 슬퍼, then 었. 돌아가신 때 puts the past modifier where 때 takes only -(으)ㄹ; 돌아가실 때 would be good Korean too.",
           "audio": {
             "src": "audio/book/2b-u14-p2-2.mp3",
             "askEnd": 2.83
@@ -1694,13 +1694,13 @@
               "ko": "고향에 가았을 때"
             },
             {
-              "id": "galsseul",
-              "ko": "고향에 갈 때"
+              "id": "ganttae",
+              "ko": "고향에 간 때"
             }
           ],
           "en": "T: When did you hear that story? — S: When I went back to my home town.",
           "why": "You heard it on a trip home, so the clause dates the hearing to that visit. 이야기를 듣다 is how Korean says to hear a story — 이야기 covers both the story and the telling of it.",
-          "grammar": "가다 → 갔을 때. ㅏ meeting 았 leaves one syllable: 가 + 았 = 갔. 가았을 writes the vowel twice, which is the mistake this stem invites.",
+          "grammar": "가다 → 갔을 때. ㅏ meeting 았 leaves one syllable: 가 + 았 = 갔. 가았을 writes the vowel twice, which is the mistake this stem invites, and 간 때 puts the past modifier where 때 takes only -(으)ㄹ. 고향에 갈 때 들었어요 would be good Korean too, heard on the way home.",
           "audio": {
             "src": "audio/book/2b-u14-p2-3.mp3",
             "askEnd": 3.18
@@ -1731,13 +1731,13 @@
               "ko": "집에 도착하았을 때"
             },
             {
-              "id": "dochakhalsseul",
-              "ko": "집에 도착할 때"
+              "id": "dochakhanttae",
+              "ko": "집에 도착한 때"
             }
           ],
           "en": "T: When did you get Nana’s call? — S: When I got home.",
           "why": "This is the sentence the 문법과 표현 연습 2 example was built on, turned round: there the phone rang as you arrived, here you answer for when the call came. 전화를 받다 is to take a call, the same 받다 as item 1.",
-          "grammar": "도착하다 → 도착했을 때. Every 하다 verb goes 하 + 였 → 했, so 도착하았을 is wrong twice over — wrong vowel, and uncontracted.",
+          "grammar": "도착하다 → 도착했을 때. Every 하다 verb goes 하 + 였 → 했, so 도착하았을 is wrong twice over — wrong vowel, and uncontracted. 도착한 때 puts the past modifier where 때 takes only -(으)ㄹ; 집에 도착할 때 받았어요 would be good Korean too, the call coming as you reached the door.",
           "audio": {
             "src": "audio/book/2b-u14-p2-4.mp3",
             "askEnd": 3.55

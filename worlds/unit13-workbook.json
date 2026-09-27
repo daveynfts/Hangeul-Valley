@@ -495,13 +495,13 @@
               "ko": "끊를 수 있을지"
             },
             {
-              "id": "c",
-              "ko": "끊을 수 있는지"
+              "id": "c2",
+              "ko": "끊는 수 있을지"
             }
           ],
           "en": "I ought to give up smoking, but I don’t know whether I can.",
-          "grammar": "The one consonant stem on the page: 끊다 ends in ㄶ, so it takes 을 — 끊을 수 있다. Said aloud the ㅎ vanishes and it runs as [끄늘 쑤].",
-          "why": "끊를 수 puts a ㄹ on a 받침. 있는지 asks about a fact already settled — whether you can, as a matter of record — where -(으)ㄹ지 asks about what has not happened yet, which is what giving up smoking is."
+          "grammar": "The one consonant stem on the page: 끊다 ends in ㄶ, so it takes 을 — 끊을 수 있다. Said aloud the ㅎ vanishes and it runs as [끄늘 쑤]. 끊을 수 있는지 모르겠어요 would be good Korean too, asking about the ability as it stands now; -(으)ㄹ지 is the page’s way of asking.",
+          "why": "끊를 수 puts a ㄹ on a 받침, and 끊는 수 uses the present modifier where 수 always takes -(으)ㄹ: 끊을 수 있다, never 끊는 수."
         }
       ]
     },
@@ -711,13 +711,13 @@
               "ko": "어떻게 도와주을 수 있을지"
             },
             {
-              "id": "c",
-              "ko": "어떻게 도와줄 수 있는지"
+              "id": "c2",
+              "ko": "어떻게 도와주는 수 있을지"
             }
           ],
           "en": "A: Julien seems to be having a hard time. How could we help Julien? — B: Hmm, I’d like to help too, but I’m not sure how.",
-          "grammar": "도와주다 is 돕다 + -아 주다, and 돕다 is ㅂ-irregular — the ㅂ becomes 오 before the ending, giving 도와. The compound is then a plain vowel stem.",
-          "why": "도와주을 수 is the 으 again. 있는지 asks about something already settled, and how to help Julien is precisely what has not been settled."
+          "grammar": "도와주다 is 돕다 + -아 주다, and 돕다 is ㅂ-irregular — the ㅂ becomes 오 before the ending, giving 도와. The compound is then a plain vowel stem. 어떻게 도와줄 수 있는지 would be good Korean as well; the page asks with -(으)ㄹ지.",
+          "why": "도와주을 수 is the 으 again, and 도와주는 수 puts the present modifier where 수 takes -(으)ㄹ."
         }
       ]
     },
@@ -1136,8 +1136,8 @@
               "ko": "하겠지만"
             },
             {
-              "id": "b",
-              "ko": "하지만"
+              "id": "b2",
+              "ko": "했겠지만"
             },
             {
               "id": "c",
@@ -1145,8 +1145,8 @@
             }
           ],
           "en": "It’ll be as cold tomorrow as it is today, but it won’t snow.",
-          "grammar": "-겠- is what Korean uses for a guess about what has not happened. 내일 puts the whole sentence in front of you, and 안 올 거예요 at the end agrees with it.",
-          "why": "하지만 states tomorrow’s weather as a fact nobody can have. 했지만 puts it in the past, which 내일 flatly contradicts."
+          "grammar": "-겠- is what Korean uses for a guess about what has not happened. 내일 puts the whole sentence in front of you, and 안 올 거예요 at the end agrees with it. 춥기는 하지만 would be good Korean too, the way a forecast puts it — the guess then sits on 안 올 거예요 alone.",
+          "why": "했겠지만 guesses about something already past, and 했지만 states it as past outright — 내일 contradicts both."
         },
         {
           "n": 2,
@@ -1758,8 +1758,8 @@
           "answer": "b",
           "choices": [
             {
-              "id": "a",
-              "ko": "세일 기간 때문에"
+              "id": "a2",
+              "ko": "세일 기간인 때문에"
             },
             {
               "id": "b",
@@ -1767,8 +1767,8 @@
             }
           ],
           "en": "The department store will be packed, because it’s the sale period right now.",
-          "grammar": "지금은 does the same job 여기는 did in row 4: it names the thing that IS the sale period. The 은 on it is the tell.",
-          "why": "세일 기간 때문에 is not impossible Korean on its own, but the 지금은 in front of it has to attach to something, and only 이기 gives it that."
+          "grammar": "지금은 does the same job 여기는 did in row 4: it names the thing that IS the sale period, and the 이기 says so. 세일 기간 때문에 would be good Korean too — because of the sale — with 지금은 simply meaning at the moment.",
+          "why": "세일 기간인 때문에 puts the modifier -ㄴ where 때문에 needs a noun or -기: 세일 기간 때문에, 세일 기간이기 때문에, never 세일 기간인 때문에."
         }
       ]
     },
@@ -2029,13 +2029,13 @@
               "ko": "좋를지 모르겠어요"
             },
             {
-              "id": "c",
-              "ko": "좋은지 모르겠어요"
+              "id": "c2",
+              "ko": "좋았을지 모르겠어요"
             }
           ],
           "en": "T: Do you think the weather will be good tomorrow? — S: Hmm, I don’t know whether it will.",
-          "grammar": "좋다 ends in ㅎ and takes 을지. It is said [조을찌]: the ㅎ falls silent between vowels, which is this chapter’s neighbour 발음 point.",
-          "why": "좋를지 puts a ㄹ on a 받침. 좋은지 is real Korean but asks about now — and the question was about tomorrow, which is exactly the ground -(으)ㄹ지 covers and -(으)ㄴ지 does not.",
+          "grammar": "좋다 ends in ㅎ and takes 을지. It is said [조을찌]: the ㅎ falls silent between vowels, which is this chapter’s neighbour 발음 point. 좋은지 모르겠어요 would be good Korean as well — whether the forecast says so.",
+          "why": "좋를지 puts a ㄹ on a 받침. 좋았을지 is a guess about what has already happened, and the question is about tomorrow.",
           "audio": {
             "src": "audio/book/2b-u13-p1-2.mp3",
             "askEnd": 2.62
@@ -2064,13 +2064,13 @@
               "ko": "오을 수 있을지 모르겠어요"
             },
             {
-              "id": "c",
-              "ko": "올 수 있는지 모르겠어요"
+              "id": "c2",
+              "ko": "올 수 있을지 몰라겠어요"
             }
           ],
           "en": "T: Do you think Nana can come to school tomorrow? — S: Hmm, I don’t know whether Nana can.",
-          "grammar": "오다 is a vowel stem: 오 + ㄹ 수 → 올 수. The 을지 then goes on 있다, which has the 받침 that asks for the 으.",
-          "why": "오을 수 gives the vowel stem a 으. 있는지 asks after a settled fact, and tomorrow is not one.",
+          "grammar": "오다 is a vowel stem: 오 + ㄹ 수 → 올 수. The 을지 then goes on 있다, which has the 받침 that asks for the 으. 올 수 있는지 모르겠어요 would be good Korean too.",
+          "why": "오을 수 gives the vowel stem a 으. 몰라겠어요 gives 모르다 its 르-irregular 몰라 before -겠-, which takes the plain stem: 모르겠어요.",
           "audio": {
             "src": "audio/book/2b-u13-p1-3.mp3",
             "askEnd": 3.95

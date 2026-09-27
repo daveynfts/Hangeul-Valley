@@ -123,8 +123,8 @@
               "ko": "세배를 해요"
             },
             {
-              "id": "b",
-              "ko": "세배를 드려요"
+              "id": "b2",
+              "ko": "세배를 지내요"
             },
             {
               "id": "c",
@@ -132,8 +132,8 @@
             }
           ],
           "en": "A: What do people usually do on Seollal morning? — B: First we bow to our elders.",
-          "grammar": "세배 goes with 하다, and the respect is carried by 께 on the elders rather than by the verb.",
-          "why": "세배를 드려요 puts the honorific on the wrong word — 께 has already done that job, and 세배를 드리다 is not the collocation the book prints. 성묘 is done at a grave, which is not where anyone is on Seollal morning.",
+          "grammar": "세배 goes with 하다, and 드리다 is its humble twin: 어른들께 세배를 드려요 is just as right, and politer still. 께 already carries the respect for the elders.",
+          "why": "세배를 지내요 borrows the verb of 차례를 지내다 — rites are held, but a bow is made — and 성묘 is done at a grave, which is not where anyone is on Seollal morning.",
           "art": "items/unit16_011_to_bow_to_one_s_elders_at_new_year.png"
         },
         {
@@ -468,17 +468,17 @@
               "ko": "방을 닦았어요"
             },
             {
-              "id": "b",
-              "ko": "방을 닦아요"
+              "id": "b2",
+              "ko": "방을 씻었어요"
             },
             {
-              "id": "c",
-              "ko": "방을 닦을 거예요"
+              "id": "c2",
+              "ko": "방을 빨았어요"
             }
           ],
           "en": "I had not cleaned for a few days, so I wiped the room down.",
           "grammar": "-아서 with a past main clause: 청소를 안 해서 came first and 방을 닦았어요 followed.",
-          "why": "The workbook’s own 정답 is 닦았어요 — the room got wiped, and the days of not cleaning are why. 닦아요 and 닦을 거예요 leave the floor still dirty.",
+          "why": "The workbook’s own 정답 is 닦았어요 — the room got wiped, and the days of not cleaning are why. 씻다 is for hands, faces and dishes, and 빨다 for clothes; a floor is wiped, 닦다. 방을 닦아요 and 닦을 거예요 would be good Korean too, as something under way or planned.",
           "art": "items/unit16_025_to_wipe_the_room_clean.png"
         },
         {
@@ -545,17 +545,17 @@
               "ko": "예매를 해 놓아야 돼요"
             },
             {
-              "id": "b",
-              "ko": "예매를 해야 돼요"
+              "id": "b2",
+              "ko": "예매를 하 놓아야 돼요"
             },
             {
-              "id": "c",
-              "ko": "예매를 해 놓았어요"
+              "id": "c2",
+              "ko": "예매를 해 놓어야 돼요"
             }
           ],
           "en": "There are no tickets at the weekend, so you have to book in advance.",
           "grammar": "하다 becomes 해 before 놓다: 해 놓다, never 하 놓다.",
-          "why": "예매를 해야 돼요 loses the 놓다, and with it the whole point — the booking has to be done *and left done* before the weekend. 해 놓았어요 reports it as already finished, where 없으니까 is giving a reason for something still to do.",
+          "why": "예매를 하 놓아야 돼요 keeps the stem where 해 is needed, and 해 놓어야 gives 놓다 the 어 of another vowel — 놓 has ㅗ, so 놓아야. 예매를 해야 돼요 and 예매를 해 놓았어요 would both be good Korean — the obligation without 놓다, and the booking already done — but the drill is -아/어 놓아야 되다.",
           "art": "items/unit16_035_to_book_a_ticket_in_advance.png"
         },
         {
@@ -568,8 +568,8 @@
           "answer": "c",
           "choices": [
             {
-              "id": "a",
-              "ko": "청소를 해요"
+              "id": "a2",
+              "ko": "청소를 해 놓아야 되요"
             },
             {
               "id": "b",
@@ -582,7 +582,7 @@
           ],
           "en": "You have to clean up before your friends arrive.",
           "grammar": "V-기 전에 sets a deadline, and 놓다 is what says the result is still there when it passes.",
-          "why": "청소를 해요 has no deadline in it at all. 하고 있어야 돼요 would have you still vacuuming when the doorbell goes, which is the opposite of the point.",
+          "why": "해 놓아야 되요 is the right form spelt wrong: 되다 + 어요 contracts to 돼요, and 되요 does not exist. 하고 있어야 돼요 would have you still vacuuming when the doorbell goes, which is the opposite of the point. 청소를 해요 would be good Korean too, without the obligation.",
           "art": "items/unit16_033_to_clean_up.png"
         },
         {
@@ -630,13 +630,13 @@
               "ko": "장을 보 놓아야 돼요"
             },
             {
-              "id": "c",
-              "ko": "장을 보러 가야 돼요"
+              "id": "c2",
+              "ko": "장을 봐 놓아야 되요"
             }
           ],
           "en": "If you are going to make the holiday food tomorrow, you have to do the shopping today.",
           "grammar": "보다 becomes 봐 before 놓다, so it is 장을 봐 놓다.",
-          "why": "보 놓아야 돼요 keeps the stem where the 아/어 form is needed. 장을 보러 가야 돼요 is good Korean and says nothing about tomorrow — the shopping would be done, but not sitting there waiting for the cooking.",
+          "why": "보 놓아야 돼요 keeps the stem where the 아/어 form is needed, and 봐 놓아야 되요 misspells 돼요 — 되 + 어 contracts to 돼. 장을 보러 가야 돼요 would be good Korean too; it only leaves out that the shopping will be sitting there waiting for the cooking.",
           "art": "items/unit16_026_to_do_the_grocery_shopping_in_advance.png"
         },
         {
@@ -657,13 +657,13 @@
               "ko": "돈을 찾아 놓아야 돼요"
             },
             {
-              "id": "c",
-              "ko": "돈을 찾아 놓았어요"
+              "id": "c2",
+              "ko": "돈을 찾아 놓어야 돼요"
             }
           ],
           "en": "Tomorrow is a holiday and the bank will not open, so you have to withdraw money today.",
           "grammar": "찾다 has a bright ㅏ, so it takes 아: 찾아 놓다.",
-          "why": "찾아 놓았어요 turns the advice into a report of what someone already did. 찾고 있어야 돼요 would have you standing at the machine all day tomorrow, when the bank is shut.",
+          "why": "찾아 놓어야 gives 놓다 the 어 of another vowel — 놓 has ㅗ, so 놓아야. 찾고 있어야 돼요 would have you standing at the machine all day tomorrow, when the bank is shut. 오늘 돈을 찾아 놓았어요 would be good Korean too — done already — where the page gives advice.",
           "art": "items/unit16_039_to_withdraw_money.png"
         },
         {
@@ -977,13 +977,13 @@
               "ko": "문자 대신 전화를 보냈어요"
             },
             {
-              "id": "c",
-              "ko": "전화 대신 문자를 했어요"
+              "id": "c2",
+              "ko": "전화 대신 문자가 보냈어요"
             }
           ],
           "en": "They didn’t answer the phone, so I sent a text instead of calling.",
-          "grammar": "문자 goes with 보내다 — a text is sent, not done.",
-          "why": "문자 대신 전화를 보냈어요 has the pair backwards and sends a phone call, which nobody does. 문자를 했어요 is the wrong verb for 문자."
+          "grammar": "문자 goes with 보내다 — a text is sent — and in speech with 하다 as well: 문자 했어요 is good Korean too.",
+          "why": "문자 대신 전화를 보냈어요 has the pair backwards and sends a phone call, which nobody does. 문자가 보냈어요 makes the text the one doing the sending."
         },
         {
           "n": 3,
@@ -1330,13 +1330,13 @@
               "ko": "쇼핑을 하까 해요"
             },
             {
-              "id": "c",
-              "ko": "쇼핑을 할 거예요"
+              "id": "c2",
+              "ko": "쇼핑을 하을까 해요"
             }
           ],
           "en": "A: What will you do when you meet your friend? — B: We both like shopping, so I’m thinking of going shopping.",
           "grammar": "The verb 하다 takes -ㄹ까: 할까 해요.",
-          "why": "하까 해요 is missing the ㄹ that carries the whole form. 할 거예요 is a decision already taken, and 좋아하니까 is offered as a reason for still thinking about it."
+          "why": "하까 해요 is missing the ㄹ that carries the whole form, and 하을까 해요 puts in an 으 that a vowel stem never takes. 쇼핑을 할 거예요 would be good Korean too — a decision rather than a thought."
         },
         {
           "n": 2,
@@ -1423,13 +1423,13 @@
               "ko": "꽃을 사 가까 해요"
             },
             {
-              "id": "c",
-              "ko": "꽃을 살까 해요"
+              "id": "c2",
+              "ko": "꽃을 사아 갈까 해요"
             }
           ],
           "en": "A: What are you taking to Mariko’s housewarming today? — B: Mariko likes flowers, so I’m thinking of taking some.",
           "grammar": "사 가다 is one verb phrase and the ending lands on 가다: 사 갈까.",
-          "why": "사 가까 해요 loses the ㄹ. 살까 해요 buys the flowers and leaves them in the shop — A asked 사 갈 거예요, about taking them along."
+          "why": "사 가까 해요 loses the ㄹ, and 사아 갈까 해요 writes out the 아 that 사다 has already swallowed: 사 가다. 꽃을 살까 해요 would be good Korean too — A asked what to buy, and 살까 answers that."
         }
       ],
       "type": "build"
@@ -1483,13 +1483,13 @@
               "ko": "갈까 하는데"
             },
             {
-              "id": "c",
-              "ko": "갈까 했는데"
+              "id": "c2",
+              "ko": "갈까 하는대"
             }
           ],
           "en": "A: I’m thinking of going to a noraebang tonight — want to come? — B: Sorry, I have plans.",
           "grammar": "노래방에 is already there, so only the verb is missing: 갈까 하는데.",
-          "why": "가까 하는데 drops the ㄹ. 갈까 했는데 puts the thought in the past, which turns an invitation into a regret."
+          "why": "가까 하는데 drops the ㄹ, and 갈까 하는대 writes the -는데 of a lead-in as -는대, the ending that reports what someone else said. 갈까 했는데 would be good Korean too — an invitation softened by putting the thought a moment back."
         },
         {
           "n": 2,
@@ -1634,8 +1634,8 @@
               "ko": "테니스를 치까 하는데"
             },
             {
-              "id": "b",
-              "ko": "테니스를 할까 하는데"
+              "id": "b2",
+              "ko": "테니스를 쳐까 하는데"
             },
             {
               "id": "c",
@@ -1644,7 +1644,7 @@
           ],
           "en": "A: I’m thinking of playing tennis after class — want to play? — B: Sure, I like playing tennis too.",
           "grammar": "치다 ends in a vowel: 칠까.",
-          "why": "같이 칠래요 at the end of the line names the verb, so 테니스를 할까 하는데 is the wrong one — 테니스 goes with 치다. 테니스를 치까 하는데 loses the ㄹ."
+          "why": "테니스를 치까 하는데 loses the ㄹ, and 쳐까 하는데 puts -ㄹ까 on the 쳐 of 쳐요, where it goes on the plain stem: 칠까. 테니스를 할까 하는데 would be good Korean too — tennis takes 하다 as often as 치다."
         }
       ],
       "type": "build"
@@ -1698,13 +1698,13 @@
               "ko": "제가 하 테니까"
             },
             {
-              "id": "c",
-              "ko": "제가 했으니까"
+              "id": "c2",
+              "ko": "제가 했을 테니까"
             }
           ],
           "en": "A: I’ll do the washing-up, so could you clean the room. — B: All right.",
           "grammar": "The verb 하다 takes -ㄹ 테니까: 할 테니까.",
-          "why": "하 테니까 has no ㄹ. 했으니까 is a reason drawn from something already done, and the dishes are still in the sink."
+          "why": "하 테니까 has no ㄹ, and 했을 테니까 is a guess about something already done — nobody guesses about their own washing-up. 설거지는 제가 했으니까 would be good Korean too, if the dishes were done already; here they are still to do."
         },
         {
           "n": 2,
@@ -1725,8 +1725,8 @@
               "ko": "제가 사 테니까"
             },
             {
-              "id": "b",
-              "ko": "제가 살 거니까"
+              "id": "b2",
+              "ko": "제가 사을 테니까"
             },
             {
               "id": "c",
@@ -1735,7 +1735,7 @@
           ],
           "en": "A: I’ll buy lunch. — B: No, I’ll get it today, so you buy next time.",
           "grammar": "The verb 사다 takes -ㄹ 테니까: 살 테니까.",
-          "why": "사 테니까 has no ㄹ. 살 거니까 is a plain reason and loses the offering tone the grammar carries — and the book prints 테니까."
+          "why": "사 테니까 has no ㄹ, and 사을 테니까 gives the vowel stem an 으 it never takes. 오늘은 제가 살 거니까 would be good Korean too — a plain reason, where 테니까 carries the offer — but the book prints 테니까."
         },
         {
           "n": 3,
@@ -2006,13 +2006,13 @@
               "ko": "전화를 못 받으실 테니까"
             },
             {
-              "id": "c",
-              "ko": "전화를 안 받으실 테니까"
+              "id": "c2",
+              "ko": "전화를 못 받으신 테니까"
             }
           ],
           "en": "A: Can I speak to Teacher Kim now? — B: Teacher Kim is in class, so won’t be able to answer — try in an hour.",
           "grammar": "The one who cannot answer is 선생님, so the verb takes the honorific 시: 받으실.",
-          "why": "못 받을 테니까 leaves the honorific off a teacher. 안 받으실 테니까 is choosing not to answer, where 수업 중이라서 says answering is impossible."
+          "why": "못 받을 테니까 leaves the honorific off a teacher, and 못 받으신 테니까 puts the past modifier where 테니까 takes -(으)ㄹ: 받으실. 안 받으실 테니까 would be good Korean too — the teacher will not be answering — though 수업 중이라서 makes it 못."
         }
       ],
       "type": "build"
@@ -2315,13 +2315,13 @@
               "ko": "네, 벌써 예약하 놓았어요"
             },
             {
-              "id": "c",
-              "ko": "네, 벌써 예매해 놓았어요"
+              "id": "c2",
+              "ko": "네, 벌써 예약해 놓었어요"
             }
           ],
           "en": "T: Did you book the plane tickets? — S: Yes, I already booked them.",
           "grammar": "예약하다 becomes 예약해 before 놓다.",
-          "why": "예약하 놓았어요 is the contraction not made. 예매 is booking a seat for a showing — the teacher said 예약했어요, and the answer echoes the verb it was given.",
+          "why": "예약하 놓았어요 is the contraction not made, and 예약해 놓었어요 gives 놓다 the 어 of another vowel — 놓 has ㅗ, so 놓았어요. 예매해 놓았어요 would be good Korean too: plane tickets are 예매 as much as 예약.",
           "audio": {
             "src": "audio/book/2b-u16-p2-3.mp3",
             "askEnd": 2.77
@@ -2454,13 +2454,13 @@
               "ko": "영화를 보까 해요"
             },
             {
-              "id": "c",
-              "ko": "영화를 볼 거예요"
+              "id": "c2",
+              "ko": "영화를 보을까 해요"
             }
           ],
           "en": "T: What will you do at the weekend? (see a film) — S: I’m thinking of seeing a film.",
           "grammar": "The verb 보다 takes -ㄹ까: 볼까.",
-          "why": "보까 해요 loses the ㄹ. 볼 거예요 is a decision already made, and this drill is about plans that are not.",
+          "why": "보까 해요 loses the ㄹ, and 보을까 해요 gives the vowel stem an 으 it does not take. 영화를 볼 거예요 would be good Korean too, as a plan already settled.",
           "audio": {
             "src": "audio/book/2b-u16-p3-2.mp3",
             "askEnd": 4.6
