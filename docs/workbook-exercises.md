@@ -1617,7 +1617,9 @@ gives ②") and a fourth listed the three answers of its first three rows.
 - **Watch the other rows as well.** A context line that quotes the tape can answer a different
   row. 모두 18,000원입니다 is the natural lead-in to Unit 10's time question, and it would have
   answered the price, two rows above; so that row has no lead-in. Every row is on screen at
-  once.
+  once. Unit 18's 듣기 1 shipped with exactly this: row 4 printed 시작한 지 일 년이 되는 날입니다
+  under row 2's blank for how long the programme had run. Its gap is now the length of time, so
+  the line answers the question instead of giving it away.
 
 `tests/test_listening_pages.js` drives the shipped renderer and checks all of it: no gloss on a
 듣기 page until the page is checked, all of them afterwards, the gloss still up front on a

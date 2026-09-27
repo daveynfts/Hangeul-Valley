@@ -18,6 +18,7 @@
       "no": "연습 2",
       "pattern": "늘다 · 줄다 · 오르다 · 내리다 · 생기다 · 발전하다",
       "section": "어휘",
+      "sectionEn": "Vocabulary",
       "icon": "📊",
       "instructionKo": "그림을 보고 [보기]와 같이 알맞은 단어를 골라 문장을 만들어 보세요.",
       "instructionEn": "Choose the right word from the box for each picture, as in the example.",
@@ -64,6 +65,10 @@
           "phraseKo": "전화 요금이 ___ (1분 300원 → 100원)",
           "lines": [
             {
+              "who": "그림",
+              "ko": "국제전화 요금: 1분 300원 → 1분 100원"
+            },
+            {
               "who": "2)",
               "ko": "전화 요금이 {}."
             }
@@ -93,6 +98,10 @@
           "phraseKo": "물건값이 ___ (500원 → 1,000원)",
           "lines": [
             {
+              "who": "그림",
+              "ko": "식품 코너: 500원 → 1,000원"
+            },
+            {
               "who": "3)",
               "ko": "물건값이 {}."
             }
@@ -113,7 +122,7 @@
             }
           ],
           "en": "The price of goods has gone up.",
-          "why": "Every tag in the second picture is higher than the first. 오르다 is the word for a figure going up, and 늘다 would be about how many items there are.",
+          "why": "The prices on the shelf went from 500 won to 1,000 won, so 올랐어요: 오르다 is the word for a figure going up. 내렸어요 reverses the change, and 늘었어요 would be about how many things there are, not what they cost.",
           "grammar": "물건값 = 물건 + 값. Korean builds price words this way: 과일값, 집값, 물건값."
         },
         {
@@ -193,6 +202,7 @@
       "no": "문법 1",
       "pattern": "A-아지다/어지다",
       "section": "문법과 표현 1",
+      "sectionEn": "Grammar and expression 1",
       "icon": "🔁",
       "instructionKo": "[보기]와 같이 알맞은 형태를 고르세요.",
       "instructionEn": "Choose the right form, as in the example.",
@@ -221,13 +231,13 @@
               "ko": "비싸었어요"
             },
             {
-              "id": "bissa_plain",
-              "ko": "비쌌어요"
+              "id": "bissa_uncontracted",
+              "ko": "비싸아졌어요"
             }
           ],
           "en": "Fruit has got a lot more expensive.",
-          "why": "비쌌어요 says fruit was expensive — a state in the past, with no change in it. The page is about change, so the verb has to carry one: 비싸 + -아지다 → 비싸지다, past 비싸졌어요. 비싸었어요 is the contraction skipped.",
-          "grammar": "비싸다 ends in ㅏ, so it takes -아지다, and 비싸 + 아 contracts to 비싸: 비싸지다."
+          "why": "비싸졌어요 is the change the page is about: 비싸 + -아지다 → 비싸지다, past 비싸졌어요. 비싸아졌어요 leaves ㅏ + 아 uncontracted, which spelling never allows, and 비싸었어요 has no -아지다 in it at all: it is the plain past with the contraction skipped and the wrong vowel.",
+          "grammar": "비싸다 ends in ㅏ, so it takes -아지다, and 비싸 + 아 contracts to 비싸: 비싸지다. 비쌌어요 is good Korean too, for fruit that was expensive; the page wants it becoming so."
         },
         {
           "n": 2,
@@ -250,12 +260,12 @@
               "ko": "익숙아졌어요"
             },
             {
-              "id": "iksuk_plain",
-              "ko": "익숙했어요"
+              "id": "iksuk_ha",
+              "ko": "익숙하졌어요"
             }
           ],
           "en": "I've got used to life in Korea.",
-          "why": "하다 adjectives go to 해지다, never 하아지다. 익숙했어요 would say you were used to it, leaving out the getting used to it, which is the whole point of the chapter and of the 말하기 dialogue.",
+          "why": "하다 adjectives go to 해지다: 익숙하 + 여 → 익숙해, then -지다. 익숙아졌어요 treats 하 like a ㅏ stem, and 익숙하졌어요 leaves out the 여 altogether. 익숙했어요 would be good Korean, but it says you were used to it, not that you got used to it.",
           "grammar": "익숙하다 → 익숙해지다. Any A-하다 does the same: 편하다 → 편해지다, 건강하다 → 건강해지다, 친하다 → 친해지다."
         },
         {
@@ -279,12 +289,12 @@
               "ko": "덥어지"
             },
             {
-              "id": "deowo_plain",
-              "ko": "덥"
+              "id": "deou",
+              "ko": "더우지"
             }
           ],
           "en": "The weather's gradually getting hotter.",
-          "why": "덥다 is a ㅂ-irregular: before a vowel the ㅂ becomes 우, giving 더워-. 덥어지다 is the irregular ignored. 덥네요 would just report that it is hot, and 점점 needs a change to modify.",
+          "why": "덥다 is a ㅂ-irregular: before a vowel the ㅂ becomes 우, and 우 + 어 gives 워 — 더워지다. 덥어지다 ignores the irregular, and 더우지다 changes the ㅂ but drops the 어 that -아/어지다 needs.",
           "grammar": "ㅂ-irregular adjectives: 덥다 → 더워요 → 더워지다, 춥다 → 추워지다, 쉽다 → 쉬워지다. 점점 (little by little) only makes sense with a change verb."
         }
       ],
@@ -306,6 +316,7 @@
       "no": "문법 2",
       "pattern": "V-게 되다",
       "section": "문법과 표현 1",
+      "sectionEn": "Grammar and expression 1",
       "icon": "🎯",
       "instructionKo": "[보기]와 같이 알맞은 것을 고르세요.",
       "instructionEn": "Choose the right form, as in the example.",
@@ -330,17 +341,17 @@
               "ko": "배우게 되었어요"
             },
             {
-              "id": "bae_plain",
-              "ko": "배웠어요"
+              "id": "bae_eo_ge",
+              "ko": "배워게 되었어요"
             },
             {
-              "id": "bae_want",
-              "ko": "배우고 싶었어요"
+              "id": "bae_gi",
+              "ko": "배우기 되었어요"
             }
           ],
           "en": "I liked Korean songs, so I ended up learning Korean.",
-          "why": "-아서 gives the reason, and 되다 supplies the result the reason led to. 배웠어요 drops that link and just reports studying; 배우고 싶었어요 reports a wish, and a wish is not what 좋아해서 produced.",
-          "grammar": "V-게 되다 = to come to do. The past is 되었어요, contracted to 됐어요 in speech, and both appear on this page."
+          "why": "배우게 되었어요 is right: -게 goes straight onto the stem, 배우 + 게, and 되었어요 supplies the result that 좋아해서 led to. 배워게 되었어요 puts -게 on 배워, the form -아/어 endings use, and 배우기 되었어요 borrows the -기 of -기 전에.",
+          "grammar": "V-게 되다 = to come to do. The past is 되었어요, contracted to 됐어요 in speech, and both appear on this page. 배웠어요 and 배우고 싶었어요 are good Korean as well, but neither says that the liking led to the learning."
         },
         {
           "n": 2,
@@ -359,17 +370,17 @@
               "ko": "먹게 됐어요"
             },
             {
-              "id": "meok_plain",
-              "ko": "먹어요"
+              "id": "meok_eojida",
+              "ko": "먹어졌어요"
             },
             {
-              "id": "meok_can",
-              "ko": "먹을 수 있어요"
+              "id": "meok_misspelt",
+              "ko": "먹게 됬어요"
             }
           ],
           "en": "At first I couldn't eat spicy food, but now I can.",
-          "why": "처음에는 … 지금은 sets up a before and an after, so the sentence is about a change and needs a verb that carries one. 먹어요 states the present with no before; 먹을 수 있어요 states an ability, which is close but says nothing about having arrived at it.",
-          "grammar": "-는데 joins the two halves as background and contrast. 처음에는 … -는데 지금은 -게 됐어요 is the whole pattern this chapter drills."
+          "why": "먹게 됐어요 is right: 처음에는 … 지금은 sets up a before and an after, and a change in what someone does is -게 되다. 먹어졌어요 gives the verb -아/어지다, which belongs to adjectives, and 됬어요 is a spelling Koreans often get wrong themselves: 되 + 었 is 됐, never 됬.",
+          "grammar": "-는데 joins the two halves as background and contrast. 지금은 잘 먹어요 and 먹을 수 있어요 are good Korean too; 먹게 됐어요 is the one that says it came about, which is what this page practises."
         },
         {
           "n": 3,
@@ -392,12 +403,12 @@
               "ko": "알기 됐어요"
             },
             {
-              "id": "al_know",
-              "ko": "알아요"
+              "id": "an_ge",
+              "ko": "안게 됐어요"
             }
           ],
           "en": "No, we got to know each other after coming to Korea.",
-          "why": "알게 됐어요 emphasizes that the two came to know each other in Korea. 알아요 only states that they know each other now. 알기 됐어요 does not form this pattern. 알았어요 can mean knew, found out or understood depending on context.",
+          "why": "알게 됐어요 is right: they met in Korea and came to know each other, which is -게 되다. 알기 됐어요 borrows the -기 of -기 전에, and 안게 됐어요 drops the ㄹ of 알다, which only goes before ㄴ, ㅂ and ㅅ — never before 게.",
           "grammar": "알다 + -게 되다 → 알게 되다. Keep ㄹ before 게. 알았어요 is also a valid form of 알다, but does not by itself emphasize the start of a relationship."
         }
       ],
@@ -419,6 +430,7 @@
       "no": "연습 1",
       "pattern": "지훈과 아키라 · 오래간만이에요",
       "section": "말하기 1",
+      "sectionEn": "Speaking 1",
       "icon": "🗣️",
       "instructionKo": "[보기]와 같이 바꿔서 이야기해 보세요.",
       "instructionEn": "Substitute the phrases into the conversation, as in the example.",
@@ -447,12 +459,12 @@
               "ko": "회사 일에도 익숙해지고"
             },
             {
-              "id": "iksuk_bad",
-              "ko": "회사 일에도 익숙하고"
+              "id": "iksuk_a",
+              "ko": "회사 일에도 익숙아지고"
             },
             {
-              "id": "iksuk_past",
-              "ko": "회사 일에도 익숙했고"
+              "id": "iksuk_ha",
+              "ko": "회사 일에도 익숙하지고"
             }
           ],
           "answer2": "meok_ge",
@@ -462,17 +474,17 @@
               "ko": "먹게 됐어요"
             },
             {
-              "id": "meok_plain",
-              "ko": "먹었어요"
+              "id": "meok_eojida",
+              "ko": "먹어졌어요"
             },
             {
-              "id": "meok_will",
-              "ko": "먹을 거예요"
+              "id": "meok_misspelt",
+              "ko": "먹게 됬어요"
             }
           ],
           "en": "Yes, I've got used to the work as well, and I can eat Korean food now too.",
-          "why": "The question was about getting used to things, so the answer keeps the change: 익숙해지고. 익숙하고 would report a state and quietly drop the getting there.",
-          "grammar": "Two changes joined by -고: 익숙해지고 … 먹게 됐어요. The tense sits on the last verb only, which is why the first is 익숙해지고 and not 익숙해졌고."
+          "why": "익숙해지고 keeps the change the question asked about, with -고 joining it to the next one: 익숙하 + 여 → 익숙해, then -지다. 익숙아지고 treats 하 as a ㅏ stem, and 익숙하지고 leaves out the 여. In the second blank, 먹게 됐어요 is the change in what 아키라 now does; 먹어졌어요 puts -아/어지다 on a verb, and 됬어요 misspells 됐어요.",
+          "grammar": "Two changes joined by -고: 익숙해지고 … 먹게 됐어요. With -고 the tense usually rides on the last verb, as it does in the book’s line. 회사 일에도 익숙하고 would be good Korean too, for a state rather than the getting there."
         },
         {
           "n": 2,
@@ -491,17 +503,17 @@
               "ko": "일하게 됐어요"
             },
             {
-              "id": "il_plain",
-              "ko": "일해요"
+              "id": "il_hae_ge",
+              "ko": "일해게 됐어요"
             },
             {
-              "id": "il_will",
-              "ko": "일할 거예요"
+              "id": "il_gi",
+              "ko": "일하기 됐어요"
             }
           ],
           "en": "I'm going to be working in China from next month.",
-          "why": "A posting is something arranged for you, not something you announce as a plan. 일할 거예요 would make it his own decision; 일하게 됐어요 is how Korean reports a transfer, and it is why 아키라 asks 얼마나 있을 건데요 rather than congratulating him on a choice.",
-          "grammar": "다음 달부터 fixes the start. -게 되다 in the past tense often carries news about yourself that someone else set in motion."
+          "why": "일하게 됐어요 is how Korean reports a posting — something arranged for 지훈 rather than a plan announced — and it is why 아키라 asks 얼마나 있을 건데요. 일해게 됐어요 puts -게 on 일해, the form -아/어 endings use, and 일하기 됐어요 borrows the -기 of -기 전에.",
+          "grammar": "다음 달부터 fixes the start. 일해요 and 일할 거예요 are good Korean for a plan of one’s own; -게 되다 in the past carries news that someone else set in motion."
         },
         {
           "n": 3,
@@ -524,13 +536,13 @@
               "ko": "익숙해졌어요"
             },
             {
-              "id": "iksuk_plain",
-              "ko": "익숙할 거예요"
+              "id": "iksuk_geeyo",
+              "ko": "익숙해질 거에요"
             }
           ],
           "en": "Don't worry. It'll be hard at first, but you'll soon get used to it.",
-          "why": "He has not gone yet, so the getting used to it is still ahead: 익숙해질 거예요. 익숙해졌어요 puts it in the past, which is the one thing that cannot be true here.",
-          "grammar": "익숙하다 → 익숙해지다 → 익숙해질 거예요. 곧 (soon) needs a future, and -겠지만 concedes the hard part before it."
+          "why": "익숙해질 거예요 is right: 지훈 has not gone yet, so the getting used to it is still ahead. 익숙해졌어요 puts it in the past, which is the one thing that cannot be true here, and 거에요 is a spelling Koreans get wrong too: 것이에요 contracts to 거예요, with 예 — never 거에요.",
+          "grammar": "익숙하다 → 익숙해지다 → 익숙해질 거예요. 곧 (soon) needs a future, and -겠지만 concedes the hard part before it. 익숙할 거예요 is sayable too, but it predicts a state; the line wants the change."
         },
         {
           "n": 4,
@@ -557,8 +569,8 @@
               "ko": "한국 생활도 편하아지고"
             },
             {
-              "id": "pyeon_past",
-              "ko": "한국 생활도 편했고"
+              "id": "pyeon_ha",
+              "ko": "한국 생활도 편하지고"
             }
           ],
           "answer2": "al_ge",
@@ -568,16 +580,16 @@
               "ko": "알게 됐어요"
             },
             {
-              "id": "al_plain",
-              "ko": "알았어요"
+              "id": "al_gi",
+              "ko": "알기 됐어요"
             },
             {
-              "id": "al_know",
-              "ko": "알아요"
+              "id": "an_ge",
+              "ko": "안게 됐어요"
             }
           ],
           "en": "Yes, life here has got easier, and I've got to know a lot of people too.",
-          "why": "The second column of the book runs the same shape with different words. 편하다 is a 하다 adjective, so it goes to 편해지다 — never 편하아지다.",
+          "why": "The book’s second column runs the same shape with different words. 편하다 is a 하다 adjective, so it goes to 편해지다: 편하아지고 leaves 하 + 아 apart, and 편하지고 leaves out the 여. In the second blank, 알게 됐어요 keeps the ㄹ of 알다 before 게 — 안게 drops it — and 알기 됐어요 borrows the -기 of -기 전에.",
           "grammar": "편하다 → 편해지다, and 알다 → 알게 되다. The pair -아/어지다 for how things feel and -게 되다 for what you now do is the division this chapter is built on."
         }
       ],
@@ -599,6 +611,7 @@
       "no": "문법 3",
       "pattern": "V-기 전에",
       "section": "문법과 표현 2",
+      "sectionEn": "Grammar and expression 2",
       "icon": "⏮️",
       "instructionKo": "[보기]와 같이 이야기해 보세요.",
       "instructionEn": "Ask and answer as in the example.",
@@ -631,12 +644,12 @@
               "ko": "왔기 전에"
             },
             {
-              "id": "olttae",
-              "ko": "올 때"
+              "id": "on_jeone",
+              "ko": "온 전에"
             }
           ],
           "en": "What did you do before you came to Korea? — I worked for a company.",
-          "why": "왔기 전에 puts the past on the wrong verb: 하셨어요 already says the whole sentence is past. 올 때 means \"when you come\", which asks a different question.",
+          "why": "오기 전에 is right, and B’s answer repeats it. 왔기 전에 puts the past on the wrong verb — 하셨어요 already says the whole sentence is past — and 온 전에 gives 전에 the modifier that belongs with 후에: 온 후에, after coming.",
           "grammar": "-기 전에 takes the bare stem: 오다 → 오기 전에, 먹다 → 먹기 전에. No tense, no irregulars to worry about."
         },
         {
@@ -714,16 +727,16 @@
               "ko": "죽기 전에"
             },
             {
-              "id": "jugeun",
-              "ko": "죽은 후에"
+              "id": "jukgi_hue",
+              "ko": "죽기 후에"
             },
             {
-              "id": "jukeul",
-              "ko": "죽을 때"
+              "id": "jukneun",
+              "ko": "죽는 전에"
             }
           ],
           "en": "Is there something you really want to do before you die?",
-          "why": "The other two are the patterns this chapter contrasts, and both are wrong here: 죽은 후에 puts the wish after death, and 죽을 때 puts it at the moment of dying.",
+          "why": "죽기 전에 is right: a wish for the time that is left, with -기 전에 on the bare stem. 죽기 후에 carries the -기 of 전에 across to 후에, which takes -(으)ㄴ, and 죽는 전에 gives 전에 a modifier it never takes.",
           "grammar": "전에 and 후에 are the pair: V-기 전에 before, V-(으)ㄴ 후에 after. Note the asymmetry — 전에 takes -기 and 후에 takes -(으)ㄴ."
         }
       ],
@@ -745,6 +758,7 @@
       "no": "문법 4",
       "pattern": "V-(으)ㄴ 후에",
       "section": "문법과 표현 2",
+      "sectionEn": "Grammar and expression 2",
       "icon": "⏭️",
       "instructionKo": "[보기]와 같이 이야기해 보세요.",
       "instructionEn": "Ask and answer as in the example.",
@@ -895,6 +909,7 @@
       "no": "연습 1",
       "pattern": "정우와 히엔 · 지금은 익숙해졌어요",
       "section": "말하기 2",
+      "sectionEn": "Speaking 2",
       "icon": "💬",
       "instructionKo": "[보기]와 같이 바꿔서 이야기해 보세요.",
       "instructionEn": "Substitute the phrases into the conversation, as in the example.",
@@ -1179,6 +1194,7 @@
       "no": "듣기 1",
       "pattern": "어렸을 때의 꿈",
       "section": "듣고 말하기",
+      "sectionEn": "Listening and speaking",
       "icon": "🏀",
       "instructionKo": "잘 듣고 맞는 것을 고르세요.",
       "instructionEn": "Listen carefully and choose the correct statement.",
@@ -1350,6 +1366,7 @@
       "no": "듣기 2",
       "pattern": "은퇴를 앞두고",
       "section": "듣고 말하기",
+      "sectionEn": "Listening and speaking",
       "icon": "🎙️",
       "instructionKo": "잘 듣고 질문에 답하세요.",
       "instructionEn": "Listen carefully and answer the questions.",
@@ -1625,11 +1642,12 @@
       "no": "읽기",
       "pattern": "내 고향 서울 · 줄리앙 김",
       "section": "읽고 쓰기",
+      "sectionEn": "Reading and writing",
       "icon": "📖",
       "instructionKo": "각 문항의 읽기 요약을 읽고 알맞은 답을 고르세요.",
       "instructionEn": "Read the learning summary supplied with each question and choose the answer.",
       "blurbEn": "A Seoul-born writer comes back and finds the city rearranged.",
-      "noteEn": "The summaries are learning aids, not a full transcript of the book passage. For question 1, choose the statement that contradicts the summary. In the remaining questions, express the changes with 줄다, 편리해지다 and 많아지다.",
+      "noteEn": "The summaries are learning aids, not a full transcript of the book passage. For question 1, choose the statement that contradicts the summary. In the remaining questions, say how each thing has changed; 모범 답안 on printed p.267 keys all three.",
       "bank": [],
       "items": [
         {
@@ -1676,7 +1694,7 @@
           "lines": [
             {
               "who": "읽기 요약",
-              "ko": "서울에는 예전보다 주택이 적습니다. 교통은 더 편리하고 외국인도 더 많습니다."
+              "ko": "예전에 동네에 많던 주택이 지금은 대부분 아파트로 바뀌었습니다. 교통은 더 편리하고 외국인도 더 많습니다."
             },
             {
               "who": "질문",
@@ -1687,11 +1705,11 @@
               "ko": "주택이 많이 {}."
             }
           ],
-          "answer": "jureotda",
+          "answer": "eopseojyeotda",
           "choices": [
             {
-              "id": "jureotda",
-              "ko": "줄었습니다"
+              "id": "eopseojyeotda",
+              "ko": "없어졌습니다"
             },
             {
               "id": "nuleotda",
@@ -1702,9 +1720,9 @@
               "ko": "생겼습니다"
             }
           ],
-          "en": "The number of houses has fallen a great deal.",
-          "why": "예전에 우리 동네는 주택이 많았는데 지금은 대부분 아파트로 바뀌었습니다 — houses turned into flats, so there are fewer houses. 늘었습니다 is the direction the text rules out.",
-          "grammar": "많았는데 … 바뀌었습니다 is the before-and-after. N(으)로 바뀌다 = to turn into N."
+          "en": "Many of the houses have disappeared.",
+          "why": "없어졌습니다 is the book’s answer: 예전에 우리 동네는 주택이 많았는데 지금은 대부분 아파트로 바뀌었습니다 — the houses are gone and flats stand in their place. 늘었습니다 and 생겼습니다 run the other way. 줄었습니다 would be good Korean for this as well, which is why it is not a wrong button.",
+          "grammar": "없다 → 없어지다, to disappear: the chapter’s -어지다 on 없다. 많았는데 … 바뀌었습니다 is the before-and-after, and N(으)로 바뀌다 is to turn into N."
         },
         {
           "n": 3,
@@ -1713,7 +1731,7 @@
           "lines": [
             {
               "who": "읽기 요약",
-              "ko": "서울에는 예전보다 주택이 적습니다. 교통은 더 편리하고 외국인도 더 많습니다."
+              "ko": "예전에 동네에 많던 주택이 지금은 대부분 아파트로 바뀌었습니다. 교통은 더 편리하고 외국인도 더 많습니다."
             },
             {
               "who": "답",
@@ -1727,8 +1745,8 @@
               "ko": "훨씬 편리해졌습니다"
             },
             {
-              "id": "pyeonri_state",
-              "ko": "훨씬 편리합니다"
+              "id": "pyeonri_ha_a",
+              "ko": "훨씬 편리하아졌습니다"
             },
             {
               "id": "bokjap",
@@ -1736,8 +1754,8 @@
             }
           ],
           "en": "Getting about has become far more convenient.",
-          "why": "9호선이 생겨서 교통이 훨씬 편리해졌습니다 is in the text almost word for word. The question asks how Seoul changed, so the answer has to be a change: 편리합니다 reports a state and answers a different question.",
-          "grammar": "편리하다 → 편리해지다, another 하다 adjective taking 해지다. 훨씬 (far more) only goes with comparatives and changes."
+          "why": "9호선이 생겨서 교통이 훨씬 편리해졌습니다 is in the text almost word for word. 훨씬 복잡해졌습니다 runs the other way, and 편리하아졌습니다 leaves 하 + 아 apart: 하다 adjectives go to 해지다.",
+          "grammar": "편리하다 → 편리해지다, another 하다 adjective taking 해지다. 훨씬 (far more) only goes with comparatives and changes. 훨씬 편리합니다 is good Korean for how things are now; the question asks what changed."
         },
         {
           "n": 4,
@@ -1746,7 +1764,7 @@
           "lines": [
             {
               "who": "읽기 요약",
-              "ko": "서울에는 예전보다 주택이 적습니다. 교통은 더 편리하고 외국인도 더 많습니다."
+              "ko": "예전에 동네에 많던 주택이 지금은 대부분 아파트로 바뀌었습니다. 교통은 더 편리하고 외국인도 더 많습니다."
             },
             {
               "who": "답",
@@ -1760,8 +1778,8 @@
               "ko": "많아졌습니다"
             },
             {
-              "id": "manda",
-              "ko": "많습니다"
+              "id": "maneo",
+              "ko": "많어졌습니다"
             },
             {
               "id": "jureotda",
@@ -1769,7 +1787,7 @@
             }
           ],
           "en": "The number of foreigners living in Seoul has grown.",
-          "why": "서울에 사는 외국인도 많아져서 … is the sentence. 많습니다 is the state without the change, and the question asked what is different.",
+          "why": "서울에 사는 외국인도 많아져서 … is the sentence. 줄었습니다 runs the other way, and 많어졌습니다 takes the wrong vowel: 많다 has ㅏ in its stem, so -아지다. 많습니다 would be good Korean for how things are now, but the question asks what changed.",
           "grammar": "많다 → 많아지다: ㅏ in the stem, so -아지다. It is also the 발음 example on the last page — 많아져요 is said [마나져요], with the ㅎ dropped."
         }
       ],
@@ -1791,6 +1809,7 @@
       "no": "과제",
       "pattern": "인생 그래프 발표하기",
       "section": "과제",
+      "sectionEn": "Task",
       "icon": "📈",
       "instructionKo": "[보기]와 같이 인생 그래프를 발표해 보세요.",
       "instructionEn": "Present your life graph, as in the example.",
@@ -1844,8 +1863,8 @@
               "ko": "건강해졌습니다"
             },
             {
-              "id": "geonghang_state",
-              "ko": "건강했습니다"
+              "id": "geonghang_ha",
+              "ko": "건강하졌습니다"
             },
             {
               "id": "geonghang_will",
@@ -1853,8 +1872,8 @@
             }
           ],
           "en": "It was very hard at the time, but I got healthy after that.",
-          "why": "그 후로 marks a turn, so the sentence needs the change: 건강해졌습니다. 건강했습니다 would say he was healthy then, which contradicts 많이 아팠습니다 in the sentence before.",
-          "grammar": "건강하다 → 건강해지다. 그 후로 = ever since then, and it wants a verb of change after it."
+          "why": "그 후로 marks a turn, so the sentence needs the change: 건강해졌습니다. 건강하졌습니다 leaves out the 여 that makes 하 into 해, and 건강할 겁니다 puts the recovery in the future, after a 그 후로 that looks back.",
+          "grammar": "건강하다 → 건강해지다. 그 후로 = ever since then, and it wants a verb of change after it. 건강했습니다 is good Korean too, but it reports a state; after 힘들었지만 the model is telling a change."
         },
         {
           "n": 3,
@@ -1933,6 +1952,7 @@
       "no": "알아보기",
       "pattern": "서울의 변화 · 1970년대와 2010년대",
       "section": "문화 산책",
+      "sectionEn": "Culture note",
       "icon": "🌆",
       "instructionKo": "서울의 변화를 보고 어떻게 달라졌는지 이야기해 보세요.",
       "instructionEn": "Look at the figures and say how Seoul has changed.",
@@ -2015,8 +2035,8 @@
               "ko": "생겼습니다"
             },
             {
-              "id": "nuleotda",
-              "ko": "늘었습니다"
+              "id": "olatda",
+              "ko": "올랐습니다"
             },
             {
               "id": "baljeon",
@@ -2024,7 +2044,7 @@
             }
           ],
           "en": "There was only Line 1; now there are lines up to Line 9.",
-          "why": "Lines 2 to 9 were not there and now are, which is 생기다 — the same verb the reading uses for the station near the writer’s house: 9호선이 생겨서.",
+          "why": "Lines 2 to 9 were not there and now are, which is 생기다 — the same verb the reading uses for the station near the writer’s house: 9호선이 생겨서. 올랐습니다 is for prices and levels, and 발전했습니다 for a city rather than a railway line. 늘었습니다 would be good Korean too — the lines did increase — so it is not a wrong button.",
           "grammar": "N호선 = Line N. 만 here is \"only\", the particle that decided question 6 of the exam paper as well."
         },
         {
@@ -2075,6 +2095,7 @@
       "no": "규칙",
       "pattern": "받침 'ㅎ, ㄶ, ㅀ' + 모음 → [ㅎ] 탈락",
       "section": "발음",
+      "sectionEn": "Pronunciation",
       "icon": "🔇",
       "instructionKo": "잘 듣고 따라 해 보세요.",
       "instructionEn": "Listen and repeat, watching the ㅎ disappear.",
@@ -2250,6 +2271,7 @@
       "no": "자기 평가 2",
       "pattern": "네 가지 문형을 한자리에서",
       "section": "자기 평가",
+      "sectionEn": "Self-check",
       "icon": "✅",
       "instructionKo": "알맞은 것을 골라 대화를 만들어 보세요.",
       "instructionEn": "Complete each dialogue with the right form of the word in brackets.",
@@ -2344,17 +2366,17 @@
               "ko": "괜찮아질 거예요"
             },
             {
-              "id": "gwaenchanha_ge",
-              "ko": "괜찮게 될 거예요"
+              "id": "gwaenchaneo",
+              "ko": "괜찮어질 거예요"
             },
             {
-              "id": "gwaenchanha_plain",
-              "ko": "괜찮을 거예요"
+              "id": "gwaenchanha_past",
+              "ko": "괜찮아졌을 거예요"
             }
           ],
           "en": "Life in Korea is a bit hard. — It's hard now, but it'll get better soon.",
-          "why": "괜찮다 is an adjective, so it takes -아지다: 괜찮아지다. 괜찮을 거예요 predicts a state without the getting there, and 곧 is asking for the change.",
-          "grammar": "괜찮다 → 괜찮아지다 → 괜찮아질 거예요. And the pronunciation page has the same word: 괜찮아요 is said [괜차나요]."
+          "why": "괜찮아질 거예요 is right: 괜찮다 is an adjective, so the change is -아지다 — ㅏ in the stem, so 아 — and 곧 puts it ahead. 괜찮어질 거예요 takes the wrong vowel, and 괜찮아졌을 거예요 guesses about something already over, which 곧 cannot be.",
+          "grammar": "괜찮다 → 괜찮아지다 → 괜찮아질 거예요. 괜찮을 거예요 is good Korean too — it will be fine — but the box asks for the change. And the pronunciation page has the same word: 괜찮아요 is said [괜차나요]."
         },
         {
           "n": 4,

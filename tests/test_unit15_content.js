@@ -99,6 +99,34 @@ for (const row of [speak2.example, ...speak2.items].filter(r => r.audio)) {
   const k = lines.indexOf(d.ko);
   assert(k >= 0 && row.lines[k].who === d.who, 'u15sgk-speak-2: ' + row.audio.src + ' says its row’s own line, in its own voice');
 }
+// Wrong buttons that are good Korean in their slot — twenty-seven, found in a review of this bank
+// and replaced with forms that are wrong there — and 줄었습니다, which the 읽기 page keyed where
+// 모범 답안 has 없어졌습니다. Pinned, so a later edit cannot bring one back as a wrong button.
+const GOOD_KOREAN = [
+  ['u15sgk-gram-1', 1, '비쌌어요'], ['u15sgk-gram-1', 2, '익숙했어요'], ['u15sgk-gram-1', 3, '덥'],
+  ['u15sgk-gram-2', 1, '배웠어요'], ['u15sgk-gram-2', 1, '배우고 싶었어요'], ['u15sgk-gram-2', 2, '먹어요'],
+  ['u15sgk-gram-2', 2, '먹을 수 있어요'], ['u15sgk-gram-2', 3, '알아요'],
+  ['u15sgk-speak-1', 1, '회사 일에도 익숙하고'], ['u15sgk-speak-1', 1, '회사 일에도 익숙했고'],
+  ['u15sgk-speak-1', 1, '먹었어요'], ['u15sgk-speak-1', 1, '먹을 거예요'], ['u15sgk-speak-1', 2, '일해요'],
+  ['u15sgk-speak-1', 2, '일할 거예요'], ['u15sgk-speak-1', 3, '익숙할 거예요'], ['u15sgk-speak-1', 4, '한국 생활도 편했고'],
+  ['u15sgk-speak-1', 4, '알았어요'], ['u15sgk-speak-1', 4, '알아요'], ['u15sgk-gram-3', 1, '올 때'],
+  ['u15sgk-gram-3', 4, '죽은 후에'], ['u15sgk-gram-3', 4, '죽을 때'], ['u15sgk-read-1', 2, '줄었습니다'],
+  ['u15sgk-read-1', 3, '훨씬 편리합니다'], ['u15sgk-read-1', 4, '많습니다'], ['u15sgk-task-1', 2, '건강했습니다'],
+  ['u15sgk-culture-1', 3, '늘었습니다'], ['u15sgk-check-2', 3, '괜찮을 거예요'], ['u15sgk-check-2', 3, '괜찮게 될 거예요']
+];
+const back = GOOD_KOREAN.filter(([id, n, ko]) => {
+  const row = page(id).items.find(r => r.n === n);
+  return [...row.choices, ...(row.choices2 || [])].some(c => c.id !== row.answer && c.id !== row.answer2 && c.ko === ko);
+});
+assert.strictEqual(back.length, 0, 'no wrong button is good Korean in its slot — ' + back.map(b => b.join(' ')).join(', '));
+// 모범 답안 on p.267 keys 없어졌습니다, and the page's own summary says what that answer is about.
+assert.strictEqual(keyed(page('u15sgk-read-1').items[1]), '없어졌습니다', '읽기 question 2 keys the book’s 없어졌습니다');
+assert(page('u15sgk-read-1').items[1].lines[0].ko.includes('아파트로 바뀌었습니다'), 'and its summary says the houses became flats');
+// Two 어휘 pictures decide their rows by which way a price went, and the scan's picture is not
+// on screen, so each row says it in words.
+assert(page('u15sgk-vocab-2').items[1].lines.some(l => l.who === '그림' && l.ko.includes('300원 → 1분 100원')), '전화 요금 fell');
+assert(page('u15sgk-vocab-2').items[2].lines.some(l => l.who === '그림' && l.ko.includes('500원 → 1,000원')), '물건값 rose');
+assert(textbook.exercises.every(e => e.sectionEn), 'every page names its section in English');
 const reading = textbook.exercises.find(e => e.id === 'u15sgk-read-1');
 assert(reading.items.every(row => row.lines.some(l => l.who === '읽기 요약')), 'reading has visible context');
 assert.strictEqual(reading.items[0].lines.find(l => l.who === '질문').ko,

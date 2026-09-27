@@ -1348,31 +1348,31 @@
         },
         {
           "n": 4,
-          "phraseKo": "오늘은 저희 방송을 ___ 일 년이 되는 날입니다",
+          "phraseKo": "오늘은 저희 방송을 시작한 지 ___ 되는 날입니다",
           "lines": [
             {
               "who": "진행자",
-              "ko": "오늘은 저희 방송을 {} 일 년이 되는 날입니다."
+              "ko": "오늘은 저희 방송을 시작한 지 {} 되는 날입니다."
             }
           ],
-          "answer": "sijakanji",
+          "answer": "il_nyeon",
           "choices": [
             {
-              "id": "sijakanji",
-              "ko": "시작한 지"
+              "id": "yuk_gaewol",
+              "ko": "육 개월이"
             },
             {
-              "id": "sijakaneunji",
-              "ko": "시작하는 지"
+              "id": "il_nyeon",
+              "ko": "일 년이"
             },
             {
-              "id": "sijakalji",
-              "ko": "시작할 지"
+              "id": "han_dal",
+              "ko": "한 달이"
             }
           ],
           "en": "Today marks a year since we first went on air.",
-          "grammar": "시작하다 in the pattern: 시작하 + ㄴ, 시작한 지.",
-          "why": "시작한 지 counts the year from the first broadcast. 시작하는 지 and 시작할 지 are the present and the future, and the pattern takes only the past modifier.",
+          "grammar": "V-(으)ㄴ 지 + a length of time + 이/가 되다 counts from the start: 시작한 지 일 년이 되다, a year since it began. The length is read in Sino-Korean numbers: 일 년, 육 개월.",
+          "why": "일 년이 is on the tape: 오늘은 저희 방송을 시작한 지 일 년이 되는 날입니다 — the presenter’s own line, and the one the book’s second question is asked about. 육 개월이 and 한 달이 are nowhere on the tape, and a year is also why the presenter can list all four seasons.",
           "audio": {
             "src": "audio/book/2b-u18-d37.mp3",
             "labelEn": "Today marks a year since we first went on air."
