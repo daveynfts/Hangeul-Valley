@@ -455,7 +455,7 @@
               "ko": "좋아하지"
             }
           ],
-          "en": "I bought Hien a present but I do not know whether she will like it.",
+          "en": "I bought Hien a present but I do not know whether Hien will like it.",
           "why": "좋아하다 ends in the vowel ㅏ, so no 으 goes in: 좋아하 + ㄹ지 → 좋아할지. 좋아하을지 is the 으 inserted where only a consonant stem would need it, and 좋아하지 has lost the ㄹ, which leaves the shape that belongs in 좋아하지 않아요.",
           "grammar": "The (으) of -(으)ㄹ지 exists only to give the ㄹ something to sit on. After a vowel there is already a syllable to sit on, so 가다 → 갈지, 하다 → 할지, 좋아하다 → 좋아할지."
         },
@@ -1796,7 +1796,7 @@
             }
           ],
           "en": "Which of these matches the passage? — Boarding houses are not easy to find these days.",
-          "why": "요즘 하숙집을 찾기가 쉽지 않습니다. is the passage in different words: 하숙집을 알아봤는데 구하기가 쉽지 않았습니다, and the reason is 하숙집이 대부분 원룸으로 바뀌었기 때문입니다. What the friend introduced was a 원룸, so 친구가 하숙집을 소개해 주었습니다 swaps one for the other. And 처음에 학교 기숙사에 살고 싶었지만 빈방이 없었습니다 — he wanted the dormitory and never got in, which is not 기숙사에 살았습니다.",
+          "why": "요즘 하숙집을 찾기가 쉽지 않습니다. is the passage in different words: 하숙집을 알아봤는데 구하기가 쉽지 않았습니다, and the reason is 하숙집이 대부분 원룸으로 바뀌었기 때문입니다. What the friend introduced was a 원룸, so 친구가 하숙집을 소개해 주었습니다 swaps one for the other. And 처음에 학교 기숙사에 살고 싶었지만 빈방이 없었습니다 — the writer wanted the dormitory and never got in, which is not 기숙사에 살았습니다.",
           "grammar": "살고 싶었지만 … 없었습니다 is a wish that did not come off, and reading 살고 싶었다 as 살았다 is the trap. 바뀌다 in the reason sentence is the intransitive one — 하숙집이 바뀌었다, a thing changing by itself, against 하숙집을 바꿨다, somebody changing it."
         },
         {
@@ -1852,7 +1852,7 @@
             }
           ],
           "en": "So I looked into boarding houses, but they were not easy to find.",
-          "why": "The long negative is -지 않다, written 않 with the ㅎ: 쉽지 않았습니다. 쉽지 안았습니다 writes 안, which is the short negative that goes in front of a verb and cannot take an ending. 쉬지 않았습니다 has lost the ㅂ of 쉽다 and turned it into 쉬다, to rest — so the sentence would say he did not rest.",
+          "why": "The long negative is -지 않다, written 않 with the ㅎ: 쉽지 않았습니다. 쉽지 안았습니다 writes 안, which is the short negative that goes in front of a verb and cannot take an ending. 쉬지 않았습니다 has lost the ㅂ of 쉽다 and turned it into 쉬다, to rest — so the sentence would say the writer did not rest.",
           "grammar": "안 goes before the verb and never conjugates; 않다 goes after -지 and does. 안 쉬웠습니다 and 쉽지 않았습니다 mean the same; 쉽지 안았습니다 means nothing."
         },
         {

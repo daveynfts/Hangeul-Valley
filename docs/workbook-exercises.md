@@ -1046,7 +1046,12 @@ kinds are worth watching for in the next unit:
 * **A gender the Korean never gives.** 그 사람, 히엔 씨 and 샤오밍 had become he and she in the English.
   The Korean does not say, so neither does the English: the name, or that person. Vietnamese
   pronouns carry gender and age, so an English "she" forces the translator into a choice the
-  book never made.
+  book never made. The same held in every bank — 선배, 동생 ("my younger brother"), 경찰 ("a
+  policeman"), 김 선생님 ("Mr Kim"), the runner of Unit 11's 듣기 and the writer of a 읽기 passage —
+  and `tests/test_pronouns.js` now reads them all. A he or she stays only where the Korean gives
+  the gender: a word in the row (여자, 언니, 형님, 할머니, 아내, 여자 친구, 여성, the written 그), a
+  speaker labelled 남 or 여, or a page listed in the test with where on the tape or in the passage
+  the gender is given. Anything else fails, and so does a listing the Korean no longer needs.
 
 ## The order to do it in
 

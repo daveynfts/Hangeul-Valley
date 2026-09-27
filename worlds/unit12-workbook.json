@@ -391,7 +391,7 @@
           }
         ],
         "answerKo": "꼼꼼한 것 같아요",
-        "en": "A: What is Yujin like? — B: She seems meticulous. She keeps her notes tidy and rarely makes small mistakes."
+        "en": "A: What is Yujin like? — B: Yujin seems meticulous — tidy notes, and hardly ever a small mistake."
       },
       "items": [
         {
@@ -425,7 +425,7 @@
               "ko": "내성적인 것 같아요"
             }
           ],
-          "en": "A: What is Steven like? — B: He seems outgoing. He talks easily even with people he has just met.",
+          "en": "A: What is Steven like? — B: Outgoing, it seems. Steven talks easily even with people just met.",
           "grammar": "A-(으)ㄴ 것 같다 softens a judgement about someone else — you are reading them, not stating a fact about them.",
           "why": "활발적이에요 borrows the -적이다 of 내성적이다 and 남성적이다, and 활발하다 does not take it. 내성적인 것 같아요 is the opposite of the behaviour described underneath."
         },
@@ -460,7 +460,7 @@
               "ko": "여성적이에요"
             }
           ],
-          "en": "A: What is Yumi like? — B: She is a bit on the masculine side. She loves sport and is not easily frightened.",
+          "en": "A: What is Yumi like? — B: A bit on the masculine side. Yumi loves sport and is not easily frightened.",
           "grammar": "-적이다 is a noun plus 이다, so the polite form is 이에요 and never 해요.",
           "why": "남성적해요 conjugates it as though it were a 하다 verb. 여성적이에요 is the word the sentence underneath rules out — 겁이 없다 and loving sport is what the book has in mind here."
         },
@@ -530,7 +530,7 @@
               "ko": "활발해요"
             }
           ],
-          "en": "A: Does Julien like meeting people? — B: No, he prefers being on his own. He is introverted.",
+          "en": "A: Does Julien like meeting people? — B: No, Julien prefers being alone — an introvert.",
           "grammar": "내성적이다 is the -적이다 shape again, and the sentence in front of the blank is what licenses it.",
           "why": "내성적해요 is the 하다 ending on a word that does not take one. 활발해요 contradicts 혼자 있는 걸 더 좋아해요, the line directly above the blank."
         },
@@ -933,7 +933,7 @@
           }
         ],
         "answerKo": "한국 사람처럼 말해요",
-        "en": "A: Is Steven good at Korean? — B: Yes, he talks like a Korean."
+        "en": "A: Is Steven good at Korean? — B: Yes, Steven talks like a Korean."
       },
       "items": [
         {
@@ -1025,7 +1025,7 @@
               "ko": "시계처럼 지켜요"
             }
           ],
-          "en": "A: Is Julien punctual? — B: Yes, he is as exact as a clock.",
+          "en": "A: Is Julien punctual? — B: Yes, as exact as a clock.",
           "grammar": "정확하다 is a 하다 adjective, so it contracts: 정확해요.",
           "why": "정확하요 is the contraction not made. 시계처럼 지켜요 repeats A’s own verb and says a clock keeps appointments, which is not the comparison the picture draws."
         },
@@ -1056,9 +1056,9 @@
               "ko": "모델처럼 커 보여요"
             }
           ],
-          "en": "A: Is Nana’s friend tall? — B: Yes, she is as tall as a model.",
+          "en": "A: Is Nana’s friend tall? — B: Yes, as tall as a model.",
           "grammar": "키가 크다 is the phrase for being tall, and 처럼 attaches to the noun 모델 in front of it.",
-          "why": "키가 높아요 is the mistake the 어휘 page warned about — a person’s height is 크다, not 높다. 커 보여요 is this unit’s other grammar point and answers a different question: A asked whether she IS tall."
+          "why": "키가 높아요 is the mistake the 어휘 page warned about — a person’s height is 크다, not 높다. 커 보여요 is this unit’s other grammar point and answers a different question: A asked whether that friend IS tall."
         },
         {
           "n": 5,
@@ -1163,8 +1163,8 @@
               "ko": "새"
             }
           ],
-          "en": "Nana has a lovely smile. She laughs like a child.",
-          "grammar": "귀엽다 in the first sentence is the clue: what is being compared is the way she laughs, not who she is with.",
+          "en": "Nana has a lovely smile, and laughs like a child.",
+          "grammar": "귀엽다 in the first sentence is the clue: what is being compared is the way Nana laughs, not who Nana is with.",
           "why": "가족 is the answer to the next row, where the comparison is about closeness. A laugh that is 귀여워요 is a child’s, which is what 아이처럼 says."
         },
         {
@@ -1332,7 +1332,7 @@
               "ko": "꼼꼼 편이에요"
             }
           ],
-          "en": "A: Kelly, what is Nana like? — B: She is feminine, and on the meticulous side.",
+          "en": "A: Kelly, what is Nana like? — B: Feminine, and on the meticulous side.",
           "grammar": "꼼꼼하다 is a 하다 adjective: the modifier is 꼼꼼한, exactly as 조용하다 gives 조용한 in the chapter title.",
           "why": "꼼꼼하는 편이에요 uses the verb ending; 꼼꼼 편이에요 drops the adjective’s ending altogether. The sentence the textbook keys on p.76 is 여성적이고 조용한 편이에요, built the same way."
         },
@@ -1363,7 +1363,7 @@
               "ko": "전화하게 편이에요"
             }
           ],
-          "en": "A: Does Xiaoming call his parents often? — B: Yes, he is the sort who phones a lot.",
+          "en": "A: Does Xiaoming often call home? — B: Yes, Xiaoming is the sort who phones a lot.",
           "grammar": "전화하다 is a verb, so it takes -는: 전화하는 편이다. A habit is a verb, however 하다-shaped the word looks.",
           "why": "전화한 편이에요 is the adjective ending, and on a verb it would mean a single finished call. 전화하게 is this unit’s -게 adverb, which cannot carry 편이다."
         },
@@ -1425,9 +1425,9 @@
               "ko": "만든 편이에요"
             }
           ],
-          "en": "A: What does Mariko cook often? — B: She is the sort who makes bulgogi a lot.",
+          "en": "A: What does Mariko cook often? — B: Mariko is the sort who makes bulgogi a lot.",
           "grammar": "A ㄹ stem drops its ㄹ before -는, so 만들다 gives 만드는. The same happens in 사는, 아는, 노는.",
-          "why": "만들는 편이에요 keeps the ㄹ that has to go — the one spelling in this exercise that no ending rule catches on its own. 만든 편이에요 is the adjective ending, and would point at one particular time she cooked."
+          "why": "만들는 편이에요 keeps the ㄹ that has to go — the one spelling in this exercise that no ending rule catches on its own. 만든 편이에요 is the adjective ending, and would point at one particular time Mariko cooked."
         }
       ]
     },
@@ -1578,7 +1578,7 @@
               "ko": "재미있는"
             }
           ],
-          "en": "A: Steven tells things in a fun way. — B: He does. Talking to him is fun.",
+          "en": "A: Steven tells things in a fun way. — B: True. Talking with Steven is fun.",
           "grammar": "재미있다 takes -게 like any other adjective, and 말을 재미있게 하다 is the phrase the textbook teaches on p.78.",
           "why": "재미있어 would end the clause and leave 해요 stranded. 재미있는 is the modifier — 재미있는 이야기 — and there is no noun here for it to attach to."
         },
@@ -1666,7 +1666,7 @@
         ],
         "answerKo": "멋있게",
         "answer2Ko": "입어요",
-        "en": "He dresses well."
+        "en": "Dresses stylishly."
       },
       "items": [
         {
@@ -1870,7 +1870,7 @@
               "ko": "씻어요"
             }
           ],
-          "en": "She draws pictures beautifully.",
+          "en": "Draws pictures beautifully.",
           "grammar": "예쁘다 is a ㅡ stem and -게 leaves the ㅡ where it is: 예쁘게, never 예뻐게.",
           "why": "크게 was spent on 이름 one row up, and the last verb left for 그림 is 그리다. 예쁜 is the modifier — 예쁜 그림 is a pretty picture, which is not the same as drawing one prettily."
         }
@@ -1989,9 +1989,9 @@
               "ko": "천천히"
             }
           ],
-          "en": "Mariko moved far away, so I hardly see her these days.",
+          "en": "Mariko moved far away, so these days we rarely get to meet.",
           "grammar": "멀리 is the adverb of 멀다 and goes with verbs of motion — 멀리 가다, 멀리 살다.",
-          "why": "멀게 is the -게 form, which would be about how something is perceived rather than where someone went. 천천히 이사를 가서 would say she moved slowly, which is not a reason for not meeting."
+          "why": "멀게 is the -게 form, which would be about how something is perceived rather than where someone went. 천천히 이사를 가서 would say Mariko moved slowly, which is not a reason for not meeting."
         },
         {
           "n": 5,
@@ -2080,7 +2080,7 @@
               "ko": "성격을 좋아 보여요"
             }
           ],
-          "en": "T: personality, good — S: He seems good-natured.",
+          "en": "T: personality, good — S: Looks good-natured.",
           "grammar": "좋다 takes -아요 because its stem vowel is ㅗ, so it is 좋아 보여요.",
           "why": "성격을 makes it an object, and 보이다 takes a subject — the thing that looks a certain way is 성격이. 좋 보여요 has no ending on the adjective at all.",
           "audio": {
@@ -2115,7 +2115,7 @@
               "ko": "키가 높아 보여요"
             }
           ],
-          "en": "T: height, tall — S: He looks tall.",
+          "en": "T: height, tall — S: Looks tall.",
           "grammar": "크다 drops its ㅡ before the ending: 커 보여요.",
           "why": "크어 보여요 is the contraction not made. 높아 보여요 measures a building; a person’s 키 is 크다, which the 어휘 page spent a whole row on.",
           "audio": {
@@ -2219,7 +2219,7 @@
           }
         ],
         "answerKo": "저도 스티븐 씨처럼 친구가 많았으면 좋겠어요",
-        "en": "T: Steven has a lot of friends, does he not? — S: Yes, I wish I had as many friends as Steven.",
+        "en": "T: Steven has a lot of friends, right? — S: Yes, I wish I had as many friends as Steven.",
         "why": "Played through once so the shape of the exchange is heard before you answer one yourself.",
         "audio": {
           "src": "audio/book/2b-u12-p2-0.mp3",
@@ -2254,7 +2254,7 @@
               "ko": "저도 마리코 씨같은 요리를 잘했으면 좋겠어요"
             }
           ],
-          "en": "T: Mariko is good at cooking, is she not? — S: Yes, I wish I could cook like Mariko.",
+          "en": "T: Mariko is good at cooking, right? — S: Yes, I wish I could cook like Mariko.",
           "grammar": "-았/었으면 좋겠다 wants the past form of the verb even though the wish is about now: 잘하다 → 잘했으면.",
           "why": "잘하면 좋겠어요 is the plain conditional and is a weaker, more distant wish. 마리코 씨같은 is the modifier of 같다 and needs a noun after it — the adverb form is 같이.",
           "audio": {
@@ -2289,7 +2289,7 @@
               "ko": "저도 켈리 씨처럼 성격을 활발했으면 좋겠어요"
             }
           ],
-          "en": "T: Kelly is outgoing, is she not? — S: Yes, I wish I were as outgoing as Kelly.",
+          "en": "T: Kelly is outgoing, right? — S: Yes, I wish I were as outgoing as Kelly.",
           "grammar": "활발하다 is a 하다 adjective and its past is 활발했으면, with the 하 contracting into 했.",
           "why": "성격을 makes 성격 an object of a wish, and 활발하다 has no object. 활발하면 좋겠어요 is the present conditional the whole drill is built to replace.",
           "audio": {
@@ -2324,7 +2324,7 @@
               "ko": "저도 줄리앙 씨처럼 기타를 잘 치면 좋겠어요"
             }
           ],
-          "en": "T: Julien plays the guitar well, does he not? — S: Yes, I wish I could play the guitar like Julien.",
+          "en": "T: Julien plays the guitar well, right? — S: Yes, I wish I could play the guitar like Julien.",
           "grammar": "치다 contracts before the past: 치 + 었 becomes 쳤.",
           "why": "치었으면 is that contraction left undone. 치면 좋겠어요 is the present conditional again — the third row in a row to offer it, because it is the one mistake this drill exists to catch.",
           "audio": {
@@ -2359,7 +2359,7 @@
               "ko": "저도 샤오밍 씨처럼 키가 컸으면 좋았어요"
             }
           ],
-          "en": "T: Xiaoming is tall, is he not? — S: Yes, I wish I were as tall as Xiaoming.",
+          "en": "T: Xiaoming is tall, right? — S: Yes, I wish I were as tall as Xiaoming.",
           "grammar": "크다 loses its ㅡ before 었: 크 + 었 gives 컸. The ending is -으면 좋겠어요, and 좋겠 is the part that carries the wishing.",
           "why": "크었으면 keeps the ㅡ. 좋았어요 puts the past on 좋다 instead of the 겠 that makes it a wish — it says the wish itself was nice, which is not what anyone means.",
           "audio": {

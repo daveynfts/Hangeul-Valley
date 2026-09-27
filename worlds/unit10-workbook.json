@@ -1024,7 +1024,7 @@
         {
           "n": 6,
           "answer": "nado",
-          "en": "A: It’s Nana’s birthday, so I’m going over to hers tonight. You’re coming too, right? — B: Yes, I’m coming too.",
+          "en": "A: It’s Nana’s birthday, so I’m going over to Nana’s tonight. You’re coming too, right? — B: Yes, I’m coming too.",
           "why": "A ends with 너도 — you too — and B answers with the same particle pointed back: 나도. A’s -지? is asking for confirmation of something already taken for granted, so all B has to do is agree.",
           "grammar": "나 + 도. 도 replaces 은/는 and 이/가 rather than stacking on top of them: 나도 갈 거야, never 나는도 or 내가도.",
           "lines": [
@@ -2211,7 +2211,7 @@
             }
           ],
           "en": "Steven, you like traditional Korean music, don’t you?",
-          "why": "Jeongwoo is checking something he already believes, which is what -지요 does, and 반말 keeps the checking. Note the name: 씨 comes off, because 씨 is politeness of the same kind as 요.",
+          "why": "Jeongwoo is checking an assumption, which is what -지요 does, and 반말 keeps the checking. Note the name: 씨 comes off, because 씨 is politeness of the same kind as 요.",
           "grammar": "좋아하지요 → 좋아하지. 좋아하시지 keeps the honorific 시, which is for someone above you — using it on a friend inside a 반말 sentence pulls in two directions at once."
         },
         {
@@ -2255,7 +2255,7 @@
             }
           ],
           "en": "Yes, I like it.",
-          "why": "The same 응 as item 1, and the verb from 연습 4 item 3. Steven is answering a -지 question, which is why a bare 응 is enough — he only has to confirm what was already assumed.",
+          "why": "The same 응 as item 1, and the verb from 연습 4 item 3. Steven is answering a -지 question, which is why a bare 응 is enough — all Steven has to do is confirm what was already assumed.",
           "grammar": "좋아해요 → 좋아해. 하다 takes 여 and 하 + 여 contracts to 해, so 하어 is a form that never exists — not here and not in 해요, 했어, 해서."
         },
         {
@@ -2328,7 +2328,7 @@
             }
           ],
           "en": "There’s a gugak class for foreigners at the National Gugak Center, and I thought you’d like it, so I called.",
-          "why": "The long one. 스티븐 씨가 is Jeongwoo talking about the person he is talking to, in the third person — which is polite Korean and quite normal. In 반말 you address them directly instead: 네가.",
+          "why": "The long one. 스티븐 씨가 is Jeongwoo speaking of the listener in the third person — which is polite Korean and quite normal. In 반말 you address them directly instead: 네가.",
           "grammar": "네가 is 너 + 가, and it is the standard form even though everyone pronounces it 니가 to keep it apart from 내가. 너가 is what that pronunciation gets written as, and it is not standard. -(으)ㄹ 것 같다 is the guess: I thought you would probably like it."
         },
         {
@@ -3240,7 +3240,7 @@
             }
           ],
           "en": "A: Nana, didn’t you sleep well last night? — B: No, I slept fine — but I’m tired.",
-          "why": "A guesses that Nana slept badly, so 아니 is answering the question rather than the tiredness: she did sleep well. Then the turn — well slept and tired all the same.",
+          "why": "A guesses that Nana slept badly, so 아니 is answering the question rather than the tiredness: Nana did sleep well. Then the turn — well slept and tired all the same.",
           "grammar": "자다 → 잤는데. 자 + 았 has nowhere to go but together, giving 잤, and the past takes -는데. 자는데 is the present, which cannot go with the 어제 in A’s question."
         },
         {
@@ -3338,7 +3338,7 @@
               "ko": "살는데"
             }
           ],
-          "en": "A: Steven, is your friend Edo good at Korean as well? — B: No — he lived in Korea a long time, but he isn’t.",
+          "en": "A: Steven, is your friend Edo good at Korean as well? — B: No — Edo lived in Korea a long time, but isn’t.",
           "why": "The contrast is between what living here a long time would lead you to expect and what is actually the case. 네 친구 is the 네 of the 반말 page, and the 도 in 에도도 is the particle — Edo too — sitting on a name that happens to end the same way.",
           "grammar": "살다 → 살았는데 in the past. In the present it would be 사는데, because a ㄹ stem drops its ㄹ in front of the ㄴ of -는데; 살는데 is that drop left undone. The past sidesteps the question, since 았 + 는데 has no ㄹ left to decide about."
         },

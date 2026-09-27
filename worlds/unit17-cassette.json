@@ -1448,7 +1448,7 @@
         "ko": "좀 자세하게 말씀해 주세요.",
         "en": "Please tell me in a little more detail.",
         "syl": 11,
-        "why": "자세하게 turns the adjective into how the telling should be done, which is what -게 is for. 말씀해 주세요 puts the asking back onto the officer’s side — he is asking for a favour, not giving an order.",
+        "why": "자세하게 turns the adjective into how the telling should be done, which is what -게 is for. 말씀해 주세요 puts the asking back onto the officer’s side — a request for a favour, not an order.",
         "tags": [
           "A-게",
           "연음"

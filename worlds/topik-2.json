@@ -1397,7 +1397,7 @@
           "주인들"
         ],
         "example": "집주인을 만났을 때를 '주인님'이라고 불러서 사람들이 웃었어.",
-        "exampleEn": "When I met the landlord I addressed him as 'my lord', and everyone laughed."
+        "exampleEn": "When I met the landlord I used the title 'my lord', and everyone laughed."
       },
       {
         "ko": "키우다",
@@ -4538,7 +4538,7 @@
         "category": "사회",
         "categoryEn": "Society & everyday life",
         "example": "휴일에 산을 오르던 경찰이 등산객을 구조했다.",
-        "exampleEn": "A police officer climbing a mountain on his day off rescued a hiker."
+        "exampleEn": "A police officer climbing a mountain on a day off rescued a hiker."
       },
       {
         "ko": "경찰",
@@ -4547,7 +4547,7 @@
         "category": "사회",
         "categoryEn": "Society & everyday life",
         "example": "휴일에 산을 오르던 경찰이 등산객을 구조했다.",
-        "exampleEn": "A police officer climbing a mountain on his day off rescued a hiker."
+        "exampleEn": "A police officer climbing a mountain on a day off rescued a hiker."
       },
       {
         "ko": "경위",
@@ -4583,7 +4583,7 @@
         "category": "자연",
         "categoryEn": "Nature & the seasons",
         "example": "이후 김 경위는 구조대 차량이 올 수 있는 산 중턱 대피소까지 여성을 업고 뛰어 내려갔다.",
-        "exampleEn": "Inspector Kim then carried the woman on his back and ran down to the mid-slope shelter that the rescue vehicle could reach."
+        "exampleEn": "Inspector Kim then carried the woman piggyback and ran down to the mid-slope shelter that the rescue vehicle could reach."
       },
       {
         "ko": "대피소",
@@ -4604,7 +4604,7 @@
           "구조했다"
         ],
         "example": "휴일에 산을 오르던 경찰이 등산객을 구조했다.",
-        "exampleEn": "A police officer climbing a mountain on his day off rescued a hiker."
+        "exampleEn": "A police officer climbing a mountain on a day off rescued a hiker."
       },
       {
         "ko": "구조대",
@@ -4655,7 +4655,7 @@
         "category": "건강",
         "categoryEn": "Health & the body",
         "example": "김 경위는 바로 여성의 체온이 떨어지지 않게 겉옷을 벗어서 덮어 주고 119에 신고했다.",
-        "exampleEn": "Inspector Kim immediately took off his coat to cover her so her body temperature would not drop, and called the emergency services."
+        "exampleEn": "Inspector Kim immediately took off a coat to cover her so her body temperature would not drop, and called the emergency services."
       },
       {
         "ko": "겉옷",
@@ -4664,7 +4664,7 @@
         "category": "사회",
         "categoryEn": "Society & everyday life",
         "example": "김 경위는 바로 여성의 체온이 떨어지지 않게 겉옷을 벗어서 덮어 주고 119에 신고했다.",
-        "exampleEn": "Inspector Kim immediately took off his coat to cover her so her body temperature would not drop, and called the emergency services."
+        "exampleEn": "Inspector Kim immediately took off a coat to cover her so her body temperature would not drop, and called the emergency services."
       },
       {
         "ko": "벗다",
@@ -4686,7 +4686,7 @@
           "덮어"
         ],
         "example": "김 경위는 바로 여성의 체온이 떨어지지 않게 겉옷을 벗어서 덮어 주고 119에 신고했다.",
-        "exampleEn": "Inspector Kim immediately took off his coat to cover her so her body temperature would not drop, and called the emergency services."
+        "exampleEn": "Inspector Kim immediately took off a coat to cover her so her body temperature would not drop, and called the emergency services."
       },
       {
         "ko": "신고하다",
@@ -4699,7 +4699,7 @@
           "신고를"
         ],
         "example": "김 경위는 바로 여성의 체온이 떨어지지 않게 겉옷을 벗어서 덮어 주고 119에 신고했다.",
-        "exampleEn": "Inspector Kim immediately took off his coat to cover her so her body temperature would not drop, and called the emergency services."
+        "exampleEn": "Inspector Kim immediately took off a coat to cover her so her body temperature would not drop, and called the emergency services."
       },
       {
         "ko": "이후",
@@ -4708,7 +4708,7 @@
         "category": "사회",
         "categoryEn": "Society & everyday life",
         "example": "이후 김 경위는 구조대 차량이 올 수 있는 산 중턱 대피소까지 여성을 업고 뛰어 내려갔다.",
-        "exampleEn": "Inspector Kim then carried the woman on his back and ran down to the mid-slope shelter that the rescue vehicle could reach."
+        "exampleEn": "Inspector Kim then carried the woman piggyback and ran down to the mid-slope shelter that the rescue vehicle could reach."
       },
       {
         "ko": "차량",
@@ -4751,7 +4751,7 @@
           "내려갔다"
         ],
         "example": "이후 김 경위는 구조대 차량이 올 수 있는 산 중턱 대피소까지 여성을 업고 뛰어 내려갔다.",
-        "exampleEn": "Inspector Kim then carried the woman on his back and ran down to the mid-slope shelter that the rescue vehicle could reach."
+        "exampleEn": "Inspector Kim then carried the woman piggyback and ran down to the mid-slope shelter that the rescue vehicle could reach."
       },
       {
         "ko": "병원",

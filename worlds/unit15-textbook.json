@@ -1684,9 +1684,9 @@
               "ko": "③ 한국어를 배우려고 한국에 왔습니다"
             }
           ],
-          "en": "Which does not match: he lived in France until he was six. (He lived in Seoul until six, and moved to France then.)",
-          "why": "태어나서 여섯 살까지 서울에 살다가 … 프랑스 파리로 가게 되었습니다. Until six he was in Seoul; France came after. Option 2 swaps the two countries and keeps the age, which is why it reads as though it came from the text. ① and ③ are both in the first paragraph.",
-          "grammar": "-다가 marks an action broken off for another: 살다가 가게 되었습니다, he was living there and then went. Getting 다가 the right way round is the question."
+          "en": "Which does not match: lived in France until the age of six. (Julien lived in Seoul until six, and moved to France then.)",
+          "why": "태어나서 여섯 살까지 서울에 살다가 … 프랑스 파리로 가게 되었습니다. Until six Julien was in Seoul; France came after. Option 2 swaps the two countries and keeps the age, which is why it reads as though it came from the text. ① and ③ are both in the first paragraph.",
+          "grammar": "-다가 marks an action broken off for another: 살다가 가게 되었습니다, living there and then going. Getting 다가 the right way round is the question."
         },
         {
           "n": 2,
@@ -1801,7 +1801,7 @@
           }
         ],
         "answerKo": "부산이에요",
-        "en": "Minsu was born in Busan. His hometown is Busan."
+        "en": "Minsu was born in Busan. Minsu’s hometown is Busan."
       }
     },
     {
