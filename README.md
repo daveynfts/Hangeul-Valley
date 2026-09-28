@@ -73,6 +73,17 @@ curriculum without running Node locally:
 Edits (save layout, add words, Sync Files) stay on the local server. The Vercel
 copy shows a Read-only badge and hides those buttons.
 
+The **✨ Designer** tab edits a study-desk page the way it looks. The page is drawn live with the
+game's own stylesheets; click any sentence to make it bold, italic, larger, coloured, highlighted
+or boxed, or to give a word a meaning on hover. A page (or a whole bank) takes a theme, a width,
+question columns, a zoom and a Korean font; text boxes, pictures and dividers can be placed
+between its sections; and every question type is editable, including the per-question ones the
+Workbooks tab only lists. Formatting is stored beside the text (`fmt` and `design` in the bank),
+never inside it, so translations, recordings and answer checks read exactly what they read
+before, and a bank nobody has formatted renders byte for byte as it did. Uploaded pictures go to
+`media/`. [docs/content-designer.md](docs/content-designer.md) covers the storage, the sanitizer
+and what to know before changing English words.
+
 Content and translation saves are made **against the version that was opened**. Every read of
 `/api/admin/content` returns the git blob SHA of the bytes it showed, the editor sends it back
 as `If-Match`, and both servers refuse a save with `409` when the file has changed since — the
@@ -509,6 +520,7 @@ sprites/         HD PNG library + catalog.json
 worlds/          textbook worlds (Unit 10 layout, quiz, word list, Unit 14 workbook)
 audio/book/      textbook drill recordings, cut one clip per exchange
 docs/            procedures too long for this file
+media/           pictures uploaded through the admin Designer (created by the first upload)
 main.py          PyWebView desktop wrapper + file-based save API
 tests/           game suites (SRS, shop, sprites, inventory, cooking)
 scripts/         data generators, content validator, R2 upload

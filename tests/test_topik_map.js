@@ -282,8 +282,10 @@ const absentFrom = (was, now, at, out) => {
   }
   return out;
 };
+// The file as it stands. A save used to drop the empty `bank: []` some groups carry, and this
+// copy dropped it too to match; the validator now writes back the shape it was given, so the
+// comparison is against the file itself.
 const inFile = JSON.parse(JSON.stringify(bank));
-inFile.exercises.forEach((ex) => { if (Array.isArray(ex.bank) && !ex.bank.length) delete ex.bank; });
 let written = null;
 try {
   written = JSON.parse(JSON.stringify(

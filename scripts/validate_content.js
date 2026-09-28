@@ -3237,8 +3237,11 @@ const overlayIds = [
     /btn\.onclick = drawn \? \(\) => openWorkbookExercise\(st\.ex\.id\) : resetWorkbook;/.test(uiForDraw));
   // Glossing the question before it is answered underlines the words it turns on, which is
   // most of the way to answering it. Once the answer is out there is nothing left to give away.
+  // A page's design may ask for the meanings up front ('always', a reading aid) — but only by
+  // naming it: the default mode is 'checked', and that path still waits for the answer.
   check('the question is glossed only once the answer is out',
-    /if \(st\.checked\) wbApplyGloss\(list\);/.test(uiForDraw));
+    /if \(glossMode === 'checked'\) \{\s*if \(st\.checked\) wbApplyGloss\(list\);/.test(uiForDraw)
+    && /GLOSS_MODES\.indexOf\(d\.glossMode\) >= 0 \? d\.glossMode : 'checked'/.test(read(path.join('js', 'richText.js'))));
   check('and the explanation is glossed as it always was',
     uiForDraw.indexOf('wbApplyGloss(explain)') >= 0);
   check('the desk offers the exam bank on the exam world',
@@ -4715,6 +4718,43 @@ STATIC_FILES.forEach(([rel]) => {
   const problems = sharedHeadwordProblems(vocabularyPlaces(ROOT), WORD_SENSES, senseKeyFor);
   check('a spelling two places share is one word, or a second sense WORD_SENSES names',
     problems.length === 0, problems.join('\n      '));
+}());
+
+// ── Formatting written in the admin designer ─────────────────────────────────
+// A bank may carry `fmt` beside its text and a `design` on a page or on the whole bank
+// (js/richText.js, docs/content-designer.md). The admin validator cleans both on every save, and
+// "every shipped file passes its validator" above runs it over what is on disk. What a save
+// cannot see is added here: that every picture the formatting points at exists — an upload made
+// on the deployed admin is committed there, and a checkout without it would draw a hole — and
+// that no exam bank shows its meanings before the answer is out.
+(function checkDesignLayer() {
+  const rich = require('../js/richText.js');
+  const i18n = require('../js/i18n.js');
+  const langs = i18n.HV_LANGS.map((l) => l.code).filter((c) => c !== i18n.HV_DEFAULT_LANG).sort();
+  check('richText.js formats every interface language i18n.js offers',
+    JSON.stringify(langs) === JSON.stringify(rich.LANGS.slice().sort()),
+    'i18n.js: ' + langs.join(', ') + ' · richText.js: ' + rich.LANGS.join(', '));
+  const missing = [];
+  const openExam = [];
+  fs.readdirSync(path.join(ROOT, 'worlds')).filter((f) => f.endsWith('.json')).sort().forEach((f) => {
+    const body = JSON.parse(read(path.join('worlds', f)));
+    rich.mediaIn(body).forEach((src) => {
+      if (!fs.existsSync(path.join(ROOT, src))) missing.push(f + ': ' + src);
+    });
+    if (body.drawOne !== true && body.examView !== true && f !== 'topik2-questions.json') return;
+    [body].concat(body.exercises || []).forEach((o) => {
+      if (o && o.design && o.design.glossMode === 'always') openExam.push(f + (o === body ? '' : ' · ' + o.id));
+    });
+  });
+  check('every picture a design or a formatted text points at is on disk',
+    missing.length === 0, missing.join('\n      '));
+  // Underlining the hard words before the answer points at the ones the question turns on.
+  check('no exam bank asks for its meanings before the answer is out',
+    openExam.length === 0, openExam.join(', '));
+  const gameHtml = read('index.html');
+  check('the game loads the formatting stylesheet and every block host is on the page',
+    gameHtml.indexOf('href="css/rich.css') >= 0
+    && rich.ANCHORS.every((a) => gameHtml.indexOf('id="wb-blocks-' + a + '"') >= 0));
 }());
 
 // ── Report ───────────────────────────────────────────────────────────────────

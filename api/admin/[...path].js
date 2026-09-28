@@ -28,9 +28,9 @@
 
 const path = require('path');
 const {
-  setCors, verifyGoogleIdToken, readBearer, env, putContent, CONTENT_CDN
+  setCors, verifyGoogleIdToken, readBearer, env, putContent, putBytes, CONTENT_CDN
 } = require('../_r2');
-const { githubConfig, commitFile, readFile, blobSha, probe } = require('../_github');
+const { githubConfig, commitFile, readFile, blobSha, probe, commitBytes, listDir } = require('../_github');
 const { repoRoot } = require('../_repoRoot');
 const content = require('../../admin/lib/content');
 
@@ -120,6 +120,9 @@ async function handleHost(req, res) {
       // could not run, that is not evidence of anything and does not block.
       writable: !!(gh && owner && (!git || git.canWrite)),
       gameUrl: '/',
+      // Where the Designer's preview finds the game's own files: the site root here, the local
+      // admin's /game/ mount there.
+      assetBase: '/',
       signedIn: !!user,
       // Shown so the first sign-in can supply the value that unlocks editing: there is no way
       // to know your own Google sub before signing in once, and hunting for it elsewhere is
@@ -421,6 +424,66 @@ async function handleI18n(req, res) {
   }
 }
 
+// ── Pictures for the Designer ───────────────────────────────────────────────
+//
+//   GET /api/admin/media          what is in media/ on the branch
+//   PUT /api/admin/media          { name, data } → committed to media/, put on R2, live at once
+//
+// The same two steps and the same order as a content save: the commit first, so the repo is
+// the source of truth and the next publish re-uploads the same bytes; the CDN second, so the
+// picture can be placed on a page straight away. admin/lib/media.js decides what is a picture
+// and what it is called — the local server applies the same rules to its own disk.
+async function handleMedia(req, res) {
+  const mediaLib = require('../../admin/lib/media');
+  if (req.method === 'GET') {
+    let gh = null;
+    try { gh = githubConfig(); } catch (e) { gh = null; }
+    if (!gh) {
+      return json(res, 200, { success: true, data: { items: [], maxBytes: mediaLib.MAX_BYTES,
+        note: 'GITHUB_TOKEN and GITHUB_REPO are not set, so uploads cannot be listed from here.' } });
+    }
+    try {
+      const entries = await listDir(gh, mediaLib.MEDIA_DIR);
+      const items = entries
+        .filter((e) => e && e.type === 'file' && mediaLib.NAME_RE.test(e.name))
+        .map((e) => ({ src: mediaLib.MEDIA_DIR + '/' + e.name, name: e.name, bytes: e.size }))
+        .sort((a, b) => a.name.localeCompare(b.name));
+      return json(res, 200, { success: true, data: { items, maxBytes: mediaLib.MAX_BYTES } });
+    } catch (e) {
+      return fail(res, 502, 'GitHub read failed', e.message);
+    }
+  }
+  if (req.method !== 'PUT' && req.method !== 'POST') return fail(res, 405, 'Method Not Allowed');
+
+  const { user, owner } = await whoami(req);
+  if (!user) return fail(res, 401, 'Unauthorized', 'Sign in with Google to upload.');
+  if (!owner) return fail(res, 403, 'Forbidden', 'This account is not allowed to upload.');
+  let gh;
+  try { gh = githubConfig(); } catch (e) { return fail(res, 503, 'Not configured', e.message); }
+  if (!gh) return fail(res, 503, 'Not configured', 'GITHUB_TOKEN and GITHUB_REPO are not set.');
+
+  let up;
+  try { up = mediaLib.prepareUpload(req.body); } catch (e) { return fail(res, 400, 'Rejected', e.message); }
+  const message = `media: ${up.file} via admin\n\nUploaded by ${user.email || user.sub} at ${new Date().toISOString()}.`
+    + '\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>';
+  let commit;
+  try { commit = await commitBytes(gh, up.rel, up.buf, message); }
+  catch (e) { return fail(res, 502, 'GitHub write failed', e.message); }
+  let published = null;
+  try { published = await putBytes(up.rel, up.buf, up.type); } catch (e) { published = null; }
+  return json(res, 200, {
+    success: true,
+    data: {
+      src: up.rel, name: up.file, bytes: up.bytes, type: up.type, size: up.size,
+      existed: commit.unchanged === true,
+      live: !!published,
+      note: published
+        ? 'Committed to ' + gh.branch + ' and live on the CDN.'
+        : 'Committed, but the CDN upload failed — the picture appears after the next publish.'
+    }
+  });
+}
+
 module.exports = async (req, res) => {
   setCors(req, res);
   if (req.method === 'OPTIONS') { res.status(204).end(); return; }
@@ -435,6 +498,7 @@ module.exports = async (req, res) => {
       return await handleHost(req, res);
     }
     if (head === 'i18n') return await handleI18n(req, res);
+    if (head === 'media') return await handleMedia(req, res);
     if (head === 'content') {
       if (!key) {
         if (req.method !== 'GET') return fail(res, 405, 'Method Not Allowed');

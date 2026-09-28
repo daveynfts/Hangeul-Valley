@@ -230,6 +230,12 @@ window.apiFetch.saveContent = (key, body) =>
     return r;
   });
 
+// Pictures for the Designer, under /api/admin/ for the same reason: one function on Vercel.
+// An upload is { name, data } with the file base64-encoded (admin/lib/media.js).
+window.apiFetch.listMedia = () => window.apiFetch('/api/admin/media');
+window.apiFetch.uploadMedia = (name, data) =>
+  window.apiFetch('/api/admin/media', { method: 'PUT', body: { name: name, data: data } });
+
 // Translations. Under /api/admin/ for the same reason as the content registry: on Vercel
 // there is one admin function, and a route anywhere else works locally and 404s live.
 window.apiFetch.i18nReport = (lang) =>
@@ -398,6 +404,7 @@ window.AppController = {
 window.AppRouter = {
   routes: {
     'dashboard': () => window.DashboardView && window.DashboardView.render(),
+    'designer': () => window.DesignerView && window.DesignerView.render(),
     'content': () => window.ContentView && window.ContentView.render(),
     'levels': () => window.LevelsView && window.LevelsView.render(),
     'vocab': () => window.VocabView && window.VocabView.render(),

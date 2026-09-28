@@ -106,6 +106,10 @@ function validateQuiz(body) {
     // keys with nothing to be checked against.
     ...(body.source ? { source: String(body.source) } : {}),
     ...(body.note ? { note: String(body.note) } : {}),
+    // Which of the book's pictures a quiz has no art for. Four quizzes carry it and
+    // scripts/validate_content.js requires it on them, so a save that dropped it — as this one
+    // did until the Designer made saving routine — turned CI red on an unchanged quiz.
+    ...(body.artNote ? { artNote: String(body.artNote) } : {}),
     questions: qs.map((q, i) => ({
       id: typeof q.id === 'number' ? q.id : i + 1,
       q: String(q.q),

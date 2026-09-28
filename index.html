@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+KR:wght@400;700;900&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/game.css?v=20260916-unit16-art-complete" />
+  <link rel="stylesheet" href="css/rich.css?v=20260916-unit16-art-complete" />
 </head>
 <body data-ui-release="20260916-unit16-art-complete">
 
@@ -1037,11 +1038,19 @@
         <button type="button" class="wb-close" onclick="closeWorkbook()" aria-label="Close workbook" data-i18n-aria-label="ui.wb.head.closeWorkbook.aria">✕</button>
       </div>
       <div id="wb-body">
+        <!-- The hv-blocks hosts hold the text boxes and pictures a page's design places
+             between its sections (js/richText.js blocksHtml); empty, they take no space. -->
+        <div id="wb-blocks-top" class="hv-blocks"></div>
         <div id="wb-instruction"></div>
+        <div id="wb-blocks-instruction" class="hv-blocks"></div>
         <div id="wb-example"></div>
+        <div id="wb-blocks-example" class="hv-blocks"></div>
         <div id="wb-bank" aria-label="Expression bank" data-i18n-aria-label="ui.wb.bank.aria"></div>
         <div id="wb-items"></div>
+        <div id="wb-blocks-items" class="hv-blocks"></div>
         <div id="wb-explain"></div>
+        <div id="wb-blocks-explain" class="hv-blocks"></div>
+        <div id="wb-blocks-bottom" class="hv-blocks"></div>
       </div>
       <div id="wb-foot">
         <button type="button" id="wb-back" class="wb-hidden">← 연습 목록</button>
@@ -1159,6 +1168,7 @@
   <script src="js/workbookArt.js?v=20260916-unit16-art-complete"></script>
   <script src="js/vocabStudy.js?v=20260916-unit16-art-complete"></script>
   <script src="js/data.js?v=20260916-unit16-art-complete"></script>
+  <script src="js/richText.js?v=20260916-unit16-art-complete"></script>
   <script src="js/ui.js?v=20260916-unit16-art-complete"></script>
   <script src="js/systems/atmosphere.js?v=20260916-unit16-art-complete"></script>
   <script src="js/skins.js?v=20260916-unit16-art-complete"></script>

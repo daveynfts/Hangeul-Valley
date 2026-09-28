@@ -12,6 +12,7 @@ const artLib = require('./lib/art');
 const skinsLib = require('./lib/skins');
 const contentLib = require('./lib/content');
 const i18nLib = require('./lib/i18n');
+const mediaLib = require('./lib/media');
 // The git blob SHA, which is what an editor's version token is on both halves of the admin.
 const { blobSha } = require('../api/_github');
 
@@ -421,16 +422,50 @@ app.put('/api/admin/i18n', (req, res, next) => {
   } catch (err) { next(err); }
 });
 
+// ── Pictures for the Designer ───────────────────────────────────────────────
+// The same URL the Vercel function answers on, for the same reason as the routes above. An
+// upload here is a file written into this checkout's media/; there, it is a commit and an R2
+// object. admin/lib/media.js holds the rules both apply — the bytes decide the type, SVG is
+// refused, and the name is the content's own hash.
+app.get('/api/admin/media', (req, res, next) => {
+  try {
+    res.json({ success: true, data: { items: mediaLib.listLocal(getRootDir()), maxBytes: mediaLib.MAX_BYTES } });
+  } catch (err) { next(err); }
+});
+const uploadMedia = (req, res, next) => {
+  try { res.json({ success: true, data: mediaLib.saveLocal(getRootDir(), req.body) }); }
+  catch (err) { err.status = err.status || 400; next(err); }
+};
+app.put('/api/admin/media', uploadMedia);
+app.post('/api/admin/media', uploadMedia);
+
 app.get('/api/admin-host', (req, res) => {
   res.json({
     success: true,
     data: {
       writable: true,
       gameUrl: 'http://localhost:8742/',
+      // Where the Designer's preview finds the game's own files (see the /game mount below).
+      // On Vercel the game is the site itself, so the same field there is '/'.
+      assetBase: '/game/',
       hint: ''
     }
   });
 });
+
+// The game's own files, read-only, for the Designer's live preview. The preview draws a page
+// with the game's stylesheets and its formatting script, and it has to be same-origin to be
+// edited in place, so the game server on :8742 will not do. Each folder is mounted on its own
+// root rather than the repo root with a name check in front: express.static resolves `..`
+// before it looks, so `/game/css/../admin/server.js` would pass a check on the first segment
+// and be served from the repo root. Mounted per folder, the climb has nowhere to go.
+const GAME_ASSET_DIRS = ['css', 'js', 'sprites', 'media', 'locales', 'worlds', 'skins', 'audio'];
+GAME_ASSET_DIRS.forEach((dir) => {
+  app.use('/game/' + dir, (req, res, next) => {
+    express.static(path.join(getRootDir(), dir), { fallthrough: false, dotfiles: 'deny', index: false })(req, res, next);
+  });
+});
+app.use('/game', (req, res) => { res.status(404).end(); });
 
 app.use('/sprite-preview', (req, res, next) => {
   express.static(path.join(getRootDir(), 'sprites'), { fallthrough: true })(req, res, next);

@@ -109,7 +109,24 @@ async function putContent(rel, text) {
   return key;
 }
 
+// The same for a picture uploaded through the Designer. Its name is its content's hash, so the
+// object at that key never changes and can be cached for good.
+async function putBytes(rel, buf, contentType) {
+  const client = r2Client();
+  if (!client) throw new Error('R2 is not configured');
+  const { PutObjectCommand } = require('@aws-sdk/client-s3');
+  const key = CONTENT_PREFIX + String(rel).split('\\').join('/');
+  await client.send(new PutObjectCommand({
+    Bucket: r2Bucket(),
+    Key: key,
+    Body: buf,
+    ContentType: contentType,
+    CacheControl: 'public, max-age=31536000, immutable'
+  }));
+  return key;
+}
+
 module.exports = {
   env, r2Client, r2Bucket, saveKey, setCors, verifyGoogleIdToken, readBearer,
-  putContent, CONTENT_PREFIX, CONTENT_CDN
+  putContent, putBytes, CONTENT_PREFIX, CONTENT_CDN
 };

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hangeul Valley - Admin Panel</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/designer.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -24,6 +25,9 @@
       <nav class="nav-tabs">
         <button class="nav-btn active" data-tab="dashboard" id="tab-btn-dashboard">
           <span class="nav-icon">📊</span> Dashboard
+        </button>
+        <button class="nav-btn" data-tab="designer" id="tab-btn-designer" title="Edit and format study-desk pages the way they look">
+          <span class="nav-icon">✨</span> Designer
         </button>
         <button class="nav-btn" data-tab="content" id="tab-btn-content">
           <span class="nav-icon">🗂️</span> Content
@@ -543,6 +547,7 @@
         </div>
         <div class="u14-actions">
           <span id="u14-dirty" class="u14-dirty"></span>
+          <button type="button" class="btn btn-secondary btn-sm" id="u14-designer" title="Format this page, place pictures and boxes, edit every question type">✨ Open in Designer</button>
           <button type="button" class="btn btn-secondary btn-sm" id="u14-add-exercise">+ Add exercise</button>
           <button type="button" class="btn btn-primary btn-sm" id="u14-save">Save workbook</button>
         </div>
@@ -556,6 +561,15 @@
         </div>
         <div id="u14-form" class="u14-main"></div>
       </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB: DESIGNER                              -->
+    <!-- ========================================== -->
+    <!-- Built by js/designer.js: a live page on the left, drawn with the game's own
+         stylesheets, and the text, page, blocks, meanings and question panels on the right. -->
+    <section id="tab-designer" class="tab-content">
+      <div id="designer-root"></div>
     </section>
 
     <section id="tab-art" class="tab-content">
@@ -741,5 +755,8 @@
   <script src="js/skins.js"></script>
   <script src="js/i18n.js"></script>
   <script src="js/timings.js"></script>
+  <script src="js/richEditor.js"></script>
+  <script src="js/designerPreview.js"></script>
+  <script src="js/designer.js"></script>
 </body>
 </html>

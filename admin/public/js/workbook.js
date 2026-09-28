@@ -42,6 +42,23 @@
     return (state.book && state.book.exercises && state.book.exercises[state.index]) || null;
   }
 
+  // A field the Designer has formatted carries its formatted words beside it (fmt.<field>.html).
+  // Editing the plain words here would leave that copy reading something else, which the save
+  // refuses — so the formatted copy goes, and the field's size, box and colour stay.
+  let warnedFmt = false;
+  function dropStaleFmt(obj, field) {
+    const spec = obj && obj.fmt && obj.fmt[field];
+    if (!spec || !spec.html) return;
+    delete spec.html;
+    if (!Object.keys(spec).length) delete obj.fmt[field];
+    if (!Object.keys(obj.fmt).length) delete obj.fmt;
+    if (!warnedFmt && window.Toast) {
+      warnedFmt = true;
+      window.Toast.warning('This text had formatting from the Designer. Its bold, colours and meanings '
+        + 'were removed because the words changed here — format it again in the Designer tab.', 'Formatting');
+    }
+  }
+
   function markDirty() {
     state.dirty = true;
     const btn = document.getElementById('u14-save');
@@ -260,7 +277,7 @@
     if (!host || !e) return;
 
     host.querySelectorAll('[data-meta]').forEach((el) => {
-      el.oninput = () => { e[el.dataset.meta] = el.value; markDirty(); };
+      el.oninput = () => { e[el.dataset.meta] = el.value; dropStaleFmt(e, el.dataset.meta); markDirty(); };
       // Switching type changes which fields mean anything, so the form is rebuilt.
       if (el.dataset.meta === 'type') {
         el.onchange = () => { e.type = el.value; markDirty(); renderForm(); renderList(); };
@@ -291,6 +308,7 @@
       el.oninput = el.onchange = () => {
         if (!e.example) e.example = {};
         e.example[el.dataset.ex] = el.value;
+        dropStaleFmt(e.example, el.dataset.ex);
         markDirty();
       };
     });
@@ -301,6 +319,7 @@
         const it = (e.items || [])[i];
         if (!it) return;
         it[el.dataset.f] = el.value;
+        dropStaleFmt(it, el.dataset.f);
         markDirty();
       };
     });
@@ -441,6 +460,16 @@
       if (saveBtn) saveBtn.onclick = () => window.Unit14View.save();
       const add = document.getElementById('u14-add-exercise');
       if (add) add.onclick = addExercise;
+      // The Designer edits the same file with the page drawn beside it, and every question type
+      // this form can only list. Unsaved edits here would be read over, so it asks first.
+      const toDesigner = document.getElementById('u14-designer');
+      if (toDesigner) {
+        toDesigner.onclick = () => {
+          if (!window.DesignerView) return;
+          if (state.dirty && !window.confirm('Save first? Unsaved changes here are not carried to the Designer. Open it anyway?')) return;
+          window.DesignerView.open(state.unit, state.index);
+        };
+      }
       if (!state.book) { await load(state.unit); return; }
       renderUnitPicker();
       renderList();

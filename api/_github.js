@@ -116,6 +116,46 @@ async function commitFile(cfg, rel, text, message, opts) {
   };
 }
 
+// The blob SHA of raw bytes, for the pictures the Designer uploads: commitFile above reads and
+// writes UTF-8 text, and a PNG pushed through it would arrive re-encoded and broken.
+function blobShaBytes(buf) {
+  return require('crypto').createHash('sha1')
+    .update('blob ' + buf.length + '\0').update(buf).digest('hex');
+}
+
+/**
+ * Commit a binary file. The names the Designer gives uploads are the content's own hash, so a
+ * file already at `rel` with the same blob SHA is the same picture and nothing is committed.
+ */
+async function commitBytes(cfg, rel, buf, message) {
+  const r0 = await api(cfg, contentUrl(rel, cfg.branch), { method: 'GET' });
+  let sha = null;
+  if (r0.status === 200) {
+    const j = await r0.json();
+    sha = j.sha || null;
+    if (sha && sha === blobShaBytes(buf)) return { committed: false, unchanged: true, sha };
+  } else if (r0.status !== 404) {
+    throw new Error('GitHub read failed: ' + r0.status + ' ' + (await r0.text()).slice(0, 200));
+  }
+  const r = await api(cfg, '/contents/' + rel.split('/').map(encodeURIComponent).join('/'), {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message, content: buf.toString('base64'), branch: cfg.branch, ...(sha ? { sha } : {}) })
+  });
+  if (!r.ok) throw new Error('GitHub write failed: ' + r.status + ' ' + (await r.text()).slice(0, 200));
+  const j = await r.json();
+  return { committed: true, sha: j.content && j.content.sha, commit: j.commit && j.commit.sha, url: j.commit && j.commit.html_url };
+}
+
+/** The entries of a folder on the branch — `[{ name, path, size, type }]` — or [] if it has none yet. */
+async function listDir(cfg, rel) {
+  const r = await api(cfg, contentUrl(rel, cfg.branch), { method: 'GET' });
+  if (r.status === 404) return [];
+  if (!r.ok) throw new Error('GitHub read failed: ' + r.status + ' ' + (await r.text()).slice(0, 200));
+  const j = await r.json();
+  return Array.isArray(j) ? j : [];
+}
+
 // Can this token actually write here, and does the branch exist? Both are knowable before a
 // save is attempted, and finding out at save time costs a filled-in form and a 403 whose text
 // says only "Resource not accessible by personal access token" — true, unhelpful, and silent
@@ -147,4 +187,4 @@ async function probe(cfg) {
   return out;
 }
 
-module.exports = { githubConfig, commitFile, currentSha, readFile, blobSha, probe };
+module.exports = { githubConfig, commitFile, currentSha, readFile, blobSha, probe, blobShaBytes, commitBytes, listDir };
