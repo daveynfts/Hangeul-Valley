@@ -111,7 +111,8 @@ assert(!/matrixKey:|lastKey:|cassette_player'|pixel_crate/.test(cassetteSpawner)
   'old cassette sprites and overlay controls have been removed');
 assert(/if \(id === 'valley'\)[\s\S]{0,180}VALLEY_REVIEWED_ART_KEYS/.test(econ)
   && /CASSETTE_REVIEWED_ART/.test(econ)
-  && /if \(id === 'topik-2'\)[\s\S]{0,120}study_desk_hd/.test(econ),
+  // The two desk-only worlds, the exam and the 합격 레시피 unit, share the one branch.
+  && /if \(id === 'topik-2' \|\| id === 'recipe-unit-1'\)[\s\S]{0,120}study_desk_hd/.test(econ),
   'world changes retry reviewed Valley, study-desk and cassette assets');
 assert(/beehiveBaseScale/.test(farm) && /portalBaseScale/.test(farm) && /dockBaseScale/.test(farm),
   'interaction feedback returns each redesigned sprite to its own map scale');

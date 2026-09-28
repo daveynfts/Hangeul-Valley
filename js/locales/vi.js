@@ -438,6 +438,7 @@
   "ui.ls.loadFailed": "Không tải được danh sách cấp độ. Bấm để thử lại.",
   "ui.ls.loading": "Đang tải các cấp độ…",
   "ui.ls.pack.choose": "Chọn một gói",
+  "ui.ls.pack.recipe": "Sách luyện thi · TOPIK II 합격 레시피",
   "ui.ls.pack.snu2b": "Giáo trình · SNU Korean 2B",
   "ui.ls.pack.topik": "Luyện thi",
   "ui.ls.pack.valley": "Gói Thung lũng",

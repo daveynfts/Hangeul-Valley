@@ -43,10 +43,13 @@ const WORLD_IDS = [
   { id: '2b-unit-16', label: '2B Unit 16 · 설날에는 밥 대신 떡국을 먹어요' },
   { id: '2b-unit-17', label: '2B Unit 17 · 비행기를 놓칠 뻔했어요' },
   { id: '2b-unit-18', label: '2B Unit 18 · 한국에 온 지 벌써 6개월이 되었어요' },
+  { id: 'recipe-unit-1', label: 'TOPIK II 합격 레시피 · Unit 1 · 문법·어휘 (읽기 1-8)' },
   { id: 'topik-2', label: 'TOPIK II · exam practice' }
 ];
 
-const QUIZ_UNITS = ['unit10', 'unit11', 'unit12', 'unit13', 'unit14', 'unit15', 'unit16', 'unit17', 'unit18', 'topik2'];
+const QUIZ_UNITS = ['unit10', 'unit11', 'unit12', 'unit13', 'unit14', 'unit15', 'unit16', 'unit17', 'unit18', 'recipe1', 'topik2'];
+// The two quiz keys that are not unitNN, named for the row rather than by their file stem.
+const QUIZ_LABEL = { topik2: 'TOPIK II', recipe1: '합격 레시피 Unit 1' };
 const CASSETTE_UNITS = ['unit10', 'unit11', 'unit12', 'unit13', 'unit14', 'unit15', 'unit16', 'unit17', 'unit18'];
 
 // Human names for the bank keys, which are otherwise file stems. Derived from WORKBOOKS
@@ -60,6 +63,7 @@ const BANK_LABEL = {
   review4: '복습 4 · Units 10-12 (익힘책)',
   review5: '복습 5 · Units 13-15 (익힘책)',
   review6: '복습 6 · Units 16-18 (익힘책)',
+  'recipe1-questions': '합격 레시피 Unit 1 · 기출문제 · 예상문제',
   'topik2-questions': 'TOPIK II · 기출 문제'
 };
 
@@ -99,7 +103,7 @@ const CONTENT = [
     group: 'Desk quizzes',
     // Every other quiz key is unitNN, so replace('unit', 'Unit ') was enough until a key
     // that is not one arrived: it left the exam row reading 'topik2 · 퀴즈'.
-    label: (u === 'topik2' ? 'TOPIK II' : u.replace('unit', 'Unit ')) + ' · 퀴즈',
+    label: (QUIZ_LABEL[u] || u.replace('unit', 'Unit ')) + ' · 퀴즈',
     validate: (body) => world.validateQuiz(body)
   })),
   ...CASSETTE_UNITS.map((u) => ({
@@ -144,8 +148,10 @@ const EDITORS = {
 WORLD_IDS.forEach((w) => {
   EDITORS['world/' + w.id] = { tab: 'unit10', panel: 'words', unit: w.id, label: 'Units tab, word table' };
 });
+// The quiz key is the file stem; the world it belongs to is not always '2b-' plus that stem.
+const QUIZ_WORLD = { topik2: 'topik-2', recipe1: 'recipe-unit-1' };
 QUIZ_UNITS.forEach((u) => {
-  const world = '2b-' + u.replace('unit', 'unit-');
+  const world = QUIZ_WORLD[u] || '2b-' + u.replace('unit', 'unit-');
   EDITORS['quiz/' + u] = { tab: 'unit10', panel: 'quiz', unit: world, label: 'Units tab, quiz builder' };
 });
 Object.keys(workbook.WORKBOOKS).forEach((unit) => {

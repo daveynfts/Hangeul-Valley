@@ -68,7 +68,9 @@ const WORKBOOKS = {
   review6: path.join('worlds', 'review6-workbook.json'),
   // Not a unit at all: the exam world's bank, which grows a question at a time rather than
   // arriving whole from a chapter. Same format, same validator, same editor.
-  'topik2-questions': path.join('worlds', 'topik2-questions.json')
+  'topik2-questions': path.join('worlds', 'topik2-questions.json'),
+  // TOPIK II 합격 레시피, Unit 1: the book's 기출문제 and 예상문제 for 읽기 1-8.
+  'recipe1-questions': path.join('worlds', 'recipe1-questions.json')
 };
 
 function workbookRel(unit) {

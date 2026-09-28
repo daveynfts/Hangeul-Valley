@@ -53,6 +53,12 @@ function isUnit18World() {
 function isTopikWorld() {
   return isWorldLevel(currentLesson()) && currentLesson().worldId === 'topik-2';
 }
+// TOPIK II 합격 레시피, the exam-prep book, a chapter at a time. Unit 1 is the book's 3급 Chapter 1
+// (문법·어휘: 읽기 1-8). Like the exam world it is a farm and a desk; unlike it, the desk holds a
+// chapter's worth of the book's own questions rather than whatever papers arrive.
+function isRecipeUnit1World() {
+  return isWorldLevel(currentLesson()) && currentLesson().worldId === 'recipe-unit-1';
+}
 function isTextbookFarmWorld() {
   const p = typeof currentWorldPack === 'function' ? currentWorldPack() : null;
   return !!(p && p.id && p.id !== 'valley');
@@ -69,6 +75,7 @@ const WORLD_PACKS = {
   '2b-unit-16': { extras: [], stations: ['desk', 'cassette'] },
   '2b-unit-17': { extras: [], stations: ['desk', 'cassette'] },
   '2b-unit-18': { extras: [], stations: ['desk', 'cassette'] },
+  'recipe-unit-1': { extras: [], stations: ['desk'] },
   'topik-2': { extras: [], stations: ['desk'] }
 };
 function worldPackIdForLesson(lvl) {
@@ -123,7 +130,7 @@ function artLoadForWorldPack(id) {
       CASSETTE_REVIEWED_ART
     ];
   }
-  if (id === 'topik-2') {
+  if (id === 'topik-2' || id === 'recipe-unit-1') {
     return [
       { key: 'study_desk_hd', file: 'furniture/oak_study_desk.png' }
     ];
@@ -140,6 +147,8 @@ const TEXTBOOK_WORLD_FILES = [
   { cache: 'world-2b-16', file: 'worlds/2b-unit-16.json' },
   { cache: 'world-2b-17', file: 'worlds/2b-unit-17.json' },
   { cache: 'world-2b-18', file: 'worlds/2b-unit-18.json' },
+  // An exam-prep book rather than a course book: TOPIK II 합격 레시피, one chapter per unit.
+  { cache: 'world-recipe-1', file: 'worlds/recipe-unit-1.json' },
   // Not from a textbook, but it loads the same way and the list is what attaches a world.
   { cache: 'world-topik-2', file: 'worlds/topik-2.json' }
 // Keep preload and fetch fallback on the same content revision.

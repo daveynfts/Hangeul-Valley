@@ -460,6 +460,7 @@ function matchParts(text, headword, strictAboutAmbiguity) {
 // with a hole in it.
 const SOURCES = [
   { rel: 'worlds/topik2-questions.json', label: 'TOPIK II', unit: 'topik-2' },
+  { rel: 'worlds/recipe1-questions.json', label: '합격 레시피 Unit 1', unit: 'recipe-unit-1' },
   { rel: 'worlds/unit10-workbook.json', label: 'Unit 10 · 익힘책', unit: '2b-unit-10' },
   { rel: 'worlds/unit10-textbook.json', label: 'Unit 10 · 교과서', unit: '2b-unit-10' },
   { rel: 'worlds/unit14-workbook.json', label: 'Unit 14 · 익힘책', unit: '2b-unit-14' },
@@ -671,6 +672,7 @@ const WORD_FILES = [
   { rel: 'worlds/2b-unit-15.json', unit: '2b-unit-15', label: 'Unit 15' },
   { rel: 'worlds/2b-unit-16.json', unit: '2b-unit-16', label: 'Unit 16' },
   { rel: 'worlds/topik-2.json', unit: 'topik-2', label: 'TOPIK II' },
+  { rel: 'worlds/recipe-unit-1.json', unit: 'recipe-unit-1', label: '합격 레시피 Unit 1' },
   { rel: 'levels.json', unit: 'valley', label: 'Valley packs' }
 ];
 

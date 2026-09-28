@@ -1,0 +1,1759 @@
+{
+  "id": "recipe-unit-1",
+  "pack": "topik-recipe",
+  "source": "TOPIK II 합격 레시피 (이태환, 한글파크, 2019) · 3급 Chapter 1 문법·어휘 · pp.14-42",
+  "title": "TOPIK II 합격 레시피 · Unit 1",
+  "titleKo": "3급 Chapter 1 · 문법·어휘",
+  "icon": "🍳",
+  "pages": "Unit 1",
+  "level": {
+    "level": "RECIPE-1",
+    "name": "3급 Chapter 1 · 문법·어휘",
+    "nameEn": "Level 3 · Grammar, vocabulary and ads",
+    "icon": "🍳",
+    "description": "읽기 1~8번: 알맞은 문법 · 유사 문법 · 광고",
+    "descriptionEn": "TOPIK II reading questions 1 to 8 the way the book teaches them: the right grammar (1-2), the similar expression (3-4) and what an ad is about (5-8). Farm the chapter’s Ranking lists, then work its past-paper and practice questions at the desk.",
+    "world": true,
+    "pack": "topik-recipe",
+    "worldId": "recipe-unit-1",
+    "map": {
+      "extras": [],
+      "stations": [
+        "desk"
+      ]
+    },
+    "target": 9,
+    "words": [
+      {
+        "ko": "-다가",
+        "en": "while doing it, switch to something else — on purpose or by accident",
+        "hint": "🔀",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-고 나서",
+        "en": "and then, once that is done",
+        "hint": "⏭️",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-(으)ㄴ/는데",
+        "en": "and / but — lays down a background or a contrast for what follows",
+        "hint": "🎬",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-(으)려고",
+        "en": "intending to — and the intender must be the one who acts",
+        "hint": "🎯",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-(으)려면",
+        "en": "if you intend to",
+        "hint": "🧭",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-느라고",
+        "en": "because you were busy doing it — and something went wrong",
+        "hint": "⏳",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-아/어야",
+        "en": "only if you — a condition, not a recommendation",
+        "hint": "🔑",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-(으)ㄹ까 봐(서)",
+        "en": "for fear that it might happen",
+        "hint": "😟",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-거나",
+        "en": "or — one or the other",
+        "hint": "⚖️",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-자마자",
+        "en": "the moment it happens",
+        "hint": "⚡",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-(으)ㄹ수록",
+        "en": "the more it does, the more",
+        "hint": "📈",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-아/어서",
+        "en": "because; and then — the first step leading into the second",
+        "hint": "🔗",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-아/어서 그런지",
+        "en": "maybe because — a reason offered as a guess",
+        "hint": "🤔",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-더니",
+        "en": "I saw A, and then B — a change the speaker watched happen",
+        "hint": "👀",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-(으)ㄹ지",
+        "en": "whether to — still undecided between options",
+        "hint": "❓",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-(으)면서",
+        "en": "while — doing two things at the same time",
+        "hint": "🎧",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-(으)니까",
+        "en": "because; or, having done it, you found that…",
+        "hint": "💡",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-(으)면",
+        "en": "if, when — a condition or a supposition",
+        "hint": "🌊",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-든지",
+        "en": "whatever, whichever — it makes no difference",
+        "hint": "🎲",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-(으)ㄴ/는 데다가",
+        "en": "on top of that — adding one more to what was said",
+        "hint": "➕",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-(으)ㄴ/는 대신에",
+        "en": "instead of doing it — or in return for it",
+        "hint": "🔄",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-아/어도",
+        "en": "even if you do",
+        "hint": "🛡️",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-는 김에",
+        "en": "while you are at it — doing one thing as the occasion for another",
+        "hint": "🧳",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-는 바람에",
+        "en": "because something sudden happened — and the result was bad",
+        "hint": "💥",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-(으)ㄴ 채로",
+        "en": "still in the state of having done it — as it was",
+        "hint": "👕",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2",
+        "forms": [
+          "-(으)ㄴ 채(로)"
+        ]
+      },
+      {
+        "ko": "-(으)ㄴ/는 덕분에",
+        "en": "thanks to it — a cause that brought something good",
+        "hint": "🙏",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-도록",
+        "en": "so that (a purpose); until, to the point of (a degree)",
+        "hint": "🌱",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-기에/길래",
+        "en": "seeing that it was so — a reason you came across",
+        "hint": "🛒",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-더라도",
+        "en": "even if it does — and what follows holds anyway",
+        "hint": "🧱",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-다가 보면",
+        "en": "keep doing it and you will find — a change that comes with repetition",
+        "hint": "🔁",
+        "category": "연결어미",
+        "categoryEn": "Connecting endings · reading 1-2"
+      },
+      {
+        "ko": "-아/어 놓다",
+        "en": "do it and leave it that way",
+        "hint": "📥",
+        "category": "종결어미",
+        "categoryEn": "Sentence endings · reading 1-2"
+      },
+      {
+        "ko": "-기로 했다",
+        "en": "decided to, promised to — a plan that has been settled",
+        "hint": "📌",
+        "category": "종결어미",
+        "categoryEn": "Sentence endings · reading 1-2"
+      },
+      {
+        "ko": "-(으)면 되다",
+        "en": "all you need to do is — that is enough",
+        "hint": "✅",
+        "category": "종결어미",
+        "categoryEn": "Sentence endings · reading 1-2"
+      },
+      {
+        "ko": "-게 하다",
+        "en": "to make something turn out that way",
+        "hint": "👉",
+        "category": "종결어미",
+        "categoryEn": "Sentence endings · reading 1-2"
+      },
+      {
+        "ko": "-게 되다",
+        "en": "to come to be that way, with nobody making it happen",
+        "hint": "🌀",
+        "category": "종결어미",
+        "categoryEn": "Sentence endings · reading 1-2"
+      },
+      {
+        "ko": "-(으)ㄴ 적이 있다",
+        "en": "to have ever done it",
+        "hint": "🗂️",
+        "category": "종결어미",
+        "categoryEn": "Sentence endings · reading 1-2"
+      },
+      {
+        "ko": "-아/어 있다",
+        "en": "the state is still there — it was done and stayed that way",
+        "hint": "🚪",
+        "category": "종결어미",
+        "categoryEn": "Sentence endings · reading 1-2"
+      },
+      {
+        "ko": "-아/어 가다",
+        "en": "the change carries on away from now, into the future",
+        "hint": "🥀",
+        "category": "종결어미",
+        "categoryEn": "Sentence endings · reading 1-2"
+      },
+      {
+        "ko": "-(으)ㄴ/는 셈이다",
+        "en": "it comes to the same as — as good as",
+        "hint": "🧮",
+        "category": "종결어미",
+        "categoryEn": "Sentence endings · reading 1-2"
+      },
+      {
+        "ko": "-아/어 오다",
+        "en": "the change has been running from the past up to now",
+        "hint": "🥋",
+        "category": "종결어미",
+        "categoryEn": "Sentence endings · reading 1-2"
+      },
+      {
+        "ko": "-(으)ㄹ 뻔했다",
+        "en": "nearly happened — but did not",
+        "hint": "😰",
+        "category": "종결어미",
+        "categoryEn": "Sentence endings · reading 1-2"
+      },
+      {
+        "ko": "-나 보다",
+        "en": "it seems that — a guess from what you can see",
+        "hint": "🔎",
+        "category": "종결어미",
+        "categoryEn": "Sentence endings · reading 1-2"
+      },
+      {
+        "ko": "-기 마련이다",
+        "en": "it is bound to be — the twin of -(으)ㄴ/는 법이다",
+        "hint": "🍂",
+        "category": "종결어미",
+        "categoryEn": "Sentence endings · reading 1-2"
+      },
+      {
+        "ko": "-(으)ㄴ/는 모양이다",
+        "en": "it looks as though — a guess from what you have seen",
+        "hint": "🧹",
+        "category": "종결어미",
+        "categoryEn": "Sentence endings · reading 1-2"
+      },
+      {
+        "ko": "-아/어 버렸다",
+        "en": "went and did it — done completely, often with feeling",
+        "hint": "🏁",
+        "category": "종결어미",
+        "categoryEn": "Sentence endings · reading 1-2"
+      },
+      {
+        "ko": "-아/어 보이다",
+        "en": "to look, to seem — how it strikes you",
+        "hint": "🪞",
+        "category": "종결어미",
+        "categoryEn": "Sentence endings · reading 1-2"
+      },
+      {
+        "ko": "-(으)ㄴ/는 척하다",
+        "en": "to pretend — acting as if it were so",
+        "hint": "🎭",
+        "category": "종결어미",
+        "categoryEn": "Sentence endings · reading 1-2"
+      },
+      {
+        "ko": "-(으)ㄹ지도 모르다",
+        "en": "might — it could be, you cannot be sure",
+        "hint": "🌫️",
+        "category": "종결어미",
+        "categoryEn": "Sentence endings · reading 1-2"
+      },
+      {
+        "ko": "-아/어 두다",
+        "en": "do it and leave it that way — the twin of -아/어 놓다",
+        "hint": "🎫",
+        "category": "종결어미",
+        "categoryEn": "Sentence endings · reading 1-2"
+      },
+      {
+        "ko": "-(으)ㄹ 리가 없다",
+        "en": "there is no way it could be",
+        "hint": "🚫",
+        "category": "종결어미",
+        "categoryEn": "Sentence endings · reading 1-2"
+      },
+      {
+        "ko": "-(으)ㄴ/는 것 같다",
+        "en": "it seems, I think — a guess",
+        "hint": "🌥️",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-(으)ㄹ 정도로",
+        "en": "to the degree that",
+        "hint": "📏",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-(으)ㄹ 수밖에 없다",
+        "en": "there is no choice but to",
+        "hint": "🛤️",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-(으)ㄹ 뿐만 아니라",
+        "en": "not only that, but also",
+        "hint": "🧺",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-(으)나 마나",
+        "en": "no point doing it — the result is the same either way",
+        "hint": "🤷",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-게",
+        "en": "so that — the everyday form of -도록; also to what degree",
+        "hint": "📅",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-는 길에",
+        "en": "on the way — while going somewhere",
+        "hint": "🚶",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-아/어 봐야",
+        "en": "only if you try; or, even if you try, it is no use",
+        "hint": "🔧",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-(으)ㄹ 뿐이다",
+        "en": "it is only that — the twin of -(으)ㄹ 따름이다",
+        "hint": "☝️",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-았/었어야 했는데",
+        "en": "should have done it — a regret",
+        "hint": "😔",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-(으)려던 참이다",
+        "en": "was just about to",
+        "hint": "⏰",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-기 위해서",
+        "en": "in order to — the purpose of doing something",
+        "hint": "🏋️",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-는 대로",
+        "en": "as soon as; or, just the way it is done",
+        "hint": "📋",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-에 달려 있다",
+        "en": "to depend on, to be up to",
+        "hint": "🍳",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-(으)ㄹ 만하다",
+        "en": "worth doing — good enough to do",
+        "hint": "👍",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-은/는커녕",
+        "en": "far from, let alone — not even the lesser thing",
+        "hint": "🥤",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-다가 보니까",
+        "en": "having kept doing it, you found — a result of repetition",
+        "hint": "🔂",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-듯이",
+        "en": "just as, like — a comparison",
+        "hint": "🌍",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-(으)ㄴ/는 반면에",
+        "en": "whereas, on the other hand",
+        "hint": "🌗",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-(으)면서(도)",
+        "en": "even while — two things that do not fit together",
+        "hint": "🤫",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-(으)ㄴ/는데(도)",
+        "en": "even though — and still not",
+        "hint": "📉",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-(으)ㄴ/는가 하면",
+        "en": "while some are, others are — two sides set against each other",
+        "hint": "🎞️",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-(ㄴ/는)다기에/길래",
+        "en": "because I heard that — a reason passed on",
+        "hint": "👂",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-기만 하다",
+        "en": "it does nothing but",
+        "hint": "🙃",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-고도",
+        "en": "even after doing it — and yet",
+        "hint": "🙉",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-(으)ㄴ/는 줄 몰랐다",
+        "en": "did not know that — thought otherwise",
+        "hint": "😮",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-(으)ㄴ 나머지",
+        "en": "so much that — the result of going too far",
+        "hint": "🎨",
+        "category": "유사 문법",
+        "categoryEn": "Similar grammar · reading 3-4"
+      },
+      {
+        "ko": "-(으)ㄴ/는 법이다",
+        "en": "that is the way of things — it could not be otherwise",
+        "hint": "📜",
+        "category": "유사 표현",
+        "categoryEn": "Equivalents to know · reading 3-4"
+      },
+      {
+        "ko": "-아/어야만 하다",
+        "en": "have no choice but to — must, with nothing else possible",
+        "hint": "🚕",
+        "category": "유사 표현",
+        "categoryEn": "Equivalents to know · reading 3-4"
+      },
+      {
+        "ko": "-는 통에",
+        "en": "in the confusion of it — a cause, and a chaotic one",
+        "hint": "📢",
+        "category": "유사 표현",
+        "categoryEn": "Equivalents to know · reading 3-4"
+      },
+      {
+        "ko": "-(으)ㄴ/는 거나 같다",
+        "en": "as good as, practically the same as",
+        "hint": "🟰",
+        "category": "유사 표현",
+        "categoryEn": "Equivalents to know · reading 3-4"
+      },
+      {
+        "ko": "-(으)ㄹ 때마다",
+        "en": "every time",
+        "hint": "🚗",
+        "category": "유사 표현",
+        "categoryEn": "Equivalents to know · reading 3-4"
+      },
+      {
+        "ko": "-ㄴ/는다고 해도",
+        "en": "even supposing it does",
+        "hint": "🖥️",
+        "category": "유사 표현",
+        "categoryEn": "Equivalents to know · reading 3-4"
+      },
+      {
+        "ko": "-기가 무섭게",
+        "en": "no sooner than — the instant it happens",
+        "hint": "🏃",
+        "category": "유사 표현",
+        "categoryEn": "Equivalents to know · reading 3-4"
+      },
+      {
+        "ko": "N에 불과하다",
+        "en": "to be no more than N",
+        "hint": "🫥",
+        "category": "유사 표현",
+        "categoryEn": "Equivalents to know · reading 3-4"
+      },
+      {
+        "ko": "N에 지나지 않다",
+        "en": "to be nothing but N",
+        "hint": "🪶",
+        "category": "유사 표현",
+        "categoryEn": "Equivalents to know · reading 3-4"
+      },
+      {
+        "ko": "-(으)ㄹ 따름이다",
+        "en": "it is only that, and nothing more",
+        "hint": "🙇",
+        "category": "유사 표현",
+        "categoryEn": "Equivalents to know · reading 3-4"
+      },
+      {
+        "ko": "-고자",
+        "en": "in order to — the written twin of -기 위해서",
+        "hint": "✍️",
+        "category": "유사 표현",
+        "categoryEn": "Equivalents to know · reading 3-4"
+      },
+      {
+        "ko": "-기 나름이다",
+        "en": "it all depends on how you do it",
+        "hint": "🧑‍🍳",
+        "category": "유사 표현",
+        "categoryEn": "Equivalents to know · reading 3-4"
+      },
+      {
+        "ko": "-(으)ㄴ/는 체하다",
+        "en": "to pretend — the written twin of -(으)ㄴ/는 척하다",
+        "hint": "🙈",
+        "category": "유사 표현",
+        "categoryEn": "Equivalents to know · reading 3-4"
+      },
+      {
+        "ko": "-(으)ㄴ/는 데 반해",
+        "en": "in contrast to — the written twin of -(으)ㄴ/는 반면에",
+        "hint": "↔️",
+        "category": "유사 표현",
+        "categoryEn": "Equivalents to know · reading 3-4"
+      },
+      {
+        "ko": "-고서도",
+        "en": "even though you did it — and still",
+        "hint": "🔇",
+        "category": "유사 표현",
+        "categoryEn": "Equivalents to know · reading 3-4"
+      },
+      {
+        "ko": "시계",
+        "en": "a watch; a clock",
+        "hint": "⌚",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5",
+        "example": "시계하고 노트북이 없어진 것 같아요.",
+        "exampleEn": "I think a watch and a laptop have gone."
+      },
+      {
+        "ko": "안경",
+        "en": "glasses",
+        "hint": "👓",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5",
+        "example": "안경을 쓰니까 똑똑해 보여요."
+      },
+      {
+        "ko": "신발",
+        "en": "shoes",
+        "hint": "👞",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5",
+        "example": "그 신발이 이 옷하고 잘 어울려요.",
+        "exampleEn": "Those shoes go well with this outfit."
+      },
+      {
+        "ko": "자동차",
+        "en": "a car",
+        "hint": "🚗",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5",
+        "example": "오늘부터 자동차를 두고 가세요."
+      },
+      {
+        "ko": "카메라",
+        "en": "a camera",
+        "hint": "📷",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5",
+        "forms": [
+          "사진기"
+        ],
+        "acceptedAnswers": [
+          "사진기"
+        ],
+        "example": "친구가 제 카메라를 잃어버렸어요."
+      },
+      {
+        "ko": "화장품",
+        "en": "cosmetics",
+        "hint": "💄",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5",
+        "example": "남자를 위한 화장품도 다양하게 만들 필요가 있다."
+      },
+      {
+        "ko": "가습기",
+        "en": "a humidifier",
+        "hint": "💨",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "우산",
+        "en": "an umbrella",
+        "hint": "☂️",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5",
+        "example": "급하게 나오느라고 우산을 챙겨 나오는 걸 깜빡했다."
+      },
+      {
+        "ko": "샴푸",
+        "en": "shampoo",
+        "hint": "🧴",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "에어컨",
+        "en": "air conditioner",
+        "hint": "❄️",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "정수기",
+        "en": "a water purifier",
+        "hint": "🚰",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "노트북",
+        "en": "a laptop",
+        "hint": "💻",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5",
+        "example": "시계하고 노트북이 없어진 것 같아요.",
+        "exampleEn": "I think a watch and a laptop have gone."
+      },
+      {
+        "ko": "책상",
+        "en": "a desk",
+        "hint": "🪑",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5",
+        "example": "책상 위에 뭐가 있어요?"
+      },
+      {
+        "ko": "거울",
+        "en": "a mirror",
+        "hint": "🪞",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "반지",
+        "en": "a ring",
+        "hint": "💍",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "빵",
+        "en": "bread",
+        "hint": "🍞",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "향수",
+        "en": "perfume",
+        "hint": "🌸",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "옷장",
+        "en": "wardrobe / closet",
+        "hint": "🚪",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "모자",
+        "en": "a hat; a cap",
+        "hint": "🧢",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5",
+        "example": "회색 모자를 썼어요."
+      },
+      {
+        "ko": "우유",
+        "en": "milk",
+        "hint": "🥛",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5",
+        "example": "우유, 눈사람, 구름의 공통된 색은 하얀색이에요.",
+        "exampleEn": "Milk, a snowman and a cloud have white in common."
+      },
+      {
+        "ko": "장난감",
+        "en": "a toy",
+        "hint": "🧸",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "안약",
+        "en": "eye drops",
+        "hint": "💧",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "염색약",
+        "en": "hair dye",
+        "hint": "🎨",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "운동복",
+        "en": "sportswear",
+        "hint": "🎽",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "체온계",
+        "en": "a thermometer (for body temperature)",
+        "hint": "🌡️",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "소화제",
+        "en": "digestive medicine",
+        "hint": "💊",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "이불",
+        "en": "a quilt or blanket",
+        "hint": "🛏️",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "휴지",
+        "en": "tissue, toilet paper",
+        "hint": "🧻",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5",
+        "forms": [
+          "화장지"
+        ],
+        "acceptedAnswers": [
+          "화장지"
+        ]
+      },
+      {
+        "ko": "선풍기",
+        "en": "an electric fan",
+        "hint": "🌬️",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "신문",
+        "en": "newspaper",
+        "hint": "📰",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5",
+        "example": "미안하지만 집에 올 때 신문 좀 사다 주세요."
+      },
+      {
+        "ko": "가방",
+        "en": "bag",
+        "hint": "🎒",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5",
+        "example": "새로 산 가방을 잃어버렸어요.",
+        "exampleEn": "I lost the bag I had just bought."
+      },
+      {
+        "ko": "치약",
+        "en": "toothpaste",
+        "hint": "🪥",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "비누",
+        "en": "soap",
+        "hint": "🧼",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "감기약",
+        "en": "cold medicine",
+        "hint": "💊",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "의자",
+        "en": "a chair",
+        "hint": "🪑",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5",
+        "example": "의자에 앉다가 넘어졌어요.",
+        "exampleEn": "I fell over as I was sitting down on the chair."
+      },
+      {
+        "ko": "장갑",
+        "en": "gloves",
+        "hint": "🧤",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "접시",
+        "en": "plate",
+        "hint": "🍽️",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "칫솔",
+        "en": "toothbrush",
+        "hint": "🪥",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "피아노",
+        "en": "a piano",
+        "hint": "🎹",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5",
+        "example": "나는 어렸을 때 피아노를 배운 적이 있다."
+      },
+      {
+        "ko": "베개",
+        "en": "a pillow",
+        "hint": "🛌",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "책",
+        "en": "a book",
+        "hint": "📕",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5",
+        "example": "책 두 권하고 지갑이 들어 있어요.",
+        "exampleEn": "There are two books and a wallet inside."
+      },
+      {
+        "ko": "운동화",
+        "en": "sneakers",
+        "hint": "👟",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5",
+        "example": "운동화를 신고 가세요.",
+        "exampleEn": "Wear your trainers."
+      },
+      {
+        "ko": "세제",
+        "en": "detergent",
+        "hint": "🫧",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "자전거",
+        "en": "bicycle",
+        "hint": "🚲",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "껌",
+        "en": "chewing gum",
+        "hint": "🍬",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "세탁기",
+        "en": "washing machine",
+        "hint": "🧺",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5",
+        "example": "내일 입을 옷이 없어서 오늘 꼭 세탁기를 돌려야 돼요.",
+        "exampleEn": "I have nothing to wear tomorrow, so I really have to run the washing machine today."
+      },
+      {
+        "ko": "주스",
+        "en": "juice",
+        "hint": "🧃",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5"
+      },
+      {
+        "ko": "냉장고",
+        "en": "a fridge",
+        "hint": "🧊",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5",
+        "example": "시원하게 마시려고 냉장고에 넣어 놓았어요."
+      },
+      {
+        "ko": "침대",
+        "en": "bed",
+        "hint": "🛏️",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5",
+        "example": "할아버지가 침대에 계세요?"
+      },
+      {
+        "ko": "청소기",
+        "en": "vacuum cleaner",
+        "hint": "🧹",
+        "category": "제품 광고",
+        "categoryEn": "Product ads · reading 5",
+        "example": "저는 보통 아침에 청소를 해요. 아파트에 살기 때문에 밤늦게 청소기를 돌리면 안 돼요.",
+        "exampleEn": "I usually clean up in the morning. I live in a flat, so I must not run the vacuum late at night."
+      },
+      {
+        "ko": "백화점",
+        "en": "department store",
+        "hint": "🏬",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6",
+        "example": "선물 사러 백화점에 갈래?"
+      },
+      {
+        "ko": "문구점",
+        "en": "a stationery shop",
+        "hint": "✏️",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6"
+      },
+      {
+        "ko": "지하철",
+        "en": "subway",
+        "hint": "🚇",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6",
+        "example": "지하철역과 5분 거리로 교통 편리!"
+      },
+      {
+        "ko": "도서관",
+        "en": "a library",
+        "hint": "📚",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6",
+        "example": "도서관이 생겼어요."
+      },
+      {
+        "ko": "미술관",
+        "en": "art gallery",
+        "hint": "🖼️",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6"
+      },
+      {
+        "ko": "시장",
+        "en": "a market",
+        "hint": "🏪",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6",
+        "example": "주변에 시장도 있고 지하철역도 가까워서 살기 편해요.",
+        "exampleEn": "There's a market nearby and the subway station is close, so it's easy to live here."
+      },
+      {
+        "ko": "옷 가게",
+        "en": "a clothes shop",
+        "hint": "👗",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6"
+      },
+      {
+        "ko": "택배 회사",
+        "en": "a courier company, a parcel delivery service",
+        "hint": "📦",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6"
+      },
+      {
+        "ko": "아파트",
+        "en": "apartment block flat",
+        "hint": "🏢",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6",
+        "example": "저는 보통 아침에 청소를 해요. 아파트에 살기 때문에 밤늦게 청소기를 돌리면 안 돼요.",
+        "exampleEn": "I usually clean up in the morning. I live in a flat, so I must not run the vacuum late at night."
+      },
+      {
+        "ko": "결혼식장",
+        "en": "a wedding hall",
+        "hint": "💒",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6",
+        "forms": [
+          "예식장"
+        ],
+        "acceptedAnswers": [
+          "예식장"
+        ]
+      },
+      {
+        "ko": "가구점",
+        "en": "a furniture shop",
+        "hint": "🛋️",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6"
+      },
+      {
+        "ko": "기숙사",
+        "en": "dormitory",
+        "hint": "🏫",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6",
+        "example": "기숙사 안에서는 담배를 피울 수 없습니다.",
+        "exampleEn": "You may not smoke inside the dormitory."
+      },
+      {
+        "ko": "채소 가게",
+        "en": "a greengrocer’s",
+        "hint": "🥬",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6"
+      },
+      {
+        "ko": "사진관",
+        "en": "a photo studio",
+        "hint": "🖼️",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6"
+      },
+      {
+        "ko": "학원",
+        "en": "a private academy, a cram school",
+        "hint": "🏫",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6"
+      },
+      {
+        "ko": "서점",
+        "en": "a bookshop",
+        "hint": "📖",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6",
+        "example": "'행복 열차'라는 책이 서점에서 이번 달까지만 판매된다."
+      },
+      {
+        "ko": "편의점",
+        "en": "a convenience store",
+        "hint": "🏪",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6"
+      },
+      {
+        "ko": "우체국",
+        "en": "post office",
+        "hint": "📮",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6"
+      },
+      {
+        "ko": "병원",
+        "en": "a hospital",
+        "hint": "🏥",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6",
+        "example": "그래도 안 나으면 병원에 가세요.",
+        "exampleEn": "If it still doesn't get better, go to the hospital."
+      },
+      {
+        "ko": "치과",
+        "en": "dental clinic",
+        "hint": "🦷",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6",
+        "example": "치과에 가 보는 게 어때요?",
+        "exampleEn": "How about going to the dentist?"
+      },
+      {
+        "ko": "호텔",
+        "en": "hotel",
+        "hint": "🏨",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6"
+      },
+      {
+        "ko": "공항",
+        "en": "airport",
+        "hint": "✈️",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6",
+        "example": "공항에 모셔다 드리고 왔어요.",
+        "exampleEn": "I took them to the airport and came back."
+      },
+      {
+        "ko": "부동산",
+        "en": "property, real estate",
+        "hint": "🏘️",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6",
+        "example": "부동산에 가서 한번 물어보세요.",
+        "exampleEn": "Go to an estate agency and ask."
+      },
+      {
+        "ko": "수리점",
+        "en": "a repair shop",
+        "hint": "🔧",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6"
+      },
+      {
+        "ko": "주유소",
+        "en": "a petrol station",
+        "hint": "⛽",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6"
+      },
+      {
+        "ko": "빵집",
+        "en": "a bakery",
+        "hint": "🥐",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6"
+      },
+      {
+        "ko": "꽃집",
+        "en": "a florist’s",
+        "hint": "💐",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6",
+        "example": "선물로 꽃을 사 가고 싶은데 근처에 꽃집이 없네요."
+      },
+      {
+        "ko": "안경점",
+        "en": "an optician’s",
+        "hint": "🕶️",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6"
+      },
+      {
+        "ko": "마트",
+        "en": "a supermarket",
+        "hint": "🛒",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6",
+        "forms": [
+          "슈퍼마켓"
+        ],
+        "acceptedAnswers": [
+          "슈퍼마켓"
+        ],
+        "example": "저는 큰 마트보다 시장에 가는 것을 더 좋아해요. 그래서 보통 시장에서 장을 봐요.",
+        "exampleEn": "I like going to the market more than to a big supermarket. So I usually do my shopping at the market."
+      },
+      {
+        "ko": "미용실",
+        "en": "hair salon",
+        "hint": "💇",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6",
+        "example": "한국에서는 아직 미용실에 못 가 봤어요.",
+        "exampleEn": "I have not managed to go to a salon in Korea yet."
+      },
+      {
+        "ko": "박물관",
+        "en": "a museum",
+        "hint": "🏛️",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6",
+        "example": "지난달 문을 연 우표 박물관이 시민들에게 사랑을 받고 있다."
+      },
+      {
+        "ko": "영화관",
+        "en": "cinema / movie theater",
+        "hint": "🎬",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6",
+        "forms": [
+          "극장"
+        ],
+        "acceptedAnswers": [
+          "극장"
+        ]
+      },
+      {
+        "ko": "은행",
+        "en": "bank",
+        "hint": "🏦",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6",
+        "example": "조금 전에 은행에 갔다 왔는데 문이 닫혀 있었다."
+      },
+      {
+        "ko": "여행사",
+        "en": "a travel agency",
+        "hint": "🧳",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6"
+      },
+      {
+        "ko": "놀이공원",
+        "en": "an amusement park",
+        "hint": "🎢",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6"
+      },
+      {
+        "ko": "세탁소",
+        "en": "a dry cleaner's; a laundry shop",
+        "hint": "👔",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6",
+        "example": "세탁소에 있어요."
+      },
+      {
+        "ko": "식당",
+        "en": "a restaurant",
+        "hint": "🍴",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6",
+        "forms": [
+          "음식점"
+        ],
+        "acceptedAnswers": [
+          "음식점"
+        ],
+        "example": "나는 부모님의 뒤를 이어 식당을 맡게 됐다."
+      },
+      {
+        "ko": "투자 신탁 회사",
+        "en": "an investment trust company",
+        "hint": "📈",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6"
+      },
+      {
+        "ko": "보험 회사",
+        "en": "an insurance company",
+        "hint": "☂️",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6"
+      },
+      {
+        "ko": "중고차 매매점",
+        "en": "a used-car dealer",
+        "hint": "🚙",
+        "category": "업소 광고",
+        "categoryEn": "Business ads · reading 6"
+      },
+      {
+        "ko": "봉사 활동",
+        "en": "volunteer work or service activities",
+        "hint": "🤝",
+        "category": "공익 광고",
+        "categoryEn": "Public-service ads · reading 7",
+        "example": "여행을 다녀온 후에는 봉사 활동을 하려고 합니다.",
+        "exampleEn": "After the travelling I plan to do volunteer work."
+      },
+      {
+        "ko": "이웃 사랑",
+        "en": "caring for your neighbours",
+        "hint": "🏘️",
+        "category": "공익 광고",
+        "categoryEn": "Public-service ads · reading 7"
+      },
+      {
+        "ko": "환경 보호",
+        "en": "protecting the environment (자연 보호, protecting nature)",
+        "hint": "🌳",
+        "category": "공익 광고",
+        "categoryEn": "Public-service ads · reading 7",
+        "forms": [
+          "자연 보호"
+        ],
+        "acceptedAnswers": [
+          "자연 보호"
+        ]
+      },
+      {
+        "ko": "음식물 쓰레기",
+        "en": "food waste",
+        "hint": "🗑️",
+        "category": "공익 광고",
+        "categoryEn": "Public-service ads · reading 7"
+      },
+      {
+        "ko": "일회용품",
+        "en": "disposable item",
+        "hint": "🥤",
+        "category": "공익 광고",
+        "categoryEn": "Public-service ads · reading 7"
+      },
+      {
+        "ko": "분리 배출",
+        "en": "sorting rubbish for recycling",
+        "hint": "♻️",
+        "category": "공익 광고",
+        "categoryEn": "Public-service ads · reading 7"
+      },
+      {
+        "ko": "전기 절약",
+        "en": "saving electricity",
+        "hint": "🔌",
+        "category": "공익 광고",
+        "categoryEn": "Public-service ads · reading 7"
+      },
+      {
+        "ko": "자원 절약",
+        "en": "saving resources",
+        "hint": "💧",
+        "category": "공익 광고",
+        "categoryEn": "Public-service ads · reading 7"
+      },
+      {
+        "ko": "교통 안전",
+        "en": "road safety (안전 운전, driving safely)",
+        "hint": "🚦",
+        "category": "공익 광고",
+        "categoryEn": "Public-service ads · reading 7",
+        "forms": [
+          "안전 운전"
+        ],
+        "acceptedAnswers": [
+          "안전 운전"
+        ]
+      },
+      {
+        "ko": "전기 안전",
+        "en": "electrical safety",
+        "hint": "⚡",
+        "category": "공익 광고",
+        "categoryEn": "Public-service ads · reading 7"
+      },
+      {
+        "ko": "화재 예방",
+        "en": "fire prevention",
+        "hint": "🧯",
+        "category": "공익 광고",
+        "categoryEn": "Public-service ads · reading 7"
+      },
+      {
+        "ko": "안전 관리",
+        "en": "safety management (안전 사고, accidents)",
+        "hint": "🦺",
+        "category": "공익 광고",
+        "categoryEn": "Public-service ads · reading 7",
+        "forms": [
+          "안전 사고"
+        ]
+      },
+      {
+        "ko": "음주 운전",
+        "en": "drink-driving",
+        "hint": "🍺",
+        "category": "공익 광고",
+        "categoryEn": "Public-service ads · reading 7"
+      },
+      {
+        "ko": "건강 관리",
+        "en": "looking after your health (건강 습관, healthy habits)",
+        "hint": "💪",
+        "category": "공익 광고",
+        "categoryEn": "Public-service ads · reading 7",
+        "forms": [
+          "건강 습관"
+        ]
+      },
+      {
+        "ko": "금연 홍보",
+        "en": "an anti-smoking campaign",
+        "hint": "🚭",
+        "category": "공익 광고",
+        "categoryEn": "Public-service ads · reading 7"
+      },
+      {
+        "ko": "감기 예방",
+        "en": "preventing colds",
+        "hint": "🤧",
+        "category": "공익 광고",
+        "categoryEn": "Public-service ads · reading 7"
+      },
+      {
+        "ko": "공공 예절",
+        "en": "manners in public places",
+        "hint": "🚌",
+        "category": "공익 광고",
+        "categoryEn": "Public-service ads · reading 7"
+      },
+      {
+        "ko": "언어 예절",
+        "en": "courtesy in how you speak",
+        "hint": "💬",
+        "category": "공익 광고",
+        "categoryEn": "Public-service ads · reading 7"
+      },
+      {
+        "ko": "전화 예절",
+        "en": "phone manners",
+        "hint": "📱",
+        "category": "공익 광고",
+        "categoryEn": "Public-service ads · reading 7"
+      },
+      {
+        "ko": "자리 양보",
+        "en": "giving up your seat for someone",
+        "hint": "💺",
+        "category": "공익 광고",
+        "categoryEn": "Public-service ads · reading 7"
+      },
+      {
+        "ko": "이용 안내",
+        "en": "how to use it — hours, service and instructions",
+        "hint": "🧾",
+        "category": "광고의 상세 설명",
+        "categoryEn": "What a notice explains · reading 8"
+      },
+      {
+        "ko": "모집 안내",
+        "en": "a call for members or applicants",
+        "hint": "📣",
+        "category": "광고의 상세 설명",
+        "categoryEn": "What a notice explains · reading 8"
+      },
+      {
+        "ko": "행사 안내",
+        "en": "an event announcement",
+        "hint": "🎪",
+        "category": "광고의 상세 설명",
+        "categoryEn": "What a notice explains · reading 8"
+      },
+      {
+        "ko": "제품 소개",
+        "en": "a product introduction — its features and effects",
+        "hint": "🏷️",
+        "category": "광고의 상세 설명",
+        "categoryEn": "What a notice explains · reading 8",
+        "forms": [
+          "상품 소개"
+        ],
+        "acceptedAnswers": [
+          "상품 소개"
+        ]
+      },
+      {
+        "ko": "수업 안내",
+        "en": "class information",
+        "hint": "👩‍🏫",
+        "category": "광고의 상세 설명",
+        "categoryEn": "What a notice explains · reading 8"
+      },
+      {
+        "ko": "주의 사항",
+        "en": "precautions, points to watch",
+        "hint": "⚠️",
+        "category": "광고의 상세 설명",
+        "categoryEn": "What a notice explains · reading 8"
+      },
+      {
+        "ko": "보관 방법",
+        "en": "how to store it",
+        "hint": "🧊",
+        "category": "광고의 상세 설명",
+        "categoryEn": "What a notice explains · reading 8"
+      },
+      {
+        "ko": "접수 방법",
+        "en": "how to register or apply",
+        "hint": "📝",
+        "category": "광고의 상세 설명",
+        "categoryEn": "What a notice explains · reading 8"
+      },
+      {
+        "ko": "안전 규칙",
+        "en": "safety rules",
+        "hint": "🦺",
+        "category": "광고의 상세 설명",
+        "categoryEn": "What a notice explains · reading 8"
+      },
+      {
+        "ko": "관람 안내",
+        "en": "visitor information for a show or exhibition",
+        "hint": "🎟️",
+        "category": "광고의 상세 설명",
+        "categoryEn": "What a notice explains · reading 8"
+      },
+      {
+        "ko": "교환",
+        "en": "an exchange (of goods)",
+        "hint": "🔁",
+        "category": "광고의 상세 설명",
+        "categoryEn": "What a notice explains · reading 8"
+      },
+      {
+        "ko": "환불",
+        "en": "a refund",
+        "hint": "💸",
+        "category": "광고의 상세 설명",
+        "categoryEn": "What a notice explains · reading 8"
+      },
+      {
+        "ko": "문의 안내",
+        "en": "how to make an enquiry",
+        "hint": "☎️",
+        "category": "광고의 상세 설명",
+        "categoryEn": "What a notice explains · reading 8"
+      },
+      {
+        "ko": "상품 평가",
+        "en": "a product review",
+        "hint": "⭐",
+        "category": "광고의 상세 설명",
+        "categoryEn": "What a notice explains · reading 8"
+      },
+      {
+        "ko": "상담 안내",
+        "en": "consultation information",
+        "hint": "🗣️",
+        "category": "광고의 상세 설명",
+        "categoryEn": "What a notice explains · reading 8"
+      },
+      {
+        "ko": "배달 안내",
+        "en": "delivery information",
+        "hint": "🛵",
+        "category": "광고의 상세 설명",
+        "categoryEn": "What a notice explains · reading 8"
+      },
+      {
+        "ko": "요리 순서",
+        "en": "the steps of a recipe",
+        "hint": "🍲",
+        "category": "광고의 상세 설명",
+        "categoryEn": "What a notice explains · reading 8"
+      },
+      {
+        "ko": "포장 방법",
+        "en": "how to wrap or pack it",
+        "hint": "🎁",
+        "category": "광고의 상세 설명",
+        "categoryEn": "What a notice explains · reading 8"
+      },
+      {
+        "ko": "구입 안내",
+        "en": "how to buy it",
+        "hint": "🛍️",
+        "category": "광고의 상세 설명",
+        "categoryEn": "What a notice explains · reading 8"
+      },
+      {
+        "ko": "여행 상품",
+        "en": "a travel package sold by an agency",
+        "hint": "🗺️",
+        "category": "광고의 상세 설명",
+        "categoryEn": "What a notice explains · reading 8",
+        "example": "여행 상품의 다양성보다 회사의 규모를 중요하게 생각하는 사람이 더 적다."
+      },
+      {
+        "ko": "영화 소개",
+        "en": "a film introduction",
+        "hint": "🎥",
+        "category": "광고의 상세 설명",
+        "categoryEn": "What a notice explains · reading 8"
+      }
+    ]
+  },
+  "notebook": {
+    "title": "TOPIK II 합격 레시피 · Unit 1",
+    "mindmap": [
+      {
+        "ko": "연결어미",
+        "en": "Connecting endings · reading 1-2",
+        "cat": "연결어미"
+      },
+      {
+        "ko": "종결어미",
+        "en": "Sentence endings · reading 1-2",
+        "cat": "종결어미"
+      },
+      {
+        "ko": "유사 문법",
+        "en": "Similar grammar · reading 3-4",
+        "cat": "유사 문법"
+      },
+      {
+        "ko": "유사 표현",
+        "en": "Equivalents to know · reading 3-4",
+        "cat": "유사 표현"
+      },
+      {
+        "ko": "제품 광고",
+        "en": "Product ads · reading 5",
+        "cat": "제품 광고"
+      },
+      {
+        "ko": "업소 광고",
+        "en": "Business ads · reading 6",
+        "cat": "업소 광고"
+      },
+      {
+        "ko": "공익 광고",
+        "en": "Public-service ads · reading 7",
+        "cat": "공익 광고"
+      },
+      {
+        "ko": "광고의 상세 설명",
+        "en": "What a notice explains · reading 8",
+        "cat": "광고의 상세 설명"
+      }
+    ]
+  }
+}

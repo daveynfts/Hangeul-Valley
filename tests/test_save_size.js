@@ -69,7 +69,7 @@ function studied(i, t0) {
 function wholeGameSave() {
   const kos = new Set();
   JSON.parse(fs.readFileSync(path.join(ROOT, 'levels.json'), 'utf8')).forEach(l => l.words.forEach(w => kos.add(w.ko)));
-  fs.readdirSync(path.join(ROOT, 'worlds')).filter(f => /^(2b-unit-\d+|topik-2)\.json$/.test(f)).forEach((f) => {
+  fs.readdirSync(path.join(ROOT, 'worlds')).filter(f => /^(2b-unit-\d+|topik-2|recipe-unit-\d+)\.json$/.test(f)).forEach((f) => {
     const w = JSON.parse(fs.readFileSync(path.join(ROOT, 'worlds', f), 'utf8'));
     ((w.level && w.level.words) || []).forEach(x => kos.add(x.ko));
   });
