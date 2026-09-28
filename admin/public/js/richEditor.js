@@ -128,7 +128,7 @@
       }
       if (o.lockText && rich.norm(text) !== rich.norm(o.text)) {
         restore();
-        say('This is the translation — style it here, change its wording in the Translate tab.');
+        say('This is Claude’s English — style it here; to change its words, change the Vietnamese.');
         return;
       }
       lastGood = html;
@@ -181,7 +181,7 @@
         const keep = String(el.className || '').split(/\s+/).filter((c) => c && c.indexOf(prefix) !== 0);
         if (el.tagName === 'MARK' && prefix === 'hv-hl-') { unwrap(el); return; }
         if (keep.length) el.className = keep.join(' ');
-        else if (!el.classList.contains('hre-blank') && !el.hasAttribute('data-gl')) unwrap(el);
+        else if (!el.classList.contains('hre-blank') && !el.classList.contains('hv-gl')) unwrap(el);
         else el.removeAttribute('class');
       });
     }
@@ -242,7 +242,7 @@
       const holder = document.createElement('div');
       holder.appendChild(frag);
       holder.querySelectorAll('b, strong, i, em, u, s, strike, sub, sup, small, mark, span, font').forEach((el) => {
-        if (el.classList.contains('hre-blank') || el.hasAttribute('data-gl')) return;
+        if (el.classList.contains('hre-blank') || el.classList.contains('hv-gl')) return;
         unwrap(el);
       });
       const out = document.createDocumentFragment();
@@ -281,29 +281,40 @@
       const word = existing ? existing.textContent : r.toString();
       const gl = existing ? existing.getAttribute('data-gl') || '' : '';
       const vi = existing ? existing.getAttribute('data-gl-vi') || '' : '';
+      // Which meanings can ever be seen here. Vietnamese text is only shown in Vietnamese and
+      // Claude's English only in English, so each asks for its own; Korean is shown in both,
+      // Vietnamese first, with the English optional (English mode falls back to the Vietnamese).
+      const lang = o.lang || 'ko';
+      const viBox = '<label>Nghĩa (Tiếng Việt)<input class="hre-in" data-k="vi" value="' + esc(vi) + '" maxlength="240"></label>';
+      const enBox = '<label>Meaning (English)' + (lang === 'en' ? '' : ' <span class="hre-opt">optional</span>')
+        + '<input class="hre-in" data-k="gl" value="' + esc(gl) + '" maxlength="240"></label>';
       openPop(btn, '<div class="hre-pop-title">💬 Meaning on hover · <b>' + esc(word) + '</b></div>'
-        + '<label>Meaning (English)<input class="hre-in" data-k="gl" value="' + esc(gl) + '" maxlength="240"></label>'
-        + '<label>Nghĩa (Tiếng Việt) <span class="hre-opt">optional</span><input class="hre-in" data-k="vi" value="' + esc(vi) + '" maxlength="240"></label>'
+        + (lang === 'en' ? enBox : (lang === 'vi' ? viBox : viBox + enBox))
         + '<div class="hre-pop-actions">'
         + (existing ? '<button type="button" class="hre-btn-danger" data-act="remove">Remove</button>' : '')
         + '<span class="hre-grow"></span><button type="button" data-act="cancel">Cancel</button>'
         + '<button type="button" class="hre-btn-primary" data-act="ok">Apply</button></div>', (p) => {
-        const val = (k) => p.querySelector('[data-k="' + k + '"]').value.replace(/\s+/g, ' ').trim();
+        // A box that is not shown keeps what the meaning already had.
+        const val = (k, keep) => {
+          const box = p.querySelector('[data-k="' + k + '"]');
+          return box ? box.value.replace(/\s+/g, ' ').trim() : keep;
+        };
+        const put = (node, name, v) => { if (v) node.setAttribute(name, v); else node.removeAttribute(name); };
         const ok = () => {
-          const m = val('gl');
-          const mv = val('vi');
-          if (!m) { say('Write the meaning first.', 'info'); return; }
+          const m = val('gl', gl);
+          const mv = val('vi', vi);
+          if (!m && !mv) { say('Write the meaning first.', 'info'); return; }
           if (existing) {
-            existing.setAttribute('data-gl', m);
-            if (mv) existing.setAttribute('data-gl-vi', mv); else existing.removeAttribute('data-gl-vi');
+            put(existing, 'data-gl', m);
+            put(existing, 'data-gl-vi', mv);
           } else {
             const range2 = recall();
             const frag = range2.extractContents();
             frag.querySelectorAll('.hv-gl').forEach(unwrap);
             const span = document.createElement('span');
             span.className = 'hv-gl';
-            span.setAttribute('data-gl', m);
-            if (mv) span.setAttribute('data-gl-vi', mv);
+            put(span, 'data-gl', m);
+            put(span, 'data-gl-vi', mv);
             span.appendChild(frag);
             range2.insertNode(span);
           }
@@ -437,7 +448,7 @@
       if (!o.lockText) return;
       if (/^format/.test(e.inputType)) return;
       e.preventDefault();
-      say('This is the translation — style it here, change its wording in the Translate tab.', 'info');
+      say('This is Claude’s English — style it here; to change its words, change the Vietnamese.', 'info');
     });
     area.addEventListener('paste', (e) => {
       e.preventDefault();

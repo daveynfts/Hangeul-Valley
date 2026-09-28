@@ -5,10 +5,20 @@
 
 window.LevelsView = {
   initialized: false,
+  // locales/vi/levels.json: the Vietnamese each English gloss is filed under. The glosses are
+  // written here in Vietnamese and Claude writes the English (docs/vietnamese-first.md).
+  viCat: null,
+
+  entries() { return (this.viCat && this.viCat.entries) || {}; },
+  viOf(obj, field) { return window.HVViFirst ? window.HVViFirst.viOf(obj, field, this.entries()) : ''; },
+  t(s, vars) { return typeof window.T === 'function' ? window.T(s, vars) : String(s); },
 
   init() {
     if (this.initialized) return;
     this.initialized = true;
+    if (window.HVViField) {
+      window.HVViField.loadCatalog('levels.json').then((cat) => { this.viCat = cat; this.render(); });
+    }
 
     // Search & Filter Events
     const searchInput = document.getElementById('input-search-words');
@@ -90,9 +100,10 @@ window.LevelsView = {
       const elTarget = document.getElementById('level-target');
 
       if (elIcon) elIcon.textContent = currentLevel.icon || '📚';
-      if (elTitle) elTitle.textContent = `Level ${currentLevel.level} - ${currentLevel.name || ''}`;
+      // The level's name is content and is shown as it is; "Level 3" is the panel's own words.
+      if (elTitle) elTitle.textContent = `${this.t('Level {n}', { n: currentLevel.level })} - ${currentLevel.name || ''}`;
       if (elWordsBadge) elWordsBadge.textContent = `${(currentLevel.words || []).length} Words`;
-      if (elDesc) elDesc.textContent = currentLevel.description || 'No description configured.';
+      if (elDesc) elDesc.textContent = currentLevel.description || this.t('No description configured.');
       if (elTarget) elTarget.textContent = `Target Score: ${currentLevel.target || (currentLevel.words ? currentLevel.words.length : 0)}`;
     }
 
@@ -142,8 +153,9 @@ window.LevelsView = {
           const matchKo = w.ko && w.ko.toLowerCase().includes(query);
           const matchEn = w.en && w.en.toLowerCase().includes(query);
           const matchCat = w.category && w.category.toLowerCase().includes(query);
+          const matchVi = this.viOf(w, 'en').toLowerCase().includes(query);
 
-          if (matchKo || matchEn || matchCat) {
+          if (matchKo || matchEn || matchCat || matchVi) {
             targetWords.push({ ...w, levelNum: lvl.level, wordIndex: idx });
           }
         });
@@ -177,7 +189,7 @@ window.LevelsView = {
     if (!tbody) return;
 
     if (targetWords.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="6" class="text-center text-muted">No words match the selected filters.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="6" class="text-center text-muted">${this.escapeHtml(this.t('No words match the selected filters.'))}</td></tr>`;
       return;
     }
 
@@ -195,12 +207,12 @@ window.LevelsView = {
       return `
         <tr>
           <td>
-            ${isGlobalSearch ? `<span class="badge badge-indigo">Lvl ${item.levelNum}</span>` : `<span class="text-muted">${displayIdx + 1}</span>`}
+            ${isGlobalSearch ? `<span class="badge badge-indigo">${this.escapeHtml(this.t('Lvl {n}', { n: item.levelNum }))}</span>` : `<span class="text-muted">${displayIdx + 1}</span>`}
           </td>
-          <td class="font-bold">${this.escapeHtml(item.ko)}</td>
-          <td><code class="key-badge">${this.escapeHtml(item.en)}</code></td>
-          <td><span class="badge ${catBadgeClass}">${this.escapeHtml(item.category || '기타')}</span></td>
-          <td class="text-center cell-glyph">${this.escapeHtml(item.hint || '')}</td>
+          <td class="font-bold" translate="no">${this.escapeHtml(item.ko)}</td>
+          <td translate="no">${this.glossCell(item)}</td>
+          <td translate="no"><span class="badge ${catBadgeClass}">${this.escapeHtml(item.category || '기타')}</span></td>
+          <td class="text-center cell-glyph" translate="no">${this.escapeHtml(item.hint || '')}</td>
           <td class="text-right">${actions}</td>
         </tr>
       `;
@@ -225,6 +237,18 @@ window.LevelsView = {
     });
   },
 
+  // The Vietnamese gloss first, as it is written; the English Claude wrote from it under it.
+  glossCell(item) {
+    const VF = window.HVViFirst;
+    const vi = this.viOf(item, 'en');
+    const owes = VF && VF.list(item, VF.TODO).indexOf('en') >= 0;
+    const unread = VF && VF.list(item, VF.AI).indexOf('en') >= 0;
+    return (vi ? `<div class="gloss-vi">${this.escapeHtml(vi)}</div>` : '')
+      + `<code class="key-badge">${this.escapeHtml(item.en || '—')}</code>`
+      + (owes ? ` <em class="vf-owe-dot" title="${this.escapeHtml(this.t('Waiting for Claude’s English'))}">⏳</em>` : '')
+      + (unread ? ` <em class="vf-owe-dot" title="${this.escapeHtml(this.t('AI English — not yet read'))}">🤖</em>` : '');
+  },
+
   getCategoryBadgeClass(cat) {
     if (!cat) return 'badge-slate';
     if (cat.includes('가족') || cat.includes('사람')) return 'badge-indigo';
@@ -240,6 +264,12 @@ window.LevelsView = {
     const selectedNum = window.AppState.selectedLevelNum || 1;
     const currentLevel = levels.find(l => l.level === selectedNum);
     if (!currentLevel) return;
+    // The modal edits a copy: nothing reaches the level until Save.
+    const VFD = window.HVViField;
+    const copy = JSON.parse(JSON.stringify(currentLevel));
+    const viBox = (field, label, multiline) => (VFD
+      ? `<div class="form-group">${VFD.html(copy, field, { ref: 'l', label, entries: this.entries(), multiline, rows: 2 })}</div>`
+      : '');
 
     const bodyHtml = `
       <div class="form-group">
@@ -251,6 +281,7 @@ window.LevelsView = {
         <label class="form-label">Level Name</label>
         <input type="text" id="modal-meta-name" class="form-input" value="${this.escapeHtml(currentLevel.name || '')}" placeholder="e.g. 기초 어휘 1">
       </div>
+      ${viBox('nameEn', 'Level name (VI)')}
 
       <div class="form-group">
         <label class="form-label">Level Icon Emoji</label>
@@ -261,6 +292,7 @@ window.LevelsView = {
         <label class="form-label">Description</label>
         <textarea id="modal-meta-desc" class="form-input" rows="3" placeholder="Describe level contents...">${this.escapeHtml(currentLevel.description || '')}</textarea>
       </div>
+      ${viBox('descriptionEn', 'Description (VI)', true)}
 
       <div class="form-group">
         <label class="form-label">Target Score</label>
@@ -273,7 +305,8 @@ window.LevelsView = {
       <button class="btn btn-emerald" id="modal-btn-save-meta"><span>💾</span> Save Level Metadata</button>
     `;
 
-    window.Modal.open(`Edit Metadata - Level ${currentLevel.level}`, bodyHtml, footerHtml);
+    window.Modal.open(this.escapeHtml(this.t('Edit Metadata - Level {n}', { n: currentLevel.level })), bodyHtml, footerHtml);
+    if (VFD) VFD.bind(document.getElementById('modal-box'), { resolve: () => copy, entries: () => this.entries() });
 
     const btnSave = document.getElementById('modal-btn-save-meta');
     if (btnSave) {
@@ -284,9 +317,15 @@ window.LevelsView = {
         const target = Number(document.getElementById('modal-meta-target').value);
 
         try {
-          const res = await window.apiFetch.updateLevelMeta(selectedNum, { name, icon, description, target });
+          const VF = window.HVViFirst;
+          const drafts = VF ? {
+            nameVi: copy.nameVi || '', descriptionVi: copy.descriptionVi || '',
+            [VF.TODO]: VF.list(copy, VF.TODO), [VF.AI]: VF.list(copy, VF.AI)
+          } : {};
+          const res = await window.apiFetch.updateLevelMeta(selectedNum, { name, icon, description, target, ...drafts });
           if (res.success) {
-            window.Toast.success(`Level ${selectedNum} metadata updated!`, 'Success');
+            window.Toast.success(this.escapeHtml(this.t('Level {n} metadata updated!', { n: selectedNum })), this.escapeHtml(this.t('Success')));
+            if (VFD) VFD.toastOwed(VFD.owed(res.data));
             window.Modal.close();
             await window.AppController.fetchAllData();
           }
@@ -316,7 +355,9 @@ window.LevelsView = {
   renderWordFormModal(title, levelNum, wordIndex = null, existingWord = null) {
     const isEdit = wordIndex !== null && existingWord !== null;
     const koVal = existingWord ? existingWord.ko : '';
-    const enVal = existingWord ? existingWord.en : '';
+    // The gloss is written in Vietnamese on a copy of the word; its English is Claude's.
+    const VFD = window.HVViField;
+    const copy = existingWord ? JSON.parse(JSON.stringify(existingWord)) : { ko: '', en: '' };
     const hintVal = existingWord ? existingWord.hint : '';
     const categoryVal = existingWord ? existingWord.category : '';
 
@@ -329,8 +370,9 @@ window.LevelsView = {
       </div>
 
       <div class="form-group">
-        <label class="form-label">English Key (en) *</label>
-        <input type="text" id="modal-word-en" class="form-input" value="${this.escapeHtml(enVal)}" placeholder="e.g. father">
+        ${VFD ? VFD.html(copy, 'en', { ref: 'w', label: 'Meaning (VI) *', entries: this.entries() })
+          : `<label class="form-label">English Key (en) *</label>
+        <input type="text" id="modal-word-en" class="form-input" value="${this.escapeHtml(copy.en || '')}" placeholder="e.g. father">`}
       </div>
 
       <div class="form-group">
@@ -354,6 +396,7 @@ window.LevelsView = {
     `;
 
     window.Modal.open(title, bodyHtml, footerHtml);
+    if (VFD) VFD.bind(document.getElementById('modal-box'), { resolve: () => copy, entries: () => this.entries() });
 
     // Emoji picker click handler
     document.querySelectorAll('.emoji-btn').forEach(btn => {
@@ -368,29 +411,38 @@ window.LevelsView = {
     if (btnSave) {
       btnSave.addEventListener('click', async () => {
         const ko = document.getElementById('modal-word-ko').value.trim();
-        const en = document.getElementById('modal-word-en').value.trim();
+        const enBox = document.getElementById('modal-word-en');
+        if (enBox) copy.en = enBox.value.trim();
+        const en = String(copy.en || '').trim();
         const category = document.getElementById('modal-word-category').value.trim();
         const hint = document.getElementById('modal-word-hint').value.trim();
+        const VF = window.HVViFirst;
+        const vi = VF ? VF.viOf(copy, 'en', this.entries()) : '';
 
-        if (!ko || !en) {
-          window.Toast.warning('Korean and English fields are required.', 'Validation');
+        if (!ko || !(en || vi)) {
+          window.Toast.warning(this.escapeHtml(this.t('The Korean word and its meaning are required.')), this.escapeHtml(this.t('Validation')));
           return;
         }
 
-        const payload = { ko, en, category, hint };
+        // The draft and the lists go with the word, so the server keeps what the box says.
+        const payload = VF
+          ? { ko, en, category, hint, vi: copy.vi || '', [VF.TODO]: VF.list(copy, VF.TODO), [VF.AI]: VF.list(copy, VF.AI) }
+          : { ko, en, category, hint };
 
         try {
           if (isEdit) {
             const res = await window.apiFetch.updateWord(levelNum, wordIndex, payload);
             if (res.success) {
-              window.Toast.success(`Word '${ko}' updated in level ${levelNum}!`, 'Success');
+              window.Toast.success(this.escapeHtml(this.t("Word '{ko}' updated in level {n}!", { ko, n: levelNum })), this.escapeHtml(this.t('Success')));
+              if (VFD) VFD.toastOwed(VFD.owed(res.data));
               window.Modal.close();
               await window.AppController.fetchAllData();
             }
           } else {
             const res = await window.apiFetch.addWord(levelNum, payload);
             if (res.success) {
-              window.Toast.success(`Word '${ko}' added to level ${levelNum}!`, 'Success');
+              window.Toast.success(this.escapeHtml(this.t("Word '{ko}' added to level {n}!", { ko, n: levelNum })), this.escapeHtml(this.t('Success')));
+              if (VFD) VFD.toastOwed(VFD.owed(res.data));
               window.Modal.close();
               await window.AppController.fetchAllData();
             }
@@ -403,14 +455,14 @@ window.LevelsView = {
   },
 
   async handleDeleteWord(levelNum, wordIndex, ko) {
-    if (!confirm(`Are you sure you want to delete the word '${ko}' from Level ${levelNum}?`)) {
+    if (!confirm(this.t("Are you sure you want to delete the word '{ko}' from Level {n}?", { ko, n: levelNum }))) {
       return;
     }
 
     try {
       const res = await window.apiFetch.deleteWord(levelNum, wordIndex);
       if (res.success) {
-        window.Toast.success(`Word '${ko}' deleted from Level ${levelNum}!`, 'Deleted');
+        window.Toast.success(this.escapeHtml(this.t("Word '{ko}' deleted from Level {n}!", { ko, n: levelNum })), this.escapeHtml(this.t('Deleted')));
         await window.AppController.fetchAllData();
       }
     } catch (err) {

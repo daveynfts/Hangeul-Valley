@@ -1335,6 +1335,9 @@ body.admin-readonly .btn-delete-word {
 .u14-ro-chip.key {
   background: rgba(34, 197, 94, .14); border-color: rgba(34, 197, 94, .55); font-weight: 700;
 }
+.gloss-vi { font-size: var(--fs-base); color: var(--text-primary); margin-bottom: 3px; }
+.u14-ro-vi { margin-top: 8px; font-size: var(--fs-sm); color: var(--text-primary); }
+.u14-ro-vi + .u14-ro-en { margin-top: 2px; }
 .u14-ro-en { margin-top: 8px; font-size: var(--fs-xs); font-style: italic; color: var(--text-secondary); }
 
 @media (max-width: 1000px) {

@@ -90,10 +90,10 @@ window.DashboardView = {
           return `
             <tr>
               <td><span class="badge badge-indigo">Lvl ${levelNum}</span></td>
-              <td class="font-bold">${this.escapeHtml(ko)}</td>
-              <td><code class="key-badge">${this.escapeHtml(en)}</code></td>
-              <td class="text-center">${this.escapeHtml(hint)}</td>
-              <td><span class="badge badge-slate">${this.escapeHtml(category)}</span></td>
+              <td class="font-bold" translate="no">${this.escapeHtml(ko)}</td>
+              <td translate="no"><code class="key-badge">${this.escapeHtml(en)}</code></td>
+              <td class="text-center" translate="no">${this.escapeHtml(hint)}</td>
+              <td translate="no"><span class="badge badge-slate">${this.escapeHtml(category)}</span></td>
               <td class="text-right"><span class="text-muted" title="Curate this word in scripts/build_facts_json.js, then re-run the generator">curate in generator</span></td>
             </tr>
           `;
@@ -112,7 +112,7 @@ window.DashboardView = {
       } else {
         dupsTbody.innerHTML = duplicatesList.map(item => `
           <tr>
-            <td class="font-bold">${this.escapeHtml(item.ko)}</td>
+            <td class="font-bold" translate="no">${this.escapeHtml(item.ko)}</td>
             <td class="text-right"><span class="badge badge-amber">${item.count} times</span></td>
           </tr>
         `).join('');

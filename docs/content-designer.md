@@ -10,14 +10,23 @@ the right change it:
 | ✏️ **Text** | Click any sentence on the page. Bold, italic, underline, strike, size, colour, highlight, font, a **meaning on hover** (💬), a reading above the text (ruby), lists, quotes, pictures inside the text. Below it: the whole field's size, alignment, **box** (note, tip, info, careful, important, grammar, example, quote, card, dashed), colour, font, bold, italic. |
 | 🎨 **Page** | Theme (parchment, notebook, mint, sky, blossom, lavender, sand), width, question **columns**, spacing, **zoom**, the Korean font, and when hover meanings appear — for this page, or as the default for every page of the bank. |
 | 🧱 **Blocks** | Text boxes, pictures and dividers placed between the page's sections: top, after the instruction, after the [보기], after the questions, with the answers, bottom. A text box can have a heading, an icon, a box style, two columns and a picture beside it; a picture has a width, alignment, frame and caption. Each can show always, only before checking, or only after. |
-| 💬 **Meanings** | The page's (or bank's) glossary — a word and the meaning it shows on hover, in English and Vietnamese — the words never glossed automatically, and the list of words the game glosses by itself on this page, each with *Hide* and *Change*. |
+| 💬 **Meanings** | The page's (or bank's) glossary — a word and the meaning it shows on hover, in Vietnamese and (optionally) English — the words never glossed automatically, and the list of words the game glosses by itself on this page, each with *Hide* and *Change*. |
 | ❓ **Question** | The rows themselves, for every exercise type: lines with their `{}` blanks, the buttons and which one is right, a second blank, the shared box, the English, the explanation, the grammar note, the recording, the picture key. Add, duplicate, move and delete questions. |
 
 The bar above holds the bank and page pickers, **Questions / Answers** (the page as the
-learner meets it, or after checking with the explanations open), **EN / VI**, a phone and
-tablet width, undo and redo (Ctrl+Z / Ctrl+Y), and **Save** (Ctrl+S). A save goes through the
+learner meets it, or after checking with the explanations open), **Content VI / EN**, a phone
+and tablet width, undo and redo (Ctrl+Z / Ctrl+Y), and **Save** (Ctrl+S). A save goes through the
 same registry and validator as every other admin save; a refusal names the exercise and
 question, and *Show me →* opens it.
+
+The content is written **Vietnamese first** ([vietnamese-first.md](vietnamese-first.md)). In
+**VI** the Text panel and the question fields edit the Vietnamese — a draft beside the English
+until Claude writes the English from it — and its formatting goes to `fmt.<field>.vi`; the
+English shows beneath with where it stands (⏳ owed, 🤖 written by Claude and unread, ✓ up to
+date). **EN** shows Claude's English to style it; its words change only through the Vietnamese.
+The ⏳ count in the bar is the English this bank still owes. A meaning on hover takes its
+Vietnamese first; the English one is optional, and English mode shows the Vietnamese until it
+is written.
 
 ## How formatting is stored — beside the text, never in it
 

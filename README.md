@@ -84,6 +84,15 @@ before, and a bank nobody has formatted renders byte for byte as it did. Uploade
 `media/`. [docs/content-designer.md](docs/content-designer.md) covers the storage, the sanitizer
 and what to know before changing English words.
 
+The admin is **Vietnamese first**. Its interface opens in Vietnamese (a **VI | EN** switch in
+the header; the strings are in `admin/public/js/lang.vi.js`), and the curriculum's prose is
+written in Vietnamese in every form — the Designer, Workbooks, the Units word list and quiz,
+Levels — with the English shown under each box, read only. A Vietnamese edit is saved as a
+draft beside the English it replaces (`whyVi` beside `why`, the English owed on `enTodo`), which
+the game shows at once; Claude then writes the English in a batch
+(`node scripts/vi_first.js todo` → `apply`) and files the Vietnamese in `locales/vi/`.
+[docs/vietnamese-first.md](docs/vietnamese-first.md) has the model and the procedure.
+
 Content and translation saves are made **against the version that was opened**. Every read of
 `/api/admin/content` returns the git blob SHA of the bytes it showed, the editor sends it back
 as `If-Match`, and both servers refuse a save with `409` when the file has changed since — the

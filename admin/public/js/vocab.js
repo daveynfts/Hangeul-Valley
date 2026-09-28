@@ -160,8 +160,8 @@ window.VocabView = {
 
       return `
         <tr>
-          <td><code class="key-badge">${this.escapeHtml(item.key)}</code></td>
-          <td>
+          <td translate="no"><code class="key-badge">${this.escapeHtml(item.key)}</code></td>
+          <td translate="no">
             ${uncurated
               ? `<span class="text-muted">${this.escapeHtml(item.en) || '--'}</span>`
               : `<span>${this.escapeHtml(item.origin)}</span>`}

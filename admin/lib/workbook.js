@@ -14,6 +14,9 @@ const { atomicWriteJson } = require('./atomicWrite');
 // The format layer the admin designer writes: `fmt` beside any text, `design` on a page or the
 // whole bank. The rules are the ones the game renders by, so they live with the renderer.
 const rich = require('../../js/richText.js');
+// Vietnamese written first in the admin: a draft beside the English it will replace, and the
+// lists of English still to write (enTodo) and written by Claude but unread (enAI).
+const viFirst = require('../public/js/viFirst.js');
 
 const WORKBOOK_REL = path.join('worlds', 'unit14-workbook.json');
 const TYPES = ['fill', 'match', 'dialogue', 'experience', 'build'];
@@ -95,10 +98,13 @@ function str(v) {
 // written and quietly ignored by the game. Added last, and only when there is some: a row
 // nobody has formatted is written back exactly as it was.
 function withFmt(out, src, where) {
+  viFirst.clean(out, src, where);
   const fmt = rich.cleanFmt(src && src.fmt, out, where);
   if (fmt) out.fmt = fmt;
   return out;
 }
+// A required English field may wait for its English while the Vietnamese stands in for it.
+const hasText = (out, src, field) => !!out[field] || viFirst.hasDraft(src, field);
 function withDesign(out, src, where, level) {
   const design = rich.cleanDesign(src && src.design, where, { level });
   if (design) out.design = design;
@@ -157,8 +163,8 @@ function cleanItem(item, i, where, type, chipIds) {
     why: str(item.why),
     grammar: str(item.grammar)
   };
-  if (!out.why) throw new Error(`${at}: needs a "why" — the page shows it after checking`);
-  if (!out.grammar) throw new Error(`${at}: needs a grammar note`);
+  if (!hasText(out, item, 'why')) throw new Error(`${at}: needs a "why" — the page shows it after checking`);
+  if (!hasText(out, item, 'grammar')) throw new Error(`${at}: needs a grammar note`);
   if (type === 'dialogue') {
     // The same script shape 'build' uses: as many lines as the exchange needs,
     // each with an optional speaker, and the gap wherever the book puts it. It
@@ -272,7 +278,7 @@ function cleanChoiceItem(item, i, where, type) {
   // unchanged bank writes each row back as it was.
   ['instructionKo', 'instructionEn'].forEach((k) => {
     const v = str(item[k]);
-    if (v) out[k] = v;
+    if (v || viFirst.hasDraft(item, k)) out[k] = v;
   });
   out.phraseKo = str(item.phraseKo);
   if (type === 'build') {
@@ -303,8 +309,8 @@ function cleanChoiceItem(item, i, where, type) {
   out.en = str(item.en);
   out.why = str(item.why);
   out.grammar = str(item.grammar);
-  if (!out.why) throw new Error(`${at}: needs a "why" — the page shows it after checking`);
-  if (!out.grammar) throw new Error(`${at}: needs a grammar note`);
+  if (!hasText(out, item, 'why')) throw new Error(`${at}: needs a "why" — the page shows it after checking`);
+  if (!hasText(out, item, 'grammar')) throw new Error(`${at}: needs a grammar note`);
   const audio = cleanAudio(item.audio, at);
   if (audio) out.audio = audio;
   // A question row whose gloss states its own answer holds it until checked, like a 듣기 page.
@@ -367,7 +373,10 @@ function cleanExercise(ex, i, seenIds) {
   // save gave the TOPIK bank's 빈칸 채우기 and 유사 표현 the label "Vocabulary", in both
   // languages. A section with no English of its own is written back without one.
   const section = str(ex.section) || '어휘';
-  const sectionEn = str(ex.sectionEn) || (section === '어휘' ? 'Vocabulary' : undefined);
+  // A heading written in Vietnamese only keeps an empty English beside it, which is what its
+  // draft is carried under until Claude writes the English.
+  const sectionEn = str(ex.sectionEn) || (section === '어휘' ? 'Vocabulary'
+    : (viFirst.hasDraft(ex, 'sectionEn') ? '' : undefined));
 
   const perItem = PER_ITEM_CHOICE_TYPES.includes(type);
   const bank = Array.isArray(ex.bank) ? ex.bank : [];
@@ -609,5 +618,5 @@ function saveWorkbook(body, rootDir, unit) {
 }
 
 module.exports = {
-  getWorkbook, saveWorkbook, validateWorkbook, workbookRel, WORKBOOKS, WORKBOOK_REL, TYPES
+  getWorkbook, saveWorkbook, validateWorkbook, workbookRel, WORKBOOKS, WORKBOOK_REL, TYPES, keepShape
 };

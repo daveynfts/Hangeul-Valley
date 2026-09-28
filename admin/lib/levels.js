@@ -6,6 +6,25 @@ const { syncLevels, getPaths } = require('./sync');
 // away: the routes below used to rebuild a word from those four alone, which meant every
 // edit through the admin quietly deleted the rest.
 const OPTIONAL_TEXT = ['categoryEn', 'example', 'exampleEn'];
+// Written in Vietnamese first (admin/public/js/viFirst.js): the Vietnamese gloss, group name
+// and example translation, kept as drafts until Claude writes the English they replace, and
+// the lists of English still owed (enTodo) and written by Claude but unread (enAI).
+const viFirst = require('../public/js/viFirst.js');
+const VI_DRAFTS = ['vi', 'categoryVi', 'exampleVi'];
+// A level's own English — its name and description — is written the same way.
+const LEVEL_DRAFTS = ['nameVi', 'descriptionVi'];
+function carryDrafts(word, from, drafts) {
+  (drafts || VI_DRAFTS).forEach((f) => {
+    if (from[f] === undefined) return;
+    const v = String(from[f] == null ? '' : from[f]).trim();
+    if (v) word[f] = v; else delete word[f];
+  });
+  [viFirst.TODO, viFirst.AI].forEach((f) => {
+    if (from[f] === undefined) return;
+    if (Array.isArray(from[f]) && from[f].length) word[f] = from[f].slice(); else delete word[f];
+  });
+  return viFirst.clean(word, Object.assign({}, word), word.ko ? `Word ${word.ko}` : `Level ${word.level}`);
+}
 
 function readLevelsFile(rootDir) {
   const paths = getPaths(rootDir);
@@ -46,12 +65,14 @@ function validateLevels(body) {
   let total = 0;
   levels.forEach((lvl, i) => {
     if (!lvl || typeof lvl !== 'object') throw new Error(`Level ${i + 1} is not an object`);
+    viFirst.clean(lvl, Object.assign({}, lvl), `Level ${lvl.level || i + 1}`);
     const words = Array.isArray(lvl.words) ? lvl.words : null;
     if (!words) throw new Error(`Level ${lvl.level || i + 1} has no words array`);
     total += words.length;
     words.forEach((w, k) => {
-      if (!w || !w.ko || !w.en || !w.category) { thin.push(`level ${lvl.level || i + 1} word ${k + 1} is missing ko / en / category`); return; }
-      if (!w.categoryEn) { thin.push(`${w.ko} is missing categoryEn`); return; }
+      if (!w || !w.ko || !(w.en || viFirst.hasDraft(w, 'en')) || !w.category) { thin.push(`level ${lvl.level || i + 1} word ${k + 1} is missing ko / en / category`); return; }
+      if (!(w.categoryEn || viFirst.hasDraft(w, 'categoryEn'))) { thin.push(`${w.ko} is missing categoryEn`); return; }
+      viFirst.clean(w, Object.assign({}, w), `Level ${lvl.level || i + 1} word ${w.ko}`);
       const ko = String(w.ko).normalize('NFC');
       if (seen.has(ko)) thin.push(`${ko} is already in level ${seen.get(ko)}`);
       else seen.set(ko, lvl.level || i + 1);
@@ -78,6 +99,8 @@ function updateLevelMetadata(levelNum, metadata, rootDir) {
   if (metadata.name !== undefined) targetLevel.name = String(metadata.name);
   if (metadata.icon !== undefined) targetLevel.icon = String(metadata.icon);
   if (metadata.description !== undefined) targetLevel.description = String(metadata.description);
+  // The Vietnamese of the English name and description, which Claude writes the English from.
+  carryDrafts(targetLevel, metadata, LEVEL_DRAFTS);
   if (metadata.target !== undefined) {
     const n = Number(metadata.target);
     if (!Number.isFinite(n)) {
@@ -101,13 +124,14 @@ function addWord(levelNum, wordObj, rootDir) {
     throw new Error(`Level ${levelNum} not found.`);
   }
 
-  if (!wordObj || !wordObj.ko || !wordObj.en) {
+  // The English gloss, or the Vietnamese one it will be written from.
+  if (!wordObj || !wordObj.ko || !(wordObj.en || (wordObj.vi && String(wordObj.vi).trim()))) {
     throw new Error('Word object must contain "ko" and "en" fields.');
   }
 
   const cleanWord = {
     ko: String(wordObj.ko).trim(),
-    en: String(wordObj.en).trim(),
+    en: String(wordObj.en || '').trim(),
     hint: wordObj.hint !== undefined ? String(wordObj.hint).trim() : '💡',
     category: wordObj.category !== undefined ? String(wordObj.category).trim() : targetLevel.name
   };
@@ -119,6 +143,7 @@ function addWord(levelNum, wordObj, rootDir) {
     if (v) cleanWord[f] = v;
   });
 
+  carryDrafts(cleanWord, wordObj);
   targetLevel.words.push(cleanWord);
   syncLevels(levels, rootDir);
   return { word: cleanWord, wordIndex: targetLevel.words.length - 1, totalWords: targetLevel.words.length };
@@ -138,7 +163,7 @@ function updateWord(levelNum, wordIndex, wordObj, rootDir) {
     throw new Error(`Word index ${wordIndex} out of bounds for level ${levelNum}.`);
   }
 
-  if (!wordObj || (!wordObj.ko && !wordObj.en)) {
+  if (!wordObj || (!wordObj.ko && !wordObj.en && !VI_DRAFTS.concat([viFirst.TODO, viFirst.AI]).some((f) => wordObj[f] !== undefined))) {
     throw new Error('Word update payload must contain valid word properties.');
   }
 
@@ -156,6 +181,7 @@ function updateWord(levelNum, wordIndex, wordObj, rootDir) {
     else if (v || ['ko', 'en', 'hint', 'category'].indexOf(f) < 0) updatedWord[f] = v;
   });
 
+  carryDrafts(updatedWord, wordObj);
   targetLevel.words[idx] = updatedWord;
   syncLevels(levels, rootDir);
   return updatedWord;

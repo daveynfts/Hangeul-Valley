@@ -104,7 +104,13 @@
         if (typeof v === 'string' && v.trim()) return v;
       }
       const v = obj[f];
-      return typeof v === 'string' ? v : (v == null ? '' : String(v));
+      const out = typeof v === 'string' ? v : (v == null ? '' : String(v));
+      // As js/i18n.js tr(): Vietnamese written before its English stands in for the English.
+      if (!out.trim()) {
+        const draft = obj[typeof win.hvLangField === 'function' ? win.hvLangField(f, 'vi') : f + 'Vi'];
+        if (typeof draft === 'string' && draft.trim()) return draft;
+      }
+      return out;
     };
     const fmt = (obj, f, shown, block) => {
       const out = R.field(obj, f, shown, { lang, block: !!block });

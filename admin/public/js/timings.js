@@ -304,7 +304,7 @@ window.TimingsView = {
       const done = lines.length && timed === lines.length;
       return '<button class="tm-track' + (i === this.ti ? ' active' : '') + '" data-ti="' + i + '">'
         + '<span class="tm-track-n">' + t.n + '</span>'
-        + '<span class="tm-track-t">' + this.esc(t.secEn || t.sec || '') + '</span>'
+        + '<span class="tm-track-t" translate="no">' + this.esc(t.secEn || t.sec || '') + '</span>'
         + '<span class="tm-track-c' + (done ? ' ok' : '') + '">'
         + (lines.length ? timed + '/' + lines.length : '—') + '</span></button>';
     }).join('');
@@ -361,8 +361,8 @@ window.TimingsView = {
       return '<button class="tm-line' + (i === this.li ? ' active' : '') + (has ? '' : ' untimed')
         + '" data-li="' + i + '">'
         + '<span class="tm-line-i">' + (i + 1) + '</span>'
-        + '<span class="tm-line-who">' + this.esc(l.who) + '</span>'
-        + '<span class="tm-line-ko">' + this.esc(l.ko) + '</span>'
+        + '<span class="tm-line-who" translate="no">' + this.esc(l.who) + '</span>'
+        + '<span class="tm-line-ko" translate="no">' + this.esc(l.ko) + '</span>'
         + '<span class="tm-line-at">' + (has ? this.fmt(l.at) + ' → ' + this.fmt(l.end) : 'not set') + '</span>'
         + '</button>';
     }).join('');

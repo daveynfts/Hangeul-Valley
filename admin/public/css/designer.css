@@ -313,3 +313,82 @@
   .dz-stage { position: relative; top: 0; height: 70vh; }
   .dz-side { max-height: none; }
 }
+
+/* ── The interface language switch in the header (admin/public/js/lang.js) ─ */
+.lang-switch { display: inline-flex; border: 1px solid var(--border-input); border-radius: var(--radius-pill); overflow: hidden; }
+.lang-switch button {
+  background: var(--bg-input); color: var(--text-secondary); border: 0; padding: 4px 10px; cursor: pointer;
+  font-size: var(--fs-xs); font-weight: 700; letter-spacing: .04em; font-family: inherit;
+}
+.lang-switch button.on { background: var(--accent-indigo); color: #fff; }
+.lang-switch button:hover:not(.on) { color: var(--text-primary); }
+
+/* ── Vietnamese first (admin/public/js/viField.js) ───────────────────────────
+   Every form that edits the curriculum's prose: the Vietnamese in the box, Claude's English
+   under it, and a chip saying where that English stands. */
+.vf { min-width: 0; }
+.vf > label { display: block; }
+.vf .vf-input { width: 100%; margin-top: 4px; }
+.vf-slot { display: inline-block; margin-left: 4px; vertical-align: 1px; }
+.vf-state {
+  display: inline-flex; align-items: center; gap: 3px; white-space: nowrap;
+  font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: var(--radius-pill);
+  border: 1px solid transparent; letter-spacing: .01em; cursor: help;
+}
+.vf-state-todo { background: var(--accent-amber-bg); color: #fcd34d; border-color: rgba(245,158,11,.45); }
+.vf-state-sync { background: rgba(56,189,248,.12); color: #7dd3fc; border-color: rgba(56,189,248,.35); }
+.vf-state-ai { background: rgba(139,92,246,.15); color: #c4b5fd; border-color: rgba(139,92,246,.45); }
+.vf-state-untranslated { background: var(--accent-rose-bg); color: #fda4af; border-color: rgba(244,63,94,.4); }
+.vf-state-ok { background: rgba(16,185,129,.1); color: #6ee7b7; border-color: rgba(16,185,129,.3); }
+.vf-en {
+  display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; margin-top: 5px;
+  font-size: var(--fs-xs); color: var(--text-secondary); line-height: 1.5;
+}
+.vf-en-tag {
+  flex: 0 0 auto; font-size: 9px; font-weight: 800; letter-spacing: .06em; padding: 0 5px;
+  border-radius: var(--radius-xs); background: rgba(56,189,248,.16); color: #7dd3fc; cursor: help;
+}
+.vf-en-t { flex: 1 1 200px; min-width: 0; white-space: pre-wrap; }
+.vf-en-none { font-style: italic; color: var(--text-muted); }
+.vf-actions { display: inline-flex; gap: 10px; flex-wrap: wrap; margin-left: auto; }
+.vf-link { background: none; border: 0; padding: 0; color: var(--accent-blue); cursor: pointer; font: inherit; font-weight: 600; }
+.vf-link:hover { text-decoration: underline; }
+.vf-owe-dot { font-style: normal; font-size: 10px; }
+
+/* The Designer's text panel: the other language of the field being edited, and the toolbar's
+   count of English lines Claude still owes. */
+.dz-companion {
+  margin: var(--sp-3) 0; padding: var(--sp-2) var(--sp-3); border: 1px solid var(--border-card);
+  border-radius: var(--radius-btn); background: rgba(15,23,42,.35);
+}
+.dz-companion-h { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: var(--fs-xs); color: var(--text-secondary); }
+.dz-companion-t { margin-top: 4px; font-size: var(--fs-sm); color: var(--text-primary); white-space: pre-wrap; line-height: 1.5; }
+.dz-companion-a { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
+.dz-companion-a:empty { display: none; }
+.dz-owed {
+  display: inline-flex; align-items: center; padding: 3px 9px; border-radius: var(--radius-pill); cursor: help;
+  font-size: var(--fs-xs); font-weight: 700; background: var(--accent-amber-bg); color: #fcd34d; border: 1px solid rgba(245,158,11,.45);
+}
+.dz-ro.dz-ro-en { border-color: rgba(56,189,248,.5); background: rgba(56,189,248,.06); font-family: var(--font-sans); }
+.dz-ro.dz-ro-en:hover { border-color: var(--accent-blue); }
+/* Asking for a new English is rare once a line is up to date; the link waits for the pointer. */
+.vf[data-vf-state="ok"]:not(:hover):not(:focus-within) .vf-actions { visibility: hidden; }
+.vf-state-source { background: rgba(148,163,184,.12); color: var(--text-secondary); border-color: rgba(148,163,184,.3); }
+.vf-state-icon { padding: 0 5px; min-width: 18px; justify-content: center; }
+/* The box and, beside it, the 한 | VI switch of a field that may hold either. */
+.vf-row { display: flex; align-items: flex-start; gap: 6px; margin-top: 4px; }
+.vf-row .vf-input { flex: 1 1 auto; min-width: 0; margin-top: 0; }
+.vf-mode {
+  flex: 0 0 auto; align-self: center; min-width: 32px; padding: 5px 7px; cursor: pointer;
+  font-size: var(--fs-xs); font-weight: 800; color: var(--text-secondary); font-family: 'Noto Sans KR', var(--font-sans);
+  background: var(--bg-input); border: 1px solid var(--border-input); border-radius: var(--radius-btn);
+}
+.vf-mode:hover { color: var(--text-primary); border-color: var(--accent-indigo); }
+/* A word-table cell: the box, then one small line with where it stands and Claude's English. */
+.vf-cell { min-width: 190px; }
+.vf-compact .vf-row { margin-top: 0; }
+.vf-compact .vf-en { margin-top: 3px; gap: 4px; font-size: 10.5px; }
+.vf-compact .vf-en-t { flex-basis: 120px; }
+.vf-compact[data-vf-state="ok"] .vf-slot { display: none; }
+.vf-compact .vf-slot { margin-left: 0; }
+.vf-compact .vf-link { font-size: var(--fs-xs); }

@@ -59,6 +59,7 @@
       </nav>
 
       <div class="header-actions">
+        <div class="lang-switch" id="admin-lang" translate="no" aria-label="Interface language"></div>
         <div class="admin-auth hidden" id="admin-auth"></div>
         <span class="readonly-pill hidden" id="admin-readonly-pill" title="Sign in as the owner to edit">Read-only</span>
         <div class="sync-status" id="sync-indicator" title="Data Synchronization Status">
@@ -246,7 +247,7 @@
             <h3 class="sidebar-title">Game Levels</h3>
             <span class="badge badge-indigo" id="levels-count-badge">25 Levels</span>
           </div>
-          <div class="level-selector-grid" id="level-selector-list">
+          <div class="level-selector-grid" id="level-selector-list" translate="no">
             <!-- Dynamically populated level buttons -->
           </div>
         </aside>
@@ -262,7 +263,7 @@
                   <h2 class="level-meta-title" id="level-title">Level 1</h2>
                   <span class="badge badge-emerald" id="level-words-badge">60 Words</span>
                 </div>
-                <p class="level-meta-desc" id="level-desc">Level description loading...</p>
+                <p class="level-meta-desc" id="level-desc" translate="no">Level description loading...</p>
                 <div class="level-target-info" id="level-target">Target Score: 60</div>
               </div>
             </div>
@@ -278,7 +279,7 @@
             <div class="filter-controls">
               <div class="search-input-wrapper">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="input-search-words" class="form-input search-input" placeholder="Search across words (Korean, English, Category)...">
+                <input type="text" id="input-search-words" class="form-input search-input" placeholder="Search across words (Korean, Vietnamese, English, Category)...">
                 <button class="btn-clear hidden" id="btn-clear-search-words" title="Clear search">✕</button>
               </div>
 
@@ -306,7 +307,7 @@
                   <tr>
                     <th style="width: 50px;">#</th>
                     <th>Korean (ko)</th>
-                    <th>English Key (en)</th>
+                    <th>Meaning (VI · EN)</th>
                     <th>Category</th>
                     <th style="width: 70px;" class="text-center">Hint</th>
                     <th style="width: 140px;" class="text-right">Actions</th>
@@ -471,7 +472,7 @@
                     <th style="width:70px"></th>
                   </tr>
                 </thead>
-                <tbody id="u10-quiz-tbody"></tbody>
+                <tbody id="u10-quiz-tbody" translate="no"></tbody>
               </table>
             </div>
           </div>
@@ -479,16 +480,15 @@
             <h3 class="widget-title">Question editor</h3>
             <p class="text-muted" id="u10-quiz-empty">Select a row to edit.</p>
             <div id="u10-quiz-fields" class="form-stack hidden">
-              <label>Prompt <textarea id="u10-q-text" class="form-input" rows="3"></textarea></label>
+              <!-- The prompt and the four answers are drawn by world.js: each is written in
+                   Vietnamese with Claude's English under it, or typed as the Korean it is. -->
+              <div id="u10-q-prompt"></div>
               <label>Correct key
                 <select id="u10-q-key" class="form-select">
                   <option>A</option><option>B</option><option>C</option><option>D</option>
                 </select>
               </label>
-              <label>A <input id="u10-q-A" class="form-input" type="text"></label>
-              <label>B <input id="u10-q-B" class="form-input" type="text"></label>
-              <label>C <input id="u10-q-C" class="form-input" type="text"></label>
-              <label>D <input id="u10-q-D" class="form-input" type="text"></label>
+              <div id="u10-q-choices" class="form-stack"></div>
             </div>
           </div>
         </div>
@@ -499,7 +499,7 @@
           <div class="filter-controls">
             <div class="search-input-wrapper">
               <span class="search-icon">🔍</span>
-              <input type="text" id="u10-word-search" class="form-input search-input" placeholder="Filter Korean or English…">
+              <input type="text" id="u10-word-search" class="form-input search-input" placeholder="Filter Korean, Vietnamese or English…">
             </div>
             <select id="u10-word-cat" class="form-select">
               <option value="">All groups</option>
@@ -519,20 +519,20 @@
                   <th style="width:44px">#</th>
                   <th style="width:56px">Art</th>
                   <th>Korean</th>
-                  <th>English</th>
+                  <th>Meaning (VI)</th>
                   <th style="width:88px">Hint</th>
                   <th>Group (KO)</th>
-                  <th>Group (EN)</th>
+                  <th>Group (VI)</th>
                   <!-- One sentence showing the word in use. The word-detail page in the game
                        prints it under the headword with a speak button, so it is Korean; the
                        column beside it is its translation. Blank is a valid answer — most of
                        these come from scripts/vocab_examples.js, which refuses to guess. -->
                   <th>Example (KO)</th>
-                  <th>Example (EN)</th>
+                  <th>Example (VI)</th>
                   <th style="width:56px"></th>
                 </tr>
               </thead>
-              <tbody id="u10-words-tbody"></tbody>
+              <tbody id="u10-words-tbody" translate="no"></tbody>
             </table>
           </div>
         </div>
@@ -678,7 +678,7 @@
               <button type="button" class="tr-filter" data-tr-filter="stale">Stale</button>
             </div>
           </div>
-          <div class="tr-rows" id="tr-rows"></div>
+          <div class="tr-rows" id="tr-rows" translate="no"></div>
           <div class="content-actions">
             <span class="tr-dirty" id="tr-dirty"></span>
             <button type="button" class="btn btn-secondary" id="tr-revert" disabled>Revert</button>
@@ -701,7 +701,7 @@
       </div>
       <p class="section-desc" id="skins-switch-hint"></p>
       <div class="skins-layout">
-        <div id="skins-list" class="skins-list"></div>
+        <div id="skins-list" class="skins-list" translate="no"></div>
         <div class="card widget-card skins-preview-card">
           <div class="skins-preview-frame" id="skins-preview-frame">
             <img id="skins-preview-img" class="art-preview-lg hidden" alt="Skin preview">
@@ -743,6 +743,12 @@
   </div>
 
   <!-- JavaScript Modules -->
+    <!-- First: every view below writes its interface in English and lang.js puts it into
+         Vietnamese on the way to the screen (VI | EN in the header). -->
+    <script src="js/lang.vi.js"></script>
+    <script src="js/lang.js"></script>
+    <script src="js/viFirst.js"></script>
+    <script src="js/viField.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/content.js"></script>
     <script src="js/app.js"></script>

@@ -257,14 +257,18 @@
     const cls = classesFor(tag, raw['class']);
     const gl = cls.indexOf('hv-gl');
     if (gl >= 0) {
+      // A meaning may be written in Vietnamese alone (the admin writes Vietnamese first); the
+      // English one is then optional, and English mode shows the Vietnamese rather than nothing.
       const meaning = cleanAttrText(raw['data-gl'], LIMITS.gloss);
-      if (!meaning || inGloss) cls.splice(gl, 1);
+      const langs = {};
+      LANGS.forEach((code) => {
+        const m = cleanAttrText(raw['data-gl-' + code], LIMITS.gloss);
+        if (m) langs[code] = m;
+      });
+      if ((!meaning && !Object.keys(langs).length) || inGloss) cls.splice(gl, 1);
       else {
-        el.attrs['data-gl'] = meaning;
-        LANGS.forEach((code) => {
-          const m = cleanAttrText(raw['data-gl-' + code], LIMITS.gloss);
-          if (m) el.attrs['data-gl-' + code] = m;
-        });
+        if (meaning) el.attrs['data-gl'] = meaning;
+        Object.keys(langs).forEach((code) => { el.attrs['data-gl-' + code] = langs[code]; });
       }
     }
     if (cls.length) el.attrs['class'] = cls.join(' ');
@@ -388,7 +392,8 @@
     const a = el.attrs;
     let cls = a['class'] || '';
     if (mode === 'show' && isGloss(el)) {
-      const meaning = (lang && a['data-gl-' + lang]) || a['data-gl'];
+      const meaning = (lang && a['data-gl-' + lang]) || a['data-gl']
+        || LANGS.map((code) => a['data-gl-' + code]).filter(Boolean)[0] || '';
       cls = (cls + ' wb-gl').trim();
       return ' class="' + escAttr(cls) + '" data-gl="' + escAttr(meaning) + '"'
         + ' title="' + escAttr((word ? word + ' — ' : '') + meaning) + '" tabindex="0"';
@@ -668,7 +673,8 @@
   function glossEntries(d, lang) {
     if (!isObj(d) || !Array.isArray(d.glossary)) return [];
     return d.glossary.map((g) => {
-      const meaning = (lang && lang !== 'en' && typeof g[lang] === 'string' && g[lang].trim()) ? g[lang] : g.gl;
+      const meaning = (lang && lang !== 'en' && typeof g[lang] === 'string' && g[lang].trim()) ? g[lang]
+        : (g.gl || LANGS.map((code) => g[code]).filter((m) => typeof m === 'string' && m.trim())[0]);
       return { ko: String(g.ko || '').trim(), gloss: String(meaning || '').trim() };
     }).filter((g) => g.ko && g.gloss);
   }
@@ -688,7 +694,14 @@
   function localized(b, key, lang) {
     const loc = lang && lang !== 'en' && isObj(b[lang]) ? b[lang] : null;
     if (loc && typeof loc[key] === 'string' && loc[key].trim()) return loc[key];
-    return typeof b[key] === 'string' ? b[key] : '';
+    if (typeof b[key] === 'string' && b[key].trim()) return b[key];
+    // Written in Vietnamese first and not yet given its English (enTodo on the block): the
+    // Vietnamese stands in rather than leaving the box empty.
+    for (let i = 0; i < LANGS.length; i++) {
+      const other = b[LANGS[i]];
+      if (isObj(other) && typeof other[key] === 'string' && other[key].trim()) return other[key];
+    }
+    return '';
   }
 
   function blockHtml(b, o) {
@@ -860,7 +873,23 @@
   }
 
   const BLOCK_KEYS = ['id', 'kind', 'at', 'when', 'html', 'heading', 'icon', 'box', 'size', 'align', 'color', 'font',
-    'cols', 'src', 'side', 'alt', 'caption', 'width', 'frame', 'style'].concat(LANGS);
+    'cols', 'src', 'side', 'alt', 'caption', 'width', 'frame', 'style', 'enTodo', 'enAI'].concat(LANGS);
+
+  // A block written in Vietnamese first (admin/public/js/viFirst.js): which of its texts still
+  // need their English (enTodo), and which English Claude wrote that nobody has read (enAI).
+  function cleanBlockLists(b, out, at, keys) {
+    ['enTodo', 'enAI'].forEach((name) => {
+      if (b[name] === undefined || b[name] === null) return;
+      if (!Array.isArray(b[name])) fail(at, name + ' must be a list');
+      const items = [];
+      b[name].forEach((k) => {
+        if (keys.indexOf(k) < 0) fail(at, name + ' names "' + k + '", which this block does not have');
+        if (items.indexOf(k) < 0) items.push(k);
+      });
+      if (items.length) out[name] = items;
+    });
+    return out;
+  }
 
   function cleanBlock(b, i, where, anchors, ids) {
     const at = where + ' block ' + (i + 1);
@@ -911,11 +940,15 @@
         if (Object.keys(l).length) lang[code] = l;
       });
       Object.keys(lang).forEach((code) => { out[code] = lang[code]; });
-      return out;
+      return cleanBlockLists(b, out, at, ['caption', 'alt']);
     }
     const html = cleanHtml(b.html, at, 'the text');
     const heading = cleanPlainText(b.heading, LIMITS.heading, at, 'the heading');
-    if (!src && !heading && !(html && (plain(html).trim() || /<img/.test(html)))) {
+    // Text in any language counts: a block written in Vietnamese first has no English yet.
+    const anyText = (h) => !!(h && (plain(h).trim() || /<img/.test(h)));
+    const otherText = LANGS.some((code) => isObj(b[code])
+      && (anyText(cleanHtml(b[code].html, at, 'the ' + code + ' text')) || cleanPlainText(b[code].heading, LIMITS.heading, at, 'the heading')));
+    if (!src && !heading && !anyText(html) && !otherText) {
       fail(at, 'a text block needs some text, a heading or a picture');
     }
     if (html) out.html = html;
@@ -949,7 +982,7 @@
       if (a) l.alt = a;
       if (Object.keys(l).length) out[code] = l;
     });
-    return out;
+    return cleanBlockLists(b, out, at, ['html', 'heading', 'alt']);
   }
 
   const DESIGN_KEYS = ['theme', 'width', 'scale', 'cols', 'font', 'density', 'glossMode', 'glossary', 'glossHide', 'blocks'];
@@ -997,13 +1030,16 @@
         }
         if (seen.has(ko)) fail(gat, '"' + ko + '" is in the glossary twice');
         seen.add(ko);
+        // The English meaning or a Vietnamese one: a word explained in Vietnamese alone shows
+        // that in English mode too, until someone writes the English.
         const gl = cleanPlainText(g.gl, LIMITS.gloss, gat, 'the meaning');
-        if (!gl) fail(gat, '"' + ko + '" needs a meaning');
-        const entry = { ko, gl };
+        const entry = { ko };
+        if (gl) entry.gl = gl;
         LANGS.forEach((code) => {
           const m = cleanPlainText(g[code], LIMITS.gloss, gat, 'the ' + code + ' meaning');
           if (m) entry[code] = m;
         });
+        if (Object.keys(entry).length < 2) fail(gat, '"' + ko + '" needs a meaning');
         return entry;
       });
       if (list.length) out.glossary = list;

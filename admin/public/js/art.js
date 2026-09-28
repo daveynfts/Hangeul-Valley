@@ -106,25 +106,28 @@ window.ArtView = {
       // A search result is already the answer, so it is never folded away.
       const folded = !q && all.length > this.FOLD_OVER && !this.expanded[fam.family];
       const shown = folded ? all.slice(0, this.PEEK) : all;
+      // The names, paths and keys are the catalogue's own words, not the panel's: they stay as
+      // they are whichever language the panel speaks (admin/public/js/lang.js).
+      const t = (str, vars) => (typeof window.T === 'function' ? window.T(str, vars) : str.replace(/\{(\w+)\}/g, (m, k) => vars[k]));
       const rows = shown.map((a) => {
         const dim = (a.w && a.h) ? (a.w + '×' + a.h) : '—';
-        const key = a.phaserKey ? '<code>' + this.esc(a.phaserKey) + '</code>' : '<span class="text-muted">not loaded</span>';
+        const key = a.phaserKey ? '<code translate="no">' + this.esc(a.phaserKey) + '</code>' : '<span class="text-muted">not loaded</span>';
         return '<tr class="art-row" data-id="' + this.esc(a.id) + '">' +
           '<td><img class="art-thumb-sm" src="' + this.esc(a.preview) + '" alt=""></td>' +
-          '<td>' + ((a.words && a.words.length) ? '<b class="art-ko">' + this.esc(a.words.join(', ')) + '</b>' : '<span class="text-muted">—</span>') + '</td>' +
-          '<td>' + this.esc(a.nameEn) + '</td>' +
-          '<td><code>' + this.esc(a.path) + '</code></td>' +
+          '<td translate="no">' + ((a.words && a.words.length) ? '<b class="art-ko">' + this.esc(a.words.join(', ')) + '</b>' : '<span class="text-muted">—</span>') + '</td>' +
+          '<td translate="no">' + this.esc(a.nameEn) + '</td>' +
+          '<td translate="no"><code>' + this.esc(a.path) + '</code></td>' +
           '<td>' + key + '</td>' +
           '<td>' + dim + '</td>' +
           '<td><span class="badge ' + this.statusBadge(a.status) + '">' + this.esc(a.status) + '</span></td>' +
           '</tr>';
       }).join('');
       const counted = fam.matched != null
-        ? fam.matched + ' of ' + fam.count + ' match'
-        : fam.count + ' file' + (fam.count === 1 ? '' : 's');
+        ? t('{a} of {b} match', { a: fam.matched, b: fam.count })
+        : (fam.count === 1 ? t('1 file') : t('{n} files', { n: fam.count }));
       const more = folded
         ? '<button class="btn btn-secondary btn-sm art-more" data-family="' + this.esc(fam.family) + '">' +
-            'Show all ' + fam.count + '</button>'
+            this.esc(t('Show all {n}', { n: fam.count })) + '</button>'
         : (!q && all.length > this.FOLD_OVER
           ? '<button class="btn btn-secondary btn-sm art-less" data-family="' + this.esc(fam.family) + '">Collapse</button>'
           : '');
@@ -132,9 +135,9 @@ window.ArtView = {
         '<div class="art-family-head">' +
           '<img class="art-thumb" src="' + this.esc(fam.preview) + '" alt="">' +
           '<div>' +
-            '<h3 class="widget-title">' + this.esc(fam.nameEn) + '</h3>' +
-            '<p class="widget-subtitle">' + this.esc(fam.kind) + ' · ' + counted +
-              (fam.sampleName ? ' · e.g. ' + this.esc(fam.sampleName) : '') + '</p>' +
+            '<h3 class="widget-title" translate="no">' + this.esc(fam.nameEn) + '</h3>' +
+            '<p class="widget-subtitle">' + this.esc(t(fam.kind)) + ' · ' + this.esc(counted) +
+              (fam.sampleName ? ' · ' + this.esc(t('e.g.')) + ' <span translate="no">' + this.esc(fam.sampleName) + '</span>' : '') + '</p>' +
           '</div>' +
           '<span class="badge ' + this.statusBadge(status) + '">' + this.esc(status) + '</span>' +
         '</div>' +

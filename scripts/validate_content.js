@@ -4757,6 +4757,39 @@ STATIC_FILES.forEach(([rel]) => {
     && rich.ANCHORS.every((a) => gameHtml.indexOf('id="wb-blocks-' + a + '"') >= 0));
 }());
 
+// ── Vietnamese first ─────────────────────────────────────────────────────────
+// The author writes prose in Vietnamese in the admin; each edit is a draft beside the English it
+// replaces, and Claude writes the English in batches (admin/public/js/viFirst.js,
+// scripts/vi_first.js, docs/vietnamese-first.md). A draft over English that is still there is
+// a normal state — the game shows the new Vietnamese, the English follows later — so it is only
+// counted. What cannot be committed is a line with no English at all: every check above that
+// reads the English would be reading nothing, so this names them in one place instead.
+(function checkVietnameseFirst() {
+  const viFirst = require('../admin/public/js/viFirst.js');
+  const rule = require('../js/i18n.js');
+  check('viFirst.js names the same translatable fields as js/i18n.js',
+    JSON.stringify(viFirst.TEXT_FIELDS) === JSON.stringify(rule.HV_TEXT_FIELDS)
+    && viFirst.TEXT_FIELDS.every((f) => viFirst.viField(f) === rule.hvLangField(f, 'vi')));
+  const bare = [];
+  let drafts = 0, owed = 0, unread = 0;
+  const rels = ['levels.json'].concat(fs.readdirSync(path.join(ROOT, 'worlds')).filter((f) => f.endsWith('.json')).map((f) => 'worlds/' + f));
+  rels.forEach((rel) => {
+    const body = JSON.parse(read(rel));
+    viFirst.pending(body).forEach(({ path: at, field, state, obj }) => {
+      if (state === 'todo') owed++; else drafts++;
+      if (!(typeof obj[field] === 'string' && obj[field].trim())) bare.push(rel + ' ' + at + '.' + field);
+    });
+    unread += viFirst.countAI(body);
+  });
+  check('every line written in Vietnamese has its English before it is committed',
+    bare.length === 0,
+    bare.length + ' line(s) have only Vietnamese — ask Claude to write their English (node scripts/vi_first.js todo): '
+      + bare.slice(0, 6).join(', '));
+  if (owed || drafts || unread) {
+    console.log(`      Vietnamese first: ${owed} English line(s) to rewrite, ${drafts} draft(s) to file, ${unread} AI English line(s) unread`);
+  }
+}());
+
 // ── Report ───────────────────────────────────────────────────────────────────
 console.log(`\nvalidate_content: ${checks - failures.length}/${checks} invariants hold`);
 if (failures.length) {

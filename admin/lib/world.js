@@ -1,6 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 const { atomicWriteJson } = require('./atomicWrite');
+// Vietnamese written first in the admin (admin/public/js/viFirst.js): a draft may stand in for
+// English that Claude has not written yet.
+const viFirst = require('../public/js/viFirst.js');
 
 // Unit 10's names are kept for the three getters that predate the content registry —
 // api/unit10/[kind].js answers on those URLs and admin/public/js/app.js calls them. The
@@ -80,10 +83,10 @@ function validateQuiz(body) {
   if (qs.length < 1) throw new Error('Quiz needs at least one question');
   const ids = new Set();
   qs.forEach((q, i) => {
-    if (!q || !q.q || !q.a || !q.choices) throw new Error(`Question ${i + 1} is incomplete`);
+    if (!q || !(q.q || viFirst.hasDraft(q, 'q')) || !q.a || !q.choices) throw new Error(`Question ${i + 1} is incomplete`);
     if (!['A', 'B', 'C', 'D'].includes(q.a)) throw new Error(`Question ${i + 1} answer must be A–D`);
     ['A', 'B', 'C', 'D'].forEach((k) => {
-      if (!q.choices[k]) throw new Error(`Question ${i + 1} missing choice ${k}`);
+      if (!q.choices[k] && !viFirst.hasDraft(q.choices, k)) throw new Error(`Question ${i + 1} missing choice ${k}`);
     });
     const id = typeof q.id === 'number' ? q.id : i + 1;
     if (ids.has(id)) throw new Error(`Duplicate question id ${id}`);
@@ -92,7 +95,7 @@ function validateQuiz(body) {
       throw new Error(`Question ${i + 1} art must name a local sprite PNG`);
     }
   });
-  return {
+  const out = {
     titleKo: body.titleKo || '학습 책상',
     titleEn: body.titleEn || 'Study desk',
     sessionSize: Math.max(1, Math.min(20, Number(body.sessionSize) || 5)),
@@ -110,15 +113,23 @@ function validateQuiz(body) {
     // scripts/validate_content.js requires it on them, so a save that dropped it — as this one
     // did until the Designer made saving routine — turned CI red on an unchanged quiz.
     ...(body.artNote ? { artNote: String(body.artNote) } : {}),
-    questions: qs.map((q, i) => ({
-      id: typeof q.id === 'number' ? q.id : i + 1,
-      q: String(q.q),
-      a: q.a,
-      ...(q.art ? { art: q.art } : {}),
-      choices: { A: String(q.choices.A), B: String(q.choices.B), C: String(q.choices.C), D: String(q.choices.D) },
-      ...(q.rankingRef ? { rankingRef: String(q.rankingRef) } : {})
-    }))
+    questions: qs.map((q, i) => {
+      const s = (v) => (v === undefined || v === null ? '' : String(v));
+      const out = {
+        id: typeof q.id === 'number' ? q.id : i + 1,
+        q: s(q.q),
+        a: q.a,
+        ...(q.art ? { art: q.art } : {}),
+        choices: { A: s(q.choices.A), B: s(q.choices.B), C: s(q.choices.C), D: s(q.choices.D) },
+        ...(q.rankingRef ? { rankingRef: String(q.rankingRef) } : {})
+      };
+      // Vietnamese drafts and the English still owed, on the prompt and on each button.
+      viFirst.clean(out.choices, q.choices, `Question ${i + 1} choices`);
+      return viFirst.clean(out, q, `Question ${i + 1}`);
+    })
   };
+  // Laid back over the quiz's own key order, as a bank is, so a save's diff is the edit.
+  return require('./workbook').keepShape(out, body);
 }
 
 // Deliberately as strict as scripts/validate_content.js is about a word list. An admin that
@@ -130,12 +141,24 @@ function validateWorld(body) {
     throw new Error('World must include level.words');
   }
   const words = body.level.words;
+  // A gloss or a group name written in Vietnamese first may wait for its English
+  // (admin/public/js/viFirst.js); scripts/validate_content.js still wants the English before a
+  // commit, and says so by name.
+  const has = (w, f) => !!w[f] || viFirst.hasDraft(w, f);
   const thin = words
-    .filter((w) => !w || !w.ko || !w.en || !w.category || !w.categoryEn || !w.hint)
+    .filter((w) => !w || !w.ko || !has(w, 'en') || !w.category || !has(w, 'categoryEn') || !w.hint)
     .map((w) => (w && w.ko) || '?');
   if (thin.length) {
     throw new Error(`${thin.length} word(s) missing ko / en / category / categoryEn / hint: ${thin.slice(0, 5).join(', ')}`);
   }
+  // Drafts are kept in place (this validator hands the body back as it came), checked, and a
+  // gloss with no English but a Vietnamese draft is put on the list of English to write. An
+  // example translated into Vietnamese before it has any English carries its draft under an
+  // empty exampleEn, which is where Claude's English goes.
+  words.forEach((w) => {
+    if (w && w.exampleEn === undefined && viFirst.hasDraft(w, 'exampleEn')) w.exampleEn = '';
+    viFirst.clean(w, Object.assign({}, w), `Word ${w.ko}`);
+  });
   const kos = words.map((w) => String(w.ko).normalize('NFC'));
   const dups = [...new Set(kos.filter((k, i) => kos.indexOf(k) !== i))];
   if (dups.length) throw new Error(`Repeated headword in this world: ${dups.slice(0, 5).join(', ')}`);
@@ -161,7 +184,7 @@ function validateWorld(body) {
     });
     const ex = String(w.example || '').trim();
     if (ex.indexOf('{}') >= 0) throw new Error(`${w.ko}: the example still has a blank in it`);
-    if (!ex && String(w.exampleEn || '').trim()) {
+    if (!ex && (String(w.exampleEn || '').trim() || viFirst.hasDraft(w, 'exampleEn'))) {
       throw new Error(`${w.ko}: exampleEn has no example to translate`);
     }
   });

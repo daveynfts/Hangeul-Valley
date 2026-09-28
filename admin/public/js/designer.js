@@ -29,7 +29,9 @@
     saved: '',
     exIndex: -1,
     view: 'questions',
-    lang: 'en',
+    // Vietnamese first: prose is written in Vietnamese and Claude writes the English after it
+    // (admin/public/js/viFirst.js, docs/vietnamese-first.md). EN shows and styles the English.
+    lang: 'vi',
     device: 'desktop',
     tab: 'text',
     sel: null,
@@ -51,6 +53,9 @@
 
   const el = (id) => document.getElementById(id);
   const R = () => window.HVRich;
+  // The panel's Vietnamese (admin/public/js/lang.js); English when that is not loaded.
+  const T = (s, vars) => (typeof window.T === 'function' ? window.T(s, vars)
+    : String(s).replace(/\{(\w+)\}/g, (m, n) => (vars && n in vars ? String(vars[n]) : m)));
   const esc = (v) => String(v == null ? '' : v).replace(/[&<>"']/g, (c) => (
     { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const clone = (v) => JSON.parse(JSON.stringify(v));
@@ -88,9 +93,9 @@
     off: ['Off', 'No automatic meanings on this page. Meanings you write into the text yourself still show.']
   };
   const FIELD_LABEL = {
-    instructionKo: 'Instruction (Korean)', instructionEn: 'Instruction (English)', noteEn: 'Note above the questions',
-    blurbEn: 'Line under the exercise on the list', pickKo: 'List heading (Korean)', pickEn: 'List heading (English)',
-    phraseKo: 'Phrase beside the picture', stemKo: 'Korean prompt', en: 'English meaning', why: 'Why this is the answer',
+    instructionKo: 'Instruction (Korean)', instructionEn: 'Instruction', noteEn: 'Note above the questions',
+    blurbEn: 'Line under the exercise on the list', pickKo: 'List heading (Korean)', pickEn: 'List heading',
+    phraseKo: 'Phrase beside the picture', stemKo: 'Korean prompt', en: 'Meaning', why: 'Why this is the answer',
     grammar: 'Grammar note', ko: 'Korean'
   };
   const EN_FIELDS = ['instructionEn', 'noteEn', 'blurbEn', 'pickEn', 'en', 'why', 'grammar'];
@@ -117,21 +122,24 @@
     const qi = p.indexOf('items');
     if (qi >= 0) {
       const item = getAt(S.bank, p.slice(0, qi + 2).join('.'));
-      bits.push('Question ' + ((item && item.n) || (p[qi + 1] + 1)));
+      bits.push(T('Question {n}', { n: (item && item.n) || (p[qi + 1] + 1) }));
     }
-    if (p.indexOf('example') >= 0) bits.push('Example [보기]');
+    if (p.indexOf('example') >= 0) bits.push(T('Example [보기]'));
     const li = p.indexOf('lines');
     if (li >= 0) {
       const line = getAt(S.bank, p.slice(0, li + 2).join('.'));
-      bits.push('line ' + (p[li + 1] + 1) + (line && line.who ? ' (' + line.who + ')' : ''));
+      bits.push(T('line {n}', { n: p[li + 1] + 1 }) + (line && line.who ? ' (' + line.who + ')' : ''));
       return bits.join(' · ');
     }
     const ci = p.indexOf('choices') >= 0 ? p.indexOf('choices') : p.indexOf('choices2');
-    if (ci >= 0) { bits.push((p[ci] === 'choices2' ? 'second blank · ' : '') + 'button ' + (p[ci + 1] + 1)); return bits.join(' · '); }
-    bits.push(FIELD_LABEL[field] || field);
+    if (ci >= 0) { bits.push((p[ci] === 'choices2' ? T('second blank') + ' · ' : '') + T('button {n}', { n: p[ci + 1] + 1 })); return bits.join(' · '); }
+    bits.push(FIELD_LABEL[field] ? T(FIELD_LABEL[field]) : field);
     return bits.join(' · ');
   }
-  const isEn = (field) => EN_FIELDS.indexOf(field) >= 0;
+  // A field the game reads a translation for — prose written for the learner, not Korean.
+  const isEn = (field, obj) => (window.HVViFirst
+    ? (obj ? window.HVViFirst.isProse(obj, field) : window.HVViFirst.isText(field))
+    : EN_FIELDS.indexOf(field) >= 0);
 
   function ex() { return S.exIndex >= 0 && S.bank ? (S.bank.exercises || [])[S.exIndex] || null : null; }
   function dirty() { return !!S.bank && JSON.stringify(S.bank) !== S.saved; }
@@ -285,7 +293,9 @@
       S.viBank = null;
       S.viWorld = null;
       loadWorld(key);
-      if (S.lang === 'vi') await loadTranslations();
+      // Both languages need the catalogue: VI shows the Vietnamese it holds, EN the state of
+      // each English line against it.
+      await loadTranslations();
     } finally {
       S.busy = false;
     }
@@ -300,7 +310,7 @@
       const r = await window.apiFetch.getContent('world/' + id);
       const body = r.data.body || {};
       S.world = { worldId: id, words: (body.level && body.level.words) || [] };
-      if (S.lang === 'vi') await loadTranslations();
+      await loadTranslations();
       schedulePreview();
       if (S.tab === 'gloss') renderInspector();
     } catch (e) { S.world = null; }
@@ -332,13 +342,17 @@
     }
     return { bank, world };
   }
+  // The Vietnamese a field reads as: the author's draft, else what the catalogue files.
+  const VF = () => window.HVViFirst;
+  function entries() { return (S.viCat && S.viCat.entries) || {}; }
   function viText(path) {
-    const f = folded();
     const { obj, field } = splitField(path);
-    const o = getAt(f.bank, obj);
-    const lf = (S.frameWin && S.frameWin.hvLangField) ? S.frameWin.hvLangField(field, 'vi') : field + 'Vi';
-    return o && typeof o[lf] === 'string' && o[lf].trim() ? o[lf] : '';
+    const o = getAt(S.bank, obj);
+    return o ? VF().viOf(o, field, entries()) : '';
   }
+  const owed = () => window.HVViField.owed(S.bank);
+  // What the English of a field is waiting for, as a chip — the one the other forms show.
+  const stateChip = (obj, field) => window.HVViField.chip(obj, field, entries());
 
   // ── Saving ───────────────────────────────────────────────────────────────
   async function save() {
@@ -353,7 +367,9 @@
       S.bank = d.body;
       S.saved = JSON.stringify(S.bank);
       S.history.push({ snap: S.saved, key: null, t: Date.now() });
-      window.Toast.success(esc(d.note || 'Saved.') + (d.branch ? ' Branch: ' + esc(d.branch) + '.' : ''), 'Saved ' + esc(d.rel || ''));
+      window.Toast.success(esc(T(d.note || 'Saved.')) + (d.branch ? ' ' + esc(T('Branch: {b}.', { b: d.branch })) : ''), esc(T('Saved {rel}', { rel: d.rel || '' })));
+      // What the save leaves for Claude, said once, so the English is not forgotten.
+      window.HVViField.toastOwed(owed());
     } catch (e) {
       S.error = e.message || String(e);
     } finally {
@@ -410,17 +426,20 @@
     if (!bar) return;
     const e = ex();
     const pages = S.bank ? (S.bank.exercises || []) : [];
+    const n = owed();
     bar.innerHTML =
       '<div class="dz-bar-row">'
-      + '<label class="dz-pick">Bank <select id="dz-bank">' + S.banks.map((k) =>
+      + '<label class="dz-pick">Bank <select id="dz-bank" translate="no">' + S.banks.map((k) =>
         '<option value="' + esc(k) + '"' + (k === S.key ? ' selected' : '') + '>' + esc(S.labels[k] || k) + '</option>').join('') + '</select></label>'
-      + '<label class="dz-pick dz-grow">Page <select id="dz-page"' + (S.bank ? '' : ' disabled') + '>'
-      + '<option value="-1"' + (S.exIndex < 0 ? ' selected' : '') + '>📋 The exercise list (bank page)</option>'
+      + '<label class="dz-pick dz-grow">Page <select id="dz-page" translate="no"' + (S.bank ? '' : ' disabled') + '>'
+      + '<option value="-1"' + (S.exIndex < 0 ? ' selected' : '') + '>📋 ' + esc(T('The exercise list (bank page)')) + '</option>'
       + pages.map((p, i) => '<option value="' + i + '"' + (i === S.exIndex ? ' selected' : '') + '>'
         + esc((p.icon || '📝') + ' ' + (p.section || '') + ' · ' + (p.no || '') + (p.pattern ? ' — ' + p.pattern : '') + '  (' + (p.items || []).length + ' Q)')
         + '</option>').join('') + '</select></label>'
       + seg('dz-view', [['questions', 'Questions'], ['answers', 'Answers']], S.view, !e)
-      + seg('dz-lang', [['en', 'EN'], ['vi', 'VI']], S.lang)
+      + '<span class="dz-pick" title="' + esc(T('Write the content in Vietnamese; Claude writes the English from it. EN shows and styles the English.')) + '">'
+      + 'Content ' + seg('dz-lang', [['vi', 'VI'], ['en', 'EN']], S.lang) + '</span>'
+      + (n ? '<span class="dz-owed" title="' + esc(T('{n} English line(s) wait for Claude. Ask: “dịch phần tiếng Anh đang chờ”.', { n })) + '">⏳ ' + n + '</span>' : '')
       + seg('dz-device', [['desktop', '🖥'], ['tablet', '▭'], ['phone', '📱']], S.device)
       + '<span class="dz-sep"></span>'
       + '<button type="button" class="btn btn-secondary btn-sm" id="dz-undo" title="Undo (Ctrl+Z)"' + (S.history.length > 1 ? '' : ' disabled') + '>↶</button>'
@@ -446,7 +465,7 @@
     bindSeg('dz-view', (v) => { S.view = v; drawPreview(); });
     bindSeg('dz-lang', async (v) => {
       S.lang = v;
-      if (v === 'vi' && !S.viCat) await loadTranslations();
+      if (!S.viCat) await loadTranslations();
       renderInspector();
       drawPreview();
     });
@@ -595,65 +614,103 @@
         + '<h4 class="dz-h">Or pick a field</h4><div class="dz-fieldlist">'
         + list.map((p) => {
           const { obj, field } = splitField(p);
-          const has = !!specOf(getAt(S.bank, obj), field);
-          return '<button type="button" data-p="' + esc(p) + '"><span>' + esc(labelFor(p)) + (has ? ' <em class="dz-fmt-dot" title="Formatted">●</em>' : '') + '</span>'
-            + '<small>' + esc(String(getAt(S.bank, p)).slice(0, 70)) + '</small></button>';
+          const o = getAt(S.bank, obj);
+          const has = !!specOf(o, field);
+          const shown = S.lang === 'vi' && isEn(field, o) ? (viText(p) || String(getAt(S.bank, p))) : String(getAt(S.bank, p));
+          const owes = isEn(field, o) && VF().status(o, field, entries()) === 'todo';
+          return '<button type="button" data-p="' + esc(p) + '"><span>' + esc(labelFor(p))
+            + (has ? ' <em class="dz-fmt-dot" title="' + esc(T('Formatted')) + '">●</em>' : '')
+            + (owes ? ' <em class="vf-owe-dot" title="' + esc(T('Waiting for Claude’s English')) + '">⏳</em>' : '') + '</span>'
+            + '<small translate="no">' + esc(shown.slice(0, 70)) + '</small></button>';
         }).join('') + '</div>';
       panel.querySelectorAll('[data-p]').forEach((b) => { b.onclick = () => selectField(b.getAttribute('data-p')); });
       return;
     }
     const { obj: objPath, field } = splitField(path);
     const obj = getAt(S.bank, objPath);
-    const en = isEn(field);
-    const vi = S.lang === 'vi' && en;
+    // A field written for the learner in English is written here in Vietnamese; its English
+    // comes from Claude. Korean is the subject and is edited as itself in both modes.
+    const en = isEn(field, obj);
+    const viMode = S.lang === 'vi' && en;
+    const enMode = S.lang === 'en' && en;
     const blanks = /\.(lines\.\d+\.ko|stemKo)$/.test(path) && val.indexOf('{}') >= 0;
     const spec = specOf(obj, field) || {};
-    const shownText = vi ? viText(path) : val;
+    const viNow = en ? viText(path) : '';
+    const shownText = viMode ? viNow : val;
     const warn = [];
-    if (!vi && spec.html && !R().matches(spec.html, val)) warn.push('The formatting here was written for different words and is not shown. Format it again.');
-    if (vi && !shownText) warn.push('This field has no Vietnamese translation yet — translate it in the Translate tab, then style it here.');
-    if (vi && spec.vi && shownText && !R().matches(spec.vi, shownText)) warn.push('The Vietnamese styling was made for an older translation and is not shown.');
+    if (!viMode && spec.html && !R().matches(spec.html, val)) warn.push(T('The formatting here was written for different words and is not shown. Format it again.'));
+    if (viMode && spec.vi && viNow && !R().matches(spec.vi, viNow)) warn.push(T('The Vietnamese styling was made for different words and is not shown. Style it again.'));
+    const companion = !en ? ''
+      : '<div class="dz-companion"><div class="dz-companion-h"><b>' + (viMode ? 'English' : 'Tiếng Việt') + '</b>'
+        + '<span id="dz-state-slot">' + stateChip(obj, field) + '</span></div>'
+        + '<div class="dz-companion-t" translate="no">' + esc((viMode ? val : viNow) || '—') + '</div>'
+        + '<div class="dz-companion-a" id="dz-companion-a"></div></div>';
 
     panel.innerHTML =
       '<div class="dz-field-head"><div><div class="dz-field-label">' + esc(labelFor(path)) + '</div>'
-      + '<div class="dz-field-path">' + esc(path) + '</div></div>'
-      + '<span class="dz-chip dz-chip-' + (vi ? 'vi' : (en ? 'en' : 'ko')) + '">' + (vi ? 'VI styling' : (en ? 'EN' : 'KO')) + '</span></div>'
+      + '<div class="dz-field-path" translate="no">' + esc(path) + '</div></div>'
+      + '<span class="dz-chip dz-chip-' + (viMode ? 'vi' : (en ? 'en' : 'ko')) + '">' + (viMode ? 'VI' : (en ? 'EN · AI' : 'KO')) + '</span></div>'
       + (warn.length ? '<div class="dz-warn">' + warn.map(esc).join('<br>') + '</div>' : '')
       + '<div id="dz-editor-host"></div>'
-      + (vi ? '<p class="dz-note">Styling the Vietnamese only. Its words come from the Translate tab; the size, box and colour below are shared with English.</p>'
-        : (en ? '<p class="dz-note">Changing the <b>words</b> of an English line orphans its Vietnamese translation — re-translate it in the Translate tab before committing (CI checks). Styling alone never does.</p>'
+      + (viMode ? '<p class="dz-note">Write in Vietnamese — this is the text you own. Claude writes the English from it when you ask.</p>'
+        : (enMode ? '<p class="dz-note">English is written by Claude from the Vietnamese. Style it here; to change what it says, change the Vietnamese or ask for a new English.</p>'
           : '<p class="dz-note">Korean text is spoken by the game’s voice and checked by the tests; formatting it is always safe.</p>'))
+      + companion
       + '<h4 class="dz-h">Whole field</h4>'
       + styleControls(spec, 'fs')
       + '<div class="dz-row-actions"><button type="button" class="btn btn-secondary btn-sm" id="dz-clear-field">Remove all formatting from this field</button></div>';
 
-    const host = el('dz-editor-host');
-    if (vi && !shownText) { host.innerHTML = '<div class="dz-editor-off">No translation to style.</div>'; }
-    else {
-      S.editor = window.HVRichEditor.create(host, {
-        html: vi ? (spec.vi && R().matches(spec.vi, shownText) ? spec.vi : '') : (spec.html && R().matches(spec.html, val) ? spec.html : ''),
-        text: shownText,
-        lang: vi ? 'vi' : (en ? 'en' : 'ko'),
-        multiline: MULTI_FIELDS.indexOf(field) >= 0 || /\.why$|\.grammar$|\.noteEn$/.test(path),
-        keepBlanks: blanks,
-        lockText: vi,
-        allowImages: MULTI_FIELDS.indexOf(field) >= 0,
-        assetBase: S.assetBase,
-        onPickImage: (cb) => openMedia(cb),
-        onHistory: (dir) => (dir === 'redo' ? redo() : undo()),
-        onChange: ({ html, text }) => {
-          const o = getAt(S.bank, objPath);
-          const rich = R().isRich(html) ? R().sanitize(html) : null;
-          if (vi) {
-            setSpec(o, field, 'vi', rich);
-          } else {
-            if (R().norm(text) !== R().norm(o[field])) o[field] = text;
-            setSpec(o, field, 'html', rich);
-          }
-          commit('field:' + path + ':' + S.lang);
-        }
+    const paintActions = () => {
+      const box = el('dz-companion-a');
+      const slot = el('dz-state-slot');
+      if (slot) slot.innerHTML = stateChip(getAt(S.bank, objPath), field);
+      if (!box) return;
+      const o = getAt(S.bank, objPath);
+      const st = VF().status(o, field, entries());
+      box.innerHTML = (st === 'ai' ? '<button type="button" class="dz-link" data-ca="read">✓ Mark the English as read</button>' : '')
+        + (st !== 'todo' && (val || viNow) ? '<button type="button" class="dz-link" data-ca="ask">✍ Ask Claude for a new English</button>' : '')
+        + (st === 'todo' && val ? '<button type="button" class="dz-link" data-ca="cancel">Keep the English as it is</button>' : '');
+      box.querySelectorAll('[data-ca]').forEach((b) => {
+        b.onclick = () => {
+          const act = b.getAttribute('data-ca');
+          if (act === 'read') VF().markReviewed(o, field);
+          else if (act === 'ask') VF().requestEnglish(o, field);
+          else VF().cancelRequest(o, field);
+          commit();
+          paintActions();
+        };
       });
-    }
+    };
+
+    S.editor = window.HVRichEditor.create(el('dz-editor-host'), {
+      html: viMode ? (spec.vi && R().matches(spec.vi, viNow) ? spec.vi : '') : (spec.html && R().matches(spec.html, val) ? spec.html : ''),
+      text: shownText,
+      lang: viMode ? 'vi' : (en ? 'en' : 'ko'),
+      placeholder: viMode ? T('Write the Vietnamese here…') : '',
+      multiline: MULTI_FIELDS.indexOf(field) >= 0 || /\.why$|\.grammar$|\.noteEn$/.test(path),
+      keepBlanks: blanks,
+      lockText: enMode,
+      allowImages: MULTI_FIELDS.indexOf(field) >= 0,
+      assetBase: S.assetBase,
+      onPickImage: (cb) => openMedia(cb),
+      onHistory: (dir) => (dir === 'redo' ? redo() : undo()),
+      onChange: ({ html, text }) => {
+        const o = getAt(S.bank, objPath);
+        const rich = R().isRich(html) ? R().sanitize(html) : null;
+        if (viMode) {
+          VF().setVi(o, field, text, entries());
+          setSpec(o, field, 'vi', rich);
+        } else if (enMode) {
+          setSpec(o, field, 'html', rich);
+        } else {
+          if (R().norm(text) !== R().norm(o[field])) o[field] = text;
+          setSpec(o, field, 'html', rich);
+        }
+        commit('field:' + path + ':' + S.lang);
+        if (en) paintActions();
+      }
+    });
+    if (en) paintActions();
     bindStyleControls(panel, 'fs', (k, v) => { setSpec(getAt(S.bank, objPath), field, k, v); commit(); renderInspector(); });
     el('dz-clear-field').onclick = () => {
       const o = getAt(S.bank, objPath);
@@ -733,7 +790,7 @@
       + R().FONTS.map((f) => '<button type="button" class="dz-font' + ((eff('font') || 'sans') === f ? ' on' : '') + '" data-font="' + f + '">'
         + '<span style="font-family:' + FONT_INFO[f][1] + '">가나다 한국어</span><small>' + FONT_INFO[f][0] + '</small></button>').join('') + '</div>'
       + '<h4 class="dz-h">Hover meanings</h4>' + glossModeControl(eff('glossMode'))
-      + '<div class="dz-row-actions"><button type="button" class="btn btn-secondary btn-sm" id="dz-reset-design">Reset ' + (scope === 'page' && e ? 'this page' : 'the bank') + '’s look</button></div>';
+      + '<div class="dz-row-actions"><button type="button" class="btn btn-secondary btn-sm" id="dz-reset-design">' + esc(T(scope === 'page' && e ? 'Reset this page’s look' : 'Reset the bank’s look')) + '</button></div>';
     R().ensureFonts(R().FONTS);
     const put = (k, v) => { setDesign(target, k, v); commit(); renderInspector(); };
     bindSeg('dz-scope', (v) => { S.designScope = v; renderInspector(); });
@@ -848,10 +905,24 @@
   }
 
   function blockSummary(b) {
-    if (b.kind === 'divider') return 'Divider · ' + (b.style || 'line');
-    if (b.kind === 'image') return 'Picture · ' + (b.caption || b.src || '');
+    if (b.kind === 'divider') return T('Divider') + ' · ' + T(b.style || 'line');
+    if (b.kind === 'image') return T('Picture') + ' · ' + (b.caption || b.src || '');
     const text = b.heading || R().plain(b.html || '');
     return (b.icon ? b.icon + ' ' : '') + (text.slice(0, 40) || 'Text box');
+  }
+
+  // A block's Vietnamese is written here and its English by Claude, like any other prose: a
+  // Vietnamese edit puts that text on the block's enTodo, and English written by hand settles it.
+  function blockOwes(x, key, has) {
+    const todo = (x.enTodo || []).filter((k) => k !== key);
+    if (has) todo.push(key);
+    if (todo.length) x.enTodo = todo; else delete x.enTodo;
+  }
+  function blockSettled(x, key) {
+    ['enTodo', 'enAI'].forEach((n) => {
+      const list = (x[n] || []).filter((k) => k !== key);
+      if (list.length) x[n] = list; else delete x[n];
+    });
   }
 
   function renderBlockEditor(box, target, b, labels) {
@@ -867,7 +938,7 @@
       + (ex() ? '<div class="dz-ctl"><span class="dz-ctl-l">Show</span>' + seg('dz-b-when', [['always', 'Always'], ['unchecked', 'Before checking'], ['checked', 'After checking']], b.when || 'always') + '</div>' : '');
     if (b.kind === 'divider') {
       box.innerHTML = '<h4 class="dz-h">Divider</h4>' + anchorSel
-        + '<div class="dz-ctl"><span class="dz-ctl-l">Style</span>' + seg('dz-b-style', R().DIVIDERS.map((s) => [s, s]), b.style || 'line') + '</div>';
+        + '<div class="dz-ctl"><span class="dz-ctl-l">Style</span>' + seg('dz-b-style', R().DIVIDERS.map((s) => [s, T(s)]), b.style || 'line') + '</div>';
     } else if (b.kind === 'image') {
       box.innerHTML = '<h4 class="dz-h">Picture</h4>'
         + '<div class="dz-imgpick"><img src="' + esc(S.assetBase + b.src) + '" alt=""><div><button type="button" class="btn btn-secondary btn-sm" id="dz-b-src">Change picture</button>'
@@ -916,7 +987,11 @@
           x.vi = x.vi || {};
           if (v.trim()) x.vi[key] = v; else delete x.vi[key];
           if (!Object.keys(x.vi).length) delete x.vi;
-        } else if (v.trim()) x[key] = v; else delete x[key];
+          blockOwes(x, key, !!v.trim());
+        } else {
+          if (v.trim()) x[key] = v; else delete x[key];
+          if (key !== 'icon') blockSettled(x, key);
+        }
         return x;
       }, 'b:' + b.id + ':' + key);
     };
@@ -942,7 +1017,11 @@
             x.vi = x.vi || {};
             if (empty) delete x.vi.html; else x.vi.html = h;
             if (!Object.keys(x.vi).length) delete x.vi;
-          } else if (empty) delete x.html; else x.html = h;
+            blockOwes(x, 'html', !empty);
+          } else {
+            if (empty) delete x.html; else x.html = h;
+            blockSettled(x, 'html');
+          }
           return x;
         }, 'bh:' + b.id + ':' + S.lang)
       });
@@ -986,12 +1065,14 @@
       (e ? '<div class="dz-scope">' + seg('dz-gscope', [['page', 'This page'], ['bank', 'Every page of this bank']], scope) + '</div>' : '')
       + '<h4 class="dz-h">When meanings appear</h4>' + glossModeControl(merged.glossMode)
       + '<h4 class="dz-h">Glossary <small class="dz-muted">— words that show your meaning on hover</small></h4>'
-      + '<div class="dz-gtable"><div class="dz-grow dz-ghead"><span>Word (Korean)</span><span>Meaning (English)</span><span>Nghĩa (Tiếng Việt)</span><span></span></div>'
+      // Vietnamese first: the meaning a Vietnamese learner reads, then the English, which may
+      // wait — English mode shows the Vietnamese until it is written.
+      + '<div class="dz-gtable"><div class="dz-grow dz-ghead"><span>Word (Korean)</span><span>Nghĩa (Tiếng Việt)</span><span>Meaning (English, optional)</span><span></span></div>'
       + gloss.map((g, i) => '<div class="dz-grow" data-i="' + i + '"><input class="form-input" data-k="ko" value="' + esc(g.ko) + '" maxlength="40">'
-        + '<input class="form-input" data-k="gl" value="' + esc(g.gl) + '" maxlength="240"><input class="form-input" data-k="vi" value="' + esc(g.vi || '') + '" maxlength="240">'
+        + '<input class="form-input" data-k="vi" value="' + esc(g.vi || '') + '" maxlength="240"><input class="form-input" data-k="gl" value="' + esc(g.gl || '') + '" maxlength="240">'
         + '<button type="button" data-del="' + i + '" title="Remove">✕</button></div>').join('')
-      + '<div class="dz-grow dz-gnew"><input class="form-input" id="dz-g-ko" placeholder="눈썹" maxlength="40"><input class="form-input" id="dz-g-gl" placeholder="eyebrow" maxlength="240">'
-      + '<input class="form-input" id="dz-g-vi" placeholder="lông mày" maxlength="240"><button type="button" id="dz-g-add" title="Add">＋</button></div></div>'
+      + '<div class="dz-grow dz-gnew"><input class="form-input" id="dz-g-ko" placeholder="눈썹" maxlength="40"><input class="form-input" id="dz-g-vi" placeholder="lông mày" maxlength="240">'
+      + '<input class="form-input" id="dz-g-gl" placeholder="eyebrow" maxlength="240"><button type="button" id="dz-g-add" title="Add">＋</button></div></div>'
       + '<p class="dz-note">Two characters or more — a single syllable would light up inside every longer word. For one occurrence, select the word in the Text tab and press 💬.</p>'
       + '<h4 class="dz-h">Hidden words <small class="dz-muted">— never glossed automatically here</small></h4>'
       + '<div class="dz-chips">' + hide.map((w, i) => '<span class="dz-tag">' + esc(w) + '<button type="button" data-unhide="' + i + '">✕</button></span>').join('')
@@ -1012,7 +1093,7 @@
         inp.oninput = () => {
           const list = clone(gloss);
           const k = inp.getAttribute('data-k');
-          if (inp.value.trim()) list[i][k] = inp.value; else if (k === 'vi') delete list[i][k]; else list[i][k] = '';
+          if (inp.value.trim()) list[i][k] = inp.value; else if (k === 'ko') list[i][k] = ''; else delete list[i][k];
           gloss[i] = list[i];
           setList('glossary', list);
         };
@@ -1023,10 +1104,11 @@
       const ko = el('dz-g-ko').value.trim();
       const gl = el('dz-g-gl').value.trim();
       const vi = el('dz-g-vi').value.trim();
-      if (ko.length < 2) { window.Toast.warning('The word needs two characters or more.', 'Glossary'); return; }
-      if (!gl) { window.Toast.warning('Give it a meaning.', 'Glossary'); return; }
-      if (gloss.some((g) => g.ko === ko)) { window.Toast.warning('"' + esc(ko) + '" is already in the glossary.', 'Glossary'); return; }
-      const entry = { ko, gl };
+      if (ko.length < 2) { window.Toast.warning(esc(T('The word needs two characters or more.')), esc(T('Glossary'))); return; }
+      if (!gl && !vi) { window.Toast.warning(esc(T('Give it a meaning.')), esc(T('Glossary'))); return; }
+      if (gloss.some((g) => g.ko === ko)) { window.Toast.warning(esc(T('"{ko}" is already in the glossary.', { ko })), esc(T('Glossary'))); return; }
+      const entry = { ko };
+      if (gl) entry.gl = gl;
       if (vi) entry.vi = vi;
       setList('glossary', gloss.concat([entry]));
       renderInspector();
@@ -1049,10 +1131,12 @@
     });
     panel.querySelectorAll('[data-own]').forEach((b) => {
       b.onclick = () => {
+        // The meaning the game would have shown, in the language it is being shown in.
+        const box = el(S.lang === 'vi' ? 'dz-g-vi' : 'dz-g-gl');
         el('dz-g-ko').value = b.getAttribute('data-own');
-        el('dz-g-gl').value = b.getAttribute('data-gl');
-        el('dz-g-gl').focus();
-        el('dz-g-gl').select();
+        box.value = b.getAttribute('data-gl');
+        box.focus();
+        box.select();
       };
     });
   }
@@ -1062,7 +1146,7 @@
     const e = ex();
     if (!e) {
       panel.innerHTML = '<div class="dz-empty"><div class="dz-empty-icon">📋</div><p>This is the bank’s exercise list. Open a page from the <b>Page</b> menu above to edit its questions.</p></div>'
-        + '<h4 class="dz-h">Bank</h4>' + inputs(S.bank, '', [['titleKo', 'Title (Korean)'], ['titleEn', 'Title (English)'], ['hintKo', 'Hint at the bottom'], ['source', 'Source line']]);
+        + '<h4 class="dz-h">Bank</h4>' + inputs(S.bank, '', [['titleKo', 'Title (Korean)'], ['titleEn', 'Title'], ['hintKo', 'Hint at the bottom'], ['source', 'Source line']]);
       bindInputs(panel, S.bank);
       return;
     }
@@ -1072,8 +1156,8 @@
     const it = S.row >= 0 ? items[S.row] : null;
     panel.innerHTML =
       '<details class="dz-details"' + (it ? '' : ' open') + '><summary>Page details · <span class="dz-muted">' + esc(TYPE_LABEL[e.type] || e.type) + '</span></summary>'
-      + inputs(e, 'ex', [['section', 'Section (Korean)'], ['sectionEn', 'Section (English)'], ['no', 'Number (연습 1…)'], ['pattern', 'Grammar point'], ['icon', 'Icon'], ['id', 'Page id']])
-      + fieldButtons('exercises.' + S.exIndex, [['instructionKo', 'Instruction (KO)'], ['instructionEn', 'Instruction (EN)'], ['noteEn', 'Note']])
+      + inputs(e, 'ex', [['section', 'Section (Korean)'], ['sectionEn', 'Section'], ['no', 'Number (연습 1…)'], ['pattern', 'Grammar point'], ['icon', 'Icon'], ['id', 'Page id']])
+      + fieldButtons('exercises.' + S.exIndex, [['instructionKo', 'Instruction (KO)'], ['instructionEn', 'Instruction'], ['noteEn', 'Note']])
       + check(e, 'holdGloss', 'Hold every row’s English until the page is checked (listening/reading pages)')
       + '</details>'
       + '<div class="dz-qbar"><span class="dz-h dz-inline">Questions</span><div class="dz-qchips">'
@@ -1104,14 +1188,28 @@
     if (!perItem) bindChipEditor(panel, e);
   }
 
+  // A short field. An English one is written in Vietnamese here (VI) or shown as Claude's
+  // English (EN); anything else — Korean, an id, an icon — is edited as it is.
   function inputs(obj, scope, fields) {
-    return '<div class="dz-grid2">' + fields.map(([k, l]) => '<label class="dz-lab">' + esc(l)
-      + '<input class="form-input" data-in="' + scope + ':' + k + '" value="' + esc(obj[k] == null ? '' : obj[k]) + '"></label>').join('') + '</div>';
+    return '<div class="dz-grid2">' + fields.map(([k, l]) => {
+      if (!isEn(k, obj)) {
+        return '<label class="dz-lab">' + esc(l) + '<input class="form-input" data-in="' + scope + ':' + k + '" value="' + esc(obj[k] == null ? '' : obj[k]) + '"></label>';
+      }
+      if (S.lang === 'en') {
+        return '<div class="dz-lab">' + esc(l) + ' ' + stateChip(obj, k) + '<div class="dz-ro dz-ro-en" translate="no">' + esc(obj[k] || '—') + '</div></div>';
+      }
+      return '<label class="dz-lab">' + esc(T(l)) + ' ' + stateChip(obj, k) + '<input class="form-input" data-in-vi="' + scope + ':' + k + '" value="'
+        + esc(VF().viOf(obj, k, entries())) + '" placeholder="' + esc(T('Write the Vietnamese here…')) + '"></label>';
+    }).join('') + '</div>';
   }
   function bindInputs(panel, obj, scope) {
     panel.querySelectorAll('[data-in^="' + (scope || '') + ':"]').forEach((inp) => {
       const k = inp.getAttribute('data-in').split(':')[1];
       inp.oninput = () => { plainEdit(obj, k, inp.value); commit('in:' + k); };
+    });
+    panel.querySelectorAll('[data-in-vi^="' + (scope || '') + ':"]').forEach((inp) => {
+      const k = inp.getAttribute('data-in-vi').split(':')[1];
+      inp.oninput = () => { VF().setVi(obj, k, inp.value, entries()); commit('in-vi:' + k); };
     });
     panel.querySelectorAll('[data-chk]').forEach((c) => {
       c.onchange = () => { const k = c.getAttribute('data-chk'); if (c.checked) obj[k] = true; else delete obj[k]; commit(); };
@@ -1129,6 +1227,23 @@
   function qField(obj, path, key, label, multi) {
     const v = obj[key] == null ? '' : String(obj[key]);
     const spec = specOf(obj, key);
+    // Prose for the learner: the Vietnamese is what is written here, the English is Claude's.
+    if (isEn(key, obj)) {
+      const viv = VF().viOf(obj, key, entries());
+      const chip = ' ' + stateChip(obj, key);
+      if (S.lang === 'en') {
+        return '<div class="dz-lab">' + esc(label) + chip
+          + '<div class="dz-ro dz-ro-en" data-fbtn="' + esc(path + '.' + key) + '" translate="no" title="' + esc(T('Claude’s English — click to style it in the Text tab')) + '">' + esc(v || '—') + '</div></div>';
+      }
+      if (spec && spec.vi && R().matches(spec.vi, viv)) {
+        return '<div class="dz-lab">' + esc(label) + ' <em class="dz-fmt-dot" title="' + esc(T('Formatted')) + '">●</em>' + chip
+          + '<div class="dz-ro" data-fbtn="' + esc(path + '.' + key) + '" translate="no" title="' + esc(T('Formatted — click to edit in the Text tab')) + '">' + esc(viv || '—') + '</div></div>';
+      }
+      const ph = ' placeholder="' + esc(T('Write the Vietnamese here…')) + '"';
+      return '<label class="dz-lab">' + esc(label) + chip + (multi
+        ? '<textarea class="form-input" rows="3" data-qvi="' + esc(path + '.' + key) + '"' + ph + '>' + esc(viv) + '</textarea>'
+        : '<input class="form-input" data-qvi="' + esc(path + '.' + key) + '" value="' + esc(viv) + '"' + ph + '>') + '</label>';
+    }
     if (spec && spec.html) {
       return '<div class="dz-lab">' + esc(label) + ' <em class="dz-fmt-dot" title="Formatted">●</em>'
         + '<div class="dz-ro" data-fbtn="' + esc(path + '.' + key) + '" title="Formatted — click to edit in the Text tab">' + esc(v || '—') + '</div></div>';
@@ -1149,7 +1264,7 @@
       + '<button type="button" class="dz-mini dz-danger" data-qa="del" title="Delete">✕</button></div>';
     if (perItem) html += qField(it, p, 'phraseKo', 'Phrase beside the picture (Korean)');
     if (e.type === 'build' || e.type === 'dialogue') {
-      html += '<div class="dz-lab">Lines <small class="dz-muted">— {} marks each blank · ' + gaps + ' blank' + (gaps === 1 ? '' : 's') + '</small></div>'
+      html += '<div class="dz-lab">' + esc(T('Lines')) + ' <small class="dz-muted">' + esc(gaps === 1 ? T('— {} marks each blank · 1 blank') : T('— {} marks each blank · {n} blanks', { n: gaps })) + '</small></div>'
         + (it.lines || []).map((l, i) => {
           const spec = specOf(l, 'ko');
           return '<div class="dz-line"><input class="form-input dz-who" data-lw="' + i + '" value="' + esc(l.who || '') + '" placeholder="A" maxlength="8">'
@@ -1171,7 +1286,7 @@
         + chips.map((c) => '<option value="' + esc(c.id) + '"' + (c.id === it.answer ? ' selected' : '') + '>' + esc(c.dict || c.ko || c.id) + '</option>').join('') + '</select></label>';
       if (e.type === 'match') html += '<label class="dz-lab">Picture instead of the prompt<input class="form-input" data-qf="' + esc(p + '.img') + '" value="' + esc(it.img || '') + '" placeholder="sprites/foods/…png"></label>';
     }
-    html += qField(it, p, 'en', 'English meaning')
+    html += qField(it, p, 'en', 'Meaning')
       + qField(it, p, 'why', 'Why this is the answer', true)
       + qField(it, p, 'grammar', 'Grammar note', true)
       + check(it, 'holdGloss', 'Hold this row’s English until checked');
@@ -1210,6 +1325,12 @@
         else plainEdit(it, key, inp.value);
         commit('qf:' + p + ':' + key);
       };
+    });
+    panel.querySelectorAll('[data-qvi]').forEach((inp) => {
+      const key = inp.getAttribute('data-qvi').split('.').pop();
+      inp.oninput = () => { VF().setVi(it, key, inp.value, entries()); commit('qvi:' + p + ':' + key); };
+      // The chips beside the field say whether the English now owes a rewrite.
+      inp.onchange = () => renderInspector();
     });
     panel.querySelectorAll('[data-qa]').forEach((b) => {
       b.onclick = () => {
@@ -1282,7 +1403,7 @@
 
   function chipEditor(e) {
     const fill = e.type === 'fill';
-    return '<details class="dz-details"><summary>The box · ' + (e.bank || []).length + ' entries</summary>'
+    return '<details class="dz-details"><summary>' + esc(T('The box · {n} entries', { n: (e.bank || []).length })) + '</summary>'
       + '<div class="dz-chiptable">' + (e.bank || []).map((c, i) => '<div class="dz-chiprow"><input class="form-input dz-art" data-bk="' + i + ':id" value="' + esc(c.id) + '" title="id">'
         + (fill ? '<input class="form-input" data-bk="' + i + ':dict" value="' + esc(c.dict || '') + '" placeholder="dictionary form"><input class="form-input" data-bk="' + i + ':polite" value="' + esc(c.polite || '') + '" placeholder="form in the sentence">'
           : '<input class="form-input" data-bk="' + i + ':ko" value="' + esc(c.ko || '') + '" placeholder="Korean"><input class="form-input dz-art" data-bk="' + i + ':mark" value="' + esc(c.mark || '') + '" placeholder="①">')
@@ -1345,7 +1466,7 @@
       const art = ((S.art && S.art.assets) || []).filter((a) => a.status === 'shipped' && !/^(characters|ui|plants|terrain|tiles|skins)\//.test(a.path || ''))
         .filter((a) => !query || (a.nameEn + ' ' + (a.wordKo || '') + ' ' + a.path).toLowerCase().indexOf(query.toLowerCase()) >= 0).slice(0, 240);
       modal.innerHTML = '<div class="dz-modal-box"><div class="dz-modal-head"><b>Pictures</b>'
-        + seg('dz-mtab', [['uploads', 'Uploaded (' + items.length + ')'], ['art', 'Game art']], tab)
+        + seg('dz-mtab', [['uploads', T('Uploaded ({n})', { n: items.length })], ['art', 'Game art']], tab)
         + '<span class="dz-grow"></span><button type="button" class="dz-mini" id="dz-mclose">✕</button></div>'
         + (tab === 'uploads'
           ? '<label class="dz-drop" id="dz-drop"><input type="file" id="dz-file" accept="image/png,image/jpeg,image/webp,image/gif" hidden>'
@@ -1423,7 +1544,7 @@
       if (!root) return;
       if (!S.booted) {
         root.innerHTML = '<p class="dz-muted dz-pad">Loading the Designer…</p>';
-        try { await boot(); } catch (e) { root.innerHTML = '<p class="dz-pad">Could not start the Designer: ' + esc(e.message) + '</p>'; return; }
+        try { await boot(); } catch (e) { root.innerHTML = '<p class="dz-pad">' + esc(T('Could not start the Designer: {why}', { why: e.message })) + '</p>'; return; }
         shell();
       } else if (!el('dz-bar')) shell();
       // Sent here by the Workbooks tab ({ designer: true }) or by the Content tab's Open button,

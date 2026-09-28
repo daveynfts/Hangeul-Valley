@@ -82,7 +82,7 @@
           ? '<button type="button" class="content-go" data-go="' + esc(c.key) + '">Open</button>'
           : '';
         return '<div class="content-row' + (c.key === S.key ? ' active' : '') + '">'
-          + '<span class="content-name">' + esc(c.label) + '</span>'
+          + '<span class="content-name" translate="no">' + esc(c.label) + '</span>'
           + where + go
           + '<button type="button" class="content-json-btn" data-key="' + esc(c.key) + '"'
           + ' title="Edit the raw file">JSON</button>'
@@ -115,7 +115,7 @@
       if (revert) revert.disabled = true;
       return;
     }
-    head.innerHTML = '<h3 class="content-title">' + esc(S.label) + '</h3>'
+    head.innerHTML = '<h3 class="content-title" translate="no">' + esc(S.label) + '</h3>'
       + '<p class="content-sub"><code>' + esc(S.rel) + '</code></p>';
     area.disabled = S.busy;
     const dirty = area.value !== S.original;
@@ -168,8 +168,9 @@
       // kinds of done.
       const where = d.unchanged ? 'Nothing had changed — no commit made.'
         : (d.note || 'Written to the working tree.');
+      const t = (str, vars) => (typeof window.T === 'function' ? window.T(str, vars) : str.replace(/\{(\w+)\}/g, (m, k) => vars[k]));
       setStatus('ok', d.unchanged ? 'Already up to date' : 'Saved',
-        where + (d.branch ? ' Branch: ' + d.branch + '.' : ''));
+        t(where) + (d.branch ? ' ' + t('Branch: {b}.', { b: d.branch }) : ''));
     } catch (e) {
       setStatus('bad', 'Refused', e.message);
     } finally {
