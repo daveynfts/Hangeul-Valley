@@ -8,6 +8,8 @@ const testCorsOrigin = require('./test_cors_origin');
 const testUnit14Workbook = require('./test_unit14_workbook');
 const testTimings = require('./test_timings');
 const testContentVersions = require('./test_content_versions');
+const testDesigner = require('./test_designer');
+const testAdminLang = require('./test_admin_lang');
 
 function padRight(str, len) {
   str = String(str);
@@ -41,7 +43,9 @@ async function runAllSuites() {
     { label: 'CORS & bind hardening', module: testCorsOrigin },
     { label: 'Unit 14 Workbook API', module: testUnit14Workbook },
     { label: 'Timings tab', module: testTimings },
-    { label: 'Content versions (If-Match)', module: testContentVersions }
+    { label: 'Content versions (If-Match)', module: testContentVersions },
+    { label: 'Designer: pictures, preview, saves', module: testDesigner },
+    { label: 'Vietnamese first: panel and content', module: testAdminLang }
   ];
 
   const results = [];

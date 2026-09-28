@@ -11,6 +11,12 @@
 const fs = require('fs');
 const path = require('path');
 const { atomicWriteJson } = require('./atomicWrite');
+// The format layer the admin designer writes: `fmt` beside any text, `design` on a page or the
+// whole bank. The rules are the ones the game renders by, so they live with the renderer.
+const rich = require('../../js/richText.js');
+// Vietnamese written first in the admin: a draft beside the English it will replace, and the
+// lists of English still to write (enTodo) and written by Claude but unread (enAI).
+const viFirst = require('../public/js/viFirst.js');
 
 const WORKBOOK_REL = path.join('worlds', 'unit14-workbook.json');
 const TYPES = ['fill', 'match', 'dialogue', 'experience', 'build'];
@@ -87,6 +93,24 @@ function str(v) {
   return typeof v === 'string' ? v.trim() : '';
 }
 
+// Formatting rides beside the text it formats and is checked against that text as saved, so
+// an overlay that no longer reads the same as its field is refused with its place rather than
+// written and quietly ignored by the game. Added last, and only when there is some: a row
+// nobody has formatted is written back exactly as it was.
+function withFmt(out, src, where) {
+  viFirst.clean(out, src, where);
+  const fmt = rich.cleanFmt(src && src.fmt, out, where);
+  if (fmt) out.fmt = fmt;
+  return out;
+}
+// A required English field may wait for its English while the Vietnamese stands in for it.
+const hasText = (out, src, field) => !!out[field] || viFirst.hasDraft(src, field);
+function withDesign(out, src, where, level) {
+  const design = rich.cleanDesign(src && src.design, where, { level });
+  if (design) out.design = design;
+  return out;
+}
+
 // A picture the game already ships, named by its path under sprites/. Reusing
 // the Unit 10 food icons rather than drawing new ones is the point, so this
 // takes a real sprite path and refuses anything that leaves the folder — the
@@ -139,8 +163,8 @@ function cleanItem(item, i, where, type, chipIds) {
     why: str(item.why),
     grammar: str(item.grammar)
   };
-  if (!out.why) throw new Error(`${at}: needs a "why" — the page shows it after checking`);
-  if (!out.grammar) throw new Error(`${at}: needs a grammar note`);
+  if (!hasText(out, item, 'why')) throw new Error(`${at}: needs a "why" — the page shows it after checking`);
+  if (!hasText(out, item, 'grammar')) throw new Error(`${at}: needs a grammar note`);
   if (type === 'dialogue') {
     // The same script shape 'build' uses: as many lines as the exchange needs,
     // each with an optional speaker, and the gap wherever the book puts it. It
@@ -163,7 +187,7 @@ function cleanItem(item, i, where, type, chipIds) {
     if (art.indexOf('..') >= 0) throw new Error(`${at}: art cannot walk out of the tree (got "${art}")`);
     out.art = art;
   }
-  return out;
+  return withFmt(out, item, at);
 }
 
 // One set of buttons for one blank. There has to be something to get wrong — a
@@ -202,7 +226,7 @@ function cleanChoiceList(raw, at, what) {
     const out = { id, ko };
     const art = cleanLocalArt(c.art, at);
     if (art) out.art = art;
-    return out;
+    return withFmt(out, c, `${at} choice "${id}"`);
   });
   return { choices, ids };
 }
@@ -215,15 +239,17 @@ function cleanLines(raw, at, gaps) {
   const list = Array.isArray(raw) ? raw : [];
   if (!list.length) throw new Error(`${at}: needs at least one line`);
   let found = 0;
-  const lines = list.map((l) => {
+  const lines = list.map((l, k) => {
     const ko = str(l && l.ko);
     if (!ko) throw new Error(`${at}: every line needs Korean text`);
     found += ko.split('{}').length - 1;
     const out = {};
     const who = str(l && l.who);
-    if (who) out.who = who;
+    // An empty speaker draws exactly as no speaker. Kept when the bank wrote one, so a save
+    // does not strip sixty-nine of them from Units 11-13 and bury the edit that was made.
+    if (who || (l && typeof l.who === 'string')) out.who = who;
     out.ko = ko;
-    return out;
+    return withFmt(out, l, `${at} line ${k + 1}`);
   });
   if (found !== gaps) {
     throw new Error(`${at}: ${gaps} blank(s) to fill, but the lines carry ${found} {}`);
@@ -252,7 +278,7 @@ function cleanChoiceItem(item, i, where, type) {
   // unchanged bank writes each row back as it was.
   ['instructionKo', 'instructionEn'].forEach((k) => {
     const v = str(item[k]);
-    if (v) out[k] = v;
+    if (v || viFirst.hasDraft(item, k)) out[k] = v;
   });
   out.phraseKo = str(item.phraseKo);
   if (type === 'build') {
@@ -283,8 +309,8 @@ function cleanChoiceItem(item, i, where, type) {
   out.en = str(item.en);
   out.why = str(item.why);
   out.grammar = str(item.grammar);
-  if (!out.why) throw new Error(`${at}: needs a "why" — the page shows it after checking`);
-  if (!out.grammar) throw new Error(`${at}: needs a grammar note`);
+  if (!hasText(out, item, 'why')) throw new Error(`${at}: needs a "why" — the page shows it after checking`);
+  if (!hasText(out, item, 'grammar')) throw new Error(`${at}: needs a grammar note`);
   const audio = cleanAudio(item.audio, at);
   if (audio) out.audio = audio;
   // A question row whose gloss states its own answer holds it until checked, like a 듣기 page.
@@ -299,7 +325,7 @@ function cleanChoiceItem(item, i, where, type) {
     const v = str(item[k]);
     if (v) out[k] = v;
   });
-  return out;
+  return withFmt(out, item, at);
 }
 
 // A recording of the exercise as the book's track has it. The value goes
@@ -347,7 +373,10 @@ function cleanExercise(ex, i, seenIds) {
   // save gave the TOPIK bank's 빈칸 채우기 and 유사 표현 the label "Vocabulary", in both
   // languages. A section with no English of its own is written back without one.
   const section = str(ex.section) || '어휘';
-  const sectionEn = str(ex.sectionEn) || (section === '어휘' ? 'Vocabulary' : undefined);
+  // A heading written in Vietnamese only keeps an empty English beside it, which is what its
+  // draft is carried under until Claude writes the English.
+  const sectionEn = str(ex.sectionEn) || (section === '어휘' ? 'Vocabulary'
+    : (viFirst.hasDraft(ex, 'sectionEn') ? '' : undefined));
 
   const perItem = PER_ITEM_CHOICE_TYPES.includes(type);
   const bank = Array.isArray(ex.bank) ? ex.bank : [];
@@ -397,6 +426,8 @@ function cleanExercise(ex, i, seenIds) {
     // second would switch off the check that guards the rows' instructions.
     if (ex.labelOptions === true) out.labelOptions = true;
     if (ex.mixedTypes === true) out.mixedTypes = true;
+    // A per-question page has no shared box; an empty one the bank wrote is kept as written.
+    if (Array.isArray(ex.bank) && !ex.bank.length) out.bank = [];
     out.items = cleaned;
     if (ex.example && type === 'build') {
       // A 'build' example has no shared box to borrow its answer from, so the
@@ -413,9 +444,13 @@ function cleanExercise(ex, i, seenIds) {
       };
       if (answer2Ko) eg.answer2Ko = answer2Ko;
       eg.en = str(ex.example.en);
+      // What the worked example is showing. Forty-six of the 교과서 examples carry one, and it
+      // was not on this list — so every save through the admin deleted it.
+      const egWhy = str(ex.example.why);
+      if (egWhy) eg.why = egWhy;
       const egAudio = cleanAudio(ex.example.audio, `${where} example`);
       if (egAudio) eg.audio = egAudio;
-      out.example = eg;
+      out.example = withFmt(eg, ex.example, `${where} example`);
     } else if (ex.example) {
       const exAnswer = str(ex.example.answer);
       out.example = {
@@ -433,8 +468,10 @@ function cleanExercise(ex, i, seenIds) {
       if (exAnswer && !firstChoices.some((c) => c.id === exAnswer)) {
         throw new Error(`${where}: the example answer "${exAnswer}" is not one of question 1's choices`);
       }
+      withFmt(out.example, ex.example, `${where} example`);
     }
-    return out;
+    withFmt(out, ex, where);
+    return withDesign(out, ex, where, 'exercise');
   }
 
   // One chip per slot. The game moves a chip rather than cloning it, so data
@@ -488,10 +525,34 @@ function cleanExercise(ex, i, seenIds) {
       out.example.stemKo = str(ex.example.stemKo);
       if (!out.example.stemKo) throw new Error(`${where}: the example needs its Korean prompt`);
     }
+    withFmt(out.example, ex.example, `${where} example`);
   } else if (spent.length) {
     throw new Error(`${where}: "${spent[0].id}" is marked as the worked example but no example is written`);
   }
-  return out;
+  withFmt(out, ex, where);
+  return withDesign(out, ex, where, 'exercise');
+}
+
+// The shape the bank arrived in. The rules above rebuild every object from a list of known
+// fields — which is what keeps an unknown field out — and left alone that also reordered every
+// key and wrote out every empty default, so the first save of a bank from the Designer rewrote
+// some hundred and fifty lines to change one. The cleaned object is laid back over the
+// original's key order instead, and a default the original never had that says nothing ('' or
+// false) is left off again. Nothing the rules produce is dropped or changed, only placed.
+function keepShape(out, src) {
+  if (Array.isArray(out)) return out.map((v, i) => keepShape(v, Array.isArray(src) ? src[i] : undefined));
+  if (!out || typeof out !== 'object') return out;
+  const from = src && typeof src === 'object' && !Array.isArray(src) ? src : {};
+  const res = {};
+  Object.keys(from).forEach((k) => {
+    if (Object.prototype.hasOwnProperty.call(out, k) && out[k] !== undefined) res[k] = keepShape(out[k], from[k]);
+  });
+  Object.keys(out).forEach((k) => {
+    if (Object.prototype.hasOwnProperty.call(res, k) || out[k] === undefined) return;
+    if (!Object.prototype.hasOwnProperty.call(from, k) && (out[k] === '' || out[k] === false)) return;
+    res[k] = keepShape(out[k], from[k]);
+  });
+  return res;
 }
 
 // Checking and writing are separate so the same rules can run inside a Vercel function,
@@ -507,7 +568,7 @@ function validateWorkbook(body, rel) {
   const seen = new Set();
   const exercises = list.map((ex, i) => cleanExercise(ex, i, seen));
 
-  return {
+  const out = {
     id: str(body.id) || path.basename(rel, '.json'),
     source: str(body.source),
     titleKo: str(body.titleKo) || '연습 문제',
@@ -540,6 +601,10 @@ function validateWorkbook(body, rel) {
     omittedNote: str(body.omittedNote) || undefined,
     exercises
   };
+  // The list page's formatting, and the design every page of the bank starts from.
+  withFmt(out, body, 'Bank');
+  withDesign(out, body, 'Bank', 'bank');
+  return keepShape(out, body);
 }
 
 function saveWorkbook(body, rootDir, unit) {
@@ -553,5 +618,5 @@ function saveWorkbook(body, rootDir, unit) {
 }
 
 module.exports = {
-  getWorkbook, saveWorkbook, validateWorkbook, workbookRel, WORKBOOKS, WORKBOOK_REL, TYPES
+  getWorkbook, saveWorkbook, validateWorkbook, workbookRel, WORKBOOKS, WORKBOOK_REL, TYPES, keepShape
 };

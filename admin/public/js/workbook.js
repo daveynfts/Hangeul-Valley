@@ -15,9 +15,21 @@
     unit: 'unit14',
     units: [],
     book: null,
+    rel: '',
+    viCat: null,
     index: 0,
     dirty: false
   };
+
+  // The prose is written in Vietnamese and its English by Claude (docs/vietnamese-first.md), so
+  // each English field is edited here as its Vietnamese, with the English under it, read only.
+  const VF = () => window.HVViFirst;
+  const VFD = () => window.HVViField;
+  const T = (s, vars) => (typeof window.T === 'function' ? window.T(s, vars) : String(s));
+  function entries() { return (state.viCat && state.viCat.entries) || {}; }
+  function viBox(obj, field, ref, label, multiline, rows) {
+    return VFD().html(obj, field, { ref, label, entries: entries(), multiline, rows });
+  }
 
   const TYPE_LABEL = {
     fill: 'Fill the sentence ending',
@@ -42,6 +54,25 @@
     return (state.book && state.book.exercises && state.book.exercises[state.index]) || null;
   }
 
+  // A field the Designer has formatted carries its formatted words beside it (fmt.<field>.html,
+  // and fmt.<field>.vi for its Vietnamese). Editing the plain words here would leave that copy
+  // reading something else, which the save refuses — so the formatted copy goes, and the
+  // field's size, box and colour stay.
+  let warnedFmt = false;
+  function dropStaleFmt(obj, field, key) {
+    const k = key || 'html';
+    const spec = obj && obj.fmt && obj.fmt[field];
+    if (!spec || !spec[k]) return;
+    delete spec[k];
+    if (!Object.keys(spec).length) delete obj.fmt[field];
+    if (!Object.keys(obj.fmt).length) delete obj.fmt;
+    if (!warnedFmt && window.Toast) {
+      warnedFmt = true;
+      window.Toast.warning('This text had formatting from the Designer. Its bold, colours and meanings '
+        + 'were removed because the words changed here — format it again in the Designer tab.', 'Formatting');
+    }
+  }
+
   function markDirty() {
     state.dirty = true;
     const btn = document.getElementById('u14-save');
@@ -61,12 +92,14 @@
     const box = document.getElementById('u14-list');
     if (!box || !state.book) return;
     const items = state.book.exercises || [];
+    const owes = (e) => VFD().owed(e) > 0;
     box.innerHTML = items.map((e, i) => `
       <button type="button" class="u14-listbtn${i === state.index ? ' active' : ''}" data-i="${i}">
         <span class="u14-list-icon">${esc(e.icon || '📝')}</span>
         <span class="u14-list-text">
-          <span class="u14-list-no">${esc(e.section || '')} · ${esc(e.no || '')}</span>
-          <span class="u14-list-type">${esc(TYPE_LABEL[e.type] || e.type || 'fill')} · ${(e.items || []).length} Q</span>
+          <span class="u14-list-no" translate="no">${esc(e.section || '')} · ${esc(e.no || '')}</span>
+          <span class="u14-list-type">${esc(T(TYPE_LABEL[e.type] || e.type || 'fill'))} · ${esc(T('{n} Q', { n: (e.items || []).length }))}${
+            owes(e) ? ` <em class="vf-owe-dot" title="${esc(T('Waiting for Claude’s English'))}">⏳</em>` : ''}</span>
         </span>
       </button>`).join('');
     box.querySelectorAll('.u14-listbtn').forEach((b) => {
@@ -76,6 +109,16 @@
         renderForm();
       };
     });
+  }
+  // The ⏳ on the open exercise, kept current while its Vietnamese is typed.
+  function renderListMarks() {
+    const b = document.querySelector('#u14-list .u14-listbtn.active .u14-list-type');
+    const e = ex();
+    if (!b || !e) return;
+    const dot = b.querySelector('.vf-owe-dot');
+    const owes = VFD().owed(e) > 0;
+    if (owes && !dot) b.insertAdjacentHTML('beforeend', ` <em class="vf-owe-dot" title="${esc(T('Waiting for Claude’s English'))}">⏳</em>`);
+    if (!owes && dot) dot.remove();
   }
 
   // ── An exercise whose choices live on each question ────────────────────────
@@ -91,37 +134,38 @@
       || `<div class="u14-ro-line">${esc(it.stemKo || '')}</div>`;
     const forms = (list, answer) => (list || []).map((c) =>
       `<span class="u14-ro-chip${c.id === answer ? ' key' : ''}">${esc(c.ko)}</span>`).join('');
+    const gloss = (it) => {
+      const vi = VF().viOf(it, 'en', entries());
+      return (vi ? `<div class="u14-ro-vi">${esc(vi)}</div>` : '')
+        + `<div class="u14-ro-en">${esc(it.en || '')}</div>`;
+    };
 
     host.innerHTML = `
       <div class="card widget-card">
         <div class="card-header-row">
-          <h3 class="widget-title">${esc(e.section || '')} · ${esc(e.no || '')}</h3>
+          <h3 class="widget-title" translate="no">${esc(e.section || '')} · ${esc(e.no || '')}</h3>
           <span class="u14-type-label">${esc(TYPE_LABEL[e.type] || e.type)}</span>
         </div>
         <div class="u14-grid2">
           <label>Exercise id <input class="form-input" data-meta="id" value="${esc(e.id)}"></label>
           <label>Grammar point <input class="form-input" data-meta="pattern" value="${esc(e.pattern)}"></label>
           <label>Section (KO) <input class="form-input" data-meta="section" value="${esc(e.section)}"></label>
-          <label>Section (EN) <input class="form-input" data-meta="sectionEn" value="${esc(e.sectionEn)}"></label>
+          ${viBox(e, 'sectionEn', 'e', 'Section (VI)')}
           <label>연습 number <input class="form-input" data-meta="no" value="${esc(e.no)}"></label>
           <label>Icon <input class="form-input" data-meta="icon" value="${esc(e.icon)}"></label>
         </div>
         <label>Instruction (KO) <input class="form-input" data-meta="instructionKo" value="${esc(e.instructionKo)}"></label>
-        <label>Instruction (EN) <input class="form-input" data-meta="instructionEn" value="${esc(e.instructionEn)}"></label>
-        <label>List blurb (EN) <input class="form-input" data-meta="blurbEn" value="${esc(e.blurbEn)}"></label>
-        <label>Note shown above the questions (EN)
-          <textarea class="form-input" rows="2" data-meta="noteEn">${esc(e.noteEn)}</textarea></label>
+        ${viBox(e, 'instructionEn', 'e', 'Instruction (VI)')}
+        ${viBox(e, 'blurbEn', 'e', 'List blurb (VI)')}
+        ${viBox(e, 'noteEn', 'e', 'Note shown above the questions (VI)', true, 2)}
       </div>
 
       <div class="card widget-card">
         <div class="card-header-row">
           <h3 class="widget-title">Questions — ${(e.items || []).length}</h3>
         </div>
-        <p class="section-desc">Each question here carries its own choices, its picture and the
-          <code>{}</code> that marks where the answer goes, and the server checks those against
-          each other on save. Edit the wording above; edit the questions in
-          <code>worlds/unit14-workbook.json</code>. The green choice is the answer.</p>
-        <div id="u14-items">
+        <p class="section-desc">${T('Each question here carries its own choices, its picture and the <code>{}</code> that marks where the answer goes, and the server checks those against each other on save. Edit the wording above; edit the questions in the Designer, or in <code>{rel}</code>. The green choice is the answer.', { rel: esc(state.rel || 'worlds/') })}</p>
+        <div id="u14-items" translate="no">
           ${(e.items || []).map((it) => `
           <div class="u14-item u14-readonly">
             <div class="u14-item-head">
@@ -132,7 +176,7 @@
             ${line(it)}
             <div class="u14-ro-forms">${forms(it.choices, it.answer)}</div>
             ${two(it) ? `<div class="u14-ro-forms">${forms(it.choices2, it.answer2)}</div>` : ''}
-            <div class="u14-ro-en">${esc(it.en || '')}</div>
+            ${gloss(it)}
           </div>`).join('')}
         </div>
       </div>`;
@@ -153,13 +197,13 @@
     const isFill = e.type === 'fill';
     const chips = e.bank || [];
     const options = chips.map((c) =>
-      `<option value="${esc(c.id)}">${esc(c.id)} — ${esc(c.dict || c.ko || '')}${c.usedByExample ? ' (example)' : ''}</option>`
+      `<option value="${esc(c.id)}">${esc(c.id)} — ${esc(c.dict || c.ko || '')}${c.usedByExample ? ' (' + esc(T('example')) + ')' : ''}</option>`
     ).join('');
 
     host.innerHTML = `
       <div class="card widget-card">
         <div class="card-header-row">
-          <h3 class="widget-title">${esc(e.section || '')} · ${esc(e.no || '')}</h3>
+          <h3 class="widget-title" translate="no">${esc(e.section || '')} · ${esc(e.no || '')}</h3>
           <span class="u14-type-label">${esc(TYPE_LABEL[e.type] || e.type)}</span>
         </div>
         <div class="u14-grid2">
@@ -171,15 +215,14 @@
             </select>
           </label>
           <label>Section (KO) <input class="form-input" data-meta="section" value="${esc(e.section)}"></label>
-          <label>Section (EN) <input class="form-input" data-meta="sectionEn" value="${esc(e.sectionEn)}"></label>
+          ${viBox(e, 'sectionEn', 'e', 'Section (VI)')}
           <label>연습 number <input class="form-input" data-meta="no" value="${esc(e.no)}"></label>
           <label>Icon <input class="form-input" data-meta="icon" value="${esc(e.icon)}"></label>
         </div>
         <label>Instruction (KO) <input class="form-input" data-meta="instructionKo" value="${esc(e.instructionKo)}"></label>
-        <label>Instruction (EN) <input class="form-input" data-meta="instructionEn" value="${esc(e.instructionEn)}"></label>
-        <label>List blurb (EN) <input class="form-input" data-meta="blurbEn" value="${esc(e.blurbEn)}"></label>
-        <label>Note shown above the box (EN)
-          <textarea class="form-input" rows="2" data-meta="noteEn">${esc(e.noteEn)}</textarea></label>
+        ${viBox(e, 'instructionEn', 'e', 'Instruction (VI)')}
+        ${viBox(e, 'blurbEn', 'e', 'List blurb (VI)')}
+        ${viBox(e, 'noteEn', 'e', 'Note shown above the box (VI)', true, 2)}
         ${isDlg ? `<label>B’s reply (KO) <input class="form-input" data-meta="reply" value="${esc(e.reply)}"></label>` : ''}
       </div>
 
@@ -218,8 +261,8 @@
           <label>${isDlg ? 'A’s line — use {} where the answer goes' : 'Korean prompt'}
             <input class="form-input" data-ex="${isDlg ? 'aKo' : 'stemKo'}" value="${esc(isDlg ? e.example.aKo : e.example.stemKo)}"></label>
           <label>Answer
-            <select class="form-select" data-ex="answer">${options}</select></label>
-          <label>English gloss <input class="form-input" data-ex="en" value="${esc(e.example.en)}"></label>
+            <select class="form-select" data-ex="answer" translate="no">${options}</select></label>
+          ${viBox(e.example, 'en', 'ex', 'Meaning (VI)')}
         </div>` : ''}
       </div>
 
@@ -234,7 +277,7 @@
             <div class="u14-item-head">
               <span class="u14-item-n">${it.n})</span>
               <label class="u14-answer">Answer
-                <select class="form-select" data-item="${i}" data-f="answer">${
+                <select class="form-select" data-item="${i}" data-f="answer" translate="no">${
                   chips.map((c) => `<option value="${esc(c.id)}"${c.id === it.answer ? ' selected' : ''}>${esc(c.dict || c.ko || c.id)}</option>`).join('')
                 }</select>
               </label>
@@ -242,11 +285,9 @@
             </div>
             <label>${isDlg ? 'A’s line — use {} where the answer goes' : 'Korean prompt'}
               <input class="form-input" data-item="${i}" data-f="${isDlg ? 'aKo' : 'stemKo'}" value="${esc(isDlg ? it.aKo : it.stemKo)}"></label>
-            <label>English gloss <input class="form-input" data-item="${i}" data-f="en" value="${esc(it.en)}"></label>
-            <label>Why this is the answer
-              <textarea class="form-input" rows="3" data-item="${i}" data-f="why">${esc(it.why)}</textarea></label>
-            <label>Grammar note
-              <textarea class="form-input" rows="2" data-item="${i}" data-f="grammar">${esc(it.grammar)}</textarea></label>
+            ${viBox(it, 'en', 'i' + i, 'Meaning (VI)')}
+            ${viBox(it, 'why', 'i' + i, 'Why this is the answer (VI)', true, 3)}
+            ${viBox(it, 'grammar', 'i' + i, 'Grammar note (VI)', true, 2)}
           </div>`).join('')}
         </div>
       </div>`;
@@ -259,8 +300,19 @@
     const e = ex();
     if (!host || !e) return;
 
+    // The Vietnamese boxes: 'e' is the exercise, 'ex' its worked example, 'i<k>' question k.
+    VFD().bind(host, {
+      resolve: (ref) => (ref === 'e' ? e : ref === 'ex' ? e.example : (e.items || [])[Number(ref.slice(1))]),
+      entries,
+      onChange: (obj, field, what) => {
+        if (what === 'vi') dropStaleFmt(obj, field, 'vi');
+        markDirty();
+        renderListMarks();
+      }
+    });
+
     host.querySelectorAll('[data-meta]').forEach((el) => {
-      el.oninput = () => { e[el.dataset.meta] = el.value; markDirty(); };
+      el.oninput = () => { e[el.dataset.meta] = el.value; dropStaleFmt(e, el.dataset.meta); markDirty(); };
       // Switching type changes which fields mean anything, so the form is rebuilt.
       if (el.dataset.meta === 'type') {
         el.onchange = () => { e.type = el.value; markDirty(); renderForm(); renderList(); };
@@ -291,6 +343,7 @@
       el.oninput = el.onchange = () => {
         if (!e.example) e.example = {};
         e.example[el.dataset.ex] = el.value;
+        dropStaleFmt(e.example, el.dataset.ex);
         markDirty();
       };
     });
@@ -301,6 +354,7 @@
         const it = (e.items || [])[i];
         if (!it) return;
         it[el.dataset.f] = el.value;
+        dropStaleFmt(it, el.dataset.f);
         markDirty();
       };
     });
@@ -357,12 +411,13 @@
       const d = (res && res.data) || {};
       // The path comes back from the save rather than being guessed from the unit key: not
       // every bank is <unit>-workbook.json — the textbook banks and the TOPIK one are not.
-      window.Toast.success(
-        `Saved ${d.exerciseCount || 0} exercises / ${d.itemCount || 0} questions`
-        + (d.rel ? ` to ${d.rel}` : ''));
+      const counts = { a: d.exerciseCount || 0, b: d.itemCount || 0, rel: d.rel || '' };
+      window.Toast.success(esc(d.rel ? T('Saved {a} exercises / {b} questions to {rel}', counts)
+        : T('Saved {a} exercises / {b} questions', counts)));
       clearDirty();
       const fresh = await window.apiFetch.getWorkbook(state.unit);
       state.book = fresh.data;
+      VFD().toastOwed(VFD().owed(state.book));
       renderList();
       renderForm();
     } catch (err) {
@@ -406,7 +461,7 @@
     const labels = (window.AppState || {}).bankLabels || {};
     box.innerHTML = state.units.map((u) =>
       `<button type="button" class="btn btn-sm ${u === state.unit ? 'btn-primary' : 'btn-secondary'}"
-        data-unit="${esc(u)}">${esc(labels[u] || u.replace('unit', 'Unit '))}</button>`).join('');
+        data-unit="${esc(u)}" translate="no">${esc(labels[u] || u.replace('unit', 'Unit '))}</button>`).join('');
     box.querySelectorAll('[data-unit]').forEach((b) => {
       b.onclick = async () => {
         const next = b.dataset.unit;
@@ -421,6 +476,8 @@
     const res = await window.apiFetch.getWorkbook(unit);
     state.unit = unit;
     state.book = res.data;
+    state.rel = String(res.rel || '').split('\\').join('/');
+    state.viCat = await VFD().loadCatalog(state.rel);
     state.index = 0;
     clearDirty();
     renderUnitPicker();
@@ -441,6 +498,16 @@
       if (saveBtn) saveBtn.onclick = () => window.Unit14View.save();
       const add = document.getElementById('u14-add-exercise');
       if (add) add.onclick = addExercise;
+      // The Designer edits the same file with the page drawn beside it, and every question type
+      // this form can only list. Unsaved edits here would be read over, so it asks first.
+      const toDesigner = document.getElementById('u14-designer');
+      if (toDesigner) {
+        toDesigner.onclick = () => {
+          if (!window.DesignerView) return;
+          if (state.dirty && !window.confirm('Save first? Unsaved changes here are not carried to the Designer. Open it anyway?')) return;
+          window.DesignerView.open(state.unit, state.index);
+        };
+      }
       if (!state.book) { await load(state.unit); return; }
       renderUnitPicker();
       renderList();

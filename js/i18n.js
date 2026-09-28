@@ -278,7 +278,14 @@ function tr(obj, base) {
     if (typeof localized === 'string' && localized.trim()) return localized;
   }
   const v = obj[field];
-  return typeof v === 'string' ? v : (v === undefined || v === null ? '' : String(v));
+  const out = typeof v === 'string' ? v : (v === undefined || v === null ? '' : String(v));
+  // Written in Vietnamese in the admin and not yet given its English (enTodo, see
+  // admin/public/js/viFirst.js): the Vietnamese stands in rather than leaving a blank.
+  if (!out.trim()) {
+    const draft = obj[hvLangField(field, 'vi')];
+    if (typeof draft === 'string' && draft.trim()) return draft;
+  }
+  return out;
 }
 
 /** Both halves at once, for the places that show the gloss under the Korean. */
@@ -406,7 +413,13 @@ function hvLocalize(rel, data, lang) {
       if (HV_TEXT_FIELDS.indexOf(field) < 0) continue;
       if (!hvIsTranslatable(value, field)) continue;
       const hit = entries[hvKey(field, value)];
-      if (typeof hit === 'string' && hit.trim()) node[hvLangField(field, code)] = hit;
+      // A translation already on the object came with the file: Vietnamese an author wrote in
+      // the admin whose English has not been rewritten yet (admin/public/js/viFirst.js). It is
+      // newer than anything the catalogue files under the old English, so it stands.
+      const target = hvLangField(field, code);
+      const own = node[target];
+      if (typeof own === 'string' && own.trim()) continue;
+      if (typeof hit === 'string' && hit.trim()) node[target] = hit;
     }
   }(data));
   return data;

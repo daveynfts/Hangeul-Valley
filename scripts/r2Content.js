@@ -178,6 +178,18 @@ function collectUploadFiles(root) {
     walkLocales(localesDir, '');
   }
 
+  // Pictures uploaded through the admin Designer. vercel.json rewrites /media/* to the CDN like
+  // the worlds, so one left off this batch would 404 on production however it looks locally.
+  // Named by their content's hash, so a re-upload of an unchanged file is skipped as usual.
+  const mediaDir = path.join(base, 'media');
+  if (fs.existsSync(mediaDir)) {
+    const MEDIA_TYPES = { png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', webp: 'image/webp', gif: 'image/gif' };
+    fs.readdirSync(mediaDir).sort().forEach((f) => {
+      const ctype = MEDIA_TYPES[String(f).split('.').pop().toLowerCase()];
+      if (ctype && fs.statSync(path.join(mediaDir, f)).isFile()) addFile(out, seen, 'media/' + f, ctype);
+    });
+  }
+
   const spriteCat = path.join(base, 'sprites', 'catalog.json');
   if (fs.existsSync(spriteCat)) {
     const pack = JSON.parse(fs.readFileSync(spriteCat, 'utf8'));

@@ -18,9 +18,18 @@
     quiz: null,
     qIndex: -1,
     world: null,
+    // The Vietnamese catalogues of the open quiz and word list: the prose is written here in
+    // Vietnamese and Claude writes the English (docs/vietnamese-first.md).
+    quizCat: null,
+    worldCat: null,
     // Korean headword -> sprite preview URL, built once from the art catalogue.
     artByKo: null
   };
+  const VF = () => window.HVViFirst;
+  const VFD = () => window.HVViField;
+  const T = (s, vars) => (typeof window.T === 'function' ? window.T(s, vars) : String(s));
+  const quizEntries = () => (state.quizCat && state.quizCat.entries) || {};
+  const worldEntries = () => (state.worldCat && state.worldCat.entries) || {};
 
   function farmToMap(ox, oy) {
     return { x: MAP.ox + ox * MAP.scale, y: MAP.oy + oy * MAP.scale };
@@ -139,16 +148,22 @@
     });
   }
 
-  function renderQuiz() {
+  // The table only: typing in the editor redraws this, never the editor it is typing in.
+  function renderQuizTable() {
     if (!state.quiz) return;
-    document.getElementById('u10-session-size').value = state.quiz.sessionSize || 5;
     const qs = state.quiz.questions || [];
-    document.getElementById('u10-quiz-count').textContent = qs.length + ' questions in bank';
+    document.getElementById('u10-quiz-count').textContent = T('{n} questions in bank', { n: qs.length });
     const body = document.getElementById('u10-quiz-tbody');
+    const prompt = (q) => {
+      const shown = VF().isProse(q, 'q') ? (VF().viOf(q, 'q', quizEntries()) || q.q) : q.q;
+      const owes = VFD().owed(q) > 0;
+      return (shown ? escapeHtml(shown) : '<i class="text-muted">' + escapeHtml(T('(new question)')) + '</i>')
+        + (owes ? ' <em class="vf-owe-dot" title="' + escapeAttr(T('Waiting for Claude’s English')) + '">⏳</em>' : '');
+    };
     body.innerHTML = qs.map((q, i) => (
       '<tr data-i="' + i + '"' + (i === state.qIndex ? ' class="selected"' : '') + '>' +
       '<td>' + (i + 1) + '</td>' +
-      '<td>' + escapeHtml(q.q) + '</td>' +
+      '<td>' + prompt(q) + '</td>' +
       '<td>' + q.a + '</td>' +
       '<td><button class="btn btn-secondary btn-sm" data-del="' + i + '">✕</button></td></tr>'
     )).join('');
@@ -156,7 +171,6 @@
       tr.addEventListener('click', (e) => {
         if (e.target.dataset.del != null) return;
         state.qIndex = Number(tr.dataset.i);
-        fillQuizEditor();
         renderQuiz();
       });
     });
@@ -170,9 +184,17 @@
         renderQuiz();
       });
     });
+  }
+
+  function renderQuiz() {
+    if (!state.quiz) return;
+    document.getElementById('u10-session-size').value = state.quiz.sessionSize || 5;
+    renderQuizTable();
     fillQuizEditor();
   }
 
+  // The prompt and each answer: Vietnamese with Claude's English under it when it is prose,
+  // the Korean itself when it is a Korean answer — and 한 | VI to say which a new one is.
   function fillQuizEditor() {
     const fields = document.getElementById('u10-quiz-fields');
     const empty = document.getElementById('u10-quiz-empty');
@@ -184,35 +206,35 @@
     }
     empty.classList.add('hidden');
     fields.classList.remove('hidden');
-    document.getElementById('u10-q-text').value = q.q;
+    q.choices = q.choices || { A: '', B: '', C: '', D: '' };
+    const opt = { entries: quizEntries(), korean: true };
+    document.getElementById('u10-q-prompt').innerHTML =
+      VFD().html(q, 'q', Object.assign({ ref: 'q', label: 'Prompt', multiline: true, rows: 3 }, opt));
+    document.getElementById('u10-q-choices').innerHTML = ['A', 'B', 'C', 'D']
+      .map((k) => VFD().html(q.choices, k, Object.assign({ ref: 'c', label: k }, opt))).join('');
     document.getElementById('u10-q-key').value = q.a;
-    ['A', 'B', 'C', 'D'].forEach((k) => {
-      document.getElementById('u10-q-' + k).value = q.choices[k] || '';
+    VFD().bind(fields, {
+      resolve: (ref) => (ref === 'q' ? q : q.choices),
+      entries: quizEntries,
+      onChange: () => renderQuizTable()
     });
   }
 
   function readQuizEditor() {
     const q = state.quiz && state.quiz.questions[state.qIndex];
     if (!q) return;
-    q.q = document.getElementById('u10-q-text').value;
     q.a = document.getElementById('u10-q-key').value;
-    q.choices = {
-      A: document.getElementById('u10-q-A').value,
-      B: document.getElementById('u10-q-B').value,
-      C: document.getElementById('u10-q-C').value,
-      D: document.getElementById('u10-q-D').value
-    };
   }
 
   function bindQuiz() {
     const box = document.getElementById('u10-quiz-fields');
     if (!box || box._bound) return;
     box._bound = true;
-    box.addEventListener('input', () => { readQuizEditor(); renderQuiz(); });
+    document.getElementById('u10-q-key').addEventListener('change', () => { readQuizEditor(); renderQuizTable(); });
     document.getElementById('u10-add-q').addEventListener('click', () => {
       const nextId = Math.max(0, ...state.quiz.questions.map((q) => q.id || 0)) + 1;
       state.quiz.questions.push({
-        id: nextId, q: 'New question', a: 'A',
+        id: nextId, q: '', a: 'A',
         choices: { A: '', B: '', C: '', D: '' }
       });
       state.qIndex = state.quiz.questions.length - 1;
@@ -223,7 +245,8 @@
       state.quiz.sessionSize = Number(document.getElementById('u10-session-size').value) || 5;
       const saved = await window.apiFetch.saveContent(currentUnit().quiz, state.quiz);
       state.quiz = saved.data.body;
-      window.Toast.success(currentUnit().label + ' quiz saved (' + state.quiz.questions.length + ' questions)');
+      window.Toast.success(escapeHtml(T('{unit} quiz saved ({n} questions)', { unit: currentUnit().label, n: state.quiz.questions.length })));
+      VFD().toastOwed(VFD().owed(state.quiz));
       renderQuiz();
     });
   }
@@ -238,45 +261,89 @@
     const prev = sel.value;
     sel.innerHTML = '<option value="">All groups</option>' + cats.map((c) => '<option>' + escapeHtml(c) + '</option>').join('');
     sel.value = prev;
+    const vi = (w, f) => VF().viOf(w, f, worldEntries());
     const rows = words.map((w, i) => ({ w, i })).filter(({ w }) => {
       if (cat && w.category !== cat) return false;
       if (!q) return true;
-      return (w.ko + ' ' + w.en + ' ' + (w.categoryEn || '') + ' ' + (w.example || ''))
+      return (w.ko + ' ' + w.en + ' ' + (w.categoryEn || '') + ' ' + (w.example || '') + ' '
+        + vi(w, 'en') + ' ' + vi(w, 'categoryEn') + ' ' + vi(w, 'exampleEn'))
         .toLowerCase().includes(q);
     });
-    document.getElementById('u10-word-count').textContent = rows.length + ' / ' + words.length + ' words';
+    document.getElementById('u10-word-count').textContent = T('{a} / {b} words', { a: rows.length, b: words.length });
     const body = document.getElementById('u10-words-tbody');
+    // The gloss, the group name and the example's translation are written in Vietnamese; the
+    // English Claude writes from them sits under each box.
+    const viCell = (w, i, f) => '<td class="vf-cell">' + VFD().html(w, f, { ref: 'w' + i, compact: true, entries: worldEntries() }) + '</td>';
     body.innerHTML = rows.map(({ w, i }) => (
       '<tr data-i="' + i + '">' +
       '<td>' + (i + 1) + '</td>' +
       wordArtCell(w.ko) +
       '<td><input class="form-input" data-f="ko" value="' + escapeAttr(w.ko) + '"></td>' +
-      '<td><input class="form-input" data-f="en" value="' + escapeAttr(w.en) + '"></td>' +
+      viCell(w, i, 'en') +
       '<td><input class="form-input" data-f="hint" value="' + escapeAttr(w.hint || '') + '"></td>' +
       '<td><input class="form-input" data-f="category" value="' + escapeAttr(w.category) + '"></td>' +
-      '<td><input class="form-input" data-f="categoryEn" value="' + escapeAttr(w.categoryEn) + '"></td>' +
+      viCell(w, i, 'categoryEn') +
       '<td><input class="form-input" data-f="example" value="' + escapeAttr(w.example || '') + '" placeholder="—"></td>' +
-      '<td><input class="form-input" data-f="exampleEn" value="' + escapeAttr(w.exampleEn || '') + '" placeholder="—"></td>' +
+      viCell(w, i, 'exampleEn') +
       '<td><button class="btn btn-secondary btn-sm" data-del="' + i + '">✕</button></td></tr>'
     )).join('');
-    body.querySelectorAll('input').forEach((inp) => {
+    body.querySelectorAll('input[data-f]').forEach((inp) => {
       inp.addEventListener('input', () => {
         const i = Number(inp.closest('tr').dataset.i);
         const field = inp.dataset.f;
         // An example that has been cleared is a word with no example, not a word with an
         // empty one. The optional fields come off the object rather than being stored blank,
         // so "has an example" stays a question about whether the key is there.
-        if ((field === 'example' || field === 'exampleEn') && !inp.value.trim()) {
+        if (field === 'example' && !inp.value.trim()) {
           delete state.world.level.words[i][field];
           return;
         }
         state.world.level.words[i][field] = inp.value;
       });
     });
+    VFD().bind(body, {
+      resolve: (ref) => words[Number(ref.slice(1))],
+      entries: worldEntries,
+      onChange: (w, field, what) => {
+        // A cleared example translation is no translation, as a cleared example is none.
+        if (field === 'exampleEn' && what === 'vi' && !VF().draftOf(w, 'exampleEn') && !String(w.exampleEn || '').trim()) {
+          delete w.exampleEn;
+        }
+        // A group is named once for all its words: the Vietnamese typed on one row is the
+        // group's, so every word filed under the same name follows it.
+        if (field === 'categoryEn') shareGroupName(w, what);
+      }
+    });
     body.querySelectorAll('[data-del]').forEach((btn) => {
       btn.addEventListener('click', () => {
         state.world.level.words.splice(Number(btn.dataset.del), 1);
         renderWords();
+      });
+    });
+  }
+
+  function shareGroupName(from, what) {
+    const words = state.world.level.words || [];
+    const name = from.categoryEn;
+    const vi = VF().draftOf(from, 'categoryEn');
+    const owes = VF().list(from, VF().TODO).indexOf('categoryEn') >= 0;
+    const read = VF().list(from, VF().AI).indexOf('categoryEn') < 0;
+    words.forEach((w, i) => {
+      if (w === from || w.category !== from.category || w.categoryEn !== name) return;
+      if (what === 'vi') VF().setVi(w, 'categoryEn', vi || VF().filedOf(w, 'categoryEn', worldEntries()), worldEntries());
+      else if (what === 'ask' && owes) VF().requestEnglish(w, 'categoryEn');
+      else if (what === 'keep' && !owes) VF().cancelRequest(w, 'categoryEn');
+      else if (what === 'read' && read) VF().markReviewed(w, 'categoryEn');
+      else return;
+      // Redraw the rows that followed, leaving the box being typed in alone.
+      const cell = document.querySelector('#u10-words-tbody .vf[data-vf="w' + i + '"][data-vf-field="categoryEn"]');
+      if (!cell) return;
+      const td = cell.parentNode;
+      td.innerHTML = VFD().html(w, 'categoryEn', { ref: 'w' + i, compact: true, entries: worldEntries() });
+      VFD().bind(td, {
+        resolve: (ref) => words[Number(ref.slice(1))],
+        entries: worldEntries,
+        onChange: (w2, field, what2) => { if (field === 'categoryEn') shareGroupName(w2, what2); }
       });
     });
   }
@@ -297,7 +364,8 @@
       // read off what was actually stored rather than off a field the old route happened to
       // return. It said 'undefined words' for exactly as long as nobody looked.
       const n = ((saved.data.body || {}).level || {}).words || [];
-      window.Toast.success(currentUnit().label + ' word list saved (' + n.length + ' words)');
+      window.Toast.success(escapeHtml(T('{unit} word list saved ({n} words)', { unit: currentUnit().label, n: n.length })));
+      VFD().toastOwed(VFD().owed(saved.data.body));
     });
   }
 
@@ -338,6 +406,12 @@
     state.layout = layout.data.body;
     state.world = world.data.body;
     state.quiz = quiz ? quiz.data.body : null;
+    const [worldCat, quizCat] = await Promise.all([
+      VFD().loadCatalog(world.data.rel),
+      quiz ? VFD().loadCatalog(quiz.data.rel) : Promise.resolve(null)
+    ]);
+    state.worldCat = worldCat;
+    state.quizCat = quizCat;
     await loadArtIndex();
   }
 
@@ -396,7 +470,7 @@
     const btn = document.querySelector('.u10-subbtn[data-panel="quiz"]');
     if (btn) {
       btn.disabled = !hasQuiz;
-      btn.title = hasQuiz ? '' : currentUnit().label + ' has no desk quiz.';
+      btn.title = hasQuiz ? '' : T('{unit} has no desk quiz.', { unit: currentUnit().label });
       btn.classList.toggle('is-unavailable', !hasQuiz);
     }
   }

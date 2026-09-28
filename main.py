@@ -63,6 +63,8 @@ ALLOWED_DIRS = frozenset({
     # and whole units in English under the Vietnamese interface with nothing saying why.
     # tests/test_desktop_allowlist.js checks this list against every folder vercel.json serves.
     'locales',
+    # Pictures uploaded through the admin Designer and placed on pages by a design.
+    'media',
 })
 
 os.makedirs(DATA_DIR, exist_ok=True)

@@ -4939,6 +4939,101 @@ function resetWorkbook() {
   renderWorkbook();
 }
 
+// ── Formatting written in the admin designer ─────────────────────────────────
+// A bank can carry formatting beside its text: `fmt` on any object with text in it (a size, a
+// box, bold and colour inside the sentence, a meaning to hover) and `design` on a page or a
+// whole bank (theme, width, zoom, columns, font, glossary, and blocks of text and pictures
+// between the page's own sections). js/richText.js reads both; docs/content-designer.md says
+// how they are stored. Every read goes through the helpers below, and each falls back to
+// exactly what the page drew before when there is nothing to apply — so a bank nobody has
+// formatted renders byte for byte as it always has, and so does every bank when richText.js
+// is not loaded.
+const WB_BLOCK_ANCHORS = ['top', 'instruction', 'example', 'items', 'explain', 'bottom'];
+let wbDesignApplied = [];
+let wbDesignMemo = null;
+
+function wbRich() {
+  return (typeof HVRich === 'object' && HVRich && typeof HVRich.field === 'function') ? HVRich : null;
+}
+function wbLang() {
+  return typeof hvLang === 'function' ? hvLang() : 'en';
+}
+// One field as HTML: formatted when the object carries formatting for it, escaped otherwise.
+function wbFmt(obj, name, shown, block) {
+  const R = wbRich();
+  const out = R ? R.field(obj, name, shown, { lang: wbLang(), block: !!block }) : null;
+  return out === null ? vbEsc(shown) : out;
+}
+// The same for a line with {} gaps in it: its pieces, or null to split the plain text.
+function wbFmtParts(obj, name, shown) {
+  const R = wbRich();
+  return R ? R.fieldParts(obj, name, shown, { lang: wbLang() }) : null;
+}
+function wbFmtParagraphs(obj, name, shown) {
+  const R = wbRich();
+  return R ? R.fieldParagraphs(obj, name, shown, { lang: wbLang() }) : null;
+}
+// Is the field drawn as a box of its own? The note above a page and the grammar card are
+// boxes already, and a box drawn inside a box reads as a mistake, so they step aside.
+function wbFmtBoxed(obj, name) {
+  const R = wbRich();
+  const spec = R ? R.specOf(obj, name) : null;
+  return !!(spec && R.BOXES.indexOf(spec.box) >= 0);
+}
+// A question row given a look of its own ("*" in its fmt): classes for the row element.
+function wbRowClasses(item) {
+  const R = wbRich();
+  const spec = R && item && item.fmt ? item.fmt['*'] : null;
+  const cls = spec ? R.specClasses(spec) : '';
+  return cls ? ' ' + cls : '';
+}
+// The page's design: the bank's settings with the open exercise's own on top.
+function wbDesign() {
+  const st = workbookState;
+  const R = wbRich();
+  if (!st || !R) return null;
+  const ex = st.mode === 'pick' ? null : st.ex;
+  const bankDesign = st.bank && st.bank.design;
+  const exDesign = ex && ex.design;
+  const m = wbDesignMemo;
+  if (m && m.bankDesign === bankDesign && m.exDesign === exDesign) return m.design;
+  wbDesignMemo = { bankDesign, exDesign, design: R.mergeDesign(bankDesign, exDesign) };
+  return wbDesignMemo.design;
+}
+function wbGlossMode() {
+  const R = wbRich();
+  return R ? R.glossMode(wbDesign()) : 'checked';
+}
+// Theme, width, zoom, columns and font go on the panel as classes (css/rich.css); the blocks
+// go into the hosts between the page's sections. A host is only rewritten when its HTML
+// changes, because the page re-renders on every click and a picture would flicker with it.
+function wbApplyDesign() {
+  const st = workbookState;
+  const R = wbRich();
+  const d = wbDesign();
+  const panel = $('workbook-panel');
+  if (panel && panel.classList) {
+    wbDesignApplied.forEach((c) => panel.classList.remove(c));
+    wbDesignApplied = (R && d) ? R.designClasses(d) : [];
+    wbDesignApplied.forEach((c) => panel.classList.add(c));
+    if (panel.style && typeof panel.style.setProperty === 'function') {
+      if (R && d && R.designScale(d) !== 1) panel.style.setProperty('--hv-scale', String(R.designScale(d)));
+      else if (typeof panel.style.removeProperty === 'function') panel.style.removeProperty('--hv-scale');
+    }
+  }
+  if (R && d && d.font) R.ensureFonts([d.font]);
+  const pick = !!(st && st.mode === 'pick');
+  const bankBlocks = (st && st.bank && st.bank.design && st.bank.design.blocks) || [];
+  const blocks = !R ? [] : (pick ? bankBlocks : ((d && d.blocks) || []));
+  const opts = { lang: wbLang(), checked: !!(st && st.checked) };
+  WB_BLOCK_ANCHORS.forEach((anchor) => {
+    const host = $('wb-blocks-' + anchor);
+    if (!host) return;
+    const html = R ? R.blocksHtml(blocks, anchor, opts) : '';
+    if (host.innerHTML !== html) host.innerHTML = html;
+  });
+}
+
 // ── Hover glosses on the answer view ─────────────────────────────────────────
 // Reading the explanation is where a hard word actually stops you: the right answer is on
 // screen and you still cannot see why, because one word in the sentence means nothing yet.
@@ -4956,14 +5051,33 @@ function resetWorkbook() {
 //     saying nothing, because a wrong gloss still looks like an answer.
 let wbGlossIndex = null;
 let wbGlossFor = null;
+let wbGlossSig = '';
 
 function wbReEsc(s) { return String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 
+// A page's design can add to the dictionary — a glossary written for that page, whose entries
+// beat the world's own gloss for the same word — and take words out of it, for the word a
+// question is testing. Written to stand on its own, because tests/test_topik_map.js lifts this
+// region out of the file and runs it with nothing else loaded.
+function wbGlossDesign() {
+  const R = (typeof HVRich === 'object' && HVRich && typeof HVRich.glossEntries === 'function') ? HVRich : null;
+  const design = (R && typeof wbDesign === 'function') ? wbDesign() : null;
+  const lang = typeof hvLang === 'function' ? hvLang() : 'en';
+  return {
+    extra: design ? R.glossEntries(design, lang) : [],
+    hide: new Set((design && design.glossHide) || [])
+  };
+}
+
+// The index is rebuilt when the words or the design's additions change, not on every render.
 function wbGlossTable() {
   const lvl = (typeof currentLesson === 'function') ? currentLesson() : null;
   const words = (lvl && lvl.words) || [];
-  if (wbGlossFor === words) return wbGlossIndex;
+  const { extra, hide } = wbGlossDesign();
+  const sig = extra.map((g) => g.ko + '\u0001' + g.gloss).join('\u0002') + '\u0003' + [...hide].join('\u0002');
+  if (wbGlossFor === words && wbGlossSig === sig) return wbGlossIndex;
   const map = new Map();
+  extra.forEach((g) => { if (g.ko.length >= 2 && !map.has(g.ko)) map.set(g.ko, g.gloss); });
   words.forEach((w) => {
     const gloss = String((w && tr(w, 'en')) || '').trim();
     if (!gloss) return;
@@ -4976,12 +5090,13 @@ function wbGlossTable() {
       const key = String(k || '').trim();
       // Two characters minimum: a single syllable matches half the sentence and the
       // explanation turns into a wall of dotted underlines.
-      if (key.length < 2 || map.has(key)) return;
+      if (key.length < 2 || map.has(key) || hide.has(key)) return;
       map.set(key, gloss);
     });
   });
   const keys = [...map.keys()].sort((a, b) => b.length - a.length);
   wbGlossFor = words;
+  wbGlossSig = sig;
   wbGlossIndex = keys.length
     ? { map, re: new RegExp(keys.map(wbReEsc).join('|'), 'g') }
     : null;
@@ -5046,11 +5161,15 @@ function wbLineHtml(ex, item, chipText, opts) {
     const texts = [chipText || '', o.second || ''];
     let slot = 0;
     return (item.lines || []).map((line) => {
-      const parts = String(line.ko || '').split('{}');
-      let html = vbEsc(parts[0] || '');
+      // A formatted line comes back as HTML pieces already; a plain one is split and escaped.
+      const rich = wbFmtParts(line, 'ko', line.ko || '');
+      const parts = rich ? rich.parts : String(line.ko || '').split('{}');
+      const piece = (s) => (rich ? (s || '') : vbEsc(s || ''));
+      let html = piece(parts[0]);
       for (let k = 1; k < parts.length; k++) {
-        html += mkBlank(texts[slot++]) + vbEsc(parts[k] || '');
+        html += mkBlank(texts[slot++]) + piece(parts[k]);
       }
+      if (rich) html = rich.open + html + rich.close;
       // A speaker is usually one letter — A, B, T, S — and the chip is a 19px box
       // sized for exactly that, at 8px type. Unit 10's 연습 5 keeps the names the
       // book prints on its lines, 정우 and 스티븐, and three syllables at 8px are
@@ -5069,7 +5188,7 @@ function wbLineHtml(ex, item, chipText, opts) {
     // too would answer the row.
     const left = item.img
       ? '<img class="wb-photo" src="/' + vbEsc(item.img) + '" alt="" loading="lazy">'
-      : vbEsc(item.stemKo);
+      : wbFmt(item, 'stemKo', item.stemKo);
     return '<span class="wb-left">' + left + '</span>' +
       '<span class="wb-join">→</span>' + blank;
   }
@@ -5081,7 +5200,7 @@ function wbLineHtml(ex, item, chipText, opts) {
       : (ownText
           ? '<b class="wb-blank filled own">' + vbEsc(ownText) + '</b>'
           : '<span class="wb-blank empty own">&nbsp;</span>');
-    return ('저는 ' + vbEsc(item.stemKo) + ' ' + blank
+    return ('저는 ' + wbFmt(item, 'stemKo', item.stemKo) + ' ' + blank
       + ' 적이 ' + ownBlank + '.');
   }
   // A fill sentence usually ends in its blank, so the plain prompt gets one
@@ -5089,10 +5208,12 @@ function wbLineHtml(ex, item, chipText, opts) {
   // 좋아서… — the prompt marks it with {} instead.
   const stem = String(item.stemKo || '');
   if (stem.indexOf('{}') >= 0) {
+    const rich = wbFmtParts(item, 'stemKo', stem);
+    if (rich) return rich.open + (rich.parts[0] || '') + blank + rich.parts.slice(1).join('') + rich.close;
     const parts = stem.split('{}');
     return vbEsc(parts[0] || '') + blank + vbEsc(parts.slice(1).join('') || '');
   }
-  return vbEsc(stem) + ' ' + blank + '.';
+  return wbFmt(item, 'stemKo', stem) + ' ' + blank + '.';
 }
 
 // The book records these drills and a drill is meant to be heard, so an exercise
@@ -5296,8 +5417,10 @@ function wbWhyParagraphs(value) {
 function wbTopikWhyHtml(ex, item, view) {
   // Through tr(), not off the object. Both cards are curriculum prose with a catalogue
   // behind them, and reading the raw field is how a fully translated explanation still
-  // arrived in English.
-  const parts = wbWhyParagraphs(tr(item, 'why'));
+  // arrived in English. A formatted explanation arrives already split and already HTML;
+  // a plain one is split on its blank lines and escaped here.
+  const parts = wbFmtParagraphs(item, 'why', tr(item, 'why'))
+    || wbWhyParagraphs(tr(item, 'why')).map(vbEsc);
   const lead = parts.shift() || '';
   const detail = parts;
   const state = view.ok ? '정답 · CORRECT' : '다시 보기 · REVIEW';
@@ -5306,7 +5429,7 @@ function wbTopikWhyHtml(ex, item, view) {
         '<summary><span>선택지 비교 · FULL REASONING</span><b>' + detail.length + '단계</b></summary>' +
         '<div class="wb-analysis-list">' + detail.map((p, k) =>
           '<div class="wb-analysis-step"><span>' + String(k + 1).padStart(2, '0') + '</span>' +
-          '<p>' + vbEsc(p) + '</p></div>').join('') + '</div>' +
+          '<p>' + p + '</p></div>').join('') + '</div>' +
       '</details>'
     : '';
   return '<article class="wb-why wb-why-topik ' + (view.ok ? 'ok' : 'bad') + '">' +
@@ -5316,12 +5439,12 @@ function wbTopikWhyHtml(ex, item, view) {
         plain: true, own: view.own, second: view.correct2 ? wbAnswerText(view.correct2) : ''
       }) + '</div>' +
     (view.ok ? '' : '<div class="wb-why-yours">내 답 · YOU PUT: ' + vbEsc(view.yours) + '</div>') +
-    '<div class="wb-topik-meaning"><span>뜻 · MEANING</span><p>' + vbEsc(tr(item, 'en') || '') + '</p></div>' +
+    '<div class="wb-topik-meaning"><span>뜻 · MEANING</span><p>' + wbFmt(item, 'en', tr(item, 'en') || '') + '</p></div>' +
     '<div class="wb-learn-grid">' +
       (lead ? '<section class="wb-learn-card wb-learn-clue"><span>01 · 핵심 단서 · WHAT TO NOTICE</span>' +
-        '<p>' + vbEsc(lead) + '</p></section>' : '') +
+        '<p>' + lead + '</p></section>' : '') +
       (tr(item, 'grammar') ? '<section class="wb-learn-card wb-learn-rule"><span>02 · 문법 포인트 · RULE</span>' +
-        '<p>' + vbEsc(tr(item, 'grammar')) + '</p></section>' : '') +
+        '<p>' + wbFmt(item, 'grammar', tr(item, 'grammar')) + '</p></section>' : '') +
     '</div>' + detailHtml +
   '</article>';
 }
@@ -5362,9 +5485,10 @@ function renderWorkbook() {
     const drawn = (st.bank && st.bank.drawOne) ? (ex.items || [])[0] : null;
     const head = (drawn && drawn.instructionKo) ? drawn : ex;
     inst.innerHTML =
-      '<div class="wb-inst-ko">' + vbEsc(head.instructionKo || '') + '</div>' +
-      '<div class="wb-inst-en">' + vbEsc(tr(head, 'instructionEn') || '') + '</div>' +
-      (ex.noteEn ? '<div class="wb-inst-note">' + vbEsc(tr(ex, 'noteEn')) + '</div>' : '') +
+      '<div class="wb-inst-ko">' + wbFmt(head, 'instructionKo', head.instructionKo || '', true) + '</div>' +
+      '<div class="wb-inst-en">' + wbFmt(head, 'instructionEn', tr(head, 'instructionEn') || '', true) + '</div>' +
+      (ex.noteEn ? '<div class="wb-inst-note' + (wbFmtBoxed(ex, 'noteEn') ? ' hv-unboxed' : '') + '">'
+        + wbFmt(ex, 'noteEn', tr(ex, 'noteEn'), true) + '</div>' : '') +
       ((ex.visualGuide && typeof workbookIconSvg === 'function')
         ? '<div class="wb-visual-guide">' + ex.visualGuide.map(p =>
           '<figure>' + workbookIconSvg(p.art, 7) + '<figcaption>' + vbEsc(p.ko) + '</figcaption></figure>'
@@ -5385,7 +5509,7 @@ function renderWorkbook() {
         '<span class="wb-example-tag">[보기]</span> ' +
         wbLineHtml(ex, ex.example, filled,
           { plain: true, second: ex.example.answer2Ko || '' }) +
-        '<div class="wb-example-en">' + vbEsc(tr(ex.example, 'en') || '') + '</div>';
+        '<div class="wb-example-en">' + wbFmt(ex.example, 'en', tr(ex.example, 'en') || '') + '</div>';
       // The worked example is the one place the finished Korean is already on
       // screen, so hearing it gives nothing away.
       if (ex.type === 'build') {
@@ -5449,7 +5573,8 @@ function renderWorkbook() {
       row.className = 'wb-row'
         + (item.img ? ' photo' : '')
         + (!st.checked && i === st.focus ? ' focus' : '')
-        + (right ? ' ok' : '') + (wrong ? ' bad' : '');
+        + (right ? ' ok' : '') + (wrong ? ' bad' : '')
+        + wbRowClasses(item);
 
       if (wbPerItem(ex)) {
         // Its own row shape: the picture and the dictionary phrase name the task,
@@ -5479,8 +5604,8 @@ function renderWorkbook() {
         // so can one row — a question on a culture page whose gloss ends "— Winter."
         const holdGloss = !!((st.bank && st.bank.holdGloss) || ex.holdGloss || item.holdGloss) && !st.checked;
         head.innerHTML = art +
-          '<span class="wb-exp-phrase">' + vbEsc(item.phraseKo || '') + '</span>' +
-          (holdGloss ? '' : '<span class="wb-exp-en">' + vbEsc(tr(item, 'en') || '') + '</span>');
+          '<span class="wb-exp-phrase">' + wbFmt(item, 'phraseKo', item.phraseKo || '') + '</span>' +
+          (holdGloss ? '' : '<span class="wb-exp-en">' + wbFmt(item, 'en', tr(item, 'en') || '') + '</span>');
         // And the same row keeps its voice until then. With no recording of its own the button
         // reads the row out with the right answers in it — the drill's model, and on a held row
         // the key — so a held row without a clip gets the button once it has been checked.
@@ -5524,11 +5649,11 @@ function renderWorkbook() {
               + (picked === c.id ? ' on' : '')
               + (st.checked && c.id === answer ? ' key' : '');
             b.disabled = st.checked;
-            b.innerHTML = '<span class="wb-chip-key">' + (++key) + '</span>' + vbEsc(c.ko);
+            b.innerHTML = '<span class="wb-chip-key">' + (++key) + '</span>' + wbFmt(c, 'ko', c.ko);
             if (c.art && typeof workbookIconSvg === 'function') {
               b.className += ' wb-pick-picture';
               b.innerHTML = '<span class="wb-chip-key">' + key + '</span>' +
-                workbookIconSvg(c.art, 7) + '<span>' + vbEsc(c.ko) + '</span>';
+                workbookIconSvg(c.art, 7) + '<span>' + wbFmt(c, 'ko', c.ko) + '</span>';
             }
             b.onclick = () => wbPickChoice(i, c.id, slot);
             picks.appendChild(b);
@@ -5616,7 +5741,16 @@ function renderWorkbook() {
     // Hoverable meanings over the question and the options too, but only once the answer is
     // out. Before that the gloss would underline exactly the words the question turns on —
     // 만, 안심하고 — and marking them as the hard ones is most of the way to answering it.
-    if (st.checked) wbApplyGloss(list);
+    // A page designed as a reading aid can ask for them up front ('always'), or for none
+    // ('off'); scripts/validate_content.js refuses 'always' on an exam bank.
+    const glossMode = wbGlossMode();
+    if (glossMode === 'checked') {
+      if (st.checked) wbApplyGloss(list);
+    } else if (glossMode === 'always') {
+      wbApplyGloss(list);
+      if (inst) wbApplyGloss(inst);
+      if (exBox && ex.example) wbApplyGloss(exBox);
+    }
   }
 
   const explain = $('wb-explain');
@@ -5650,15 +5784,18 @@ function renderWorkbook() {
               { plain: true, own: st.own && st.own[i],
                 second: correct2 ? wbAnswerText(correct2) : '' }) + '</div>' +
           (ok ? '' : '<div class="wb-why-yours">' + vbEsc(hvT('ui.wb.youPut')) + ' ' + vbEsc(yours) + '</div>') +
-          '<div class="wb-why-en">' + vbEsc(tr(item, 'en') || '') + '</div>' +
-          '<div class="wb-why-body">' + vbEsc(tr(item, 'why')) + '</div>' +
-          '<div class="wb-why-gram">📐 ' + vbEsc(tr(item, 'grammar')) + '</div>' +
+          '<div class="wb-why-en">' + wbFmt(item, 'en', tr(item, 'en') || '') + '</div>' +
+          '<div class="wb-why-body">' + wbFmt(item, 'why', tr(item, 'why'), true) + '</div>' +
+          '<div class="wb-why-gram' + (wbFmtBoxed(item, 'grammar') ? ' hv-unboxed' : '') + '">📐 '
+            + wbFmt(item, 'grammar', tr(item, 'grammar'), true) + '</div>' +
         '</div>';
       }).join('');
-      // Every headword this world teaches becomes hoverable inside the explanation.
-      wbApplyGloss(explain);
+      // Every headword this world teaches becomes hoverable inside the explanation — unless
+      // the page's design has turned the automatic meanings off.
+      if (wbGlossMode() !== 'off') wbApplyGloss(explain);
     }
   }
+  wbApplyDesign();
 
   const hint = $('wb-hint');
   if (hint) {
@@ -5709,8 +5846,8 @@ function renderWorkbookPicker() {
   const inst = $('wb-instruction');
   if (inst) {
     inst.innerHTML =
-      '<div class="wb-inst-ko">' + vbEsc(st.bank.pickKo || '어떤 연습을 할까요?') + '</div>' +
-      '<div class="wb-inst-en">' + vbEsc(tr(st.bank, 'pickEn') || '') + '</div>';
+      '<div class="wb-inst-ko">' + wbFmt(st.bank, 'pickKo', st.bank.pickKo || '어떤 연습을 할까요?', true) + '</div>' +
+      '<div class="wb-inst-en">' + wbFmt(st.bank, 'pickEn', tr(st.bank, 'pickEn') || '', true) + '</div>';
   }
   const exBox = $('wb-example');
   if (exBox) { exBox.innerHTML = ''; exBox.className = 'wb-hidden'; }
@@ -5756,7 +5893,9 @@ function renderWorkbookPicker() {
                 '<span class="wb-pick-no">' + vbEsc(ex.no || '') + '</span>'
               : '<b class="wb-pick-name">' + vbEsc(ex.no || '') + '</b>') +
           '</span>' +
-          '<span class="wb-pick-en">' + vbEsc(tr(ex, 'blurbEn') || tr(ex, 'instructionEn') || '') + '</span>' +
+          '<span class="wb-pick-en">' + (tr(ex, 'blurbEn')
+            ? wbFmt(ex, 'blurbEn', tr(ex, 'blurbEn'))
+            : vbEsc(tr(ex, 'instructionEn') || '')) + '</span>' +
         '</span>' +
         '<span class="wb-pick-count">' +
           (st.bank.drawOne && (ex.items || []).length > 1
@@ -5774,6 +5913,7 @@ function renderWorkbookPicker() {
   if (back) back.className = 'wb-hidden';
   const btn = $('wb-check');
   if (btn) { btn.className = 'wb-hidden'; btn.onclick = null; }
+  wbApplyDesign();
 }
 
 // Keyboard for both desk screens. Escape is deliberately left alone — the modal
