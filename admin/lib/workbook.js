@@ -342,6 +342,12 @@ function cleanExercise(ex, i, seenIds) {
   const no = str(ex.no);
   if (!no) throw new Error(`${where}: needs a 연습 number`);
   if (!str(ex.instructionKo)) throw new Error(`${where}: needs the Korean instruction`);
+  // The English under the section heading. "Vocabulary" is the English for the default section,
+  // so it only stands in under 어휘 — as the fallback for any group without an English label, a
+  // save gave the TOPIK bank's 빈칸 채우기 and 유사 표현 the label "Vocabulary", in both
+  // languages. A section with no English of its own is written back without one.
+  const section = str(ex.section) || '어휘';
+  const sectionEn = str(ex.sectionEn) || (section === '어휘' ? 'Vocabulary' : undefined);
 
   const perItem = PER_ITEM_CHOICE_TYPES.includes(type);
   const bank = Array.isArray(ex.bank) ? ex.bank : [];
@@ -364,8 +370,8 @@ function cleanExercise(ex, i, seenIds) {
   if (perItem) {
     const out = {
       id, type,
-      section: str(ex.section) || '어휘',
-      sectionEn: str(ex.sectionEn) || 'Vocabulary',
+      section,
+      sectionEn,
       no,
       icon: str(ex.icon) || '📝',
       blurbEn: str(ex.blurbEn),
@@ -449,8 +455,8 @@ function cleanExercise(ex, i, seenIds) {
   const out = {
     id,
     type,
-    section: str(ex.section) || '어휘',
-    sectionEn: str(ex.sectionEn) || 'Vocabulary',
+    section,
+    sectionEn,
     no,
     icon: str(ex.icon) || '📝',
     blurbEn: str(ex.blurbEn),

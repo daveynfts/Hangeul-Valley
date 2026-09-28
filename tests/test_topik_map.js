@@ -296,6 +296,15 @@ if (written) {
   assert(lost.length === 0, 'and a save through it keeps every field the bank holds — drawOne, '
     + 'labelOptions, mixedTypes, each mixed row\'s instruction'
     + (lost.length ? ' — lost ' + lost.slice(0, 6).join(', ') : ''));
+  // Nor may a save add what the file does not hold. Its fallback for a group with no English
+  // section label was "Vocabulary", the English for 어휘 alone, and it gave 빈칸 채우기 and
+  // 유사 표현 that label in both languages. The one addition allowed is art "" on a row without
+  // a picture, which the renderer reads the same as no art at all.
+  const asWritten = JSON.parse(JSON.stringify(written));
+  asWritten.exercises.forEach((ex) => (ex.items || []).forEach((it) => { if (it.art === '') delete it.art; }));
+  const added = absentFrom(asWritten, inFile, '', []);
+  assert(added.length === 0, 'and adds nothing the bank does not hold — no "Vocabulary" label on a '
+    + 'group outside 어휘' + (added.length ? ' — added ' + added.slice(0, 6).join(', ') : ''));
 }
 const { collectUploadFiles } = require(path.join(ROOT, 'scripts', 'r2Content.js'));
 const batch = new Set(collectUploadFiles(ROOT).map((x) => x.rel.split(path.sep).join('/')));
