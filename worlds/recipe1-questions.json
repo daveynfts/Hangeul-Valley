@@ -1,0 +1,3394 @@
+{
+  "id": "recipe1-questions",
+  "source": "TOPIK II 합격 레시피 · 3급 Chapter 1 문법·어휘 · pp.14-42",
+  "titleKo": "합격 레시피",
+  "titleEn": "The book’s questions",
+  "pickKo": "어떤 문제를 풀까요?",
+  "pickEn": "The chapter’s three question types in the book’s order — each one’s past-paper questions (기출문제) with the book’s own answers and 해설, then its practice set (예상문제).",
+  "hintKo": "모두 고른 다음 확인을 누르면 정답과 해설이 열려요.",
+  "checkKo": "확인",
+  "checkEn": "Check",
+  "againKo": "다시 풀기",
+  "backKo": "문제 목록",
+  "doneKo": "닫기",
+  "holdGloss": true,
+  "keepOrder": true,
+  "examView": true,
+  "keyNote": "The book prints its 예상문제 answers in a separate booklet (책 속의 책 · 정답과 해설, p.49 on) that this PDF does not include. Rows with keySource \"book\" are 기출문제 whose 정답 and 해설 are printed beside them; rows with keySource \"ranking\" were keyed from the Ranking row named in rankingRef, and tests/test_recipe_unit1.js checks each key against that row.",
+  "exercises": [
+    {
+      "id": "r1-grammar-past",
+      "type": "build",
+      "section": "알맞은 문법",
+      "sectionEn": "The right grammar · reading 1-2",
+      "no": "기출 · 제60회 1~2번 · p.14",
+      "icon": "🏆",
+      "blurbEn": "Questions 1 and 2 of the 60th TOPIK II, with the book’s own answers and 해설.",
+      "instructionKo": "(   )에 들어갈 가장 알맞은 것을 고르십시오. (각 2점)",
+      "instructionEn": "Choose the one that best fits the blank. (2 points each)",
+      "noteEn": "Reading questions 1-2 test basic grammar at 3급 level: one sentence, one blank, four endings on the same verb. The book’s 황금 레시피 (p.14): know what intermediate grammar does and means; for a 연결어미, split the sentence into A → B and pick the ending that joins the two halves; for a 종결어미, first decide whether the end of the sentence is past, present or future. These two are from the 60th TOPIK II, and the key and 해설 that open after checking are the book’s own.",
+      "pattern": "기출문제",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "휴대 전화를 (   ) 내려야 할 역을 지나쳤다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "휴대 전화를 {} 내려야 할 역을 지나쳤다."
+            }
+          ],
+          "answer": "o2",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "보든지"
+            },
+            {
+              "id": "o2",
+              "ko": "보다가"
+            },
+            {
+              "id": "o3",
+              "ko": "보려면"
+            },
+            {
+              "id": "o4",
+              "ko": "보고서"
+            }
+          ],
+          "en": "I was looking at my phone and went past the station where I had to get off.",
+          "why": "Split it the way the book does, A → B: 휴대 전화를 보다 → 내려야 할 역을 지나쳤다. B is something nobody meant to do — missing your stop is 의외, the unexpected — and it happened while A was still going on. That is the job of -다가: an action under way, cut into by what happens in the middle of it. The book files it as 〈행동 전환: 의외〉.\n\n교재 해설 · p.14 — 정답은 ②번. 휴대 전화를 보다 → 내려야 할 역을 지나쳤다. '내려야 할 역을 지나쳤다.'는 의외의 내용이다. 이때 호응하는 문법은 〈행동: 의외〉를 나타내는 '-다가'를 찾아야 한다. '-다가'는 앞의 내용을 하는 중에 뒤의 행동으로 바뀔 때 사용한다.\n\n보든지 is -든지, 〈선택: 무관〉: whichever you do, it makes no difference. It needs a question word or a second option beside it (무엇을 하든지, 보든지 말든지), and there is nothing to choose between here.\n\n보려면 is -(으)려면, 〈가정: 의도〉: if you mean to look. What follows has to be what that intention needs — 보려면 앱을 켜야 한다 — and missing a station is nobody’s requirement.\n\n보고서 is -고서: one step finished, then the next. It would make the looking first and done, when the point is that the looking was still going on as the station went by.",
+          "grammar": "V-다가 — Ranking 연결어미 01. Two uses, both a switch from A to B while A is going on: 〈행동 전환: 의지〉, stopping on purpose to do something else — 집에 가다가 시장에 들러서 과자를 샀다 — and 〈행동 전환: 의외〉, something unplanned happening in the middle — 계단을 뛰어 내려가다가 넘어질 뻔했다. The same person is the subject of both clauses.",
+          "source": "제60회 TOPIK II 읽기 1번",
+          "bookPage": 14,
+          "keySource": "book",
+          "bookKey": "②"
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "한국 친구 덕분에 한국 문화를 많이 (   ).",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "한국 친구 덕분에 한국 문화를 많이 {}."
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "알게 되었다"
+            },
+            {
+              "id": "o2",
+              "ko": "알도록 했다"
+            },
+            {
+              "id": "o3",
+              "ko": "알아도 된다"
+            },
+            {
+              "id": "o4",
+              "ko": "알아야 한다"
+            }
+          ],
+          "en": "Thanks to my Korean friend, I came to know a lot about Korean culture.",
+          "why": "The book reads the front half first: 한국 친구 덕분에 is 〈이유〉, a reason with a good result coming. So the end of the sentence is that result, and a result that has already happened is in the past — which leaves 알게 되었다 and 알도록 했다. Of those two, the one that says “I did not know it before, and now I do” is -게 되다, 〈설명: 변화〉: a change you arrived at.\n\n교재 해설 · p.14 — 정답은 ①번. 한국 친구 덕분에 → 한국 문화를 많이 알다. 앞의 내용인 '한국 친구 덕분에'는 〈이유〉로 긍정적인 이유와 결과를 나타낸다. 뒤의 내용은 결과이기 때문에 과거시제를 찾으면 되는데 과거시제는 ①번과 ②번이다. 이 중에서 '그 전에는 한국 문화를 잘 몰랐는데 한국 친구 덕분에 알았다.'라는 의미를 완성하려면 〈설명: 변화〉의 '-게 되다.'를 찾아야 한다. '-게 되다.'는 앞의 상황을 설명하고 뒤에서 현재의 변화된 상황을 설명할 때 사용한다.\n\n알도록 했다 is -도록 하다, making someone do something or seeing that it gets done. It needs someone doing the making — 선생님이 학생들이 알도록 했다 — and the friend is already the reason, not the one being made to know.\n\n알아도 된다 gives permission (you may know it) and 알아야 한다 an obligation (you have to know it). Both are about now or later, and neither is the result of anything — the 덕분에 at the front is left with nothing to have caused.",
+          "grammar": "A/V-게 되다 — Ranking 종결어미 05 · 〈설명: 변화〉. A situation changed, and the sentence reports where it ended up rather than who made it happen: 해외 근무를 지원해서 해외 지사에 가게 되었다. It pairs naturally with a reason in front — 덕분에, 때문에, -아/어서 — because a change usually has one.",
+          "source": "제60회 TOPIK II 읽기 2번",
+          "bookPage": 14,
+          "keySource": "book",
+          "bookKey": "①"
+        }
+      ]
+    },
+    {
+      "id": "r1-grammar-conn",
+      "type": "build",
+      "section": "알맞은 문법",
+      "sectionEn": "The right grammar · reading 1-2",
+      "no": "예상 · p.18",
+      "icon": "🔗",
+      "blurbEn": "Ten practice questions on the connecting endings of the book’s Ranking 30 (pp.15-16).",
+      "instructionKo": "(   )에 들어갈 가장 알맞은 것을 고르십시오. (각 2점)",
+      "instructionEn": "Choose the one that best fits the blank. (2 points each)",
+      "noteEn": "Split each sentence into A → B and name what joins them before reading the options: something breaking into an action, a finished first step, a background, a purpose, an intention, a reason that kept you busy, a necessary condition, a worry, a choice, an immediate sequence. Then find the ending that says it. Where these answers come from: the book prints the key to its 예상문제 in a separate booklet (책 속의 책 · 정답과 해설, p.49 on) that this copy of the book does not include. Each key here is read off the book’s own Ranking table that the set practises, and the grammar card under each explanation names the entry.",
+      "pattern": "예상문제 · 연결어미",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "운동장에서 (   ) 친구와 부딪혀서 넘어졌다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "운동장에서 {} 친구와 부딪혀서 넘어졌다."
+            }
+          ],
+          "answer": "o3",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "축구할수록"
+            },
+            {
+              "id": "o2",
+              "ko": "축구하던데"
+            },
+            {
+              "id": "o3",
+              "ko": "축구하다가"
+            },
+            {
+              "id": "o4",
+              "ko": "축구하려고"
+            }
+          ],
+          "en": "I was playing football on the sports field when I bumped into a friend and fell over.",
+          "why": "A → B: 운동장에서 축구하다 → 친구와 부딪혀서 넘어졌다. Nobody plays football in order to collide with a friend: B broke into A while A was going on, the 〈행동 전환: 의외〉 use of -다가 that 기출 1 on p.14 turned on as well. 축구하다가 넘어졌다 is its natural shape.\n\n축구할수록 is -(으)ㄹ수록, 〈설명: 비례〉: the more you play, the more… It needs a second clause that grows with the first — 축구할수록 실력이 는다 — and one fall is not a quantity that rises.\n\n축구하던데 is -던데, recalling something seen in the past to set up what you say next — 민수가 운동장에서 축구하던데 같이 할래? It reports a scene someone else was in, and cannot lead into an accident that happened to you at that same moment.\n\n축구하려고 is -(으)려고, 〈목적〉: in order to play football. The sentence would then say you collided and fell in order to play, which puts the purpose the wrong way round.",
+          "grammar": "Ranking 연결어미 01 · -다가 〈행동 전환: 의지〉 〈행동 전환: 의외〉 — V-다가: an action under way when something else takes over — on purpose (〈의지〉) or, as here, by accident (〈의외〉). 예문: 집에 가다가 시장에 들러서 과자를 샀다. / 계단을 뛰어 내려가다가 넘어질 뻔했다.",
+          "source": "합격 레시피 p.18 · 예상문제 1번",
+          "bookPage": 18,
+          "keySource": "ranking",
+          "rankingRef": "연결어미 01"
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "나는 저녁을 (   ) 집 앞 공원에서 산책을 한다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "나는 저녁을 {} 집 앞 공원에서 산책을 한다."
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "먹고 나서"
+            },
+            {
+              "id": "o2",
+              "ko": "먹다 보면"
+            },
+            {
+              "id": "o3",
+              "ko": "먹을 만큼"
+            },
+            {
+              "id": "o4",
+              "ko": "먹는 길에"
+            }
+          ],
+          "en": "After I have dinner, I go for a walk in the park in front of my house.",
+          "why": "A → B: 저녁을 먹다 → 공원에서 산책을 한다. Two things done one after the other, the first finished before the second starts — a habit, which is why B is in the present. That is -고 나서, 〈순서: 완료〉: 어제 퇴근하고 나서 친구들과 만났다.\n\n먹다 보면 is -다가 보면, 〈경험: 반복〉: keep eating and you will find… It leads to a discovery or a change that comes from doing A over and over — 먹다 보면 익숙해진다 — not to a walk.\n\n먹을 만큼 is -(으)ㄹ 만큼, a degree: as much as you will eat. It measures something (먹을 만큼 담으세요) and cannot say when the walk happens.\n\n먹는 길에 is -는 길에, on the way somewhere — 집에 들어오는 길에. It needs a verb of going in front of it, and eating dinner is not a journey.",
+          "grammar": "Ranking 연결어미 02 · -고 나서 〈순서: 완료〉 — V-고 나서: A is completed, then B. Stronger than a bare -고 about the first action being finished before the second begins. 예문: 어제 퇴근하고 나서 친구들과 만났다.",
+          "source": "합격 레시피 p.18 · 예상문제 2번",
+          "bookPage": 18,
+          "keySource": "ranking",
+          "rankingRef": "연결어미 02"
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "내일 전시회가 (   ) 사람들이 많이 올 것 같다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "내일 전시회가 {} 사람들이 많이 올 것 같다."
+            }
+          ],
+          "answer": "o2",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "열리듯이"
+            },
+            {
+              "id": "o2",
+              "ko": "열리는데"
+            },
+            {
+              "id": "o3",
+              "ko": "열리든지"
+            },
+            {
+              "id": "o4",
+              "ko": "열리도록"
+            }
+          ],
+          "en": "There is an exhibition on tomorrow, and I think a lot of people will come.",
+          "why": "A → B: 내일 전시회가 열리다 → 사람들이 많이 올 것 같다. A is background — here is the situation — and B is what you think about it. The ending that lays down background before the main point is -는데, its 〈설명: 도입〉 use: 행사장에 도착했는데 사람들이 많이 와 있었다.\n\n열리듯이 is -듯이, 〈비유〉: just as the exhibition opens… It compares two things of the same kind (언어가 다르듯이 문화도 다르다), and people coming is not like an exhibition opening.\n\n열리든지 is -든지, 〈선택: 무관〉, which needs a choice — 열리든지 말든지 — and there is only one event here.\n\n열리도록 is -도록, 〈목적〉 or 〈정도〉: so that it opens, or until it opens. People coming is neither the purpose of the opening nor its limit.",
+          "grammar": "Ranking 연결어미 03 · -(으)ㄴ/는데 〈상반: 대조〉 〈설명: 도입〉 — A/V-(으)ㄴ/는데: sets up a contrast or a background for what follows — 〈상반: 대조〉 (음식값은 저렴한데 맛이 별로 없다) or, as here, 〈설명: 도입〉, the situation first and the point second. 예문: 저 식당은 음식값은 저렴한데 맛이 별로 없다. / 행사장에 도착했는데 사람들이 많이 와 있었다.",
+          "source": "합격 레시피 p.18 · 예상문제 3번",
+          "bookPage": 18,
+          "keySource": "ranking",
+          "rankingRef": "연결어미 03"
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "이번 생일에 딸에게 (   ) 인형을 만들었다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "이번 생일에 딸에게 {} 인형을 만들었다."
+            }
+          ],
+          "answer": "o3",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "선물하도록"
+            },
+            {
+              "id": "o2",
+              "ko": "선물하든지"
+            },
+            {
+              "id": "o3",
+              "ko": "선물하려고"
+            },
+            {
+              "id": "o4",
+              "ko": "선물하기에"
+            }
+          ],
+          "en": "I made a doll as a present for my daughter’s birthday this year.",
+          "why": "A → B: 딸에게 선물하다 → 인형을 만들었다. A is why B was done: the doll was made in order to be a present. The ending of purpose, with the same person intending and doing, is -(으)려고, 〈목적〉: 고향에 가려고 기차표를 미리 예매했다.\n\n선물하도록 is -도록, also a purpose, but one that aims at something happening — 꽃이 잘 자라도록 — usually to someone or something other than the doer. Here the one giving and the one making are the same person, and -(으)려고 is the ending for that.\n\n선물하든지 is -든지, 〈선택: 무관〉 — whether you give it or not — and there is no alternative anywhere in the sentence.\n\n선물하기에 is -기에, 〈이유: 발견〉: because I noticed that… It needs a fact the speaker came across (과일을 싸게 팔기에 많이 샀다), and giving a present is not something you find out about.",
+          "grammar": "Ranking 연결어미 04 · -(으)려고 〈목적〉 — V-(으)려고: in order to — the subject intends A and does B for it, so both clauses share one subject. 예문: 고향에 가려고 기차표를 미리 예매했다.",
+          "source": "합격 레시피 p.18 · 예상문제 4번",
+          "bookPage": 18,
+          "keySource": "ranking",
+          "rankingRef": "연결어미 04"
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "일할 때 실수를 하지 (   ) 미리 준비를 해야 한다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "일할 때 실수를 하지 {} 미리 준비를 해야 한다."
+            }
+          ],
+          "answer": "o3",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "않기에는"
+            },
+            {
+              "id": "o2",
+              "ko": "않을수록"
+            },
+            {
+              "id": "o3",
+              "ko": "않으려면"
+            },
+            {
+              "id": "o4",
+              "ko": "않으니까"
+            }
+          ],
+          "en": "If you don’t want to make mistakes at work, you have to prepare in advance.",
+          "why": "A → B: 실수를 하지 않다 → 미리 준비를 해야 한다. A is what you want, B what that want requires, and -아/어야 하다 at the end is the tell. The ending that states an intention as a condition is -(으)려면, 〈가정: 의도〉: 다음 버스를 타려면 삼십 분을 기다려야 한다.\n\n않기에는 is -기에는, for doing it, judged against a standard: 혼자 하기에는 너무 많다. It needs an evaluation after it — too much, not enough — and 준비를 해야 한다 is not one.\n\n않을수록 is -(으)ㄹ수록, 〈설명: 비례〉: the less you make mistakes, the more… — a proportion with no second quantity to rise with it.\n\n않으니까 gives a reason: because you don’t make mistakes, you must prepare. That turns the sentence inside out — preparing would follow from already not making mistakes.",
+          "grammar": "Ranking 연결어미 05 · -(으)려면 〈가정: 의도〉 — V-(으)려면: if you intend to A, then B. The second clause is what the intention needs, so it usually ends in -아/어야 하다, -(으)면 되다 or a request. 예문: 다음 버스를 타려면 삼십 분을 기다려야 한다.",
+          "source": "합격 레시피 p.18 · 예상문제 5번",
+          "bookPage": 18,
+          "keySource": "ranking",
+          "rankingRef": "연결어미 05"
+        },
+        {
+          "n": 6,
+          "art": "",
+          "phraseKo": "급하게 (   ) 우산을 챙겨 나오는 걸 깜빡했다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "급하게 {} 우산을 챙겨 나오는 걸 깜빡했다."
+            }
+          ],
+          "answer": "o4",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "나오는데도"
+            },
+            {
+              "id": "o2",
+              "ko": "나오자마자"
+            },
+            {
+              "id": "o3",
+              "ko": "나오더라도"
+            },
+            {
+              "id": "o4",
+              "ko": "나오느라고"
+            }
+          ],
+          "en": "I was in such a hurry coming out that I forgot to bring my umbrella.",
+          "why": "A → B: 급하게 나오다 → 우산을 챙겨 나오는 걸 깜빡했다. B is a bad result and A is what caused it, by taking up your attention at the same time. That is -느라고, 〈이유: 동시〉: 시장에서 물건을 사느라고 조금 늦었다. It usually leads to something going wrong — being late, forgetting, missing out.\n\n나오는데도 is -는데도, 〈상반〉: even though I came out — which expects B to go against A. Forgetting the umbrella is what hurrying causes, not what it resists.\n\n나오자마자 is -자마자, 〈순서: 즉시〉: the moment I came out. The forgetting happened before the door, while getting ready, not the instant after leaving.\n\n나오더라도 is -더라도, 〈가정: 상반〉: even if I come out. It is a supposition, and 깜빡했다 is a fact that already happened.",
+          "grammar": "Ranking 연결어미 06 · -느라고 〈이유: 동시〉 — V-느라고: A kept you busy, and because of it B went wrong. The subject is the same in both clauses, and B is usually a negative result. 예문: 시장에서 물건을 사느라고 조금 늦었다.",
+          "source": "합격 레시피 p.18 · 예상문제 6번",
+          "bookPage": 18,
+          "keySource": "ranking",
+          "rankingRef": "연결어미 06"
+        },
+        {
+          "n": 7,
+          "art": "",
+          "phraseKo": "뭐든지 최선을 (   ) 회사 생활을 잘 할 수 있다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "뭐든지 최선을 {} 회사 생활을 잘 할 수 있다."
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "다해야"
+            },
+            {
+              "id": "o2",
+              "ko": "다해도"
+            },
+            {
+              "id": "o3",
+              "ko": "다하도록"
+            },
+            {
+              "id": "o4",
+              "ko": "다하려면"
+            }
+          ],
+          "en": "Only if you do your best at everything can you do well at work.",
+          "why": "A → B: 최선을 다하다 → 회사 생활을 잘 할 수 있다. A is the one condition B needs, and without it B does not happen. That is -아/어야, 〈조건: 필수〉: 이 영화는 예매를 해야 볼 수 있을 정도로 인기가 많다.\n\n다해도 is -아/어도, 〈가정: 상반〉: even if you do your best. It expects B to hold in spite of A, and doing your best is no obstacle to doing well.\n\n다하도록 is -도록, 〈목적〉: so that you do your best. The purpose would then be the effort itself, and being able to do well is not something done for the sake of effort.\n\n다하려면 is -(으)려면, 〈가정: 의도〉: if you mean to do your best. What follows would have to be what the intention needs — 최선을 다하려면 계획이 필요하다 — not a result it earns.",
+          "grammar": "Ranking 연결어미 07 · -아/어야 〈조건: 필수〉 — A/V-아/어야: only if A, B. A is the necessary condition, and B is often 할 수 있다, 되다 or another result that depends on it. 예문: 이 영화는 예매를 해야 볼 수 있을 정도로 인기가 많다.",
+          "source": "합격 레시피 p.18 · 예상문제 7번",
+          "bookPage": 18,
+          "keySource": "ranking",
+          "rankingRef": "연결어미 07"
+        },
+        {
+          "n": 8,
+          "art": "",
+          "phraseKo": "전화번호를 (   ) 휴대 전화에 얼른 저장했다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "전화번호를 {} 휴대 전화에 얼른 저장했다."
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "잊어버릴까 봐서"
+            },
+            {
+              "id": "o2",
+              "ko": "잊어버릴 정도로"
+            },
+            {
+              "id": "o3",
+              "ko": "잊어버릴 테니까"
+            },
+            {
+              "id": "o4",
+              "ko": "잊어버릴 겸해서"
+            }
+          ],
+          "en": "I saved the phone number on my phone straight away in case I forgot it.",
+          "why": "A → B: 전화번호를 잊어버리다 → 얼른 저장했다. Forgetting has not happened; it is the worry, and saving the number is what you did because of it. That is -(으)ㄹ까 봐(서), 〈우려〉: 길이 미끄러워서 넘어질까 봐 조심스럽게 걸어왔다.\n\n잊어버릴 정도로 is -(으)ㄹ 정도로, a degree: to the point of forgetting. It measures how much of something there was (잊어버릴 정도로 많다), and saving a number is not an amount.\n\n잊어버릴 테니까 is -(으)ㄹ 테니까: since you are sure to forget. It gives a firm expectation as the reason for a suggestion or an order — 잊어버릴 테니까 적어 두세요 — not for something you have already finished doing.\n\n잊어버릴 겸해서 would be -(으)ㄹ 겸, doing one thing for two purposes at once (운동도 할 겸 산책도 할 겸). Forgetting is not a purpose anyone has.",
+          "grammar": "Ranking 연결어미 08 · -(으)ㄹ까 봐(서) 〈우려〉 — V-(으)ㄹ까 봐(서): for fear that A might happen, B was done or felt. A is a worry about what may come; B is past or present. 예문: 길이 미끄러워서 넘어질까 봐 조심스럽게 걸어왔다.",
+          "source": "합격 레시피 p.18 · 예상문제 8번",
+          "bookPage": 18,
+          "keySource": "ranking",
+          "rankingRef": "연결어미 08"
+        },
+        {
+          "n": 9,
+          "art": "",
+          "phraseKo": "몸이 (   ) 힘들면 고향 생각이 많이 난다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "몸이 {} 힘들면 고향 생각이 많이 난다."
+            }
+          ],
+          "answer": "o4",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "아프다면"
+            },
+            {
+              "id": "o2",
+              "ko": "아프지만"
+            },
+            {
+              "id": "o3",
+              "ko": "아프듯이"
+            },
+            {
+              "id": "o4",
+              "ko": "아프거나"
+            }
+          ],
+          "en": "When I’m ill or having a hard time, I think about home a lot.",
+          "why": "A → B: 몸이 아프다 / 힘들다 → 고향 생각이 많이 난다. Two situations stand side by side and either one brings B on. The ending that joins alternatives, one or the other, is -거나, 〈선택: 택일〉: 나는 시간이 있으면 영화를 보거나 책을 읽는다.\n\n아프다면 is -다면, a supposition: if I were ill. It would stack a second condition in front of the -면 of 힘들면, two ifs with nothing joining them.\n\n아프지만 is -지만, a contrast: I am ill, but… Being ill and having a hard time do not pull against each other.\n\n아프듯이 is -듯이, 〈비유〉: just as I am ill, I am having a hard time — a comparison where the sentence wants a choice of either.",
+          "grammar": "Ranking 연결어미 09 · -거나 〈선택: 택일〉 — A/V-거나: A or B, either one. Also used for a list of typical activities: 주말에는 영화를 보거나 책을 읽는다. 예문: 나는 시간이 있으면 영화를 보거나 책을 읽는다.",
+          "source": "합격 레시피 p.18 · 예상문제 9번",
+          "bookPage": 18,
+          "keySource": "ranking",
+          "rankingRef": "연결어미 09"
+        },
+        {
+          "n": 10,
+          "art": "",
+          "phraseKo": "나는 학교를 (   ) 운전 면허증을 땄다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "나는 학교를 {} 운전 면허증을 땄다."
+            }
+          ],
+          "answer": "o4",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "졸업하도록"
+            },
+            {
+              "id": "o2",
+              "ko": "졸업하든지"
+            },
+            {
+              "id": "o3",
+              "ko": "졸업하더라도"
+            },
+            {
+              "id": "o4",
+              "ko": "졸업하자마자"
+            }
+          ],
+          "en": "I got my driving licence as soon as I finished school.",
+          "why": "A → B: 학교를 졸업하다 → 운전 면허증을 땄다. Two past events in order, the second straight after the first. That is -자마자, 〈순서: 즉시〉: 어제 너무 피곤해서 눕자마자 잠이 들었다.\n\n졸업하도록 is -도록, a purpose (so that I graduate) or a limit (until I graduated). Getting a licence does not help anyone graduate, and it is not something done all the way up to graduation.\n\n졸업하든지 is -든지, 〈선택: 무관〉, with no second option anywhere in the sentence.\n\n졸업하더라도 is -더라도, 〈가정: 상반〉: even if I graduate. It supposes, where the sentence reports two things that happened.",
+          "grammar": "Ranking 연결어미 10 · -자마자 〈순서: 즉시〉 — V-자마자: B happens immediately after A. The two clauses may have different subjects, and the tense sits on the second. 예문: 어제 너무 피곤해서 눕자마자 잠이 들었다.",
+          "source": "합격 레시피 p.18 · 예상문제 10번",
+          "bookPage": 18,
+          "keySource": "ranking",
+          "rankingRef": "연결어미 10"
+        }
+      ]
+    },
+    {
+      "id": "r1-grammar-final",
+      "type": "build",
+      "section": "알맞은 문법",
+      "sectionEn": "The right grammar · reading 1-2",
+      "no": "예상 · p.19",
+      "icon": "🔚",
+      "blurbEn": "Ten practice questions on the sentence endings of the book’s Ranking 20 (pp.16-17).",
+      "instructionKo": "(   )에 들어갈 가장 알맞은 것을 고르십시오. (각 2점)",
+      "instructionEn": "Choose the one that best fits the blank. (2 points each)",
+      "noteEn": "The blank is the end of the sentence, so settle the time first — a past event, a habit, a plan, a state that is still there, a stretch of time up to now — and then what the speaker is doing with it: reporting, deciding, judging, guessing. Where these answers come from: the book prints the key to its 예상문제 in a separate booklet (책 속의 책 · 정답과 해설, p.49 on) that this copy of the book does not include. Each key here is read off the book’s own Ranking table that the set practises, and the grammar card under each explanation names the entry.",
+      "pattern": "예상문제 · 종결어미",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "사무실을 청소하면서 중요한 서류인 것 같아서 서랍에 (   ).",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "사무실을 청소하면서 중요한 서류인 것 같아서 서랍에 {}."
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "넣어 놓았다"
+            },
+            {
+              "id": "o2",
+              "ko": "넣을 뻔했다"
+            },
+            {
+              "id": "o3",
+              "ko": "넣고 있었다"
+            },
+            {
+              "id": "o4",
+              "ko": "넣기만 했다"
+            }
+          ],
+          "en": "While cleaning the office I found what looked like an important document, so I put it away in the drawer.",
+          "why": "The book’s recipe for a 종결어미 is to settle the tense first. 청소하면서 … 것 같아서 is a finished past event, and the point is where the document is now: put somewhere and left there to keep it safe. Doing something and leaving the result in place is -아/어 놓다, 〈유지: 대비〉: 내일은 바쁠 것 같아서 오늘 미리 신청서를 써 놓았다.\n\n넣을 뻔했다 is -(으)ㄹ 뻔하다, 〈행동: 직전〉: almost put it in. Nothing says you nearly did it and stopped, and 중요한 서류인 것 같아서 is a reason for doing it.\n\n넣고 있었다 is the progressive: I was in the middle of putting it in. It describes the moment rather than the result, and a reason like 중요한 서류인 것 같아서 leads to what you did about it, not to what you were busy with.\n\n넣기만 했다 is -기만 하다, 〈유일〉: all I did was put it in. It needs a contrast with what else should have happened (넣기만 했지 정리는 안 했다), and nothing supplies one.",
+          "grammar": "Ranking 종결어미 01 · -아/어 놓다 〈유지: 대비〉 — V-아/어 놓다: do A and leave the result there, usually to be ready for later. -아/어 두다 is its twin (Ranking 종결어미 19). 예문: 내일은 바쁠 것 같아서 오늘 미리 신청서를 써 놓았다.",
+          "source": "합격 레시피 p.19 · 예상문제 1번",
+          "bookPage": 19,
+          "keySource": "ranking",
+          "rankingRef": "종결어미 01"
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "나는 새해에 열심히 운동해서 살을 (   ).",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "나는 새해에 열심히 운동해서 살을 {}."
+            }
+          ],
+          "answer": "o2",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "뺄 뻔했다"
+            },
+            {
+              "id": "o2",
+              "ko": "빼기로 했다"
+            },
+            {
+              "id": "o3",
+              "ko": "뺄 리가 없다"
+            },
+            {
+              "id": "o4",
+              "ko": "빼려던 참이다"
+            }
+          ],
+          "en": "I’ve decided to exercise hard this new year and lose weight.",
+          "why": "새해에 points ahead, and 열심히 운동해서 describes a plan. A plan that has been decided is -기로 하다 — 〈계획: 결심〉 when you resolve it yourself: 나는 내일부터 담배를 끊기로 했다. 했다 is past because the decision is made, even though the losing is still to come.\n\n뺄 뻔했다 is -(으)ㄹ 뻔하다, almost doing something — usually something you are glad not to have done (넘어질 뻔했다). Nobody nearly loses weight by accident.\n\n뺄 리가 없다 is -(으)ㄹ 리가 없다, 〈추측: 불신〉: there is no way I would lose weight. It contradicts 열심히 운동해서 and weighs chances instead of stating a plan.\n\n빼려던 참이다 is -(으)려던 참이다, a plan in a much narrower sense: I was just about to. It fits a moment (“I was about to call you”), not a year’s resolution.",
+          "grammar": "Ranking 종결어미 02 · -기로 했다 〈계획: 약속〉 〈계획: 결심〉 — V-기로 하다 (usually 했다): a decision or promise has been made — 〈계획: 약속〉 with someone, 〈계획: 결심〉 on your own. The deciding is past; the action is still ahead. 예문: 나는 이번 방학에 부모님과 같이 설악산에 여행을 가기로 했다. / 나는 내일부터 담배를 끊기로 했다.",
+          "source": "합격 레시피 p.19 · 예상문제 2번",
+          "bookPage": 19,
+          "keySource": "ranking",
+          "rankingRef": "종결어미 02"
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "시험 시작 40분 전까지 강의실에 (   ).",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "시험 시작 40분 전까지 강의실에 {}."
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "들어가면 된다"
+            },
+            {
+              "id": "o2",
+              "ko": "들어가곤 한다"
+            },
+            {
+              "id": "o3",
+              "ko": "들어가게 된다"
+            },
+            {
+              "id": "o4",
+              "ko": "들어가기 쉽다"
+            }
+          ],
+          "en": "You just need to be in the lecture room 40 minutes before the exam starts.",
+          "why": "The sentence gives a deadline — 40분 전까지 — and what has to happen by then, stated as enough: do this and you are fine. That is -(으)면 되다, 〈조건: 충족〉: 지하철역으로 가려면 이쪽으로 3분쯤 걸어가면 된다.\n\n들어가곤 한다 is -곤 하다, a habit: I tend to go in. A deadline with 까지 is a rule for one occasion, not a description of what someone usually does.\n\n들어가게 된다 is -게 되다, 〈설명: 변화〉: you end up going in. It reports how things turn out, not what anyone should do.\n\n들어가기 쉽다 is -기 쉽다: it is easy to go in. It rates how hard the action is, and a deadline says nothing about that.",
+          "grammar": "Ranking 종결어미 03 · -(으)면 되다 〈조건: 충족〉 — V-(으)면 되다: doing A is all that is needed. Common in directions and instructions, and the counterpart of -아/어야 하다, which says A is required. 예문: 지하철역으로 가려면 이쪽으로 3분쯤 걸어가면 된다.",
+          "source": "합격 레시피 p.19 · 예상문제 3번",
+          "bookPage": 19,
+          "keySource": "ranking",
+          "rankingRef": "종결어미 03"
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "엄마는 아이에게 밤 9시 이후에는 게임을 못 (   ).",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "엄마는 아이에게 밤 9시 이후에는 게임을 못 {}."
+            }
+          ],
+          "answer": "o2",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "하곤 했다"
+            },
+            {
+              "id": "o2",
+              "ko": "하게 했다"
+            },
+            {
+              "id": "o3",
+              "ko": "해야 했다"
+            },
+            {
+              "id": "o4",
+              "ko": "할까 했다"
+            }
+          ],
+          "en": "Mum wouldn’t let the child play games after nine at night.",
+          "why": "Two people: 엄마는 and 아이에게. One decides; the other is the one who does not get to play. One person making another do — or not do — something is -게 하다, 〈명령: 사동〉, and the one being made takes 에게: 선생님은 학생들에게 휴대 전화를 끄게 했다. With 못 in front, 못 하게 했다 means “did not let”.\n\n하곤 했다 is -곤 하다, a habit — but it would be the mother’s own habit of not playing, and the 아이에게 in the sentence would have nothing to do.\n\n해야 했다 is an obligation on the subject: the mother had to not play. Again 아이에게 is left hanging.\n\n할까 했다 is -(으)ㄹ까 하다, a vague plan: was thinking of not playing. It is about the subject’s own intention, not about someone else.",
+          "grammar": "Ranking 종결어미 04 · -게 하다 〈명령: 사동〉 — V-게 하다: make or let someone do A. The one made to act takes 에게 or 을/를; with 못 or 안 it becomes forbidding. 예문: 선생님은 학생들에게 휴대 전화를 끄게 했다.",
+          "source": "합격 레시피 p.19 · 예상문제 4번",
+          "bookPage": 19,
+          "keySource": "ranking",
+          "rankingRef": "종결어미 04"
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "나는 부모님의 뒤를 이어 식당을 (   ).",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "나는 부모님의 뒤를 이어 식당을 {}."
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "맡게 됐다"
+            },
+            {
+              "id": "o2",
+              "ko": "맡아 놓았다"
+            },
+            {
+              "id": "o3",
+              "ko": "맡을 뿐이었다"
+            },
+            {
+              "id": "o4",
+              "ko": "맡을 모양이었다"
+            }
+          ],
+          "en": "Following in my parents’ footsteps, I ended up taking over the restaurant.",
+          "why": "부모님의 뒤를 이어, carrying on from your parents, is a change in your life, and the sentence reports where it led. A situation that turned out a certain way is -게 되다, 〈설명: 변화〉 — the same ending as 기출 2 on p.14: 해외 근무를 지원해서 해외 지사에 가게 되었다. 됐다 is the spoken contraction of 되었다.\n\n맡아 놓았다 is -아/어 놓다, doing something in advance and leaving it ready — 자리를 맡아 놓다 is to save a seat. Taking over a family restaurant is not something kept ready for later.\n\n맡을 뿐이었다 is -(으)ㄹ 뿐이다, 〈유일〉: all I did was run it. It needs something it is set against (다른 일은 하지 않고), and there is none.\n\n맡을 모양이었다 is a guess from what you can see, 〈추측: 관찰〉, and nobody guesses about their own life from the outside.",
+          "grammar": "Ranking 종결어미 05 · -게 되다 〈설명: 변화〉 — A/V-게 되다: things came to be a certain way, through circumstance rather than decision. 됐다 = 되었다. 예문: 해외 근무를 지원해서 해외 지사에 가게 되었다.",
+          "source": "합격 레시피 p.19 · 예상문제 5번",
+          "bookPage": 19,
+          "keySource": "ranking",
+          "rankingRef": "종결어미 05"
+        },
+        {
+          "n": 6,
+          "art": "",
+          "phraseKo": "나는 어렸을 때 피아노를 (   ).",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "나는 어렸을 때 피아노를 {}."
+            }
+          ],
+          "answer": "o2",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "배우는 중이다"
+            },
+            {
+              "id": "o2",
+              "ko": "배운 적이 있다"
+            },
+            {
+              "id": "o3",
+              "ko": "배우려던 참이다"
+            },
+            {
+              "id": "o4",
+              "ko": "배울지도 모른다"
+            }
+          ],
+          "en": "I learned the piano when I was a child.",
+          "why": "어렸을 때 fixes the time in the past, so the ending has to talk about the past. Having done something at some point is -(으)ㄴ 적이 있다, 〈경험: 시간〉: 어렸을 때 부산에서 산 적이 있다.\n\n배우는 중이다 is now: I am in the middle of learning. It cannot sit beside 어렸을 때.\n\n배우려던 참이다 is -(으)려던 참이다, just about to — a moment in the present or the recent past, not a childhood.\n\n배울지도 모른다 is -(으)ㄹ지도 모르다, 〈추측: 불확실〉: I might learn. It looks ahead, and 어렸을 때 is behind.",
+          "grammar": "Ranking 종결어미 06 · -(으)ㄴ 적이 있다 〈경험: 시간〉 — V-(으)ㄴ 적이 있다/없다: to have (or never have) done A. The ㄴ is the past modifier, so the experience is always a completed one. 예문: 어렸을 때 부산에서 산 적이 있다.",
+          "source": "합격 레시피 p.19 · 예상문제 6번",
+          "bookPage": 19,
+          "keySource": "ranking",
+          "rankingRef": "종결어미 06"
+        },
+        {
+          "n": 7,
+          "art": "",
+          "phraseKo": "조금 전에 은행에 갔다 왔는데 문이 (   ).",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "조금 전에 은행에 갔다 왔는데 문이 {}."
+            }
+          ],
+          "answer": "o2",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "닫힌 셈이다"
+            },
+            {
+              "id": "o2",
+              "ko": "닫혀 있었다"
+            },
+            {
+              "id": "o3",
+              "ko": "닫힐 뻔했다"
+            },
+            {
+              "id": "o4",
+              "ko": "닫혔을 뿐이다"
+            }
+          ],
+          "en": "I went to the bank a little while ago, and the door was closed.",
+          "why": "조금 전에 … 갔다 왔는데 sets the scene in the past, and the question is what you found there: the door in a closed state. A state that stays after the change is -아/어 있다, 〈지속: 유지〉, and it goes on verbs like 닫히다 that describe what happens to something: 공항에 도착하니까 사촌 동생이 마중을 나와 있었다.\n\n닫힌 셈이다 is -(으)ㄴ 셈이다, 〈판단: 유사 결과〉: as good as closed. It judges that one thing amounts to another, and a door you saw with your own eyes is no approximation.\n\n닫힐 뻔했다 is almost closed — but you went and came back, and the sentence reports what you found, not a near miss.\n\n닫혔을 뿐이다 is -(으)ㄹ 뿐이다, 〈유일〉: it was merely closed. It needs something it is being played down against, and nothing is.",
+          "grammar": "Ranking 종결어미 07 · -아/어 있다 〈지속: 유지〉 — V-아/어 있다: the state left by an action carries on — 문이 닫혀 있다, 앉아 있다, 나와 있다. It goes with verbs of a change of state; -고 있다 is the action in progress. 예문: 공항에 도착하니까 사촌 동생이 마중을 나와 있었다.",
+          "source": "합격 레시피 p.19 · 예상문제 7번",
+          "bookPage": 19,
+          "keySource": "ranking",
+          "rankingRef": "종결어미 07"
+        },
+        {
+          "n": 8,
+          "art": "",
+          "phraseKo": "한국어를 배운 지 거의 2년이 다 (   ).",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "한국어를 배운 지 거의 2년이 다 {}."
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "되어 간다"
+            },
+            {
+              "id": "o2",
+              "ko": "되면 좋겠다"
+            },
+            {
+              "id": "o3",
+              "ko": "되어야 한다"
+            },
+            {
+              "id": "o4",
+              "ko": "되기로 했다"
+            }
+          ],
+          "en": "It has been nearly two years since I started learning Korean.",
+          "why": "-(으)ㄴ 지 … 되다 measures time since something began, and 거의 … 다 says the count is nearly complete. Time moving towards a point is -아/어 가다 in the book’s second use, 〈진행: 완료〉: 한국에 온 지 거의 2년이 다 되어 간다 — the Ranking example is almost this very sentence.\n\n되면 좋겠다 is a wish: I hope it will be two years. Time passes whether anyone wishes it or not, and 거의 다 already reports how far it has got.\n\n되어야 한다 is an obligation, and nobody is obliged to let time pass.\n\n되기로 했다 is a decision (-기로 하다), and nobody decides how long ago they started.",
+          "grammar": "Ranking 종결어미 08 · -아/어 가다 〈진행: 지속〉 〈진행: 완료〉 — V-아/어 가다: a change or process moving on from now towards an end — 시들어 간다 (〈진행: 지속〉), 다 되어 간다 (〈진행: 완료〉). Its mirror, -아/어 오다, runs from the past up to now. 예문: 꽃에 물을 자주 주는데도 자꾸 시들어 간다. / 한국에 온 지 거의 2년이 다 되어 간다.",
+          "source": "합격 레시피 p.19 · 예상문제 8번",
+          "bookPage": 19,
+          "keySource": "ranking",
+          "rankingRef": "종결어미 08"
+        },
+        {
+          "n": 9,
+          "art": "",
+          "phraseKo": "고객들에게 안내장을 보냈으니까 모든 준비를 (   ).",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "고객들에게 안내장을 보냈으니까 모든 준비를 {}."
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "마친 셈이다"
+            },
+            {
+              "id": "o2",
+              "ko": "마치려던 참이다"
+            },
+            {
+              "id": "o3",
+              "ko": "마치기 마련이다"
+            },
+            {
+              "id": "o4",
+              "ko": "마치기 십상이다"
+            }
+          ],
+          "en": "We’ve sent the invitations to our customers, so the preparations are as good as done.",
+          "why": "보냈으니까 gives a reason, and the end is a judgement drawn from it: sending the invitations was the last step, so everything amounts to finished. Judging that something comes to the same as a result is -(으)ㄴ/는 셈이다, 〈판단: 유사 결과〉: 벌써 12월이니까 올해도 다 지난 셈이다.\n\n마치려던 참이다 is -(으)려던 참이다: I was just about to finish. It fits a moment (“I was about to finish when you called”), not a conclusion drawn with -(으)니까.\n\n마치기 마련이다 is -기 마련이다, 〈당위: 예정 사실〉: things like this always end up finished. It states a general truth, and this is one particular event.\n\n마치기 십상이다 is -기 십상이다: very likely to, and usually of something bad — 서두르면 실수하기 십상이다. Finishing the preparations is not a risk.",
+          "grammar": "Ranking 종결어미 09 · -(으)ㄴ/는 셈이다 〈판단: 유사 결과〉 — A/V-(으)ㄴ/는 셈이다: it comes to the same as A, in effect — a judgement from the facts in front of it, often after -(으)니까. 예문: 벌써 12월이니까 올해도 다 지난 셈이다.",
+          "source": "합격 레시피 p.19 · 예상문제 9번",
+          "bookPage": 19,
+          "keySource": "ranking",
+          "rankingRef": "종결어미 09"
+        },
+        {
+          "n": 10,
+          "art": "",
+          "phraseKo": "그 의사는 20년간 환자들을 무료로 (   ).",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "그 의사는 20년간 환자들을 무료로 {}."
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "치료해 왔다"
+            },
+            {
+              "id": "o2",
+              "ko": "치료하게 했다"
+            },
+            {
+              "id": "o3",
+              "ko": "치료하는 법이다"
+            },
+            {
+              "id": "o4",
+              "ko": "치료하려던 참이다"
+            }
+          ],
+          "en": "That doctor has been treating patients for free for twenty years.",
+          "why": "20년간 is a stretch of time running from the past up to now. An action carried on through that stretch is -아/어 오다, 〈진행: 완료〉: 나는 3년 전부터 태권도를 배워 왔다.\n\n치료하게 했다 is -게 하다, making someone else treat patients. The doctor would then be the one who arranged it, and 20년간 would have nothing to measure.\n\n치료하는 법이다 is -는 법이다, a general truth — this is how things are done. It cannot describe one doctor’s twenty years.\n\n치료하려던 참이다 is -(으)려던 참이다, about to — a moment, not twenty years.",
+          "grammar": "Ranking 종결어미 10 · -아/어 오다 〈진행: 완료〉 — V-아/어 오다: an action or change continuing from the past up to now. Time words like 동안, -간 and 부터 often go with it. 예문: 나는 3년 전부터 태권도를 배워 왔다.",
+          "source": "합격 레시피 p.19 · 예상문제 10번",
+          "bookPage": 19,
+          "keySource": "ranking",
+          "rankingRef": "종결어미 10"
+        }
+      ]
+    },
+    {
+      "id": "r1-similar-past",
+      "type": "build",
+      "section": "유사 문법",
+      "sectionEn": "Similar grammar · reading 3-4",
+      "no": "기출 · 제60회 3~4번 · p.20",
+      "icon": "🏆",
+      "blurbEn": "Questions 3 and 4 of the 60th TOPIK II, with the book’s own answers and 해설.",
+      "instructionKo": "다음 밑줄 친 부분과 의미가 비슷한 것을 고르십시오. (각 2점)",
+      "instructionEn": "Choose the one closest in meaning to the underlined part. (2 points each)",
+      "noteEn": "Reading questions 3-4 ask for the expression that means the same as the underlined part — usually intermediate grammar, though question 4 sometimes reaches for advanced. The book’s 황금 레시피 (p.20): check the function (기능) of the underlined grammar first, and only if that does not settle it, look for the closest meaning (의미). The screen cannot underline, so the sentence is printed twice: as the book has it, and again with a gap where the underlined words stand.",
+      "pattern": "기출문제",
+      "items": [
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "동생은 차를 타기만 하면 멀미를 한다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "동생은 차를 {} 멀미를 한다."
+            }
+          ],
+          "answer": "o3",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "탈 만해서"
+            },
+            {
+              "id": "o2",
+              "ko": "타는 탓에"
+            },
+            {
+              "id": "o3",
+              "ko": "탈 때마다"
+            },
+            {
+              "id": "o4",
+              "ko": "타는 동안"
+            }
+          ],
+          "en": "My younger sibling gets carsick every time they ride in a car.",
+          "why": "Check the function first, as the book’s recipe says. 타기만 하면 is -기만 하다, 〈유일〉, in its conditional shape: that one action, and every time it happens, B follows. So what is being tested is repetition — each ride brings carsickness — and the option that says “every time” is -(으)ㄹ 때마다.\n\n교재 해설 · p.20 — 정답은 ③번. '-기만 하다.'는 〈유일〉을 나타내는 문법이다. '-기만 하면'의 형태로 사용하면 '그 한 가지의 행동을 하면 그때마다'의 의미가 된다. '동생은 다른 행동이 아니고 차를 타는 행동만 하면 그때마다 멀미를 한다.'의 의미이다. 따라서 선택지 중에서는 이와 같은 의미의 문법을 찾으면 시간을 나타내면서 '행동'과 '반복'의 의미를 나타내는 '-(으)ㄹ 때마다'이다.\n\n탈 만해서 is -(으)ㄹ 만하다, worth doing (탈 만한 차, a car worth riding in), with -아/어서 on it. It gives a reason, not a repeated occasion.\n\n타는 탓에 is -는 탓에, because of riding, blaming it for a bad result. It explains one outcome and loses the “every time” that 기만 하면 carries.\n\n타는 동안 is while riding: a stretch of time. It says when the sickness comes but not that it comes on each and every ride.",
+          "grammar": "V-기만 하면 — Ranking 유사 문법 36 · -기만 하다 〈유일〉. Only this one action, and whenever it happens B follows: 목감기에 걸려서 그런지 음식을 먹기만 하면 목이 아프다 = 음식을 먹을 때마다 목이 아프다. -(으)ㄹ 때마다 is its everyday paraphrase.",
+          "source": "제60회 TOPIK II 읽기 3번",
+          "bookPage": 20,
+          "keySource": "book",
+          "bookKey": "③"
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "이 컴퓨터는 낡아서 수리해 봐야 오래 쓰기 어렵다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "이 컴퓨터는 낡아서 {} 오래 쓰기 어렵다."
+            }
+          ],
+          "answer": "o4",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "수리해 보니까"
+            },
+            {
+              "id": "o2",
+              "ko": "수리하는 대로"
+            },
+            {
+              "id": "o3",
+              "ko": "수리하는 바람에"
+            },
+            {
+              "id": "o4",
+              "ko": "수리한다고 해도"
+            }
+          ],
+          "en": "This computer is old, so even if you have it repaired it will be hard to keep using it for long.",
+          "why": "This -아/어 봐야 is not the -아/어야 of a necessary condition. With 어렵다 or 소용없다 after it, it means “however much you try, it is no use” — the book calls it 〈행동: 무용〉. So the replacement has to be a concession, “even if you do”, and the one on offer is -(ㄴ/는)다고 해도, 〈가정: 상반〉.\n\n교재 해설 · p.20 — 정답은 ④번. '-아/어 봐야'는 〈행동: 무용〉을 나타내는 문법이다. '수리를 해 봐야 소용이 없다'는 의미이다. 선택지 중에서 이와 같은 의미의 문법을 찾으면 〈가정: 상반〉을 나타내는 '-(ㄴ/는)다고 해도'이다.\n\n수리해 보니까 is -아/어 보니까: having tried it, I found… It reports a result you discovered, and the sentence is not about a repair that has already happened.\n\n수리하는 대로 is -는 대로: as soon as it is repaired, or in the way it is repaired. Neither concedes anything.\n\n수리하는 바람에 is -는 바람에, 〈이유: 돌발〉: because it was repaired, and something went wrong. It makes the repair the cause of the trouble, the opposite of what the sentence says.",
+          "grammar": "V-아/어 봐야 — Ranking 유사 문법 13 · 〈행동〉. Two meanings to keep apart: “only if you try” (먹어 봐야 안다) and, with a negative judgement after it, “even if you try, it is no use” — 다른 가게에 가 봐야 값이 다 비슷할 것 같다 = 가 봐도 = 가 본다고 해도. This question is the second.",
+          "source": "제60회 TOPIK II 읽기 4번",
+          "bookPage": 20,
+          "keySource": "book",
+          "bookKey": "④"
+        }
+      ]
+    },
+    {
+      "id": "r1-similar-practice",
+      "type": "build",
+      "section": "유사 문법",
+      "sectionEn": "Similar grammar · reading 3-4",
+      "no": "예상 · p.25",
+      "icon": "🪞",
+      "blurbEn": "Ten practice questions on the book’s Ranking 40 of similar grammar (pp.21-24).",
+      "instructionKo": "다음 밑줄 친 부분과 의미가 비슷한 것을 고르십시오. (각 2점)",
+      "instructionEn": "Choose the one closest in meaning to the underlined part. (2 points each)",
+      "noteEn": "Name the underlined grammar’s job — a guess, a degree, the natural way of things, the only option, an addition, a bad cause, a worry, an immediate sequence, a judgement, pointlessness — then find the option doing the same job on the same verb. For each headword the book prints the forms that can replace it (the ones in blue are advanced grammar), and the right option is always one of those forms. Where these answers come from: the book prints the key to its 예상문제 in a separate booklet (책 속의 책 · 정답과 해설, p.49 on) that this copy of the book does not include. Each key here is read off the book’s own Ranking table that the set practises, and the grammar card under each explanation names the entry.",
+      "pattern": "예상문제 · 유사 문법",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "하늘에 구름이 많이 낀 걸 보니까 비가 올 듯하다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "하늘에 구름이 많이 낀 걸 보니까 비가 {}."
+            }
+          ],
+          "answer": "o3",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "올 뻔했다"
+            },
+            {
+              "id": "o2",
+              "ko": "올 뿐이다"
+            },
+            {
+              "id": "o3",
+              "ko": "올 모양이다"
+            },
+            {
+              "id": "o4",
+              "ko": "올 리가 없다"
+            }
+          ],
+          "en": "Seeing how cloudy the sky is, it looks like rain.",
+          "why": "Function first: -(으)ㄹ 듯하다 is 〈추측〉, a guess — and 구름이 많이 낀 걸 보니까 says it is a guess from something you can see. The book’s Ranking 유사 문법 01 lines up the guessing family on one sentence: 가는 것 같다 = 가는 듯하다 = 가나 보다 = 가는 모양이다. 올 모양이다 is the member offered here.\n\n올 뻔했다 is -(으)ㄹ 뻔하다, 〈행동: 직전〉: it nearly rained. That is a near miss in the past, not a guess about now.\n\n올 뿐이다 is -(으)ㄹ 뿐이다, 〈유일〉: it will only rain — a limit, with no guessing in it.\n\n올 리가 없다 is -(으)ㄹ 리가 없다: there is no way it will rain. It is certainty the other way, and it contradicts the clouds.",
+          "grammar": "Ranking 유사 문법 01 · -(으)ㄴ/는 것 같다 〈추측〉 · 가는 것 같다 = 가는 듯하다 = 가나 보다 = 가는 모양이다 — V-(으)ㄹ 듯하다 · A/V-(으)ㄴ/는 듯하다: it seems that — a written, slightly formal way of saying -(으)ㄴ/는 것 같다. -(으)ㄹ 모양이다 and -나 보다 guess too, and both want evidence you can point to (…걸 보니까).",
+          "source": "합격 레시피 p.25 · 예상문제 1번",
+          "bookPage": 25,
+          "keySource": "ranking",
+          "rankingRef": "유사 문법 01"
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "1년 만에 고향에 갔는데 몰라볼 정도로 변해서 깜짝 놀랐다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "1년 만에 고향에 갔는데 {} 변해서 깜짝 놀랐다."
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "몰라보게"
+            },
+            {
+              "id": "o2",
+              "ko": "몰라보든지"
+            },
+            {
+              "id": "o3",
+              "ko": "몰라볼까 봐"
+            },
+            {
+              "id": "o4",
+              "ko": "몰라볼 텐데"
+            }
+          ],
+          "en": "I went home for the first time in a year, and it had changed so much I hardly recognised it — I was astonished.",
+          "why": "-(으)ㄹ 정도로 is 〈정도〉: to the degree that. It measures how much the place had changed. The book’s Ranking 유사 문법 02 gives three ways to say the same degree: 몰라볼 정도로 = 몰라볼 만큼 = 몰라보게. The last, printed in blue as advanced, is -게 used for degree: changed beyond recognition.\n\n몰라보든지 is -든지, 〈선택: 무관〉, and there is nothing to choose between.\n\n몰라볼까 봐 is -(으)ㄹ까 봐, 〈우려〉: afraid I might not recognise it. It is a worry before the fact, and the sentence reports a surprise after it.\n\n몰라볼 텐데 is -(으)ㄹ 텐데: I expect I won’t recognise it, but… It is an expectation about something still to come, and 변해서 놀랐다 has already happened.",
+          "grammar": "Ranking 유사 문법 02 · -(으)ㄹ 정도로 〈정도〉 · 몰라볼 정도로 = 몰라볼 만큼 = 몰라보게 — V-(으)ㄹ 정도로: so much that A — a measure of degree. Paraphrases: -(으)ㄹ 만큼, and -게 on verbs like 몰라보다 (몰라보게 달라졌다, changed beyond recognition).",
+          "source": "합격 레시피 p.25 · 예상문제 2번",
+          "bookPage": 25,
+          "keySource": "ranking",
+          "rankingRef": "유사 문법 02"
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "일을 처음 배울 때에는 실수하기 마련이다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "일을 처음 배울 때에는 {}."
+            }
+          ],
+          "answer": "o3",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "실수할 듯하다"
+            },
+            {
+              "id": "o2",
+              "ko": "실수할 뿐이다"
+            },
+            {
+              "id": "o3",
+              "ko": "실수하는 법이다"
+            },
+            {
+              "id": "o4",
+              "ko": "실수하는 척한다"
+            }
+          ],
+          "en": "When you are first learning a job, you are bound to make mistakes.",
+          "why": "-기 마련이다 is 〈당위〉: it is only natural, it always happens that way. The book’s Ranking 유사 문법 03: 낡기 마련이다 = 낡는 법이다 (in blue, advanced) = 낡게 돼 있다. So the answer is -는 법이다, the other general-truth ending.\n\n실수할 듯하다 is a guess about one case — I think I’ll make a mistake — where the sentence states a rule for everyone.\n\n실수할 뿐이다 is -(으)ㄹ 뿐이다, 〈유일〉: it is only a mistake. It limits, and has no “naturally” in it.\n\n실수하는 척한다 is -는 척하다, 〈행동: 가식〉: pretending to make mistakes.",
+          "grammar": "Ranking 유사 문법 03 · -기 마련이다 〈당위〉 · 낡기 마련이다 = 낡는 법이다 = 낡게 돼 있다 — V-기 마련이다: A is only natural, bound to happen. Its twins are -는 법이다 (more formal) and -게 되어 있다 (돼 있다 in speech).",
+          "source": "합격 레시피 p.25 · 예상문제 3번",
+          "bookPage": 25,
+          "keySource": "ranking",
+          "rankingRef": "유사 문법 03"
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "밤늦게까지 놀다가 버스가 끊겨서 택시를 탈 수밖에 없었다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "밤늦게까지 놀다가 버스가 끊겨서 택시를 {}."
+            }
+          ],
+          "answer": "o3",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "탈 뻔했다"
+            },
+            {
+              "id": "o2",
+              "ko": "탈 듯했다"
+            },
+            {
+              "id": "o3",
+              "ko": "타야만 했다"
+            },
+            {
+              "id": "o4",
+              "ko": "타는 법이었다"
+            }
+          ],
+          "en": "I stayed out late having fun, the buses stopped running, and I had no choice but to take a taxi.",
+          "why": "-(으)ㄹ 수밖에 없다 is 〈유일〉: the only option left. The book’s Ranking 유사 문법 04 gives its paraphrases: 갈 수밖에 없었다 = 가야만 했다 = 가지 않을 수 없었다. -아/어야만 하다 is -아/어야 하다 with 만, “only”, squeezing the choice down to one.\n\n탈 뻔했다 is almost took a taxi — and the sentence says you did.\n\n탈 듯했다 is a guess: it seemed I would take one. There is nothing to guess about a necessity.\n\n타는 법이었다 is -는 법이다, a general truth about how things go, not what one person was forced to do one night.",
+          "grammar": "Ranking 유사 문법 04 · -(으)ㄹ 수밖에 없다 〈유일〉 · 갈 수밖에 없었다 = 가야만 했다 = 가지 않을 수 없었다 — V-(으)ㄹ 수밖에 없다: there is no choice but to A. = -아/어야만 하다 = -지 않을 수 없다.",
+          "source": "합격 레시피 p.25 · 예상문제 4번",
+          "bookPage": 25,
+          "keySource": "ranking",
+          "rankingRef": "유사 문법 04"
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "집 근처에 있는 슈퍼마켓은 가까울 뿐만 아니라 물건도 다양해서 자주 가는 편이다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "집 근처에 있는 슈퍼마켓은 {} 물건도 다양해서 자주 가는 편이다."
+            }
+          ],
+          "answer": "o2",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "가까운 이상"
+            },
+            {
+              "id": "o2",
+              "ko": "가까운 데다가"
+            },
+            {
+              "id": "o3",
+              "ko": "가까운 데 비해"
+            },
+            {
+              "id": "o4",
+              "ko": "가까운 셈치고"
+            }
+          ],
+          "en": "The supermarket near my house is not only close but also has a wide range of goods, so I tend to go there often.",
+          "why": "-(으)ㄹ 뿐만 아니라 is 〈포함: 추가〉: not only A, B as well — and the 도 in 물건도 is the second item being added. The book’s Ranking 유사 문법 05: 쌀 뿐만 아니라 = 싼 데다가 = 싼 것은 물론이고. -(으)ㄴ/는 데다가 adds in the same way.\n\n가까운 이상 is -(으)ㄴ 이상: since it is close, it follows that… It draws a conclusion from something given, rather than adding a second thing.\n\n가까운 데 비해 is -(으)ㄴ 데 비해: compared with its being close. It sets the two against each other, where the sentence puts them together.\n\n가까운 셈치고 is -(으)ㄴ 셈 치다: treating it as if it were close. It pretends something counts, which the sentence does not do.",
+          "grammar": "Ranking 유사 문법 05 · -(으)ㄹ 뿐만 아니라 〈포함: 추가〉 · 쌀 뿐만 아니라 = 싼 데다가 = 싼 것은 물론이고 — A/V-(으)ㄹ 뿐만 아니라: not only A but also B; the B clause usually carries 도. = -(으)ㄴ/는 데다가 = -(으)ㄴ/는 것은 물론이고.",
+          "source": "합격 레시피 p.25 · 예상문제 5번",
+          "bookPage": 25,
+          "keySource": "ranking",
+          "rankingRef": "유사 문법 05"
+        },
+        {
+          "n": 6,
+          "art": "",
+          "phraseKo": "사람들이 시끄럽게 떠드는 바람에 강연에 집중을 할 수 없었다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "사람들이 시끄럽게 {} 강연에 집중을 할 수 없었다."
+            }
+          ],
+          "answer": "o2",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "떠든 채로"
+            },
+            {
+              "id": "o2",
+              "ko": "떠드는 통에"
+            },
+            {
+              "id": "o3",
+              "ko": "떠들 정도로"
+            },
+            {
+              "id": "o4",
+              "ko": "떠드는 덕분에"
+            }
+          ],
+          "en": "People were chatting so noisily that I couldn’t concentrate on the lecture.",
+          "why": "-는 바람에 is 〈이유〉 of a particular kind: something unexpected got in the way and the result is bad. The book’s Ranking 유사 문법 06: 떠드는 바람에 = 떠드는 통에 (in blue, advanced) = 떠들어서. -는 통에 is the one on offer, and it carries the same sense of commotion.\n\n떠든 채로 is -(으)ㄴ 채로, 〈지속: 상태〉: in the state of having chatted. It describes how something else was done, not why you could not concentrate.\n\n떠들 정도로 is a degree — so much that — and would make the amount of noise the point, with a result that measures it (떠들 정도로 즐거웠다). Here the noise is a cause.\n\n떠드는 덕분에 is -는 덕분에, 〈이유: 긍정〉: thanks to the chatting. It credits the cause with a good result, and not being able to concentrate is not one.",
+          "grammar": "Ranking 유사 문법 06 · -는 바람에 〈이유〉 · 떠드는 바람에 = 떠드는 통에 = 떠들어서 / 나오는 바람에 = 나오느라고 = 나온 탓에 — V-는 바람에: because A happened unexpectedly, B went wrong. = -는 통에 (a noisy, chaotic cause), and the plain -아/어서.",
+          "source": "합격 레시피 p.25 · 예상문제 6번",
+          "bookPage": 25,
+          "keySource": "ranking",
+          "rankingRef": "유사 문법 06"
+        },
+        {
+          "n": 7,
+          "art": "",
+          "phraseKo": "스케이트를 처음 타 봤는데 처음에는 넘어질까 봐 걱정했는데 재미있었다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "스케이트를 처음 타 봤는데 처음에는 {} 걱정했는데 재미있었다."
+            }
+          ],
+          "answer": "o4",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "넘어질 텐데"
+            },
+            {
+              "id": "o2",
+              "ko": "넘어질 정도로"
+            },
+            {
+              "id": "o3",
+              "ko": "넘어질 리 없어서"
+            },
+            {
+              "id": "o4",
+              "ko": "넘어질 것 같아서"
+            }
+          ],
+          "en": "I went skating for the first time. At first I was worried I would fall, but it was fun.",
+          "why": "-(으)ㄹ까 봐 is 〈우려〉: worried that A might happen — and 걱정했는데 right after it names the worry. The book’s Ranking 유사 문법 07: 넘어질까 봐 걱정했는데 = 넘어질 것 같아서 걱정했는데. “It seemed I would fall, so I worried” is the same fear taken apart.\n\n넘어질 텐데 is -(으)ㄹ 텐데, an expectation with a “but” or a piece of advice to follow (넘어질 텐데 조심해). It does not give the reason for a worry that has already happened.\n\n넘어질 정도로 is a degree: to the point of falling. It measures, and a worry is not measured.\n\n넘어질 리 없어서 is -(으)ㄹ 리가 없다: there was no way I would fall — the opposite of being worried.",
+          "grammar": "Ranking 유사 문법 07 · -(으)ㄹ까 봐(서) 〈우려〉 · 넘어질까 봐 = 넘어질 것 같아서 / 앉을 수 없을까 봐 = 앉을 수 없을지도 몰라서 — V-(으)ㄹ까 봐(서): worried that A might happen, so B. = -(으)ㄹ 것 같아서 = -(으)ㄹ지도 몰라서.",
+          "source": "합격 레시피 p.25 · 예상문제 7번",
+          "bookPage": 25,
+          "keySource": "ranking",
+          "rankingRef": "유사 문법 07"
+        },
+        {
+          "n": 8,
+          "art": "",
+          "phraseKo": "지금 진행하고 있는 프로젝트가 끝나자마자 여행을 갈 생각이다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "지금 진행하고 있는 프로젝트가 {} 여행을 갈 생각이다."
+            }
+          ],
+          "answer": "o2",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "끝나 봐야"
+            },
+            {
+              "id": "o2",
+              "ko": "끝나는 대로"
+            },
+            {
+              "id": "o3",
+              "ko": "끝나는가 하면"
+            },
+            {
+              "id": "o4",
+              "ko": "끝나기는 하지만"
+            }
+          ],
+          "en": "I plan to go travelling as soon as the project I’m working on now is finished.",
+          "why": "-자마자 is 〈순서〉: B straight after A. The book’s Ranking 유사 문법 08: 도착하자마자 = 도착하는 대로 = 도착하면 바로. -는 대로 in this sense means “as soon as”, and it suits a plan like 갈 생각이다 especially well.\n\n끝나 봐야 is -아/어 봐야: only once it is over (will we know), or even if it ends (it is no use). Neither is “straight after”.\n\n끝나는가 하면 is -(으)ㄴ/는가 하면, 〈상반〉: while one thing ends, another… It sets two facts side by side as a contrast.\n\n끝나기는 하지만 is -기는 하지만: it does end, but… A concession, not a sequence.",
+          "grammar": "Ranking 유사 문법 08 · -자마자 〈순서〉 · 도착하자마자 = 도착하는 대로 = 도착하면 바로 / 시작되자마자 = 시작되기가 무섭게 — V-자마자: immediately after A. = V-는 대로 (as soon as — for plans and future actions) = V-(으)면 바로.",
+          "source": "합격 레시피 p.25 · 예상문제 8번",
+          "bookPage": 25,
+          "keySource": "ranking",
+          "rankingRef": "유사 문법 08"
+        },
+        {
+          "n": 9,
+          "art": "",
+          "phraseKo": "초대장도 보냈기 때문에 이제 모든 행사 준비를 마친 셈이다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "초대장도 보냈기 때문에 이제 모든 행사 준비를 {}."
+            }
+          ],
+          "answer": "o2",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "마친 척했다"
+            },
+            {
+              "id": "o2",
+              "ko": "마친 거나 같다"
+            },
+            {
+              "id": "o3",
+              "ko": "마치기 마련이다"
+            },
+            {
+              "id": "o4",
+              "ko": "마치려던 참이다"
+            }
+          ],
+          "en": "We’ve sent the invitations as well, so the preparations for the event are practically finished.",
+          "why": "-(으)ㄴ 셈이다 is 〈판단〉: it amounts to, it is as good as. The book’s Ranking 유사 문법 09 prints four versions of one sentence: 지나간 셈이다 = 지나간 거나 같다 = 지나간 거나 마찬가지이다 = 지나간 거나 다름없다. 마친 거나 같다 is the second of them.\n\n마친 척했다 is -(으)ㄴ 척하다, pretending to have finished — a pose, not a judgement.\n\n마치기 마련이다 is a general truth: things like this always end up finished.\n\n마치려던 참이다 is -(으)려던 참이다: I was just about to finish. 종결어미 question 9 on p.19 offers the same wrong answer and tests this ending from the other side.",
+          "grammar": "Ranking 유사 문법 09 · -(으)ㄴ/는 셈이다 〈판단〉 · 지나간 셈이다 = 지나간 거나 같다 = 지나간 거나 마찬가지이다 = 지나간 거나 다름없다 — A/V-(으)ㄴ/는 셈이다: in effect, it comes to A. = -(으)ㄴ/는 거나 같다 = -(으)ㄴ/는 거나 마찬가지이다 = -(으)ㄴ/는 거나 다름없다.",
+          "source": "합격 레시피 p.25 · 예상문제 9번",
+          "bookPage": 25,
+          "keySource": "ranking",
+          "rankingRef": "유사 문법 09"
+        },
+        {
+          "n": 10,
+          "art": "",
+          "phraseKo": "다시 물어보나 마나 형은 귀찮아서 싫다고 할 게 뻔하다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "다시 {} 형은 귀찮아서 싫다고 할 게 뻔하다."
+            }
+          ],
+          "answer": "o4",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "물어보거나"
+            },
+            {
+              "id": "o2",
+              "ko": "물어보기에"
+            },
+            {
+              "id": "o3",
+              "ko": "물어보는 것보다"
+            },
+            {
+              "id": "o4",
+              "ko": "물어보지 않아도"
+            }
+          ],
+          "en": "There’s no point asking again — my older brother is obviously going to say no because it’s too much bother.",
+          "why": "-(으)나 마나 is 〈선택〉 with the choice already made for you: ask or don’t, the answer is the same, so there is no point. -(으)ㄹ 게 뻔하다 at the end confirms it. The book’s Ranking 유사 문법 10: 물어보나 마나 = 물어봐도 = 물어보지 않아도 = 물어볼 것도 없이. 물어보지 않아도 is the one here.\n\n물어보거나 is -거나, 〈선택: 택일〉: ask, or do something else. It offers a choice instead of saying the choice makes no difference.\n\n물어보기에 is -기에, 〈이유: 발견〉: because I asked. It makes asking the reason, and the sentence has not asked.\n\n물어보는 것보다 is a comparison, rather than asking. It needs a second thing that would be better (물어보는 것보다 찾아보는 게 낫다).",
+          "grammar": "Ranking 유사 문법 10 · -(으)나 마나 〈선택〉 · 물어보나 마나 = 물어봐도 = 물어보지 않아도 = 물어볼 것도 없이 — V-(으)나 마나: whether you do A or not the result is obvious, so it is pointless — often with -(으)ㄹ 게 뻔하다. = -아/어도 = -지 않아도 = -(으)ㄹ 것도 없이.",
+          "source": "합격 레시피 p.25 · 예상문제 10번",
+          "bookPage": 25,
+          "keySource": "ranking",
+          "rankingRef": "유사 문법 10"
+        }
+      ]
+    },
+    {
+      "id": "r1-ads-past",
+      "type": "build",
+      "section": "광고",
+      "sectionEn": "Advertisements · reading 5-8",
+      "no": "기출 · 제60회 5~8번 · pp.26-39",
+      "icon": "🏆",
+      "blurbEn": "Questions 5 to 8 of the 60th TOPIK II — one of each kind of ad — with the book’s own answers and 핵심어.",
+      "instructionKo": "다음은 무엇에 대한 글인지 고르십시오. (각 2점)",
+      "instructionEn": "Choose what the text is about. (2 points each)",
+      "noteEn": "Reading questions 5-8 give a short ad and ask what it is about. The book sorts them by number: 5 is a product (〈제품 광고〉), 6 a business (〈업소 광고〉), 7 a public-service ad (〈공익 광고〉), and 8 asks what kind of detail an ad or notice gives (〈광고의 상세 설명〉). Its 황금 레시피 (p.26): find the ad’s nouns and verbs quickly, then find the option they belong with.",
+      "pattern": "기출문제",
+      "items": [
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "몸에 좋은 영양소가 가득~"
+            },
+            {
+              "ko": "매일 아침 신선함을 마셔요."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o3",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "과자"
+            },
+            {
+              "id": "o2",
+              "ko": "안경"
+            },
+            {
+              "id": "o3",
+              "ko": "우유"
+            },
+            {
+              "id": "o4",
+              "ko": "신발"
+            }
+          ],
+          "en": "Packed with nutrients that are good for you — drink freshness every morning.",
+          "why": "The recipe for questions 5 to 8: find the nouns and verbs, then find the option they belong to. Here they are 몸에 좋다, 영양소 and 마시다 — the book’s own 핵심어 for this question. Of the four options only one is something you drink, and 매일 아침 fits the Ranking’s 우유 keywords too (아침, 한잔, 영양가가 높다).\n\n교재 해설 · p.26 — 정답은 ③번. 핵심어: 몸에 좋다, 영양소, 마시다\n\n과자 is eaten, not drunk, and nobody sells snacks on their nutrients. 안경 and 신발 have their own words — 눈, 보이다 and 걷다, 편하다 — and none of them is here.",
+          "grammar": "제품 광고 Ranking 20 · 우유 — 광고 핵심어: 아침, 한잔, 대신, 영양가가 높다. Question 5 of TOPIK II is always a product ad (〈제품 광고〉): match the ad’s nouns and verbs to the thing that uses them.",
+          "source": "제60회 TOPIK II 읽기 5번",
+          "bookPage": 26,
+          "keySource": "book",
+          "bookKey": "③"
+        },
+        {
+          "n": 6,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "큰 이불도 깨끗하게"
+            },
+            {
+              "ko": "세탁부터 건조까지 한 번에 해결!"
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o4",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "우체국"
+            },
+            {
+              "id": "o2",
+              "ko": "여행사"
+            },
+            {
+              "id": "o3",
+              "ko": "편의점"
+            },
+            {
+              "id": "o4",
+              "ko": "빨래방"
+            }
+          ],
+          "en": "Even big duvets come out clean — washing and drying, sorted in one go!",
+          "why": "Nouns and verbs: 이불, 깨끗하다, 세탁, 건조 — the book’s 핵심어. Washing (세탁) and drying (건조) together are what a self-service laundry does, and 빨래방 is 빨래, laundry, plus 방, a room.\n\n교재 해설 · p.31 — 정답은 ④번. 핵심어: 이불, 깨끗하다, 세탁, 건조\n\nThe Ranking’s nearest entry is 세탁소 (빨다, 옷, 깨끗하다, 이불, 운동화, 맡기다) — the same job done for you. 우체국 is 물건, 배달하다, 은행 업무; 여행사 is 항공권, 예약, 떠나다; 편의점 is 24시간, 생활용품, 간단한 식사. None of them washes anything.",
+          "grammar": "업소 광고 Ranking 36 · 세탁소 — 광고 핵심어: 빨다, 옷, 깨끗하다, 이불, 운동화, 맡기다. Question 6 is always a business (〈업소 광고〉): a shop, a service or a place.",
+          "source": "제60회 TOPIK II 읽기 6번",
+          "bookPage": 31,
+          "keySource": "book",
+          "bookKey": "④"
+        },
+        {
+          "n": 7,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "등산할 때 담배와 라이터는 두고 가세요."
+            },
+            {
+              "ko": "작은 실천이 아름다운 산을 지킵니다."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o3",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "건강 관리"
+            },
+            {
+              "id": "o2",
+              "ko": "전기 절약"
+            },
+            {
+              "id": "o3",
+              "ko": "화재 예방"
+            },
+            {
+              "id": "o4",
+              "ko": "교통 안전"
+            }
+          ],
+          "en": "When you go hiking, leave your cigarettes and lighter behind. A small action protects our beautiful mountains.",
+          "why": "핵심어: 등산, 담배, 라이터, 산을 지키다. Leaving cigarettes and a lighter at home on a mountain walk is about fire, and 산을 지키다 names what is being protected. This is a public-service ad (〈공익 광고〉), and its theme is 화재 예방.\n\n교재 해설 · p.35 — 정답은 ③번. 핵심어: 등산, 담배, 라이터, 산을 지키다\n\n건강 관리 is tempting because of 담배, but a health ad would tell you to give up (the Ranking’s 금연 홍보: 피우다, 끊다, 폐), not to leave the lighter at home. 전기 절약 is 플러그, 끄다, 아끼다, and 교통 안전 is 신호, 정지선 — neither is on a mountain.",
+          "grammar": "공익 광고 Ranking 11 · 화재 예방 — 광고 핵심어: 불씨, 꺼지다, 살펴보다. Question 7 is a public-service ad, and the book sorts them into six groups: 공동체, 환경, 절약, 안전, 건강 and 공공생활.",
+          "source": "제60회 TOPIK II 읽기 7번",
+          "bookPage": 35,
+          "keySource": "book",
+          "bookKey": "③"
+        },
+        {
+          "n": 8,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "• 검사 전날 밤 9시 이후에는 아무것도 드시면 안 됩니다."
+            },
+            {
+              "ko": "• 정확한 검사를 위해 음주를 피하십시오."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o2",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "상품 안내"
+            },
+            {
+              "id": "o2",
+              "ko": "주의 사항"
+            },
+            {
+              "id": "o3",
+              "ko": "사용 순서"
+            },
+            {
+              "id": "o4",
+              "ko": "장소 문의"
+            }
+          ],
+          "en": "Do not eat or drink anything after 9 pm on the night before your test. For accurate results, avoid alcohol.",
+          "why": "핵심어: 안 됩니다, 피하십시오. Question 8 asks what kind of detail a notice gives, and its endings answer before its content does: -(으)면 안 됩니다 forbids and -(으)십시오 instructs. Rules about what not to do before a test are 주의 사항, precautions.\n\n교재 해설 · p.39 — 정답은 ②번. 핵심어: 안 됩니다, 피하십시오\n\n상품 안내 would describe a product, 사용 순서 would set steps in order (먼저, 그다음), and 장소 문의 would ask or answer where something is. There is no product, no sequence and no place here.",
+          "grammar": "광고의 상세 설명 Ranking 06 · 주의 사항 — 선택지 어휘: V-(으)십시오, V-지 마십시오. For question 8, read the endings first: 안 됩니다, 금지, 피하십시오 and 마십시오 mark 주의 사항.",
+          "source": "제60회 TOPIK II 읽기 8번",
+          "bookPage": 39,
+          "keySource": "book",
+          "bookKey": "②"
+        }
+      ]
+    },
+    {
+      "id": "r1-ads-product",
+      "type": "build",
+      "section": "광고",
+      "sectionEn": "Advertisements · reading 5-8",
+      "no": "예상 · pp.29-30 · 5번",
+      "icon": "🛍️",
+      "blurbEn": "Ten product ads, question 5’s type, against the book’s Ranking 50 of 광고 핵심어 (pp.26-28).",
+      "instructionKo": "다음은 무엇에 대한 글인지 고르십시오. (각 2점)",
+      "instructionEn": "Choose what the text is about. (2 points each)",
+      "noteEn": "Question 5 is always a product. The book’s Ranking 50 lists, for each product, the words its ads use — 광고 핵심어. Read the ad for its nouns and verbs and ask which product they belong to; a wrong option usually shares one word with the ad and none of the others. Where these answers come from: the book prints the key to its 예상문제 in a separate booklet (책 속의 책 · 정답과 해설, p.49 on) that this copy of the book does not include. Each key here is read off the book’s own Ranking table that the set practises, and the grammar card under each explanation names the entry.",
+      "pattern": "예상문제 · 제품 광고",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "당신의 일정을 지켜 드립니다."
+            },
+            {
+              "ko": "1분 1초라도 정확하게~"
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o2",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "달력"
+            },
+            {
+              "id": "o2",
+              "ko": "시계"
+            },
+            {
+              "id": "o3",
+              "ko": "라디오"
+            },
+            {
+              "id": "o4",
+              "ko": "자동차"
+            }
+          ],
+          "en": "We keep your schedule for you — accurate to the minute and the second.",
+          "why": "Nouns and verbs: 일정, 지켜 드리다, 1분 1초, 정확하다. Keeping time to the second is what a watch or clock does — the book’s Ranking 01, whose 핵심어 are exactly 일정, 1분 1초, 정확하다, 지켜 주다.\n\n달력 is tempting because of 일정, but a calendar counts days, not 1분 1초. 라디오 and 자동차 have nothing to be accurate about here.",
+          "grammar": "Ranking 제품 광고 01 · 시계 — 광고 핵심어: 일정, 1분 1초, 정확하다, 지켜 주다. 시계, a watch or clock: an ad for one sells exactness — 정확하다, 1분 1초.",
+          "source": "합격 레시피 p.29 · 예상문제 1번",
+          "bookPage": 29,
+          "keySource": "ranking",
+          "rankingRef": "제품 광고 01"
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "글씨가 흐릿하게 보이십니까?"
+            },
+            {
+              "ko": "먼 곳까지 선명하게~ 눈을 보호하세요."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o2",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "거울"
+            },
+            {
+              "id": "o2",
+              "ko": "안경"
+            },
+            {
+              "id": "o3",
+              "ko": "신문"
+            },
+            {
+              "id": "o4",
+              "ko": "사진기"
+            }
+          ],
+          "en": "Does writing look blurry to you? See clearly, even far away — and protect your eyes.",
+          "why": "눈, 보이다, 선명하다, 먼 곳 — all four are the Ranking’s 안경 keywords (02), and 흐릿하게 보이다, seeing things blurred, is the problem glasses fix.\n\n거울 shows you your own 모습; 신문 is where 글씨 appears but nothing gets clearer; 사진기 is 찍다 and 추억.",
+          "grammar": "Ranking 제품 광고 02 · 안경 — 광고 핵심어: 눈, 보이다, 선명하다, 먼 곳. 안경, glasses: 눈, 보이다, 선명하다 — seeing clearly.",
+          "source": "합격 레시피 p.29 · 예상문제 2번",
+          "bookPage": 29,
+          "keySource": "ranking",
+          "rankingRef": "제품 광고 02"
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "발이 편해야 모든 게 편합니다."
+            },
+            {
+              "ko": "모두가 걷기 편한 세상으로~"
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "신발"
+            },
+            {
+              "id": "o2",
+              "ko": "비누"
+            },
+            {
+              "id": "o3",
+              "ko": "우산"
+            },
+            {
+              "id": "o4",
+              "ko": "자동차"
+            }
+          ],
+          "en": "When your feet are comfortable, everything is comfortable. Towards a world where walking is easy for everyone.",
+          "why": "발, 편하다, 걷다 — the Ranking’s 신발 keywords (03) are just 걷다 and 편하다, and 발 settles it.\n\n자동차 is also sold on comfort (편안한 느낌), but you ride in a car, you do not walk in it. 비누 and 우산 have nothing to do with feet.",
+          "grammar": "Ranking 제품 광고 03 · 신발 — 광고 핵심어: 걷다, 편하다. 신발, shoes: 걷다, 편하다 — and in this ad 발, the feet themselves.",
+          "source": "합격 레시피 p.29 · 예상문제 3번",
+          "bookPage": 29,
+          "keySource": "ranking",
+          "rankingRef": "제품 광고 03"
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "타고 싶은 멋진 디자인"
+            },
+            {
+              "ko": "편안한 느낌으로 달립니다."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o4",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "운동화"
+            },
+            {
+              "id": "o2",
+              "ko": "전화기"
+            },
+            {
+              "id": "o3",
+              "ko": "등산복"
+            },
+            {
+              "id": "o4",
+              "ko": "자동차"
+            }
+          ],
+          "en": "A stylish design you’ll want to ride in — it drives with a comfortable feel.",
+          "why": "타다, 디자인, 편안한 느낌, 달리다 — four of the Ranking’s 자동차 keywords (04). The verb that decides is 타다: you ride in a car.\n\n운동화 also 달리다, but you wear trainers, you do not 타다 them. 전화기 and 등산복 are neither ridden nor driven.",
+          "grammar": "Ranking 제품 광고 04 · 자동차 — 광고 핵심어: 디자인, 타다, 편안한 느낌, 달리다, 소음, 조용하다, 승차감. 자동차, a car: 타다, 달리다, and comfort words — 편안한 느낌, 조용하다, 승차감.",
+          "source": "합격 레시피 p.29 · 예상문제 4번",
+          "bookPage": 29,
+          "keySource": "ranking",
+          "rankingRef": "제품 광고 04"
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "찍는 순간 흔들리지 않습니다."
+            },
+            {
+              "ko": "다시 보고 싶은 순간, 추억으로~"
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o3",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "거울"
+            },
+            {
+              "id": "o2",
+              "ko": "신문"
+            },
+            {
+              "id": "o3",
+              "ko": "사진기"
+            },
+            {
+              "id": "o4",
+              "ko": "자전거"
+            }
+          ],
+          "en": "It doesn’t shake the moment you take the shot. The moments you’ll want to see again, kept as memories.",
+          "why": "찍다, 순간, 다시 보고 싶다, 추억 — the Ranking’s 카메라(사진기) keywords (05), word for word. A shot that does not blur, 흔들리지 않다, is a camera’s selling point.\n\n거울 shows your face but keeps nothing; 신문 is read; 자전거 might 흔들리다 too, but nobody 찍다 with it.",
+          "grammar": "Ranking 제품 광고 05 · 카메라(사진기) — 광고 핵심어: 찍다, 다시 보고 싶다, 순간, 추억. 사진기 (= 카메라), a camera: 찍다, 순간, 추억.",
+          "source": "합격 레시피 p.29 · 예상문제 5번",
+          "bookPage": 29,
+          "keySource": "ranking",
+          "rankingRef": "제품 광고 05"
+        },
+        {
+          "n": 6,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "바르세요, 아기 피부처럼 뽀송뽀송~"
+            },
+            {
+              "ko": "바르세요, 빛나는 피부를 만드세요."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o3",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "치약"
+            },
+            {
+              "id": "o2",
+              "ko": "가습기"
+            },
+            {
+              "id": "o3",
+              "ko": "화장품"
+            },
+            {
+              "id": "o4",
+              "ko": "염색약"
+            }
+          ],
+          "en": "Put it on for skin as soft as a baby’s. Put it on and make your skin glow.",
+          "why": "바르다 and 피부 — the Ranking’s two 화장품 keywords (06) — each come twice.\n\n염색약 is also 바르다, but on 흰머리, not on skin. 치약 is 닦다 and 입안, and 가습기 works on the air, not on you.",
+          "grammar": "Ranking 제품 광고 06 · 화장품 — 광고 핵심어: 피부, 바르다. 화장품, cosmetics: 피부, 바르다.",
+          "source": "합격 레시피 p.30 · 예상문제 6번",
+          "bookPage": 30,
+          "keySource": "ranking",
+          "rankingRef": "제품 광고 06"
+        },
+        {
+          "n": 7,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "겨울철, 실내가 건조하세요?"
+            },
+            {
+              "ko": "공기를 촉촉하게 만들어 드립니다."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o3",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "청소기"
+            },
+            {
+              "id": "o2",
+              "ko": "세탁기"
+            },
+            {
+              "id": "o3",
+              "ko": "가습기"
+            },
+            {
+              "id": "o4",
+              "ko": "정수기"
+            }
+          ],
+          "en": "Is the air indoors dry in winter? We’ll make it pleasantly moist.",
+          "why": "건조하다, 공기, 촉촉하다 — three of the Ranking’s four 가습기 keywords (07). A humidifier (가습기, 加濕器, a machine that adds moisture) is what fixes dry air.\n\nFour machines ending in 기, on purpose: 청소기 takes away 먼지, 세탁기 washes 옷, and 정수기 cleans water for 마시다. Only one works on the air.",
+          "grammar": "Ranking 제품 광고 07 · 가습기 — 광고 핵심어: 공기, 물, 건조하다, 촉촉하다. 가습기, a humidifier: 공기, 물, 건조하다, 촉촉하다.",
+          "source": "합격 레시피 p.30 · 예상문제 7번",
+          "bookPage": 30,
+          "keySource": "ranking",
+          "rankingRef": "제품 광고 07"
+        },
+        {
+          "n": 8,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "버튼 한 번에 접었다 폈다를 자유롭게"
+            },
+            {
+              "ko": "간편한 휴대로 소나기 걱정 뚝!"
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o2",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "책"
+            },
+            {
+              "id": "o2",
+              "ko": "우산"
+            },
+            {
+              "id": "o3",
+              "ko": "신문"
+            },
+            {
+              "id": "o4",
+              "ko": "노트북"
+            }
+          ],
+          "en": "Folds and opens freely at one push of a button. Easy to carry — no more worrying about sudden showers!",
+          "why": "접다, 펴다, 소나기 — three of the Ranking’s 우산 keywords (08). An umbrella that opens and folds with one button is a folding umbrella, and 소나기 걱정 뚝 is what it is for.\n\n책, 신문 and 노트북 can all be opened (펴다) or carried (휴대), but none of them keeps the rain off.",
+          "grammar": "Ranking 제품 광고 08 · 우산 — 광고 핵심어: 소나기, 접다, 펴다, 젖다. 우산, an umbrella: 소나기, 접다, 펴다, 젖다.",
+          "source": "합격 레시피 p.30 · 예상문제 8번",
+          "bookPage": 30,
+          "keySource": "ranking",
+          "rankingRef": "제품 광고 08"
+        },
+        {
+          "n": 9,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "머릿결을 부드럽고 향기롭게!"
+            },
+            {
+              "ko": "감는 순간 느낄 수 있습니다."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o3",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "치약"
+            },
+            {
+              "id": "o2",
+              "ko": "수건"
+            },
+            {
+              "id": "o3",
+              "ko": "샴푸"
+            },
+            {
+              "id": "o4",
+              "ko": "향수"
+            }
+          ],
+          "en": "Soft, fragrant hair! You’ll feel it the moment you wash it.",
+          "why": "머릿결, 부드럽다, 감다 — the Ranking’s 샴푸 keywords (09) are 머릿결, 머리카락, 머리를 감다, 부드럽다. 감다 is the verb for washing hair.\n\n향수 is tempting because of 향기롭다, but you 뿌리다 perfume, you do not wash with it. 수건 dries hair; 치약 is for teeth.",
+          "grammar": "Ranking 제품 광고 09 · 샴푸 — 광고 핵심어: 머릿결, 머리카락, 머리를 감다, 부드럽다. 샴푸, shampoo: 머릿결, 머리를 감다, 부드럽다.",
+          "source": "합격 레시피 p.30 · 예상문제 9번",
+          "bookPage": 30,
+          "keySource": "ranking",
+          "rankingRef": "제품 광고 09"
+        },
+        {
+          "n": 10,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "전기 요금 걱정 뚝! 바람이 씽씽!"
+            },
+            {
+              "ko": "더위를 날려 버리고 시원한 여름 보내세요."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o4",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "라디오"
+            },
+            {
+              "id": "o2",
+              "ko": "체온계"
+            },
+            {
+              "id": "o3",
+              "ko": "가습기"
+            },
+            {
+              "id": "o4",
+              "ko": "에어컨"
+            }
+          ],
+          "en": "No more worrying about the electricity bill! A strong, cool breeze! Blow the heat away and have a cool summer.",
+          "why": "시원하다, 바람, 더위 — the Ranking’s 에어컨 entry (10) is 시원한 바람, 더위.\n\n선풍기 has 바람 and 시원하다 too (Ranking 29), but it is not among the options. 가습기 changes the air’s moisture, not its heat, and 라디오 and 체온계 have nothing to blow.",
+          "grammar": "Ranking 제품 광고 10 · 에어컨 — 광고 핵심어: 시원한 바람, 더위. 에어컨, an air conditioner: 시원한 바람, 더위.",
+          "source": "합격 레시피 p.30 · 예상문제 10번",
+          "bookPage": 30,
+          "keySource": "ranking",
+          "rankingRef": "제품 광고 10"
+        }
+      ]
+    },
+    {
+      "id": "r1-ads-business",
+      "type": "build",
+      "section": "광고",
+      "sectionEn": "Advertisements · reading 5-8",
+      "no": "예상 · pp.33-34 · 6번",
+      "icon": "🏪",
+      "blurbEn": "Ten business ads, question 6’s type, against the book’s Ranking 40 (pp.31-32).",
+      "instructionKo": "다음은 무엇에 대한 글인지 고르십시오. (각 2점)",
+      "instructionEn": "Choose what the text is about. (2 points each)",
+      "noteEn": "Question 6 is a shop, a service or a place. The ad names what you do there — shop in a sale, send a parcel, look at paintings, live without noise from upstairs — and the place is whichever one that is done in. Where these answers come from: the book prints the key to its 예상문제 in a separate booklet (책 속의 책 · 정답과 해설, p.49 on) that this copy of the book does not include. Each key here is read off the book’s own Ranking table that the set practises, and the grammar card under each explanation names the entry.",
+      "pattern": "예상문제 · 업소 광고",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "봄맞이 30% 세일~ 쇼핑 기회!"
+            },
+            {
+              "ko": "넓은 주차 공간, 친절한 안내와 서비스"
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "백화점"
+            },
+            {
+              "id": "o2",
+              "ko": "편의점"
+            },
+            {
+              "id": "o3",
+              "ko": "음식점"
+            },
+            {
+              "id": "o4",
+              "ko": "안경점"
+            }
+          ],
+          "en": "30% off for spring — a chance to shop! Plenty of parking, and friendly help and service.",
+          "why": "세일, 기회, 쇼핑 — the Ranking’s 백화점 keywords (01) are 세일, 싸다, 기회, and a big car park with 안내 and 서비스 fits a department store.\n\n편의점 is 24시간 and 가까운 곳, not a seasonal sale; 음식점 is 손맛 and 재료; 안경점 is 눈 and 글씨.",
+          "grammar": "Ranking 업소 광고 01 · 백화점 — 광고 핵심어: 세일, 싸다, 기회. 백화점, a department store: 세일, 싸다, 기회.",
+          "source": "합격 레시피 p.33 · 예상문제 1번",
+          "bookPage": 33,
+          "keySource": "ranking",
+          "rankingRef": "업소 광고 01"
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "저렴하고 품질이 우수한 상품들!"
+            },
+            {
+              "ko": "학용품은 물론 사무용품 등 모두 준비되어 있습니다."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o2",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "회사"
+            },
+            {
+              "id": "o2",
+              "ko": "문구점"
+            },
+            {
+              "id": "o3",
+              "ko": "기숙사"
+            },
+            {
+              "id": "o4",
+              "ko": "슈퍼마켓"
+            }
+          ],
+          "en": "Low prices and excellent quality! School supplies, office supplies too — we have it all ready.",
+          "why": "학용품 and 사무용품, school and office supplies, are the Ranking’s 문구점 entry (02): 학교와 사무실에 필요한 모든 것.\n\n슈퍼마켓 also sells 상품, but its words are 과일, 채소, 생선. 회사 and 기숙사 are places where supplies get used, not sold.",
+          "grammar": "Ranking 업소 광고 02 · 문구점 — 광고 핵심어: 학교와 사무실에 필요한 모든 것, 책가방 속, 책상 위 필수품. 문구점, a stationery shop: 학용품, 사무용품 — everything school and the office need.",
+          "source": "합격 레시피 p.33 · 예상문제 2번",
+          "bookPage": 33,
+          "keySource": "ranking",
+          "rankingRef": "업소 광고 02"
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "길이 막혀서 짜증나신다고요?"
+            },
+            {
+              "ko": "약속 시간까지 빠르고 안전하게 모십니다."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o2",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "자전거"
+            },
+            {
+              "id": "o2",
+              "ko": "지하철"
+            },
+            {
+              "id": "o3",
+              "ko": "자동차"
+            },
+            {
+              "id": "o4",
+              "ko": "비행기"
+            }
+          ],
+          "en": "Fed up with traffic jams? We’ll get you there quickly and safely, in time for your appointment.",
+          "why": "막히다, 약속 시간, 빠르다, 안전하다 — four of the Ranking’s 지하철 keywords (03). Beating the traffic is the subway’s promise, because it never uses the road.\n\n자동차 is the thing stuck in the jam. 자전거 is not what anyone offers as safe and fast for an appointment, and 비행기 is 하늘 and 여행. 모십니다, we take you, is a service speaking, and the subway is the service here.",
+          "grammar": "Ranking 업소 광고 03 · 지하철 — 광고 핵심어: 막히다, 약속 시간, 빠르다, 안전하다, 시민의 발. 지하철, the subway: 막히다, 약속 시간, 빠르다, 안전하다, 시민의 발.",
+          "source": "합격 레시피 p.33 · 예상문제 3번",
+          "bookPage": 33,
+          "keySource": "ranking",
+          "rankingRef": "업소 광고 03"
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "국내 최대 서적 보유~"
+            },
+            {
+              "ko": "원하는 자료 검색부터 복사까지 한 번에"
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "도서관"
+            },
+            {
+              "id": "o2",
+              "ko": "미술관"
+            },
+            {
+              "id": "o3",
+              "ko": "박물관"
+            },
+            {
+              "id": "o4",
+              "ko": "우체국"
+            }
+          ],
+          "en": "The largest collection of books in the country — from searching for what you need to copying it, all in one go.",
+          "why": "서적, 자료, 복사 — the Ranking’s 도서관 keywords (04) are 서적, 잡지, 다양하다, 복사하다.\n\n미술관 holds 작품 by 화가; 박물관 holds 문화재 from the 과거; 우체국 sends 물건. Only a library lets you search and copy.",
+          "grammar": "Ranking 업소 광고 04 · 도서관 — 광고 핵심어: 서적, 잡지, 다양하다, 복사하다, 인생, 준비하다. 도서관, a library: 서적, 잡지, 복사하다.",
+          "source": "합격 레시피 p.33 · 예상문제 4번",
+          "bookPage": 33,
+          "keySource": "ranking",
+          "rankingRef": "업소 광고 04"
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "국내외 현대 화가의 작품을 한눈에~"
+            },
+            {
+              "ko": "동서양의 그림을 한 곳에서 감상하십시오."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o3",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "병원"
+            },
+            {
+              "id": "o2",
+              "ko": "백화점"
+            },
+            {
+              "id": "o3",
+              "ko": "미술관"
+            },
+            {
+              "id": "o4",
+              "ko": "음식점"
+            }
+          ],
+          "en": "Works by modern painters from home and abroad, all at a glance. Enjoy Eastern and Western paintings in one place.",
+          "why": "화가, 작품, 국내외, 그림, 감상하다 — the Ranking’s 미술관 keywords (05) are 화가, 작품, 전시, 국외, 국내.\n\n박물관 would be the trap, but it is not offered; 병원, 백화점 and 음식점 have no paintings to see.",
+          "grammar": "Ranking 업소 광고 05 · 미술관 — 광고 핵심어: 화가, 작품, 전시, 국외, 국내. 미술관, an art gallery: 화가, 작품, 전시.",
+          "source": "합격 레시피 p.33 · 예상문제 5번",
+          "bookPage": 33,
+          "keySource": "ranking",
+          "rankingRef": "업소 광고 05"
+        },
+        {
+          "n": 6,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "알뜰하게 장도 보고 지역 경제도 살리고!"
+            },
+            {
+              "ko": "넓은 주차 공간 완비, 배달 서비스 시작"
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o2",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "극장"
+            },
+            {
+              "id": "o2",
+              "ko": "시장"
+            },
+            {
+              "id": "o3",
+              "ko": "병원"
+            },
+            {
+              "id": "o4",
+              "ko": "편의점"
+            }
+          ],
+          "en": "Shop thriftily and help the local economy too! Plenty of parking, and a new delivery service.",
+          "why": "장을 보다, 지역 경제, 주차 — the Ranking’s 시장 keywords (06) are 신용카드, 주차장, 지역 경제, 덤, 정, 장을 보다. A traditional market is the place ads say keeps the 지역 경제 alive.\n\n편의점 sells food too, but its words are 24시간 and 가까운 곳. 극장 and 병원 are not places to 장을 보다.",
+          "grammar": "Ranking 업소 광고 06 · 시장 — 광고 핵심어: 신용카드, 주차장, 지역 경제, 덤, 정, 장을 보다. 시장, a market: 장을 보다, 지역 경제, 덤, 정.",
+          "source": "합격 레시피 p.34 · 예상문제 6번",
+          "bookPage": 34,
+          "keySource": "ranking",
+          "rankingRef": "업소 광고 06"
+        },
+        {
+          "n": 7,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "유행에 민감한 당신을 초대합니다."
+            },
+            {
+              "ko": "봄 신상품 대량 보유, 세일 시작~"
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o3",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "가구점"
+            },
+            {
+              "id": "o2",
+              "ko": "여행사"
+            },
+            {
+              "id": "o3",
+              "ko": "옷 가게"
+            },
+            {
+              "id": "o4",
+              "ko": "부동산"
+            }
+          ],
+          "en": "An invitation for the fashion-conscious. A big range of new spring arrivals — the sale has started!",
+          "why": "유행, 신상품, 세일 — the Ranking’s 옷 가게 keywords (07), all three of them. 봄 신상품 is a new season’s clothes.\n\n가구점 has 디자인 but no seasons; 여행사 is 예약 and 떠나다; 부동산 is 집값 and 아파트.",
+          "grammar": "Ranking 업소 광고 07 · 옷 가게 — 광고 핵심어: 세일, 신상품, 유행. 옷 가게, a clothes shop: 세일, 신상품, 유행.",
+          "source": "합격 레시피 p.34 · 예상문제 7번",
+          "bookPage": 34,
+          "keySource": "ranking",
+          "rankingRef": "업소 광고 07"
+        },
+        {
+          "n": 8,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "전화 한 통만 하십시오."
+            },
+            {
+              "ko": "문 앞에서 문 앞으로 빠르고 안전하게 배달해 드립니다."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o4",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "편의점"
+            },
+            {
+              "id": "o2",
+              "ko": "음식점"
+            },
+            {
+              "id": "o3",
+              "ko": "채소 가게"
+            },
+            {
+              "id": "o4",
+              "ko": "택배 회사"
+            }
+          ],
+          "en": "Just one phone call. We deliver door to door, quickly and safely.",
+          "why": "전화 한 통, 문 앞, 빠르다, 안전하다, 배달하다 — the Ranking’s 택배 회사 keywords (08), nearly word for word. 문 앞에서 문 앞으로, from one door to another, is a parcel’s journey.\n\n편의점, 음식점 and 채소 가게 may deliver their own goods, but 문 앞에서 문 앞으로 means collecting something at one door and taking it to another — a courier.",
+          "grammar": "Ranking 업소 광고 08 · 택배 회사 — 광고 핵심어: 문 앞, 전화 한 통, 신속하다, 소중하다, 안전하다, 배달하다. 택배 회사, a courier company: 문 앞, 전화 한 통, 신속하다, 배달하다.",
+          "source": "합격 레시피 p.34 · 예상문제 8번",
+          "bookPage": 34,
+          "keySource": "ranking",
+          "rankingRef": "업소 광고 08"
+        },
+        {
+          "n": 9,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "지하철역과 5분 거리로 교통 편리!"
+            },
+            {
+              "ko": "최신식 공사 방법으로 층간 소음이 없다!"
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o3",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "극장"
+            },
+            {
+              "id": "o2",
+              "ko": "호텔"
+            },
+            {
+              "id": "o3",
+              "ko": "아파트"
+            },
+            {
+              "id": "o4",
+              "ko": "백화점"
+            }
+          ],
+          "en": "Five minutes from the subway station — easy to get around! Built with the latest methods, so there’s no noise between floors!",
+          "why": "층간 소음, 지하철역, 교통, 편리하다 — the Ranking’s 아파트 keywords (09). 층간 소음, noise between floors, is a problem only where people live stacked above one another.\n\n호텔 is 예약, 조식, 침대; 극장 is 좌석 and 화면; 백화점 is 세일. None of them is sold on quiet floors.",
+          "grammar": "Ranking 업소 광고 09 · 아파트 — 광고 핵심어: 건축, 층간 소음, 지하철역, 가깝다, 교통, 편리하다. 아파트, a block of flats: 층간 소음, 지하철역, 교통, 편리하다.",
+          "source": "합격 레시피 p.34 · 예상문제 9번",
+          "bookPage": 34,
+          "keySource": "ranking",
+          "rankingRef": "업소 광고 09"
+        },
+        {
+          "n": 10,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "신랑, 신부 만족도 1위"
+            },
+            {
+              "ko": "인생 최고의 순간을 저희에게 맡겨 주십시오."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "예식장"
+            },
+            {
+              "id": "o2",
+              "ko": "가구점"
+            },
+            {
+              "id": "o3",
+              "ko": "백화점"
+            },
+            {
+              "id": "o4",
+              "ko": "아파트"
+            }
+          ],
+          "en": "No. 1 for bride and groom satisfaction. Leave the greatest moment of your life to us.",
+          "why": "신랑, 신부, 인생, 최고 — the Ranking’s 결혼식장 keywords (10). 예식장 is the everyday name for a wedding hall, the same place as 결혼식장.\n\n가구점, 백화점 and 아파트 all turn up around a wedding — the furniture, the gifts, the new flat — but none of them hosts 인생 최고의 순간 itself.",
+          "grammar": "Ranking 업소 광고 10 · 결혼식장 — 광고 핵심어: 인생, 추억, 소중하다, 최고, 교통, 편리하다, 신랑, 신부. 예식장 (= 결혼식장), a wedding hall: 신랑, 신부, 인생, 추억, 최고.",
+          "source": "합격 레시피 p.34 · 예상문제 10번",
+          "bookPage": 34,
+          "keySource": "ranking",
+          "rankingRef": "업소 광고 10"
+        }
+      ]
+    },
+    {
+      "id": "r1-ads-public",
+      "type": "build",
+      "section": "광고",
+      "sectionEn": "Advertisements · reading 5-8",
+      "no": "예상 · pp.37-38 · 7번",
+      "icon": "📣",
+      "blurbEn": "Ten public-service ads, question 7’s type, against the book’s Ranking 20 (pp.35-36).",
+      "instructionKo": "다음은 무엇에 대한 글인지 고르십시오. (각 2점)",
+      "instructionEn": "Choose what the text is about. (2 points each)",
+      "noteEn": "Question 7 is a campaign, and the book files its themes in six groups: 공동체, 환경, 절약, 안전, 건강 and 공공생활. The trap is usually an option built on one word of the ad that is not its point — a comparison, an example, the place where it happens — so ask what the ad wants you to do. Where these answers come from: the book prints the key to its 예상문제 in a separate booklet (책 속의 책 · 정답과 해설, p.49 on) that this copy of the book does not include. Each key here is read off the book’s own Ranking table that the set practises, and the grammar card under each explanation names the entry.",
+      "pattern": "예상문제 · 공익 광고",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "당신의 재능을 나눠 주세요."
+            },
+            {
+              "ko": "작은 나눔이 받는 사람에게는 큰 선물이 됩니다."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "봉사 활동"
+            },
+            {
+              "id": "o2",
+              "ko": "직업 활동"
+            },
+            {
+              "id": "o3",
+              "ko": "체육 활동"
+            },
+            {
+              "id": "o4",
+              "ko": "경제 활동"
+            }
+          ],
+          "en": "Share your talent. A small act of sharing becomes a big gift to the person who receives it.",
+          "why": "재능, 나누다, 나눔 — the Ranking’s 봉사 활동 keywords (01) are 이웃, 도움, 나누다, 시간, 재능. Giving your talent away for someone else’s good is volunteering.\n\nAll four options end in 활동, so the first noun decides. 직업 활동 and 경제 활동 are paid work and business, 체육 활동 is sport; none of them is about giving.",
+          "grammar": "Ranking 공익 광고 01 · 봉사 활동 (공동체) — 광고 핵심어: 이웃, 도움, 나누다, 시간, 재능. 봉사 활동, volunteer work: 이웃, 도움, 나누다, 재능.",
+          "source": "합격 레시피 p.37 · 예상문제 1번",
+          "bookPage": 37,
+          "keySource": "ranking",
+          "rankingRef": "공익 광고 01"
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "오늘부터 자동차를 두고 가세요."
+            },
+            {
+              "ko": "공기가 나빠지는 것은 자동차 배기가스 때문"
+            },
+            {
+              "ko": "공해 없는 교통수단 지하철이 답입니다."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "환경 보호"
+            },
+            {
+              "id": "o2",
+              "ko": "차량 소개"
+            },
+            {
+              "id": "o3",
+              "ko": "건강 관리"
+            },
+            {
+              "id": "o4",
+              "ko": "지하철 안내"
+            }
+          ],
+          "en": "From today, leave the car at home. The air is getting worse because of car exhaust. The subway, transport without pollution, is the answer.",
+          "why": "공기가 나빠지다, 배기가스, 공해 — the problem is pollution, and the ad asks you to change a habit for the air’s sake. That is the Ranking’s 환경 group, 자연 보호, 환경 보호 (03): 지키다, 미래.\n\n지하철 안내 is the trap. The subway is named, but the ad is not telling you how to use it — lines, times, fares — it is telling you why. 차량 소개 would present a car, and this ad asks you to leave yours at home. 건강 관리 is about your body, not the air.",
+          "grammar": "Ranking 공익 광고 03 · 자연 보호, 환경 보호 (환경) — 광고 핵심어: 푸른 숲, 맑은 강, 지키다, 후손, 미래. 환경 보호 (= 자연 보호), protecting the environment: 공기, 공해, 지키다, 미래.",
+          "source": "합격 레시피 p.37 · 예상문제 2번",
+          "bookPage": 37,
+          "keySource": "ranking",
+          "rankingRef": "공익 광고 03"
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "한 번의 편리함이 주는 달콤함."
+            },
+            {
+              "ko": "그 달콤함이 환경을 망치고 있습니다."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "일회용품"
+            },
+            {
+              "id": "o2",
+              "ko": "언어 예절"
+            },
+            {
+              "id": "o3",
+              "ko": "금연 홍보"
+            },
+            {
+              "id": "o4",
+              "ko": "음식물 쓰레기"
+            }
+          ],
+          "en": "The sweetness that one moment of convenience gives. That sweetness is ruining the environment.",
+          "why": "한 번, 편리하다, 환경, 망치다 — four of the Ranking’s six 일회용품 keywords (05). Something used once (한 번) for convenience that ruins the environment is a disposable product.\n\n음식물 쓰레기 harms the environment too, but its words are 먹다, 남기다, 버리다 — food left over, not convenience. 언어 예절 and 금연 홍보 are not about the environment at all.",
+          "grammar": "Ranking 공익 광고 05 · 일회용품 (환경) — 광고 핵심어: 한 번, 쓰다, 사용하다, 편리하다, 환경, 망치다. 일회용품, disposable goods: 한 번, 편리하다, 환경, 망치다.",
+          "source": "합격 레시피 p.37 · 예상문제 3번",
+          "bookPage": 37,
+          "keySource": "ranking",
+          "rankingRef": "공익 광고 05"
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "먹는 게 반, 버리는 게 반"
+            },
+            {
+              "ko": "돈이라면 버리시겠습니까?"
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o3",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "근검 절약"
+            },
+            {
+              "id": "o2",
+              "ko": "저축 안내"
+            },
+            {
+              "id": "o3",
+              "ko": "음식물 쓰레기"
+            },
+            {
+              "id": "o4",
+              "ko": "모범 식당 소개"
+            }
+          ],
+          "en": "Half eaten, half thrown away. Would you throw it away if it were money?",
+          "why": "먹다, 버리다 — the Ranking’s 음식물 쓰레기 keywords (04) are 먹다, 남기다, 버리다. Half of what is served ends up in the bin: food waste.\n\n돈 is the trap. It is a comparison — would you throw away money? — not the topic, so 근검 절약, thrift, and 저축 안내, savings, both miss the point. 모범 식당 소개 would recommend a restaurant.",
+          "grammar": "Ranking 공익 광고 04 · 음식물 쓰레기 (환경) — 광고 핵심어: 먹다, 남기다, 버리다. 음식물 쓰레기, food waste: 먹다, 남기다, 버리다.",
+          "source": "합격 레시피 p.37 · 예상문제 4번",
+          "bookPage": 37,
+          "keySource": "ranking",
+          "rankingRef": "공익 광고 04"
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "중간 밸브는 잠그셨습니까?"
+            },
+            {
+              "ko": "정기 점검은 꾸준히 받고 계십니까?"
+            },
+            {
+              "ko": "가스, 보이지 않는다고 방심하면 안 됩니다."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "안전 관리"
+            },
+            {
+              "id": "o2",
+              "ko": "건물 안내"
+            },
+            {
+              "id": "o3",
+              "ko": "화재 예방"
+            },
+            {
+              "id": "o4",
+              "ko": "에너지 절약"
+            }
+          ],
+          "en": "Have you closed the middle valve? Are you getting regular inspections? Just because you can’t see gas doesn’t mean you can let your guard down.",
+          "why": "중간 밸브, 잠그다, 가스 — the Ranking’s 안전 관리, 안전 사고 keywords (12) are 가스, 중간 밸브, 잠그다, 끄다. Checks and inspections to stop an accident are safety management.\n\n화재 예방 is the close one, since gas can start a fire, but its keywords are 불씨, 꺼지다, 살펴보다, and this ad is about the gas itself — the valve and the inspection. 에너지 절약 would ask you to use less gas rather than check it, and 건물 안내 would direct you around a building.",
+          "grammar": "Ranking 공익 광고 12 · 안전 관리, 안전 사고 (안전) — 광고 핵심어: 가스, 중간 밸브, 잠그다, 끄다. 안전 관리, safety management: 가스, 중간 밸브, 잠그다.",
+          "source": "합격 레시피 p.37 · 예상문제 5번",
+          "bookPage": 37,
+          "keySource": "ranking",
+          "rankingRef": "공익 광고 12"
+        },
+        {
+          "n": 6,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "규칙적인 식사와 충분한 운동"
+            },
+            {
+              "ko": "100세 장수로의 지름길입니다."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o2",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "식사 예절"
+            },
+            {
+              "id": "o2",
+              "ko": "건강 관리"
+            },
+            {
+              "id": "o3",
+              "ko": "안전 규칙"
+            },
+            {
+              "id": "o4",
+              "ko": "체육 활동"
+            }
+          ],
+          "en": "Regular meals and enough exercise are the shortcut to living to a hundred.",
+          "why": "운동, 100세 — the Ranking’s 건강 관리, 건강 습관 keywords (14) are 운동, 걷기, 물 마시기, 100세. Meals and exercise for a long life are health management.\n\n식사 예절 is table manners, not regular meals; 체육 활동 is sport as an activity, without the long life; 안전 규칙 has nothing to do with either.",
+          "grammar": "Ranking 공익 광고 14 · 건강 관리, 건강 습관 (건강) — 광고 핵심어: 운동, 걷기, 물 마시기, 100세. 건강 관리, looking after your health: 운동, 걷기, 물 마시기, 100세.",
+          "source": "합격 레시피 p.38 · 예상문제 6번",
+          "bookPage": 38,
+          "keySource": "ranking",
+          "rankingRef": "공익 광고 14"
+        },
+        {
+          "n": 7,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "안 쓰는 가전제품의 플러그는 빼 놓으셨나요?"
+            },
+            {
+              "ko": "우리의 작은 생활 습관이"
+            },
+            {
+              "ko": "에너지를 아끼는 지름길입니다."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o4",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "건강 습관"
+            },
+            {
+              "id": "o2",
+              "ko": "안전 관리"
+            },
+            {
+              "id": "o3",
+              "ko": "자연 보호"
+            },
+            {
+              "id": "o4",
+              "ko": "전기 절약"
+            }
+          ],
+          "en": "Have you pulled out the plugs of appliances you aren’t using? Our small everyday habits are the shortcut to saving energy.",
+          "why": "플러그, 빼다, 아끼다, 에너지 — the Ranking’s 전기 절약 keywords (07) are 전원, 끄다, 낭비하다, 아끼다, 불, 플러그, 빼다, 뽑다.\n\n습관 points at 건강 습관, but the habit here is unplugging, not exercise. 전기 안전 would mention 플러그 too, warning about 화재 and 위험, which this ad never does; 안전 관리 and 자연 보호 leave out the 아끼다.",
+          "grammar": "Ranking 공익 광고 07 · 전기 절약 (절약) — 광고 핵심어: 전원, 끄다, 낭비하다, 아끼다, 불, 플러그, 빼다, 뽑다. 전기 절약, saving electricity: 플러그, 빼다, 끄다, 아끼다.",
+          "source": "합격 레시피 p.38 · 예상문제 7번",
+          "bookPage": 38,
+          "keySource": "ranking",
+          "rankingRef": "공익 광고 07"
+        },
+        {
+          "n": 8,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "나의 즐거움이 옆 사람에게는 소음이 됩니다!"
+            },
+            {
+              "ko": "벨소리는 진동으로, 통화는 작은 소리로 짧게!"
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o3",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "안전 규칙"
+            },
+            {
+              "id": "o2",
+              "ko": "환경 보호"
+            },
+            {
+              "id": "o3",
+              "ko": "공공 예절"
+            },
+            {
+              "id": "o4",
+              "ko": "경제 활동"
+            }
+          ],
+          "en": "My fun becomes noise for the person next to me! Ringtones on vibrate, and calls kept short and quiet!",
+          "why": "소음, 진동, 옆 사람 — manners towards the people around you in a public place. The book files these under 공공생활: 공공 예절 (17: 버스, 지하철, 조용히, 휴대폰) and 전화 예절 (19: 공공장소, 조용히, 소음, 진동). Only 공공 예절 is offered.\n\n환경 보호 is the trap for 소음, since noise pollution is an environmental topic, but the ad is about how you behave towards the person beside you. 안전 규칙 and 경제 활동 do not fit at all.",
+          "grammar": "Ranking 공익 광고 17 · 공공 예절 (공공생활) — 광고 핵심어: 버스, 지하철, 기차, 대화, 조용히, 휴대폰. 공공 예절, public manners: 버스, 지하철, 조용히, 휴대폰.",
+          "source": "합격 레시피 p.38 · 예상문제 8번",
+          "bookPage": 38,
+          "keySource": "ranking",
+          "rankingRef": "공익 광고 17"
+        },
+        {
+          "n": 9,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "조금 천천히 가시는 건 어떨까요?"
+            },
+            {
+              "ko": "먼저 양보를 하시는 건 어떨까요?"
+            },
+            {
+              "ko": "보행자를 먼저 생각하시는 건 어떨까요?"
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o2",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "봉사 활동"
+            },
+            {
+              "id": "o2",
+              "ko": "안전 운전"
+            },
+            {
+              "id": "o3",
+              "ko": "건강 관리"
+            },
+            {
+              "id": "o4",
+              "ko": "전화 예절"
+            }
+          ],
+          "en": "How about going a little more slowly? How about giving way first? How about thinking of pedestrians first?",
+          "why": "천천히 가다, 양보, 보행자 — advice to a driver. The Ranking’s 교통 안전, 안전 운전 (09) has 보호, 신호, 정지선, 지키다: driving that protects the people on the road.\n\n양보 also belongs to 자리 양보, giving up your seat, and 먼저 생각하다 could sound like 봉사 활동, but 보행자 and 천천히 가다 are about driving. 건강 관리 and 전화 예절 have no road in them.",
+          "grammar": "Ranking 공익 광고 09 · 교통 안전, 안전 운전 (안전) — 광고 핵심어: 학교, 어린이, 노인, 보호, 신호, 정지선, 지키다, 졸음. 안전 운전 (= 교통 안전), driving safely: 신호, 정지선, 보호, 지키다.",
+          "source": "합격 레시피 p.38 · 예상문제 9번",
+          "bookPage": 38,
+          "keySource": "ranking",
+          "rankingRef": "공익 광고 09"
+        },
+        {
+          "n": 10,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "전화가 무슨 죄가 있나요?"
+            },
+            {
+              "ko": "잘못 걸려온 전화에 짜증보다는 친절한 말 한 마디"
+            },
+            {
+              "ko": "가는 말이 고와야 오는 말도 곱습니다."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "언어 예절"
+            },
+            {
+              "id": "o2",
+              "ko": "건강 관리"
+            },
+            {
+              "id": "o3",
+              "ko": "공공 질서"
+            },
+            {
+              "id": "o4",
+              "ko": "번호 안내"
+            }
+          ],
+          "en": "What has the phone done wrong? A kind word rather than irritation when the number was wrong. Speak kindly and you will be spoken to kindly.",
+          "why": "친절한 말 한 마디, 가는 말이 고와야 오는 말도 곱다 — the proverb is about the way you speak. The Ranking’s 언어 예절 keywords (18) are 바른말, 고운 말, 한마디, 따뜻하다, 배려하다, 마음.\n\n전화 in every line points at 전화 예절, which is not an option, and 번호 안내 is the trap for 잘못 걸려온 전화: the ad is not handing out numbers. 공공 질서 is order in public places, and 건강 관리 is not here at all.",
+          "grammar": "Ranking 공익 광고 18 · 언어 예절 (공공생활) — 광고 핵심어: 바른말, 고운 말, 한마디, 따뜻하다, 배려하다, 마음. 언어 예절, courtesy in speech: 바른말, 고운 말, 한마디, 배려하다.",
+          "source": "합격 레시피 p.38 · 예상문제 10번",
+          "bookPage": 38,
+          "keySource": "ranking",
+          "rankingRef": "공익 광고 18"
+        }
+      ]
+    },
+    {
+      "id": "r1-ads-detail",
+      "type": "build",
+      "section": "광고",
+      "sectionEn": "Advertisements · reading 5-8",
+      "no": "예상 · pp.41-42 · 8번",
+      "icon": "📋",
+      "blurbEn": "Ten notices, question 8’s type — what kind of detail each gives — against the book’s Ranking 20 of option words (pp.39-40).",
+      "instructionKo": "다음은 무엇에 대한 글인지 고르십시오. (각 2점)",
+      "instructionEn": "Choose what the text is about. (2 points each)",
+      "noteEn": "Question 8 does not ask what the product is but what the notice tells you about it: how to use it, how to keep it, how to register, what to watch out for, what customers thought. The endings help — -지 마십시오 and 안 됩니다 are warnings — but an instruction ending in -(으)십시오 is not always a precaution, so read what it asks you to do. Where these answers come from: the book prints the key to its 예상문제 in a separate booklet (책 속의 책 · 정답과 해설, p.49 on) that this copy of the book does not include. Each key here is read off the book’s own Ranking table that the set practises, and the grammar card under each explanation names the entry.",
+      "pattern": "예상문제 · 광고의 상세 설명",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "상처가 난 부위에 붙여 주십시오."
+            },
+            {
+              "ko": "붙이기 전 반드시 소독을 해 주십시오."
+            },
+            {
+              "ko": "연고를 바르면 더욱 효과가 좋습니다."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o2",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "주의 사항"
+            },
+            {
+              "id": "o2",
+              "ko": "사용 방법"
+            },
+            {
+              "id": "o3",
+              "ko": "보관 방법"
+            },
+            {
+              "id": "o4",
+              "ko": "특징 소개"
+            }
+          ],
+          "en": "Apply to the injured area. Be sure to disinfect before applying. Using ointment as well makes it work even better.",
+          "why": "붙이다, 소독, 연고를 바르다 — steps for using a plaster: where it goes, what to do first, what helps. That is the Ranking’s 이용 안내 (01), whose 선택지 어휘 include 사용 방법 and 사용 순서.\n\n주의 사항 is the trap, because the ad uses -(으)십시오. But these instructions tell you how to use it, not what to avoid — a precaution would say 사용을 중지하십시오 or -지 마십시오, as question 6 of this set does. 보관 방법 is where to keep it; 특징 소개 would describe the product.",
+          "grammar": "Ranking 광고의 상세 설명 01 · 이용 안내 — 선택지 어휘: 영업 안내, 운행 안내, 이용 방법, 사용 방법, 사용 설명, 이용 순서, 사용 순서. 사용 방법, how to use something — filed by the book under 이용 안내 with 사용 설명 and 사용 순서.",
+          "source": "합격 레시피 p.41 · 예상문제 1번",
+          "bookPage": 41,
+          "keySource": "ranking",
+          "rankingRef": "광고의 상세 설명 01"
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "'차 사랑 연구회'에서 여러분을 기다립니다."
+            },
+            {
+              "ko": "차를 좋아하시는 분이라면 누구나 환영합니다."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "회원 모집"
+            },
+            {
+              "id": "o2",
+              "ko": "접수 방법"
+            },
+            {
+              "id": "o3",
+              "ko": "방문 기간"
+            },
+            {
+              "id": "o4",
+              "ko": "이용 순서"
+            }
+          ],
+          "en": "The Cha Sarang Society is waiting for you. Anyone who likes 차 — tea, or cars — is welcome.",
+          "why": "기다리다, 환영하다, 누구나 — an invitation to join a group. The Ranking’s 모집 안내 (02) lists 회원 모집, 사원 모집, 지원 자격 as its 선택지 어휘. Whether 차 is tea or cars does not matter: the ad is recruiting members.\n\n접수 방법 would say how to apply (in person, by phone), 방문 기간 when to come, and 이용 순서 the steps for using something. The ad gives none of those details.",
+          "grammar": "Ranking 광고의 상세 설명 02 · 모집 안내 — 선택지 어휘: 회원 모집, 사원 모집, 지원 자격. 회원 모집, recruiting members — the book’s 모집 안내, with 사원 모집 and 지원 자격.",
+          "source": "합격 레시피 p.41 · 예상문제 2번",
+          "bookPage": 41,
+          "keySource": "ranking",
+          "rankingRef": "광고의 상세 설명 02"
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "〈어린이 바둑 대회〉"
+            },
+            {
+              "ko": "최고의 어린이 바둑 기사를 찾습니다."
+            },
+            {
+              "ko": "초등학생이라면 누구나 참가 가능합니다."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "행사 안내"
+            },
+            {
+              "id": "o2",
+              "ko": "수업 안내"
+            },
+            {
+              "id": "o3",
+              "ko": "장소 소개"
+            },
+            {
+              "id": "o4",
+              "ko": "학원 소개"
+            }
+          ],
+          "en": "Children’s Baduk Tournament. We are looking for the best young baduk players. Any primary school pupil may take part.",
+          "why": "대회, 참가 — a tournament that people can enter is an event. The Ranking’s 행사 안내 (03) is 행사 초대: an announcement of an event and an invitation to it.\n\n수업 안내 and 학원 소개 are the traps for 바둑 — lessons and a baduk academy would teach it, and this is a competition. 장소 소개 would describe a place, and the ad does not even say where it is.",
+          "grammar": "Ranking 광고의 상세 설명 03 · 행사 안내 — 선택지 어휘: 행사 초대. 행사 안내, announcing an event — the book’s 행사 초대.",
+          "source": "합격 레시피 p.41 · 예상문제 3번",
+          "bookPage": 41,
+          "keySource": "ranking",
+          "rankingRef": "광고의 상세 설명 03"
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "유리처럼 투명하고 유리보다 가볍습니다."
+            },
+            {
+              "ko": "전자레인지에 음식을 데울 때 사용해도 안전합니다."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o4",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "제품 효과"
+            },
+            {
+              "id": "o2",
+              "ko": "주의 사항"
+            },
+            {
+              "id": "o3",
+              "ko": "이용 방법"
+            },
+            {
+              "id": "o4",
+              "ko": "상품 특징"
+            }
+          ],
+          "en": "Clear as glass and lighter than glass. Safe to use when heating food in the microwave.",
+          "why": "투명하다, 가볍다, 안전하다 — what the product is like, point by point. The Ranking’s 제품(상품) 소개 (04) lists 제품 특징 among its 선택지 어휘, and a list of qualities is 특징.\n\n제품 효과 is the near miss from the same Ranking row: an effect is what the product does for you (피부가 좋아진다), not what it is made of. 이용 방법 would be steps, and 주의 사항 a warning — 사용해도 안전합니다 is the opposite of one.",
+          "grammar": "Ranking 광고의 상세 설명 04 · 제품(상품) 소개 — 선택지 어휘: 제품 안내, 제품 설명, 제품 홍보, 제품 특징, 제품 효과. 상품 특징 (= 제품 특징), a product’s features — the book’s 제품(상품) 소개.",
+          "source": "합격 레시피 p.41 · 예상문제 4번",
+          "bookPage": 41,
+          "keySource": "ranking",
+          "rankingRef": "광고의 상세 설명 04"
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "★★★★★ 가격도 저렴하고 품질이 좋아요."
+            },
+            {
+              "ko": "매우 만족 디자인도 예쁘고 튼튼해서 마음에 들어요."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "사용 소감"
+            },
+            {
+              "id": "o2",
+              "ko": "상품 설명"
+            },
+            {
+              "id": "o3",
+              "ko": "이용 방법"
+            },
+            {
+              "id": "o4",
+              "ko": "문의 사항"
+            }
+          ],
+          "en": "★★★★★ Cheap, and good quality. Very satisfied — the design is pretty and it’s sturdy, I love it.",
+          "why": "Five stars, 매우 만족, 마음에 들어요 — a customer’s opinion after using the product. The Ranking’s 상품 평가 (13) lists 사용 소감 and 사용 후기: impressions written after use.\n\n상품 설명 is the trap: price, quality and design are what a description covers too, but a seller does not give itself five stars or write 마음에 들어요. 이용 방법 and 문의 사항 would be steps and questions.",
+          "grammar": "Ranking 광고의 상세 설명 13 · 상품 평가 — 선택지 어휘: 사용 소감, 사용 후기. 사용 소감, impressions after use — the book’s 상품 평가, with 사용 후기.",
+          "source": "합격 레시피 p.41 · 예상문제 5번",
+          "bookPage": 41,
+          "keySource": "ranking",
+          "rankingRef": "광고의 상세 설명 13"
+        },
+        {
+          "n": 6,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "• 바른 후 피부가 빨갛게 되거나 가려우면 즉시 사용을 중지하십시오."
+            },
+            {
+              "ko": "• 흐르는 물로 빨리 씻은 후 의사와 상담하시기 바랍니다."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o4",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "사용 방법"
+            },
+            {
+              "id": "o2",
+              "ko": "장점 소개"
+            },
+            {
+              "id": "o3",
+              "ko": "상담 안내"
+            },
+            {
+              "id": "o4",
+              "ko": "주의 사항"
+            }
+          ],
+          "en": "If your skin turns red or itchy after applying it, stop using it at once. Rinse quickly under running water, then consult a doctor.",
+          "why": "즉시 사용을 중지하십시오 — stop using it at once — is a warning. The Ranking’s 주의 사항 (06) is marked by V-(으)십시오 and V-지 마십시오 about what to do when something goes wrong.\n\n상담 안내 is the trap for 의사와 상담하시기 바랍니다, but seeing a doctor is part of the warning, not a service on offer. 사용 방법 would say how to apply it, and 장점 소개 would praise it.",
+          "grammar": "Ranking 광고의 상세 설명 06 · 주의 사항 — 선택지 어휘: V-(으)십시오, V-지 마십시오. 주의 사항, precautions: V-(으)십시오, V-지 마십시오.",
+          "source": "합격 레시피 p.42 · 예상문제 6번",
+          "bookPage": 42,
+          "keySource": "ranking",
+          "rankingRef": "광고의 상세 설명 06"
+        },
+        {
+          "n": 7,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "• 개봉 후 가급적 빨리 드시기 바랍니다."
+            },
+            {
+              "ko": "• 내용물이 남은 경우 냉장실에 넣어 두세요."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o4",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "특징 소개"
+            },
+            {
+              "id": "o2",
+              "ko": "제품 안내"
+            },
+            {
+              "id": "o3",
+              "ko": "사용 방법"
+            },
+            {
+              "id": "o4",
+              "ko": "보관 방법"
+            }
+          ],
+          "en": "Please consume as soon as possible after opening. If there is any left, keep it in the fridge.",
+          "why": "냉장실에 넣어 두다 — where to keep what is left — and 개봉 후 빨리 드시다 — how long it lasts. The Ranking’s 보관 방법 (07): 실온, 냉장, 서늘한 곳, 넣다.\n\n사용 방법 is the near miss for 드시기 바랍니다, but the advice is about keeping it fresh, not about how to eat it. 특징 소개 and 제품 안내 would describe the product.",
+          "grammar": "Ranking 광고의 상세 설명 07 · 보관 방법 — 선택지 어휘: 실온, 냉장, 서늘한 곳, 넣다. 보관 방법, how to store something: 실온, 냉장, 서늘한 곳, 넣다.",
+          "source": "합격 레시피 p.42 · 예상문제 7번",
+          "bookPage": 42,
+          "keySource": "ranking",
+          "rankingRef": "광고의 상세 설명 07"
+        },
+        {
+          "n": 8,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "운전면허 시험, 이제 '전진'과 함께라면 걱정 끝!"
+            },
+            {
+              "ko": "⊙ 신분증 지참 후 방문 접수"
+            },
+            {
+              "ko": "⊙ 접수 상담: 02) 123-4568"
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "등록 안내"
+            },
+            {
+              "id": "o2",
+              "ko": "문의 방법"
+            },
+            {
+              "id": "o3",
+              "ko": "상품 안내"
+            },
+            {
+              "id": "o4",
+              "ko": "사용 방법"
+            }
+          ],
+          "en": "Your driving test — no more worries with Jeonjin! Register in person, and bring your ID. Registration enquiries: 02) 123-4568.",
+          "why": "방문 접수, 신분증 지참, 접수 상담 — how to sign up. The Ranking’s 접수 방법 (08) lists 신청 방법 and 등록 안내: registering is what the ad explains.\n\n문의 방법 is the trap for the phone number, but the number is there for 접수 상담, questions about registering, and the main line is 방문 접수. 상품 안내 and 사용 방법 would be about a product.",
+          "grammar": "Ranking 광고의 상세 설명 08 · 접수 방법 — 선택지 어휘: 신청 방법, 등록 안내. 등록 안내, how to register — the book’s 접수 방법, with 신청 방법.",
+          "source": "합격 레시피 p.42 · 예상문제 8번",
+          "bookPage": 42,
+          "keySource": "ranking",
+          "rankingRef": "광고의 상세 설명 08"
+        },
+        {
+          "n": 9,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "• 구입하신 영수증을 가지고 직접 방문해 주시기 바랍니다."
+            },
+            {
+              "ko": "• 구입 일로부터 14일 이내에 가능합니다."
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o4",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "구입 안내"
+            },
+            {
+              "id": "o2",
+              "ko": "방문 기간"
+            },
+            {
+              "id": "o3",
+              "ko": "제품 특징"
+            },
+            {
+              "id": "o4",
+              "ko": "교환 방법"
+            }
+          ],
+          "en": "Please bring your receipt and come in person. This is possible within 14 days of purchase.",
+          "why": "영수증, 구입 일로부터 14일 이내 — bringing back something already bought, within a time limit. The Ranking’s 교환, 환불 (11) lists 교환 안내, 교환 방법, 환불 안내.\n\n구입 안내 is the trap for 구입하신 and 구입 일: the purchase has already happened, and the notice is about what to do after it. 방문 기간 would give dates for visiting something, and 제품 특징 would describe the product.",
+          "grammar": "Ranking 광고의 상세 설명 11 · 교환, 환불 — 선택지 어휘: 교환 안내, 교환 방법, 환불 안내. 교환 방법, how to exchange something — the book’s 교환, 환불.",
+          "source": "합격 레시피 p.42 · 예상문제 9번",
+          "bookPage": 42,
+          "keySource": "ranking",
+          "rankingRef": "광고의 상세 설명 11"
+        },
+        {
+          "n": 10,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "광고",
+              "ko": "이번 4월에 새로 나오는 신형 휴대 전화의"
+            },
+            {
+              "ko": "예약을 신청 받습니다."
+            },
+            {
+              "ko": "신청 기간은 3월 31일까지입니다."
+            },
+            {
+              "ko": "www.pineapple.co.kr"
+            },
+            {
+              "who": "무엇",
+              "ko": "{}에 대한 글"
+            }
+          ],
+          "answer": "o1",
+          "choices": [
+            {
+              "id": "o1",
+              "ko": "구입 안내"
+            },
+            {
+              "id": "o2",
+              "ko": "선택 기준"
+            },
+            {
+              "id": "o3",
+              "ko": "주의 사항"
+            },
+            {
+              "id": "o4",
+              "ko": "교환 방법"
+            }
+          ],
+          "en": "We are taking pre-orders for the new mobile phone coming out this April. Applications close on 31 March. www.pineapple.co.kr",
+          "why": "신형 휴대 전화, 예약, 신청 기간 — how and when to order a new phone before it comes out. That is buying information, the Ranking’s 구입 안내 (18: 구입 방법).\n\n교환 방법 is about a phone already bought; 주의 사항 would warn; 선택 기준 would help you choose between models. Only 구입 안내 covers ordering one.",
+          "grammar": "Ranking 광고의 상세 설명 18 · 구입 안내 — 선택지 어휘: 구입 방법. 구입 안내, information on buying: 구입 방법.",
+          "source": "합격 레시피 p.42 · 예상문제 10번",
+          "bookPage": 42,
+          "keySource": "ranking",
+          "rankingRef": "광고의 상세 설명 18"
+        }
+      ]
+    }
+  ]
+}

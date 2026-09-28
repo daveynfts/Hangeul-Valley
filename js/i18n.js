@@ -454,6 +454,8 @@ const HV_CATALOG_SOURCES = [
   'worlds/2b-unit-13.json', 'worlds/2b-unit-14.json', 'worlds/2b-unit-15.json',
   'worlds/2b-unit-16.json', 'worlds/2b-unit-17.json', 'worlds/2b-unit-18.json',
   'worlds/topik-2.json',
+  // TOPIK II 합격 레시피, a unit per chapter of the book: the farm, the book's questions, the quiz.
+  'worlds/recipe-unit-1.json', 'worlds/recipe1-questions.json', 'worlds/recipe1-desk-quiz.json',
   'worlds/unit10-workbook.json', 'worlds/unit10-textbook.json',
   'worlds/unit11-workbook.json', 'worlds/unit11-textbook.json',
   'worlds/unit12-workbook.json', 'worlds/unit12-textbook.json',

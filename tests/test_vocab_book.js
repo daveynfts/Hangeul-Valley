@@ -61,7 +61,7 @@ assert(detailed.forms.length === 2 && /stem 썰렁하-/.test(detailed.studyNote)
 
 const levels = JSON.parse(fs.readFileSync(path.join(ROOT, 'levels.json'), 'utf8'));
 const worldFiles = fs.readdirSync(path.join(ROOT, 'worlds'))
-  .filter(name => /^(2b-unit-(10|11|13|14|15)|topik-2)\.json$/.test(name));
+  .filter(name => /^(2b-unit-(10|11|13|14|15)|topik-2|recipe-unit-\d+)\.json$/.test(name));
 const words = levels.flatMap(level => level.words || []);
 worldFiles.forEach(name => {
   const world = JSON.parse(fs.readFileSync(path.join(ROOT, 'worlds', name), 'utf8'));

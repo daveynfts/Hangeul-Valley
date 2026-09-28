@@ -3,7 +3,7 @@
 A Stardew-Valley-flavoured Korean vocabulary game. You plant a Korean word, answer a
 three-phase quiz as the crop grows, harvest it for Gold, and spend the Gold on new
 vocabulary packs, farm plots and cosmetics. 25 levels of 1,500 words in the TOPIK 1–3
-range, plus ten textbook and exam worlds that carry their own vocabulary — 3,183 unique
+range, plus eleven textbook and exam worlds that carry their own vocabulary — 3,321 unique
 words across the game. (`checkReadmeCounts` in `scripts/validate_content.js` fails if any
 figure in this paragraph drifts from the content.)
 
@@ -563,6 +563,13 @@ every word must trace back to a paper or an explicit learner vocabulary list, an
 a learner can hover the thing the question is actually testing.
 [docs/topik-vocabulary.md](docs/topik-vocabulary.md) records the daily-life word list,
 its practice examples, icon references and the scoped TTS command.
+
+The *TOPIK II 합격 레시피* worlds are a prep book taken a unit at a time: Unit 1 is 읽기 1-8,
+with the book's Ranking tables on the farm, its 기출문제 and 예상문제 at the desk, and a desk
+quiz drawn from the tables. The scan lacks the booklet with the 예상문제 answers, so every row
+says whose key it carries — the book's printed 정답, or one derived from the Ranking row it
+names — and `tests/test_recipe_unit1.js` re-derives the seventy that are not printed.
+[docs/topik-recipe.md](docs/topik-recipe.md) has the page map and the next unit's steps.
 
 `js/scenes/` holds five scenes — `FarmScene` (the hub), `ArcadeScene`, `DungeonScene`,
 `FishingScene`, `BeeScene` — with the pixel renderer, chiptune synth, day/night and

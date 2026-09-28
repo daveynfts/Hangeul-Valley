@@ -139,11 +139,14 @@ function collectTtsPhrases(root, worldId) {
   const out = [];
   const seen = new Set();
   const worldFile = worldId ? 'worlds/' + worldId + '.json' : '';
-  if (worldId && (!/^(?:2b-unit-\d+|topik-\d+)$/.test(worldId)
+  if (worldId && (!/^(?:2b-unit-\d+|topik-\d+|recipe-unit-\d+)$/.test(worldId)
     || !fs.existsSync(path.join(base, worldFile)))) {
     throw new Error('Unknown TTS world: ' + worldId);
   }
-  const stem = worldId ? worldId.replace(/^2b-/, '').replace(/-(\d+)$/, '$1') : '';
+  // The stem its other files are named by: 2b-unit-12 → unit12, topik-2 → topik2, and the
+  // 합격 레시피 units, recipe-unit-1 → recipe1.
+  const stem = worldId
+    ? worldId.replace(/^2b-/, '').replace(/^recipe-unit-/, 'recipe').replace(/-(\d+)$/, '$1') : '';
   if (!worldId) {
     const levels = JSON.parse(fs.readFileSync(path.join(base, 'levels.json'), 'utf8'));
     (Array.isArray(levels) ? levels : []).forEach((lvl) => {
@@ -156,6 +159,8 @@ function collectTtsPhrases(root, worldId) {
     'worlds/2b-unit-17.json',
     'worlds/2b-unit-18.json',
     'worlds/topik-2.json',
+    'worlds/recipe-unit-1.json',
+    'worlds/recipe1-desk-quiz.json',
     'worlds/unit10-desk-quiz.json',
     'worlds/unit11-desk-quiz.json', 'worlds/unit12-desk-quiz.json', 'worlds/unit13-desk-quiz.json',
     'worlds/unit14-desk-quiz.json', 'worlds/unit15-desk-quiz.json',
@@ -171,10 +176,12 @@ function collectTtsPhrases(root, worldId) {
   collectWorkbookPhrases(out, seen, base, stem);
   // TOPIK uses the workbook renderer too. Only harvest the completed correct
   // scripts, never its distractors or lines with an unfilled blank.
-  const exam = path.join(base, 'worlds', 'topik2-questions.json');
-  if ((!worldId || worldId === 'topik-2') && fs.existsSync(exam)) {
-    collectOneWorkbook(out, seen, exam);
-  }
+  // The 합격 레시피 banks are the same kind of paper, so they are harvested the same way.
+  [['topik-2', 'topik2-questions.json'], ['recipe-unit-1', 'recipe1-questions.json']]
+    .forEach(([id, file]) => {
+      const exam = path.join(base, 'worlds', file);
+      if ((!worldId || worldId === id) && fs.existsSync(exam)) collectOneWorkbook(out, seen, exam);
+    });
   if (!worldId) EXTRA_PHRASES.forEach((p) => addKo(out, seen, p));
 
   const sylSeen = new Set();

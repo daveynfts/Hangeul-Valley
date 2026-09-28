@@ -438,6 +438,7 @@
   "ui.ls.loadFailed": "Could not load levels. Click to retry.",
   "ui.ls.loading": "Loading levels…",
   "ui.ls.pack.choose": "Choose a pack",
+  "ui.ls.pack.recipe": "Exam prep · TOPIK II 합격 레시피",
   "ui.ls.pack.snu2b": "Textbook · SNU Korean 2B",
   "ui.ls.pack.topik": "Exam practice",
   "ui.ls.pack.valley": "Valley packs",

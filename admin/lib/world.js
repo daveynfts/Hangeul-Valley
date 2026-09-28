@@ -101,12 +101,18 @@ function validateQuiz(body) {
     closeKo: body.closeKo || '책상 닫기',
     correctKo: body.correctKo || '맞아요!',
     wrongKo: body.wrongKo || 'Answer:',
+    // Where a quiz drawn from a book says it came from, and the table row behind each key.
+    // Only the 합격 레시피 quiz carries them, and a save that dropped them would leave its
+    // keys with nothing to be checked against.
+    ...(body.source ? { source: String(body.source) } : {}),
+    ...(body.note ? { note: String(body.note) } : {}),
     questions: qs.map((q, i) => ({
       id: typeof q.id === 'number' ? q.id : i + 1,
       q: String(q.q),
       a: q.a,
       ...(q.art ? { art: q.art } : {}),
-      choices: { A: String(q.choices.A), B: String(q.choices.B), C: String(q.choices.C), D: String(q.choices.D) }
+      choices: { A: String(q.choices.A), B: String(q.choices.B), C: String(q.choices.C), D: String(q.choices.D) },
+      ...(q.rankingRef ? { rankingRef: String(q.rankingRef) } : {})
     }))
   };
 }

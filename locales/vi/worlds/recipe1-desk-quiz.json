@@ -1,0 +1,10 @@
+{
+  "lang": "vi",
+  "source": "worlds/recipe1-desk-quiz.json",
+  "note": "Keys are field|English-source. Editing the English orphans its translation on purpose.",
+  "entries": {
+    "note|Every key is the book’s own: the form a Ranking example underlines, the equivalent printed beside it, or the headword a 광고 핵심어 list belongs to. The three wrong buttons are forms or headwords the same table rules out.": "Mọi đáp án đều là của sách: dạng mà câu ví dụ trong Ranking gạch chân, dạng tương đương in bên cạnh, hoặc mục từ mà danh sách 광고 핵심어 thuộc về. Ba nút sai là những dạng hoặc mục từ mà chính bảng đó loại trừ.",
+    "source|TOPIK II 합격 레시피 · 3급 Chapter 1 Ranking tables · pp.15-40": "TOPIK II 합격 레시피 · 3급 Chapter 1 · các bảng Ranking · tr.15-40",
+    "titleEn|Ranking review — the book’s tables": "Ôn Ranking — các bảng trong sách"
+  }
+}

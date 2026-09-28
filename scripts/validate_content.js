@@ -146,7 +146,7 @@ check('no two headwords share an English gloss', sharedGlosses.length === 0,
   // Every list, not just the valley packs: the units and the TOPIK bank are where most of
   // these sentences came from and where a bad one would be seen first.
   const everyWord = words.slice();
-  ['2b-unit-10', '2b-unit-11', '2b-unit-12', '2b-unit-13', '2b-unit-14', '2b-unit-15', 'topik-2']
+  ['2b-unit-10', '2b-unit-11', '2b-unit-12', '2b-unit-13', '2b-unit-14', '2b-unit-15', 'topik-2', 'recipe-unit-1']
     .forEach((id) => {
       const doc = JSON.parse(read(path.join('worlds', id + '.json')));
       (((doc || {}).level || {}).words || []).forEach((w) => everyWord.push(w));
@@ -522,7 +522,7 @@ const overlayIds = [
   // alone therefore leaves the station not spawning while every grep says it is wired —
   // which is exactly how Unit 14's cassette player shipped invisible. Unit 11's suite has
   // asserted this for itself since it was built; nothing asserted it for the others.
-  ['2b-unit-10', '2b-unit-11', '2b-unit-13', '2b-unit-14', 'topik-2'].forEach((u) => {
+  ['2b-unit-10', '2b-unit-11', '2b-unit-13', '2b-unit-14', 'topik-2', 'recipe-unit-1'].forEach((u) => {
     const world = JSON.parse(read(path.join('worlds', u + '.json')));
     const json = ((world.level && world.level.map && world.level.map.stations) || []);
     const m = new RegExp("'" + u + "': \\{ extras: \\[\\], stations: \\[([^\\]]*)\\]").exec(gameJs);
@@ -739,7 +739,7 @@ const overlayIds = [
 
 (function checkEveryWorldCoheres() {
   const dir = path.join(ROOT, 'worlds');
-  const files = fs.readdirSync(dir).filter((f) => /^(2b-unit-\d+|topik-2)\.json$/.test(f));
+  const files = fs.readdirSync(dir).filter((f) => /^(2b-unit-\d+|topik-2|recipe-unit-\d+)\.json$/.test(f));
   check('there are worlds to check', files.length >= 5, String(files.length));
   const sameGloss = [];
   const catClash = [];
@@ -3208,7 +3208,7 @@ const overlayIds = [
       served.join(', '));
     const nulled = served.filter((stem) => {
       const world = stem.indexOf('unit') === 0 ? '2b-' + stem.replace('unit', 'unit-')
-        : (stem === 'topik2' ? 'topik-2' : stem);
+        : ({ topik2: 'topik-2', recipe1: 'recipe-unit-1' }[stem] || stem);
       const row = picker.match(new RegExp("\\{ id: '" + world + "'[^}]*\\}"));
       return row && /quiz:\s*null/.test(row[0]);
     });
@@ -3293,6 +3293,66 @@ const overlayIds = [
   check('a bank can hold its translation back until the row is checked',
     gameJs.indexOf('st.bank && st.bank.holdGloss') >= 0
     && gameJs.indexOf("holdGloss ? '' :") >= 0);
+}());
+
+// ── TOPIK II 합격 레시피, Unit 1 ──────────────────────────────────────────────
+// The book's own 기출문제 and 예상문제 for 읽기 1-8. The keys are pinned, and the seventy the
+// book prints only in its missing answer booklet are re-derived from its Ranking tables, in
+// tests/test_recipe_unit1.js. What is checked here is that nothing says less about a key than
+// the file does, and that the world is wired in every place a world has to be.
+(function checkRecipeUnit1() {
+  const wRel = path.join('worlds', 'recipe-unit-1.json');
+  const bRel = path.join('worlds', 'recipe1-questions.json');
+  const qRel = path.join('worlds', 'recipe1-desk-quiz.json');
+  if (!check('the 합격 레시피 world, its bank and its quiz exist',
+    [wRel, bRel, qRel].every((r) => fs.existsSync(path.join(ROOT, r))))) return;
+  let world = null, qbank = null, quiz = null;
+  try {
+    world = JSON.parse(read(wRel));
+    qbank = JSON.parse(read(bRel));
+    quiz = JSON.parse(read(qRel));
+  } catch (e) { check('and all three are valid JSON', false, e.message); return; }
+  check('the world names itself recipe-unit-1',
+    world.id === 'recipe-unit-1' && world.level && world.level.worldId === 'recipe-unit-1', String(world.id));
+  const rows = [];
+  (qbank.exercises || []).forEach((ex) => (ex.items || []).forEach((it) => rows.push(ex.id + ' ' + it.n + '|' + JSON.stringify({
+    keySource: it.keySource, bookKey: it.bookKey, rankingRef: it.rankingRef, bookPage: it.bookPage, source: it.source
+  }))));
+  const unsourced = rows.filter((r) => {
+    const it = JSON.parse(r.slice(r.indexOf('|') + 1));
+    const keyed = (it.keySource === 'book' && /^[①②③④]$/.test(it.bookKey || '') && !it.rankingRef)
+      || (it.keySource === 'ranking' && !!it.rankingRef && !it.bookKey);
+    return !keyed || !(it.bookPage > 0) || !it.source;
+  }).map((r) => r.slice(0, r.indexOf('|')));
+  check(`every question says whose key it carries and which page it is on (${rows.length})`,
+    rows.length > 0 && unsourced.length === 0, unsourced.slice(0, 6).join(', '));
+  check('and the bank says so in the file as well',
+    qbank.keepOrder === true && qbank.examView === true && qbank.holdGloss === true
+    && /정답과 해설/.test(qbank.keyNote || ''));
+  const qs = quiz.questions || [];
+  check(`the desk quiz names the Ranking row behind every key (${qs.length})`,
+    qs.length > 0 && qs.every((q) => !!q.rankingRef));
+  check('the desk offers this world its own quiz',
+    gameJs.indexOf("isRecipeUnit1World()) return '/worlds/recipe1-desk-quiz.json'") >= 0);
+  check('and the book’s questions, on this world only',
+    /function recipeBankUrl\(\) \{\r?\n\s+if \(typeof isRecipeUnit1World === 'function' && isRecipeUnit1World\(\)\) return '\/worlds\/recipe1-questions\.json';/.test(gameJs)
+    && gameJs.indexOf("key: 'recipe'") >= 0);
+  check('the world is fetched alongside the others',
+    gameJs.indexOf("file: 'worlds/recipe-unit-1.json'") >= 0);
+  check('a bank that keeps the paper’s order is dealt in it',
+    gameJs.indexOf('st.bank.drawOne || st.bank.keepOrder') >= 0);
+  check('and one that asks for the exam view gets it',
+    gameJs.indexOf('st.bank.examView === true') >= 0);
+  const wbLib = read(path.join('admin', 'lib', 'workbook.js'));
+  check('the admin registry can open the bank, and keeps what the keys say about themselves',
+    wbLib.indexOf("'recipe1-questions': path.join('worlds', 'recipe1-questions.json')") >= 0
+    && wbLib.indexOf("['keySource', 'bookKey', 'rankingRef']") >= 0
+    && wbLib.indexOf('keepOrder: body.keepOrder === true') >= 0
+    && wbLib.indexOf('examView: body.examView === true') >= 0);
+  const i18nSrc = read(path.join('js', 'i18n.js'));
+  check('and all three files are translated',
+    [wRel, bRel, qRel].every((r) => i18nSrc.indexOf("'" + r.split(path.sep).join('/') + "'") >= 0
+      && fs.existsSync(path.join(ROOT, 'locales', 'vi', r))));
 }());
 
 // ── Every piece of content has a way into the admin ──────────────────────────
@@ -3396,10 +3456,10 @@ const overlayIds = [
   };
   const levelsClaim = claim('level count', /([\d,]+) levels of/);
   const wordsClaim = claim('level-mode word count', /levels of ([\d,]+) words/);
-  const worldsClaim = claim('world count', /plus (six|seven|eight|nine|ten|[\d,]+) textbook/);
+  const worldsClaim = claim('world count', /plus (six|seven|eight|nine|ten|eleven|twelve|[\d,]+) textbook/);
   const totalClaim = claim('total word count', /([\d,]+) unique\s+words/);
 
-  const NUMBER_WORDS = { six: 6, seven: 7, eight: 8, nine: 9, ten: 10 };
+  const NUMBER_WORDS = { six: 6, seven: 7, eight: 8, nine: 9, ten: 10, eleven: 11, twelve: 12 };
   const worldsSaid = Number.isNaN(worldsClaim)
     ? NUMBER_WORDS[(readme.match(/plus (\w+) textbook/) || [])[1]]
     : worldsClaim;
@@ -3413,7 +3473,7 @@ const overlayIds = [
   const levelWords = seen.size;
 
   const worldFiles = fs.readdirSync(path.join(ROOT, 'worlds'))
-    .filter((f) => /^(2b-unit-\d+|topik-2)\.json$/.test(f));
+    .filter((f) => /^(2b-unit-\d+|topik-2|recipe-unit-\d+)\.json$/.test(f));
   worldFiles.forEach((f) => {
     const w = JSON.parse(read(path.join('worlds', f)));
     const lvls = Array.isArray(w.level) ? w.level : [w.level];

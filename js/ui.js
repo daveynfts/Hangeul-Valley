@@ -355,6 +355,7 @@ function buildLevelSelectScreen() {
   // only ever reaches hvT through a variable is a key nothing checks has an English string.
   const PACK_HEADING = {
     'snu-2b': hvT('ui.ls.pack.snu2b'),
+    'topik-recipe': hvT('ui.ls.pack.recipe'),
     topik: hvT('ui.ls.pack.topik')
   };
   const byPack = new Map();
@@ -2690,6 +2691,8 @@ function deskQuizUrl() {
   // as well. This one is revision of the paper rather than a second syllabus: every row
   // drills a distinction one of the questions already turned on.
   if (typeof isTopikWorld === 'function' && isTopikWorld()) return '/worlds/topik2-desk-quiz.json';
+  // The book's Ranking tables read as questions — every key is one of its own examples.
+  if (typeof isRecipeUnit1World === 'function' && isRecipeUnit1World()) return '/worlds/recipe1-desk-quiz.json';
   return null;
 }
 
@@ -2938,6 +2941,13 @@ function topikBankUrl() {
   return null;
 }
 
+// TOPIK II 합격 레시피: one chapter's 기출문제 and 예상문제, in the book's order. Same format and
+// renderer again; the bank asks for the paper's own option order and the exam answer view.
+function recipeBankUrl() {
+  if (typeof isRecipeUnit1World === 'function' && isRecipeUnit1World()) return '/worlds/recipe1-questions.json';
+  return null;
+}
+
 function loadDeskBank(url) {
   if (!url) return Promise.resolve(null);
   if (deskBanks[url]) return Promise.resolve(deskBanks[url]);
@@ -2959,10 +2969,11 @@ function loadWorkbook() { return loadDeskBank(workbookUrl()); }
 function loadTextbook() { return loadDeskBank(textbookUrl()); }
 function loadReview() { return loadDeskBank(reviewUrl()); }
 function loadTopikBank() { return loadDeskBank(topikBankUrl()); }
+function loadRecipeBank() { return loadDeskBank(recipeBankUrl()); }
 
 function openStudyDesk() {
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
-  Promise.all([loadTextbook(), loadWorkbook(), loadReview(), loadTopikBank()]).then(([tb, wb, rv, tk]) => {
+  Promise.all([loadTextbook(), loadWorkbook(), loadReview(), loadTopikBank(), loadRecipeBank()]).then(([tb, wb, rv, tk, rc]) => {
     // Every row is earned by content that actually loaded. 퀴즈 used to be added
     // unconditionally, which was fine while every desk belonged to a unit that had one — see
     // deskQuizUrl for what that cost the moment one did not.
@@ -3005,6 +3016,14 @@ function openStudyDesk() {
         en: 'TOPIK II — the questions collected so far',
         vi: 'TOPIK II — những câu hỏi đã gom được',
         run: () => openWorkbook(tk)
+      });
+    }
+    if (((rc && rc.exercises) || []).length) {
+      deskMenuOptions.push({
+        key: 'recipe', icon: '🍳', ko: '합격 레시피',
+        en: 'The book — its 기출문제 and 예상문제, section by section',
+        vi: 'Sách — 기출문제 và 예상문제, theo từng phần',
+        run: () => openWorkbook(rc)
       });
     }
     // A desk with nothing on it says so. The exam world sits here until its first question
@@ -4654,7 +4673,9 @@ function wbDealIds(list, keep) {
   return wbShuffled(all).map(c => c.id);
 }
 function wbDeal(st) {
-  const keep = !!(st.bank && st.bank.drawOne);
+  // keepOrder is the same promise without the draw: a book of past papers whose 해설 says 정답은 ②번
+  // has to show ② second. Its keys are the paper's, so pressing 1 on every row scores nothing.
+  const keep = !!(st.bank && (st.bank.drawOne || st.bank.keepOrder));
   const items = (st.ex && st.ex.items) || [];
   const chips = ((st.ex && st.ex.bank) || []).filter(c => !c.usedByExample);
   st.chips = keep ? chips : wbShuffled(chips);
@@ -5614,7 +5635,7 @@ function renderWorkbook() {
         // learner can see which half went wrong rather than just that one did.
         const yours = (two ? [chosen, chosen2] : [chosen])
           .map(c => (c ? wbAnswerText(c) : '—')).join(' / ');
-        if (st.bank && st.bank.id === 'topik2-questions') {
+        if (st.bank && (st.bank.id === 'topik2-questions' || st.bank.examView === true)) {
           return wbTopikWhyHtml(ex, item, {
             ok: ok,
             correct: correct,

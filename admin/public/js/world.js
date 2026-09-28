@@ -319,6 +319,7 @@
     { id: '2b-unit-16', label: 'Unit 16', quiz: 'quiz/unit16' },
     { id: '2b-unit-17', label: 'Unit 17', quiz: 'quiz/unit17' },
     { id: '2b-unit-18', label: 'Unit 18', quiz: 'quiz/unit18' },
+    { id: 'recipe-unit-1', label: '합격 레시피 Unit 1', quiz: 'quiz/recipe1' },
     { id: 'topik-2', label: 'TOPIK II', quiz: 'quiz/topik2' }
   ];
 

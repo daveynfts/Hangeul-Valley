@@ -460,6 +460,7 @@ function matchParts(text, headword, strictAboutAmbiguity) {
 // with a hole in it.
 const SOURCES = [
   { rel: 'worlds/topik2-questions.json', label: 'TOPIK II', unit: 'topik-2' },
+  { rel: 'worlds/recipe1-questions.json', label: '합격 레시피 Unit 1', unit: 'recipe-unit-1' },
   { rel: 'worlds/unit10-workbook.json', label: 'Unit 10 · 익힘책', unit: '2b-unit-10' },
   { rel: 'worlds/unit10-textbook.json', label: 'Unit 10 · 교과서', unit: '2b-unit-10' },
   { rel: 'worlds/unit14-workbook.json', label: 'Unit 14 · 익힘책', unit: '2b-unit-14' },
@@ -508,6 +509,8 @@ function isCue(s) {
   // A circled digit is an option number: the text around it is a question with its choices
   // run together, not a sentence anybody wrote.
   if (/[①②③④⑤⑥⑦⑧⑨⑩]/.test(s)) return true;
+  // A worked conjugation — 까맣다 + -(으)니까 → 까마니까 — is a formula, not a sentence.
+  if (/\s[+→]\s/.test(s)) return true;
   if ((s.match(/,/g) || []).length >= 2 && !/[요다까네]\s*[.?!]?$/.test(s)) return true;
   // A bare dictionary form is the way a prompt names a word, not the way a sentence ends.
   if (/(?:^|\s)[가-힣]+(?:하|되|이)?다$/.test(s) && !/[았었겠ㄴ는인]다$/.test(s)) return true;
@@ -520,6 +523,9 @@ function pushSentence(out, text, src) {
   // what comes after it.
   const s = String(text || '').replace(/\s+/g, ' ').replace(/^[→⇒➜\-–—·*•]\s*/, '').trim();
   if (!s || s.indexOf('{}') >= 0) return;          // an unfilled blank is not a sentence
+  // Nor is the exam paper's own gap, ( ): a TOPIK question keeps its sentence with the hole
+  // printed in it, and seven TOPIK words were given one of those as their example.
+  if (/\(\s*\)/.test(s)) return;
   if (!HANGUL.test(s)) return;
   if (s.length < 5 || s.length > 90) return;       // too short to teach, too long to read
   if (/^[·\-—,\s]+$/.test(s)) return;
@@ -622,7 +628,11 @@ const SENSE_RULES = [
   // finds nothing, and the word keeps no example, which is the true answer.
   { ko: '동안', gloss: /face|youthful/i, require: /동안(이다|이에요|입니다|인 편|비결|미인)|동안을 유지/ },
   { ko: '다리', gloss: /leg/i, forbid: /(한강|다리를 건너|다리 위)/ },
-  { ko: '거리', gloss: /distance|walk away/i, forbid: /(한 거리|거리가 식당|먹거리|거리 축제)/ }
+  { ko: '거리', gloss: /distance|walk away/i, forbid: /(한 거리|거리가 식당|먹거리|거리 축제)/ },
+  // 칫솔질 is brushing, not the brush; and a two-word headword is only in a sentence that says
+  // both words together — 환경 and 보호 forty characters apart are about something else.
+  { ko: '칫솔', gloss: /toothbrush/i, forbid: /칫솔질/ },
+  { ko: '환경 보호', gloss: /environment/i, require: /환경 보호|환경을 보호/ }
 ];
 function wrongSense(headword, gloss, text) {
   return SENSE_RULES.some((r) => {
@@ -662,6 +672,7 @@ const WORD_FILES = [
   { rel: 'worlds/2b-unit-15.json', unit: '2b-unit-15', label: 'Unit 15' },
   { rel: 'worlds/2b-unit-16.json', unit: '2b-unit-16', label: 'Unit 16' },
   { rel: 'worlds/topik-2.json', unit: 'topik-2', label: 'TOPIK II' },
+  { rel: 'worlds/recipe-unit-1.json', unit: 'recipe-unit-1', label: '합격 레시피 Unit 1' },
   { rel: 'levels.json', unit: 'valley', label: 'Valley packs' }
 ];
 
