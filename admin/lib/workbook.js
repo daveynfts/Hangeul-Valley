@@ -244,9 +244,17 @@ function cleanChoiceItem(item, i, where, type) {
 
   const out = {
     n: typeof item.n === 'number' && item.n > 0 ? item.n : i + 1,
-    art: str(item.art),
-    phraseKo: str(item.phraseKo)
+    art: str(item.art)
   };
+  // A row of a group that mixes question types carries its own instruction, and a bank that
+  // draws one question a sitting heads it with that rather than the group's umbrella line.
+  // Set between art and phraseKo because that is where the bank keeps it, so saving an
+  // unchanged bank writes each row back as it was.
+  ['instructionKo', 'instructionEn'].forEach((k) => {
+    const v = str(item[k]);
+    if (v) out[k] = v;
+  });
+  out.phraseKo = str(item.phraseKo);
   if (type === 'build') {
     const hasSecond = !!(item.choices2 || item.answer2);
     out.lines = cleanLines(item.lines, at, hasSecond ? 2 : 1);
@@ -376,6 +384,13 @@ function cleanExercise(ex, i, seenIds) {
     // The bank-wide holdGloss below, asked for by one page: a 듣기 page whose English would
     // answer its rows before the tape is played. Dropped here, a save would hand them back.
     if (ex.holdGloss === true) out.holdGloss = true;
+    // Two flags scripts/validate_content.js reads off an exam group. labelOptions exempts a
+    // 순서 배열 group, whose options are orderings like (나) - (라) - (가) - (다), from the rule
+    // that every option has a word to hover; mixedTypes holds every row of a group to its own
+    // instruction. A save that lost the first would fail validation, and one that lost the
+    // second would switch off the check that guards the rows' instructions.
+    if (ex.labelOptions === true) out.labelOptions = true;
+    if (ex.mixedTypes === true) out.mixedTypes = true;
     out.items = cleaned;
     if (ex.example && type === 'build') {
       // A 'build' example has no shared box to borrow its answer from, so the

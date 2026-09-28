@@ -256,11 +256,47 @@ assert(src.indexOf("isTopikWorld()) return '/worlds/topik2-questions.json'") >= 
 assert(src.indexOf("file: 'worlds/topik-2.json'") >= 0,
   'the world is fetched alongside the textbook worlds');
 assert(/key: 'topik'/.test(src), 'the desk builds a row for it');
-const { WORKBOOKS, workbookRel } = require(path.join(ROOT, 'admin', 'lib', 'workbook.js'));
+const { WORKBOOKS, workbookRel, validateWorkbook } = require(path.join(ROOT, 'admin', 'lib', 'workbook.js'));
 assert(workbookRel('topik2-questions').split(path.sep).join('/') === 'worlds/topik2-questions.json',
   'the admin registry resolves the bank to this file and no other');
 const targets = Object.values(WORKBOOKS).map((r) => r.split(path.sep).join('/'));
 assert(new Set(targets).size === targets.length, 'and no two registry keys point at the same file');
+// The Workbooks tab saves through validateWorkbook, which rebuilds every group and row from the
+// fields it knows by name. Anything else the bank carries is gone after the first save, and
+// nothing says so: labelOptions, mixedTypes and the mixed rows' own instructions all went that
+// way. So every field in the file has to come back, in whatever key order. The one exception
+// is a per-row group's empty box: the validator never writes one, and nothing reads it — the
+// renderer hides the box by type, and treats a missing one as empty.
+// Every path of `was` whose value `now` does not hold. Key order is ignored; array order is not.
+const absentFrom = (was, now, at, out) => {
+  if (was === null || typeof was !== 'object') {
+    if (was !== now) out.push(at);
+  } else if (now === null || typeof now !== 'object' || Array.isArray(was) !== Array.isArray(now)
+    || (Array.isArray(was) && was.length !== now.length)) {
+    out.push(at);
+  } else {
+    Object.keys(was).forEach((k) => {
+      const name = Array.isArray(was) && was[k] && was[k].id ? was[k].id : k;
+      absentFrom(was[k], now[k], at ? at + '.' + name : name, out);
+    });
+  }
+  return out;
+};
+const inFile = JSON.parse(JSON.stringify(bank));
+inFile.exercises.forEach((ex) => { if (Array.isArray(ex.bank) && !ex.bank.length) delete ex.bank; });
+let written = null;
+try {
+  written = JSON.parse(JSON.stringify(
+    validateWorkbook(JSON.parse(JSON.stringify(bank)), 'worlds/topik2-questions.json')));
+} catch (e) {
+  assert(false, 'the admin validator accepts the bank: ' + e.message);
+}
+if (written) {
+  const lost = absentFrom(inFile, written, '', []);
+  assert(lost.length === 0, 'and a save through it keeps every field the bank holds — drawOne, '
+    + 'labelOptions, mixedTypes, each mixed row\'s instruction'
+    + (lost.length ? ' — lost ' + lost.slice(0, 6).join(', ') : ''));
+}
 const { collectUploadFiles } = require(path.join(ROOT, 'scripts', 'r2Content.js'));
 const batch = new Set(collectUploadFiles(ROOT).map((x) => x.rel.split(path.sep).join('/')));
 assert(batch.has('worlds/topik-2.json') && batch.has('worlds/topik2-questions.json'),
