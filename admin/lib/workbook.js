@@ -279,6 +279,16 @@ function cleanChoiceItem(item, i, where, type) {
   if (audio) out.audio = audio;
   // A question row whose gloss states its own answer holds it until checked, like a 듣기 page.
   if (item.holdGloss === true) out.holdGloss = true;
+  // Where an exam row came from and whose key it carries: the one the book prints, or one
+  // derived from the book's own tables. A save that dropped these would leave a derived key
+  // looking exactly like a printed one, which is the one thing a learner cannot check.
+  const source = str(item.source);
+  if (source) out.source = source;
+  if (typeof item.bookPage === 'number' && item.bookPage > 0) out.bookPage = item.bookPage;
+  ['keySource', 'bookKey', 'rankingRef'].forEach((k) => {
+    const v = str(item[k]);
+    if (v) out[k] = v;
+  });
   return out;
 }
 
@@ -490,6 +500,14 @@ function validateWorkbook(body, rel) {
     // A bank may hold its English gloss back until the row is checked. Off unless asked for,
     // because on a textbook page the gloss beside the sentence is a help, not a giveaway.
     holdGloss: body.holdGloss === true,
+    // How an exam bank is dealt, and what its answer view says about its keys. Not on this
+    // list, a save through the Workbooks tab turned the exam bank back into a whole paper
+    // with shuffled buttons, and took away the note that says which keys are derived.
+    drawOne: body.drawOne === true || undefined,
+    nextKo: str(body.nextKo) || undefined,
+    keepOrder: body.keepOrder === true || undefined,
+    examView: body.examView === true || undefined,
+    keyNote: str(body.keyNote) || undefined,
     // These two say what the bank does NOT have: which of the book's pictures are missing,
     // and which printed exercises are not here because the key gives them no answer. They
     // were not on this list, so every save through the Workbooks tab deleted them — silently,
