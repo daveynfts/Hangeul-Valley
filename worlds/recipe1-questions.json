@@ -162,7 +162,70 @@
           {
             "ko": "-고 나서",
             "vi": "(Sau khi... xong)\nChức năng: Trình tự thời gian dứt điểm. Kết thúc hoàn toàn hành động ở vế trước rồi mới tiến hành hành động ở vế sau."
+          },
+          {
+            "ko": "-(으)려고",
+            "vi": "(Để / Định...)\nChức năng: Thể hiện mục đích, ý định của chủ ngữ khi thực hiện hành vi ở vế sau."
+          },
+          {
+            "ko": "-(으)려면",
+            "vi": "(Nếu muốn... thì phải...)\nChức năng: Giả định kèm ý muốn (-(으)려고 하면 viết tắt) dùng để đặt ra mục tiêu ở vế trước, vế sau thường là điều kiện bắt buộc (-아/어야 하다)."
+          },
+          {
+            "ko": "-느라고",
+            "vi": "(Vì mải/bận... nên...)\nChức năng: Nêu nguyên nhân tiêu tốn thời gian, sự tập trung vào vế trước dẫn đến hệ quả tiêu cực hoặc không làm được việc khác ở vế sau (hai vế phải cùng chủ ngữ)."
+          },
+          {
+            "ko": "-아/어야",
+            "vi": "(Phải... thì mới...)\nChức năng: Đặt ra điều kiện thiết yếu, tiên quyết chỉ khi hoàn thành vế trước thì mới có thể đạt được kết quả ở vế sau."
+          },
+          {
+            "ko": "-(으)ㄹ까 봐(서)",
+            "vi": "(Sợ rằng / Lo rằng... nên...)\nChức năng: Thể hiện sự lo lắng, e ngại một tình huống xấu có thể xảy ra, từ đó thực hiện hành vi phòng ngừa ở vế sau."
+          },
+          {
+            "ko": "-거나",
+            "vi": "(Hoặc / Hay là...)\nChức năng: Lựa chọn 1 trong 2 hay nhiều hành động/trạng thái."
+          },
+          {
+            "ko": "-자마자",
+            "vi": "(Ngay sau khi... là...)\nChức năng: Trình tự thời gian tức thì, hành động vế sau diễn ra ngay lập tức sau khi hành động vế trước vừa dứt điểm."
+          },
+          {
+            "ko": "-(으)ㄹ수록",
+            "vi": "(Càng... càng...)\nChức năng: Tỷ lệ thuận. Mức độ của hành động/trạng thái ở vế trước tăng lên thì mức độ ở vế sau cũng thay đổi tương ứng."
+          },
+          {
+            "ko": "-아/어서",
+            "vi": "(Vì... nên / Rồi...)\nChức năng:\n- Chỉ lý do (이유): Nêu nguyên nhân tự nhiên dẫn tới kết quả.\nTrình tự liên kết chặt chẽ (순서: 계기): Hành động vế trước là tiền đề trực tiếp để thực hiện tiếp hành động vế sau."
+          },
+          {
+            "ko": "-아/어서 그런지",
+            "vi": "Chức năng: Phỏng đoán nguyên nhân. Người nói không dám khẳng định chắc chắn 100%, chỉ đưa ra suy đoán về lý do dẫn đến kết quả ở vế sau."
+          },
+          {
+            "ko": "-더니",
+            "vi": "(Thấy... thế mà / Vì... nên giờ...)\nChức năng: Hồi tưởng lại sự việc/sự thay đổi mà bản thân đã trực tiếp chứng kiến trong quá khứ, dẫn đến một kết quả hoặc trạng thái đối lập ở hiện tại (chủ ngữ thường không phải là bản thân người nói đối với câu chỉ cảm xúc/hành động)."
+          },
+          {
+            "ko": "-(으)ㄹ지",
+            "vi": "(Liệu rằng... / Có nên... hay không)\nChức năng: Thể hiện sự băn khoăn, đắn đo suy nghĩ trước một lựa chọn chưa ngã ngũ (thường kết hợp với các động từ nhận thức như: 고민하다, 모르다, 결정하다)."
+          },
+          {
+            "ko": "-(으)면서",
+            "vi": "(Vừa... vừa...)\nChức năng: Diễn tả hai hành động được một chủ ngữ thực hiện song song cùng một thời điểm."
+          },
+          {
+            "ko": "-(으)니까",
+            "vi": "(Sau khi... thì nhận thấy...)\nChức năng: Thể hiện sự phát hiện/trải nghiệm sau khi thực hiện xong hành động ở vế trước thì mới phát hiện ra một sự thật, kết quả khách quan ở vế sau."
+          },
+          {
+            "ko": "-(으)면",
+            "vi": "(Nếu... thì...)\nChức năng: Đặt ra giả định, điều kiện chung cho một tình huống hoặc sự việc."
           }
+        ],
+        "glossHide": [
+          "시장"
         ]
       }
     },
