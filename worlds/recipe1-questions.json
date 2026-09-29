@@ -769,7 +769,99 @@
           },
           "grammarVi": "Phân tích sâu cấu trúc cốt lõi: -자마자\nNgữ pháp -자마자 gắn trực tiếp sau thân động từ, mang nghĩa: \"Vừa mới... là... ngay / Ngay sau khi... thì...\".\n\nCách kết hợp:\nBất kể thân động từ có hay không có patchim, đều gắn trực tiếp với -자마자.\n졸업하다 + -자마자 → 졸업하자마자.\n눕다 + -자마자 → 눕자마자 (vừa nằm xuống là...).\n\nĐặc trưng ngữ pháp quan trọng trong TOPIK:\nQuy tắc thì: Đuôi chỉ thì quá khứ (như -았/었-) tuyệt đối không được gắn vào vế trước (không dùng 졸업했자마자), thì của cả câu luôn do vị từ ở cuối câu quyết định (trong câu này là quá khứ 땄다).\nTính linh hoạt về chủ ngữ: -자마자 có thể dùng khi hai vế cùng một chủ ngữ (như câu trên: \"tôi tốt nghiệp\" và \"tôi lấy bằng\"), hoặc hai chủ ngữ hoàn toàn khác nhau (ví dụ: 내가 집에 도착하자마자 비가 내렸다).\nHình thức câu vế sau: Vế sau có thể kết hợp linh hoạt với câu kể trần thuật (-았다/었다), câu mệnh lệnh (-(으)십시오) hoặc câu rủ rê (-(으)ㅂ시다)."
         }
-      ]
+      ],
+      "design": {
+        "glossary": [
+          {
+            "ko": "-든지",
+            "vi": "(Dù... / Bất kể...)\nÝ nghĩa & Chức năng: Lựa chọn không liên quan/không phân biệt (선택: 무관) bất kể chọn phương án nào thì kết quả hay thái độ ở vế sau vẫn không thay đổi."
+          },
+          {
+            "ko": "-(으)ㄴ/는 데다가",
+            "vi": "(Không những... mà còn... / Thêm vào đó...)\nÝ nghĩa & Chức năng: Bổ sung, cộng dồn thông tin (포함: 추가). Hai vế phải đồng nhất về tính chất: cùng tích cực hoặc cùng tiêu cực."
+          },
+          {
+            "ko": "-(으)ㄴ/는 대신에",
+            "vi": "(Thay vì... / Bù lại...)\nÝ nghĩa & Chức năng: Thay thế hoặc đền bù, bù trừ (선택: 대체, 보상) — không làm việc A mà chọn làm việc B, hoặc việc B bù đắp cho việc A."
+          },
+          {
+            "ko": "-아/어도",
+            "vi": "(Dù... thì vẫn...)\nÝ nghĩa & Chức năng: Giả định tương phản (가정: 상반) — dù tình huống ở vế trước có xảy ra thì hành động/kết quả ở vế sau vẫn không bị cản trở."
+          },
+          {
+            "ko": "-는 김에",
+            "vi": "(Nhân tiện... thì làm luôn...)\nÝ nghĩa & Chức năng: Cơ hội hành động (행동: 계기), nhân cơ hội hoặc tiện đường thực hiện hành vi A vốn đã định sẵn, ta làm thêm một việc B khác."
+          },
+          {
+            "ko": "-는 바람에",
+            "vi": "(Do đột ngột... nên dẫn đến hậu quả...)\nÝ nghĩa & Chức năng: Lý do phát sinh bất ngờ (이유: 돌발), một sự việc khách quan xảy ra đột ngột ngoài tầm kiểm soát kéo theo kết quả tiêu cực/xấu ở vế sau."
+          },
+          {
+            "ko": "-(으)ㄴ 채로",
+            "vi": "(Để nguyên... mà...)\nÝ nghĩa & Chức năng: Duy trì trạng thái (지속: 상태), hành động vế sau diễn ra trong khi trạng thái kết quả của hành động vế trước vẫn đang được giữ nguyên."
+          },
+          {
+            "ko": "-(으)ㄴ/는 덕분에",
+            "vi": "(Nhờ có... nên...)\nÝ nghĩa & Chức năng: Lý do tích cực (이유: 긍정), vế trước là ân huệ, sự hỗ trợ hoặc điều kiện thuận lợi mang lại kết quả tốt đẹp ở vế sau."
+          },
+          {
+            "ko": "-도록",
+            "vi": "(Để / Đến mức...)\nÝ nghĩa & Chức năng:\n- Mục đích (목적): Làm việc B để đạt được kết quả A.\n- Mức độ (정도): Hành động/trạng thái diễn ra đến mức độ chạm ngưỡng."
+          },
+          {
+            "ko": "-기에 / -길래",
+            "vi": "(Thấy... nên...)\nÝ nghĩa & Chức năng: Căn cứ phát hiện (이유: 발견), người nói trực tiếp chứng kiến hoặc nhận thấy một tình huống ở vế trước, lấy đó làm nguyên nhân/căn cứ để đưa ra quyết định hành động ở vế sau (-기에 dùng nhiều trong văn viết, -길래 phổ biến ở văn nói)."
+          },
+          {
+            "ko": "-더라도",
+            "vi": "(Cho dù... đi chăng nữa thì...)\nÝ nghĩa & Chức năng: Giả định tương phản mức độ cao (가정: 상반), dù tình huống xấu nhất ở vế trước có xảy ra thì quyết tâm/sự thật ở vế sau vẫn giữ nguyên."
+          },
+          {
+            "ko": "-다가 보면",
+            "vi": "(Nếu cứ liên tục... thì sẽ...)\nÝ nghĩa & Chức năng: Lặp lại trải nghiệm (경험: 반복), nếu duy trì liên tục một hành động nào đó trong thời gian dài thì sẽ dần xuất hiện một kết quả mới hoặc quy luật tất yếu."
+          },
+          {
+            "ko": "-(으)ㄹ수록",
+            "vi": "(Càng... càng...)\nChức năng: Tỷ lệ thuận, mức độ của hành động/trạng thái ở vế trước tăng lên thì mức độ ở vế sau cũng thay đổi tương ứng."
+          },
+          {
+            "ko": "-아/어야",
+            "vi": "(Phải... thì mới...)\nChức năng: Đặt ra điều kiện thiết yếu, tiên quyết, chỉ khi hoàn thành vế trước thì mới có thể đạt được kết quả ở vế sau."
+          },
+          {
+            "ko": "-(으)려면",
+            "vi": "(Nếu muốn... thì phải...)\nChức năng: Giả định kèm ý muốn (-(으)려고 하면 viết tắt), đặt ra mục tiêu ở vế trước, vế sau thường là điều kiện bắt buộc (-아/어야 하다)."
+          },
+          {
+            "ko": "-자마자",
+            "vi": "(Ngay sau khi... là...)\nChức năng: Trình tự thời gian tức thì hành động vế sau diễn ra ngay lập tức sau khi hành động vế trước vừa dứt điểm."
+          },
+          {
+            "ko": "-거나",
+            "vi": "(Hoặc / Hay là...)\nChức năng: Lựa chọn 1 trong 2 hay nhiều hành động/trạng thái."
+          },
+          {
+            "ko": "-(으)려고",
+            "vi": "(Để / Định...)\nChức năng: Thể hiện mục đích, ý định của chủ ngữ khi thực hiện hành vi ở vế sau."
+          },
+          {
+            "ko": "-다가",
+            "vi": "(Đang... thì...)\nChức năng: Chuyển đổi hành động khi vế trước đang diễn ra.\n- Hành động có chủ ý (의지): Đang làm A thì dừng lại chủ động làm B.\n- Tình huống bất ngờ / ngoài dự tính (의외): Đang làm A thì phát sinh sự cố ngoài ý muốn."
+          },
+          {
+            "ko": "-고 나서",
+            "vi": "(Sau khi... xong)\nChức năng: Trình tự thời gian dứt điểm, kết thúc hoàn toàn hành động ở vế trước rồi mới tiến hành hành động ở vế sau."
+          },
+          {
+            "ko": "-느라고",
+            "vi": "(Vì mải/bận... nên...)\nChức năng: Nêu nguyên nhân tiêu tốn thời gian, sự tập trung vào vế trước dẫn đến hệ quả tiêu cực hoặc không làm được việc khác ở vế sau (hai vế phải cùng chủ ngữ)."
+          },
+          {
+            "ko": "-(으)ㄹ까 봐(서)",
+            "vi": "(Sợ rằng / Lo rằng... nên...)\nChức năng: Thể hiện sự lo lắng, e ngại một tình huống xấu có thể xảy ra, từ đó thực hiện hành vi phòng ngừa ở vế sau."
+          }
+        ]
+      }
     },
     {
       "id": "r1-grammar-final",
