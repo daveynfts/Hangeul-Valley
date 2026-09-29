@@ -871,6 +871,86 @@
           {
             "ko": "-(으)ㄴ/는데",
             "vi": "(Nhưng / Bối cảnh dẫn dắt)\nChức năng:\n- Tương phản, đối lập (상반: 대조): Diễn tả hai sự việc trái ngược nhau.\n- Dẫn nhập bối cảnh (설명: 도입): Đưa ra hoàn cảnh ban đầu để làm tiền đề giải thích sự việc vế sau."
+          },
+          {
+            "ko": "-아/어 놓다",
+            "vi": "(Làm sẵn / Để nguyên trạng thái)\nChức năng: Duy trì trạng thái chuẩn bị trước (유지: 대비), thực hiện xong một hành động để chuẩn bị đối phó cho tình huống tiếp theo và duy trì kết quả đó.\nDấu hiệu nhận biết: Thường đi kèm các phó từ chỉ sự chuẩn bị trước như 미리 (trước), 벌써 (đã/sẵn rồi)."
+          },
+          {
+            "ko": "-기로 했다",
+            "vi": "(Quyết định / Hẹn làm gì)\nChức năng:\n- Lời hẹn, kế hoạch với người khác (계획: 약속)\n- Hạ quyết tâm của bản thân (계획: 결심)\nLưu ý: Thường chia ở thì quá khứ -기로 했다 vì quyết định đã được đưa ra trước thời điểm nói."
+          },
+          {
+            "ko": "-(으)면 되다",
+            "vi": "(Chỉ cần... là được)\n- Chức năng: Thỏa mãn điều kiện tối thiểu (조건: 충족), đưa ra giải pháp đơn giản nhất để giải quyết vấn đề hoặc hướng dẫn đường đi/thủ tục.\n- Cặp hay đi kèm: Vế trước thường là điều kiện -(으)려면 (Nếu muốn... thì chỉ cần...)."
+          },
+          {
+            "ko": "-게 하다",
+            "vi": "(Bảo / Bắt / Khiến ai làm gì)\nChức năng: Sai khiến, mệnh lệnh (명령: 사동), chủ ngữ tác động, yêu cầu hoặc cho phép đối tượng khác thực hiện hành vi."
+          },
+          {
+            "ko": "-게 되다",
+            "vi": "(Được / Bị / Trở nên...)\nChức năng: Biến đổi trạng thái khách quan (설명: 변화), sự việc thay đổi do hoàn cảnh bên ngoài xô đẩy hoặc quy định tổ chức, không bắt nguồn từ ý chí chủ quan ban đầu."
+          },
+          {
+            "ko": "-(으)ㄴ 적이 있다/없다",
+            "vi": "(Đã từng / Chưa từng...)\nChức năng: Kinh nghiệm trong quá khứ (경험: 시간), khẳng định đã có hoặc chưa từng có trải nghiệm nào đó trong dòng thời gian trước đây."
+          },
+          {
+            "ko": "-아/어 있다",
+            "vi": "(Đang duy trì trạng thái)\n- Chức năng: Duy trì trạng thái kết quả (지속: 유지), hành động đã kết thúc nhưng trạng thái kết quả của nó vẫn đang tiếp tục duy trì.\n- Quy tắc quan trọng: Chỉ đi kèm với nội động từ (như: 앉다 - ngồi, 서다 - đứng, 열리다 - mở sẵn, 피다 - hoa nở)."
+          },
+          {
+            "ko": "-아/어 가다",
+            "vi": "(Dần dần... về sau / Sắp sửa...)\nChức năng:\n- Tiếp tục tiến triển theo dòng thời gian (진행: 지속)\n- Gần chạm mốc hoàn thành"
+          },
+          {
+            "ko": "-(으)ㄴ/는 셈이다",
+            "vi": "(Coi như là / Xem như là...)\nChức năng: Đánh giá tương đương (판단: 유사 결과), sau khi xem xét mọi khía cạnh thì có thể kết luận sự việc đạt kết quả gần như tương đương với điều được nói tới."
+          },
+          {
+            "ko": "-아/어 오다",
+            "vi": "(Vẫn làm... từ trước đến nay)\nChức năng: Quá trình tiến hành từ quá khứ kéo dài liên tục đến hiện tại (진행: 완료)."
+          },
+          {
+            "ko": "-(으)ㄹ 뻔했다",
+            "vi": "(Suýt chút nữa thì...)\n- Chức năng: Cận kề sự cố (행동: 직전), sự việc nguy hiểm hoặc ngoài ý muốn suýt nữa đã diễn ra nhưng thực tế đã không xảy ra.\n- Dấu hiệu nhận biết: Rất hay đi kèm phó từ 하마터면 (suýt nữa thì)."
+          },
+          {
+            "ko": "-나 보다 / -(으)ㄴ가 보다",
+            "vi": "(Chắc là / Có vẻ như...)\n- Chức năng: Phỏng đoán dựa trên quan sát (추측: 관찰), nhìn thấy một hiện tượng cụ thể bằng mắt rồi đưa ra suy đoán."
+          },
+          {
+            "ko": "-기 마련이다",
+            "vi": "(Đương nhiên là... / Tất yếu sẽ...)\n- Chức năng: Quy luật tất yếu, chân lý tự nhiên (당위: 예정 사실), việc gì đó xảy ra là lẽ đương nhiên khi một điều kiện được đáp ứng.\n- Cặp hay đi kèm: Thường kết hợp với vế trước là -다가 보면 (Nếu cứ làm gì liên tục thì đương nhiên...)."
+          },
+          {
+            "ko": "-(으)ㄴ/는 모양이다",
+            "vi": "(Trông có vẻ như / Chắc là...)\n- Chức năng: Phỏng đoán theo dấu vết, hiện trạng thực tế (추측: 관찰)."
+          },
+          {
+            "ko": "-아/어 버렸다",
+            "vi": "(Làm... mất tiêu rồi / Xong phăng luôn)\n- Chức năng: Hoàn tất dứt điểm một hành động (행동: 완료), thường mang sắc thái: trút bỏ được gánh nặng thấy nhẹ nhõm, hoặc mang cảm xúc tiếc nuối/hối hận."
+          },
+          {
+            "ko": "-아/어 보이다",
+            "vi": "(Trông có vẻ... / Nhìn bề ngoài có nét...)\nChức năng: Đánh giá chủ quan qua thị giác (판단: 주관적), nhận xét về diện mạo, sắc thái bề ngoài của người hoặc sự vật."
+          },
+          {
+            "ko": "-(으)ㄴ/는 척하다",
+            "vi": "(Giả vờ / Làm ra vẻ như...)\n- Chức năng: Hành vi giả tạo, ngụy tạo trạng thái không có thật (행동: 가식)."
+          },
+          {
+            "ko": "-(으)ㄹ지도 모른다",
+            "vi": "(Không biết chừng / Có lẽ sẽ...)\nChức năng: Phỏng đoán với độ chắc chắn thấp (추측: 불확실), khả năng một việc có thể xảy ra nhưng người nói không dám khẳng định."
+          },
+          {
+            "ko": "-아/어 두다",
+            "vi": "(Làm sẵn / Giữ nguyên trạng thái phục vụ tương lai)\n- Chức năng: Chuẩn bị trước dài hạn (유지: 대비), ý nghĩa gần như tương đương với -아/어 놓다, nhưng -두다 thường nhấn mạnh tính lưu trữ, bảo quản trong thời gian dài hơn."
+          },
+          {
+            "ko": "-(으)ㄹ 리가 없다",
+            "vi": "(Không có lý nào... / Làm sao có thể...)\n- Chức năng: Phủ nhận tuyệt đối / Bất tín (추측: 불신), khẳng định chắc chắn 100% một việc không thể nào xảy ra vì hoàn toàn trái với logic hoặc thực tế."
           }
         ]
       }
