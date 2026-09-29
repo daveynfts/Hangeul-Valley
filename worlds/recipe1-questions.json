@@ -331,7 +331,23 @@
           "source": "합격 레시피 p.18 · 예상문제 2번",
           "bookPage": 18,
           "keySource": "ranking",
-          "rankingRef": "연결어미 02"
+          "rankingRef": "연결어미 02",
+          "vi": "Ăn tối xong, tôi đi dạo ở công viên trước nhà.",
+          "enTodo": [
+            "en",
+            "why",
+            "grammar"
+          ],
+          "whyVi": "Phân tích logic câu và trình tự thời gian \n- Vế A (Hành động trước): 저녁을 먹다.\n- Vế B (Hành động sau): 집 앞 공원에서 산책을 한다.\nHai hành động này không diễn ra cùng một lúc, cũng không phải mối quan hệ nguyên nhân - hệ quả. Đây là một chuỗi hành vi mang tính trình tự thời gian dứt điểm (순서: 완료): hành động ăn tối kết thúc trọn vẹn rồi mới chuyển sang đi dạo.\nMẹo TOPIK II (Câu 3~4 - Chọn ngữ pháp đồng nghĩa):\nKhi gặp -고 나서, đáp án tương đương chuẩn xác nhất thường là:\n-(으)ㄴ 후에 (sau khi làm gì)\n-(으)ㄴ 뒤에 / -(으)ㄴ 다음에\n\n2. 먹다 보면 (-다 보면):\n- Mang nghĩa: \"Nếu cứ liên tục làm gì thì sẽ...\".\n- Cấu trúc này dùng để giả định rằng nếu duy trì một hành động nào đó trong thời gian dài thì một kết quả hoặc nhận thức mới sẽ xuất hiện ở vế sau (vế sau thường đi kèm các đuôi như -게 된다, -(으)ㄹ 수 있다).\nVí dụ: 한국어를 계속 연습하다 보면 실력이 늘 거예요. Lắp vào câu thói quen hàng ngày là hoàn toàn sai nghĩa.\n\n3. 먹을 만큼 (-(으)ㄹ 만큼):\n- Mang nghĩa: \"đến mức...\" hoặc \"bao nhiêu... bấy nhiêu\" (chỉ mức độ, tương đương với -(으)ㄹ 정도로).\n- Ví dụ: 먹을 만큼 덜어서 드세요. Cấu trúc này không mang chức năng nối tiếp trình tự hành động.\n\n4. 먹는 길에 (-는 길에):\n- Mang nghĩa: \"nhân tiện trên đường đi...\".\n- Quy tắc bắt buộc: Ngữ pháp này chỉ đi kèm với các động từ chỉ sự di chuyển như: 가다, 오다, 퇴근하다, 출근하다, 돌아가다 (ví dụ: 집에 가는 길에). Động từ 먹다 không phải là động từ di chuyển, nên kết hợp 먹는 길에 là sai ngữ pháp.",
+          "fmt": {
+            "why": {
+              "vi": "<b>Phân tích logic câu và trình tự thời gian </b><br>- Vế A (Hành động trước): <span class=\"hv-gl\" data-gl-vi=\"Ăn tối\">저녁을 먹다</span>.<br>- Vế B (Hành động sau): <span class=\"hv-gl\" data-gl-vi=\"Đi dạo ở công viên trước nhà\">집 앞 공원에서 산책을 한다</span>.<br>Hai hành động này không diễn ra cùng một lúc, cũng không phải mối quan hệ nguyên nhân - hệ quả. Đây là một chuỗi hành vi mang tính trình tự thời gian dứt điểm (순서: 완료): hành động ăn tối kết thúc trọn vẹn rồi mới chuyển sang đi dạo.<br><b>Mẹo TOPIK II (Câu 3~4 - Chọn ngữ pháp đồng nghĩa):</b><br>Khi gặp <span class=\"hv-hl-yellow\">-고 나서</span>, đáp án tương đương chuẩn xác nhất thường là:<br><span class=\"hv-hl-yellow\">-(으)ㄴ 후에</span> (sau khi làm gì)<br><span class=\"hv-hl-yellow\">-(으)ㄴ 뒤에</span> / <span class=\"hv-hl-yellow\">-(으)ㄴ 다음에</span><br><br>2. 먹다 보면 (<span class=\"hv-hl-yellow\">-다 보면</span>):<br>- Mang nghĩa: \"Nếu cứ liên tục làm gì thì sẽ...\".<br>- Cấu trúc này dùng để giả định rằng nếu duy trì một hành động nào đó trong thời gian dài thì một kết quả hoặc nhận thức mới sẽ xuất hiện ở vế sau (vế sau thường đi kèm các đuôi như -게 된다, -(으)ㄹ 수 있다).<br>Ví dụ: <span class=\"hv-gl\" data-gl-vi=\"Nếu cứ chăm chỉ luyện tiếng Hàn thì năng lực sẽ tăng lên\">한국어를 계속 연습하다 보면 실력이 늘 거예요</span>. Lắp vào câu thói quen hàng ngày là hoàn toàn sai nghĩa.<br><br>3. 먹을 만큼 (<span class=\"hv-hl-yellow\">-(으)ㄹ 만큼</span>):<br>- Mang nghĩa: \"đến mức...\" hoặc \"bao nhiêu... bấy nhiêu\" (chỉ mức độ, tương đương với <span class=\"hv-hl-yellow\">-(으)ㄹ 정도로</span>).<br>- Ví dụ: <span class=\"hv-gl\" data-gl-vi=\"Hãy lấy thức ăn vừa đủ với sức ăn của mình thôi\">먹을 만큼 덜어서 드세요</span>. Cấu trúc này không mang chức năng nối tiếp trình tự hành động.<br><br>4. 먹는 길에 (<span class=\"hv-hl-yellow\">-는 길에</span>):<br>- Mang nghĩa: \"nhân tiện trên đường đi...\".<br>- Quy tắc bắt buộc: Ngữ pháp này chỉ đi kèm với các động từ chỉ sự di chuyển như: 가다, 오다, 퇴근하다, 출근하다, 돌아가다 (ví dụ: <span class=\"hv-gl\" data-gl-vi=\"trên đường về nhà\">집에 가는 길에</span>). Động từ <span class=\"hv-gl\" data-gl-vi=\"ăn\">먹다</span> không phải là động từ di chuyển, nên kết hợp 먹는 길에 là sai ngữ pháp."
+            },
+            "grammar": {
+              "vi": "<b>Phân tích sâu cấu trúc cốt lõi: <span class=\"hv-hl-yellow\">-고 나서</span></b><br>Ngữ pháp <span class=\"hv-hl-yellow\">-고 나서</span> gắn sau thân động từ, dùng để biểu thị:<br>- Tính dứt điểm: Nhấn mạnh rằng hành động ở vế trước đã được hoàn tất, kết thúc hoàn toàn thì hành động ở vế sau mới bắt đầu.<br>- So sánh với <span class=\"hv-hl-yellow\">-고</span>: Đuôi <span class=\"hv-hl-yellow\">-고</span> chỉ đơn thuần liệt kê hành động theo thứ tự (\"làm A rồi làm B\"), trong khi <span class=\"hv-hl-yellow\">-고 나서</span> nhấn mạnh mạnh mẽ hơn vào việc \"xong xuôi việc A rồi mới tới việc B\".<br><br><b>Quy tắc ngữ pháp:</b><br>- Chỉ kết hợp với động từ (không đi với tính từ).<br>- Thì quá khứ/tương lai không gắn vào <span class=\"hv-hl-yellow\">-고 나서</span> mà chia ở động từ cuối câu (ở câu trên là chia hiện tại theo thói quen: 산책을 한다)."
+            }
+          },
+          "grammarVi": "Phân tích sâu cấu trúc cốt lõi: -고 나서\nNgữ pháp -고 나서 gắn sau thân động từ, dùng để biểu thị:\n- Tính dứt điểm: Nhấn mạnh rằng hành động ở vế trước đã được hoàn tất, kết thúc hoàn toàn thì hành động ở vế sau mới bắt đầu.\n- So sánh với -고: Đuôi -고 chỉ đơn thuần liệt kê hành động theo thứ tự (\"làm A rồi làm B\"), trong khi -고 나서 nhấn mạnh mạnh mẽ hơn vào việc \"xong xuôi việc A rồi mới tới việc B\".\n\nQuy tắc ngữ pháp:\n- Chỉ kết hợp với động từ (không đi với tính từ).\n- Thì quá khứ/tương lai không gắn vào -고 나서 mà chia ở động từ cuối câu (ở câu trên là chia hiện tại theo thói quen: 산책을 한다)."
         },
         {
           "n": 3,
@@ -368,7 +384,16 @@
           "source": "합격 레시피 p.18 · 예상문제 3번",
           "bookPage": 18,
           "keySource": "ranking",
-          "rankingRef": "연결어미 03"
+          "rankingRef": "연결어미 03",
+          "whyVi": "A → B: 내일 전시회가 열리다 → 사람들이 많이 올 것 같다. A là bối cảnh — tình hình là thế này — còn B là điều mình nghĩ về nó. Đuôi đặt bối cảnh trước ý chính là -는데, cách dùng 〈설명: 도입〉: 행사장에 도착했는데 사람들이 많이 와 있었다.\n\n열리든지 là -든지, 〈선택: 무관〉, cần một sự lựa chọn — 열리든지 말든지 — mà ở đây chỉ có một sự kiện.\n\n열리도록 là -도록, 〈목적〉 hoặc 〈정도〉: để nó mở ra, hoặc cho tới khi nó mở. Người ta đến không phải mục đích của việc khai mạc, cũng không phải giới hạn của nó.",
+          "enTodo": [
+            "why"
+          ],
+          "fmt": {
+            "why": {
+              "vi": "A → B: 내일 전시회가 열리다 → 사람들이 많이 올 것 같다. A là bối cảnh — tình hình là thế này — còn B là điều mình nghĩ về nó. Đuôi đặt bối cảnh trước ý chính là -는데, cách dùng 〈설명: 도입〉: 행사장에 도착했는데 사람들이 많이 와 있었다.<br><br>열리든지 là -든지, 〈선택: 무관〉, cần một sự lựa chọn — 열리든지 말든지 — mà ở đây chỉ có một sự kiện.<br><br>열리도록 là -도록, 〈목적〉 hoặc 〈정도〉: để nó mở ra, hoặc cho tới khi nó mở. Người ta đến không phải mục đích của việc khai mạc, cũng không phải giới hạn của nó."
+            }
+          }
         },
         {
           "n": 4,
