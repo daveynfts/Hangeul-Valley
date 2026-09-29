@@ -142,6 +142,18 @@
         "noteEn": {
           "vi": "<span class=\"hv-sz-lg\"><b>1. Tổng quan dạng bài (읽기 [1~2]번 유형)</b></span><br><b>Yêu cầu:</b> Chọn ngữ pháp phù hợp nhất điền vào chỗ trống theo mạch câu.<br><b>Mục tiêu đánh giá:</b> Khả năng hiểu và vận dụng ngữ pháp cơ bản.<br><b>Độ khó:</b> Trọng tâm kiến thức nằm ở trình độ <b>TOPIK cấp 3</b> (Trung cấp 1).  <br><br><b><span class=\"hv-sz-lg\">2. Bí kíp vàng làm bài (황금 레시피)</span></b><br>Chiến lược 1 Nắm vững kiến thức nền:<br>Phải hiểu rõ ý nghĩa ngữ pháp và chức năng cụ thể của các cấu trúc trung cấp (ví dụ: nhóm chỉ lý do, điều kiện, nhượng bộ, mục đích hay sự chuyển hướng).<br><br>Chiến lược 2 Cách xử lý đuôi liên kết (연결어미):<br>Đây là những ngữ pháp nằm ở giữa câu để nối hai mệnh đề.<br>Cách làm: Chia câu làm hai vế rõ ràng: vế trước (A) và vế sau (B). Phân tích mối quan hệ logic giữa A và B (A dẫn đến B, A tương phản với B, hay làm A để đạt được B) để chọn ngữ pháp liên kết chuẩn xác nhất.<br><br>Chiến lược 3 Cách xử lý đuôi kết thúc câu (종결어미):<br>Đây là những cấu trúc đứng ở cuối câu, thể hiện ý định, cảm thán, dự đoán hay thái độ.<br>Cách làm: Xác định chuẩn xác thì (thời gian) của ngữ cảnh là quá khứ, hiện tại hay tương lai/phỏng đoán, từ đó loại trừ các phương án sai thì và chọn đuôi kết thúc tương ứng."
         }
+      },
+      "design": {
+        "blocks": [
+          {
+            "id": "b1",
+            "kind": "text",
+            "at": "instruction",
+            "html": "Write something here.",
+            "box": "tip",
+            "icon": "💡"
+          }
+        ]
       }
     },
     {
@@ -192,7 +204,24 @@
           "source": "합격 레시피 p.18 · 예상문제 1번",
           "bookPage": 18,
           "keySource": "ranking",
-          "rankingRef": "연결어미 01"
+          "rankingRef": "연결어미 01",
+          "vi": "Đang đá bóng ở sân vận động thì va vào bạn rồi bị ngã.",
+          "enTodo": [
+            "en",
+            "why",
+            "grammar"
+          ],
+          "whyVi": "Phân tích mạch logic câu\nÁp dụng phương pháp phân tích liên kết hai vế (A sang B)\n- Vế A (Hành động đang tiếp diễn): 운동장에서 축구하다.\n- Vế B (Sự cố phát sinh): 친구와 부딪혀서 넘어졌다.\nHành động ở vế B là một tình huống phát sinh đột ngột, ngoài dự tính (의외의 상황) và làm gián đoạn trực tiếp hoạt động đá bóng ở vế A. Ngữ pháp dùng để nối hành động đang diễn ra thì bị ngắt quãng hoặc dẫn đến một kết quả tiêu cực/ngoài ý muốn chính là -다가.\nMẹo nhận diện nhanh cho TOPIK II (Câu 1~2):\nKhi nhìn lướt thấy vế sau có những từ khóa chỉ sự cố bất ngờ (부딪히다, 넘어지다, 다치다), hãy ưu tiên tìm ngay đáp án chứa -다가.\n\n① 축구할수록 (-(으)ㄹ수록):\n- Diễn tả quan hệ tỉ lệ thuận: \"càng... thì càng...\".\n- Vế sau phải là sự tăng/giảm về mức độ theo thời gian hoặc tần suất (ví dụ: càng đá bóng càng thấy vui). Đi với việc bị ngã 넘어졌다 là sai hoàn toàn logic.\n\n② 축구하던데 (-던데):\n- Diễn tả sự hồi tưởng lại một cảnh tượng hoặc sự thật người nói đã tận mắt chứng kiến trong quá khứ để làm tiền đề cảm thán, gợi chuyện hoặc đưa ra nhận xét trái ngược.\n- Cấu trúc này không dùng để kết nối chuỗi hành động diễn tiến liên tục của chính chủ ngữ khi gặp sự cố.\n\n④ 축구하려고 (-(으)려고):\n- Diễn tả mục đích: \"định... / để làm gì đó...\".\n- Nếu ghép vào, câu sẽ mang nghĩa: \"Để đá bóng nên tôi đã va vào bạn rồi ngã\" hoàn toàn phi lý về mặt ngữ nghĩa.",
+          "fmt": {
+            "why": {
+              "vi": "<b>Phân tích mạch logic câu</b><br>Áp dụng phương pháp phân tích liên kết hai vế (A sang B)<br>- Vế A (Hành động đang tiếp diễn): <span class=\"hv-gl\" data-gl-vi=\"Đá bóng ở sân vận động\">운동장에서 축구하다</span>.<br>- Vế B (Sự cố phát sinh): <span class=\"hv-gl\" data-gl-vi=\"Va chạm với bạn rồi bị ngã\">친구와 부딪혀서 넘어졌다</span>.<br>Hành động ở vế B là một tình huống phát sinh đột ngột, ngoài dự tính (의외의 상황) và làm gián đoạn trực tiếp hoạt động đá bóng ở vế A. Ngữ pháp dùng để nối hành động đang diễn ra thì bị ngắt quãng hoặc dẫn đến một kết quả tiêu cực/ngoài ý muốn chính là <span class=\"hv-hl-yellow\">-다가</span>.<br><b>Mẹo nhận diện nhanh cho TOPIK II (Câu 1~2):</b><br>Khi nhìn lướt thấy vế sau có những từ khóa chỉ sự cố bất ngờ (부딪히다, 넘어지다, 다치다), hãy ưu tiên tìm ngay đáp án chứa <span class=\"hv-hl-yellow\">-다가</span>.<br><br>① 축구할수록 (<span class=\"hv-hl-yellow\">-(으)ㄹ수록</span>):<br>- Diễn tả quan hệ tỉ lệ thuận: \"càng... thì càng...\".<br>- Vế sau phải là sự tăng/giảm về mức độ theo thời gian hoặc tần suất (ví dụ: càng đá bóng càng thấy vui). Đi với việc bị ngã 넘어졌다 là sai hoàn toàn logic.<br><br>② 축구하던데 (<span class=\"hv-hl-yellow\">-던데</span>):<br>- Diễn tả sự hồi tưởng lại một cảnh tượng hoặc sự thật người nói đã tận mắt chứng kiến trong quá khứ để làm tiền đề cảm thán, gợi chuyện hoặc đưa ra nhận xét trái ngược.<br>- Cấu trúc này không dùng để kết nối chuỗi hành động diễn tiến liên tục của chính chủ ngữ khi gặp sự cố.<br><br>④ 축구하려고 (<span class=\"hv-hl-yellow\">-(으)려고</span>):<br>- Diễn tả mục đích: \"định... / để làm gì đó...\".<br>- Nếu ghép vào, câu sẽ mang nghĩa: \"Để đá bóng nên tôi đã va vào bạn rồi ngã\" hoàn toàn phi lý về mặt ngữ nghĩa.",
+              "box": "quote"
+            },
+            "grammar": {
+              "vi": "<b>Phân tích sâu cấu trúc cốt lõi: <span class=\"hv-hl-yellow\">-다가</span></b><br>- Bản chất ngữ pháp: Đuôi liên kết <span class=\"hv-hl-yellow\">-다가</span> gắn sau thân động từ, diễn tả một hành vi đang tiến hành thì có hành vi hoặc sự việc khác xen vào (chuyển đổi hành động).<br>- Dấu hiệu nhận biết trong đề thi TOPIK: Khi vế sau xuất hiện các động từ chỉ tai nạn, sự cố hoặc kết quả không mong muốn (như <span class=\"hv-gl\" data-gl-vi=\"va chạm\">부딪히다</span>, <span class=\"hv-gl\" data-gl-vi=\"ngã\">넘어지다</span>, <span class=\"hv-gl\" data-gl-vi=\"bị thương\">다치다</span>, <span class=\"hv-gl\" data-gl-vi=\"lỡ xe\">놓치다</span>, <span class=\"hv-gl\" data-gl-vi=\"đi quá trạm\">지나치다</span>), cấu trúc <span class=\"hv-hl-yellow\">-다가</span> là lựa chọn chuẩn xác hàng đầu.<br>- Liên hệ: Tình huống này tương tự cấu trúc ví dụ mẫu thường gặp: <span class=\"hv-gl\" data-gl-vi=\"Đang chạy xuống cầu thang thì suýt ngã\">계단을 뛰어 내려가다가 넘어질 뻔했다</span>."
+            }
+          },
+          "grammarVi": "Phân tích sâu cấu trúc cốt lõi: -다가\n- Bản chất ngữ pháp: Đuôi liên kết -다가 gắn sau thân động từ, diễn tả một hành vi đang tiến hành thì có hành vi hoặc sự việc khác xen vào (chuyển đổi hành động).\n- Dấu hiệu nhận biết trong đề thi TOPIK: Khi vế sau xuất hiện các động từ chỉ tai nạn, sự cố hoặc kết quả không mong muốn (như 부딪히다, 넘어지다, 다치다, 놓치다, 지나치다), cấu trúc -다가 là lựa chọn chuẩn xác hàng đầu.\n- Liên hệ: Tình huống này tương tự cấu trúc ví dụ mẫu thường gặp: 계단을 뛰어 내려가다가 넘어질 뻔했다."
         },
         {
           "n": 2,
