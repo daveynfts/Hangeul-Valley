@@ -148,6 +148,16 @@ assert(R.fieldParts(cut, 'ko', cut.ko, {}).parts.length === 2, 'a {} the formatt
 const topik = { why: 'Lead.\n\nOne.\n\nTwo.', fmt: { why: { html: '<b>Lead.<br><br>One.</b><br><br>Two.' } } };
 const paras = R.fieldParagraphs(topik, 'why', topik.why, {});
 assert(paras.length === 3 && paras[0] === '<b>Lead.</b>' && paras[1] === '<b>One.</b>', 'a bold that runs across a blank line still splits into steps');
+// One paragraph at a time, as the Designer edits an exam explanation: the text and the html
+// split at the same blank lines, and joined again give the field back.
+const tp = R.textParagraphs('Lead line one.\nLead line two.\n\nStep one.\r\n \r\nStep two.\n\n\n');
+assert(tp.length === 3 && tp[0] === 'Lead line one.\nLead line two.' && tp[2] === 'Step two.', 'the text splits at blank lines, on LF and CRLF, and keeps a paragraph\'s own line breaks');
+const hp = R.paragraphsOf('<b>Lead</b> line one.<br>Lead line two.<br><br>Step <span class="hv-gl" data-gl-vi="một">one</span>.<br> <br>Step two.');
+assert(hp.length === 3 && hp[0] === '<b>Lead</b> line one.<br>Lead line two.' && hp[1] === 'Step <span class="hv-gl" data-gl-vi="một">one</span>.',
+  'the html splits at the same places, as stored html — a meaning keeps its stored form');
+assert(R.matches(hp.join('<br><br>'), tp.join('\n\n')) && hp.every((h, i) => R.matches(h, tp[i])), 'and paragraph k of one is paragraph k of the other');
+assert(R.specClasses({ size: 'lg', box: 'tip', color: 'blue' }, { noBox: true }) === 'hv-fmt hv-sz-lg hv-c-blue'
+  && /hv-box-tip/.test(R.specClasses({ size: 'lg', box: 'tip' })), 'a paragraph drawn inside a card takes the field\'s styles, not its box');
 assert(R.show('<span class="hv-gl" data-gl="eyebrow" data-gl-vi="lông mày">눈썹</span>', 'vi')
   === '<span class="hv-gl wb-gl" data-gl="lông mày" title="눈썹 — lông mày" tabindex="0">눈썹</span>',
   'a meaning written into the text becomes the game’s own hover element, in the interface language, reachable by keyboard');
@@ -311,6 +321,39 @@ assert(why.indexOf('<div class="hv-fmt hv-box hv-box-tip"><b>' + it0.why.slice(0
 assert(ui.els['wb-blocks-explain'].innerHTML.indexOf('hv-divider-dots') >= 0, 'and the block placed with the answers appears with them');
 ui.run('backToWorkbookList()');
 assert(!panel.classList.contains('hv-theme-mint'), 'back on the list, the page\'s own design comes off again');
+
+// An exam page: the explanation drawn as cards and steps. The field's styles reach every
+// paragraph, and a question's own fields (item.extra) are more cards beside the clue and the
+// rule — or, on an ordinary page, boxes under the grammar note.
+const recipe = JSON.parse(read('worlds/recipe1-questions.json'));
+const rx = recipe.exercises[0];
+const r0 = rx.items[0];
+r0.fmt = { why: { size: 'lg', color: 'blue', box: 'tip' } };
+r0.extra = [{ id: 'x1', labelEn: 'Memory tip', noteEn: 'An action under way, cut into.' }, { id: 'x2', labelEn: 'Empty', noteEn: '' }];
+const ux = loadUi(true);
+ux.open(recipe, rx.id);
+rx.items.forEach((it, i) => {
+  ux.run("wbPickChoice(" + i + ", '" + it.answer + "')");
+  if (it.answer2) ux.run("wbPickChoice(" + i + ", '" + it.answer2 + "', 2)");
+});
+ux.run('checkWorkbook()');
+const card = ux.els['wb-explain'].innerHTML;
+const leadP = '<span>01 · 핵심 단서 · WHAT TO NOTICE</span><p class="hv-fmt hv-sz-lg hv-c-blue">';
+assert(card.indexOf(leadP) >= 0 && card.indexOf('<div class="wb-analysis-step"><span>01</span><p class="hv-fmt hv-sz-lg hv-c-blue">') >= 0,
+  'the field\'s size and colour reach the clue and every reasoning step');
+assert(card.indexOf('hv-box-tip') < 0, '… but not its box: the cards are boxes already');
+assert(card.indexOf('<section class="wb-learn-card wb-learn-extra"><span>03 · Memory tip</span><p>An action under way, cut into.</p></section>') >= 0,
+  'a custom field is a card of its own, numbered after the clue and the rule');
+assert(card.indexOf('Empty') < 0, 'and one with nothing in it is not drawn');
+const plainBank = JSON.parse(JSON.stringify(u12));
+const pEx = byId(plainBank, 'u12sgk-vocab-1');
+pEx.items[0].extra = [{ id: 'x1', labelEn: 'Tip', noteEn: 'Look at the noun.' }];
+const up = loadUi(true);
+up.open(plainBank, 'u12sgk-vocab-1');
+pEx.items.forEach((it, i) => up.run("wbPickChoice(" + i + ", '" + it.answer + "')"));
+up.run('checkWorkbook()');
+assert(up.els['wb-explain'].innerHTML.indexOf('<div class="wb-why-extra"><b class="wb-why-extra-h">Tip</b>Look at the noun.</div>') >= 0,
+  'on an ordinary page it is a box under the grammar note');
 
 // ── 6. The admin half ────────────────────────────────────────────────────────
 console.log('\n--- 6. A save from the Designer changes only what was edited ---');

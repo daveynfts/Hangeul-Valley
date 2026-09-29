@@ -177,6 +177,32 @@ section('a bank save carries drafts and accepts Vietnamese-only lines');
   }
 }
 
+section('a question\'s custom fields are prose like the rest of the row');
+{
+  eq([VF.fieldOfDraft('noteVi', { noteEn: '' }), VF.fieldOfDraft('noteVi', { note: 'x' }), VF.fieldOfDraft('noteVi', {}), VF.fieldOfDraft('titleVi', { title: '' })],
+    ['noteEn', 'note', 'noteEn', 'title'], 'a draft name two fields share goes to the one the object holds');
+  const bank = read('worlds/recipe1-questions.json');
+  const b = clone(bank);
+  const it = b.exercises[0].items[0];
+  it.extra = [
+    { labelEn: '', labelVi: 'Mẹo nhớ', noteEn: '', noteVi: 'Nhớ: -다가 = đang làm thì…', fmt: { noteEn: { vi: 'Nhớ: <b>-다가</b> = đang làm thì…' } } },
+    { labelEn: '', noteEn: '' },
+    { id: 'x1', labelEn: 'Trap', noteEn: 'Watch the tense.' }
+  ];
+  const out = workbook.validateWorkbook(b, 'worlds/recipe1-questions.json').exercises[0].items[0].extra;
+  eq(out.length, 2, 'one left empty is dropped, not refused');
+  eq([out[0].id, out[0].labelVi, out[0].noteVi, out[0].enTodo], ['x1', 'Mẹo nhớ', 'Nhớ: -다가 = đang làm thì…', ['noteEn', 'labelEn']],
+    'one written only in Vietnamese keeps its words and owes both English lines');
+  eq(out[0].fmt, { noteEn: { vi: 'Nhớ: <b>-다가</b> = đang làm thì…' } }, 'and its formatting');
+  eq(out[1].id, 'x1_', 'ids stay unique');
+  const bad = clone(bank);
+  bad.exercises[0].items[0].extra = [{ noteEn: 'x', id: 'no spaces allowed' }];
+  throws(() => workbook.validateWorkbook(bad, 'worlds/recipe1-questions.json'), /custom field 1: id/, 'a malformed id is refused with its place');
+  const many = clone(bank);
+  many.exercises[0].items[0].extra = Array.from({ length: 13 }, (_, k) => ({ noteEn: 'n' + k }));
+  throws(() => workbook.validateWorkbook(many, 'worlds/recipe1-questions.json'), /at most 12 custom fields/, 'and more than twelve on one question');
+}
+
 section('a word list, a quiz and the levels carry drafts too');
 {
   const w = read('worlds/2b-unit-10.json');
@@ -265,6 +291,11 @@ section('scripts/vi_first.js — status, todo, apply, ai, reviewed');
     VF.setVi(item, 'why', 'Câu giải thích viết lại bằng tiếng Việt.', cat);
     twrite('worlds/unit14-workbook.json', workbook.validateWorkbook(bank, 'worlds/unit14-workbook.json'));
 
+    // A custom field written in Vietnamese on the same question.
+    const bank2 = tread('worlds/unit14-workbook.json');
+    bank2.exercises[ex].items[0].extra = [{ id: 'x1', labelEn: '', labelVi: 'Mẹo', noteEn: '', noteVi: 'Nhìn vế sau trước.' }];
+    twrite('worlds/unit14-workbook.json', workbook.validateWorkbook(bank2, 'worlds/unit14-workbook.json'));
+
     const w = tread('worlds/2b-unit-10.json');
     const wcat = tread('locales/vi/worlds/2b-unit-10.json').entries;
     const group = w.level.words[0];
@@ -284,13 +315,21 @@ section('scripts/vi_first.js — status, todo, apply, ai, reviewed');
     assert(whyItem && whyItem.ko.length > 0, '…and the Korean the line is about');
     eq(groupItems.length, 1, 'a group name shared by ' + sameGroup.length + ' words is one line to write');
     eq((groupItems[0].also || []).length, sameGroup.length - 1, '…standing for every word that shares it');
+    const extraItems = todo.filter((t) => t.file === 'worlds/unit14-workbook.json' && /\.extra\.0$/.test(t.path));
+    eq(extraItems.map((t) => t.field).sort(), ['labelEn', 'noteEn'], 'a custom field\'s heading and text are on the worklist');
+    assert(extraItems.every((t) => /custom field 1/.test(t.where) && t.ko === whyItem.ko), '…with where it is and the Korean of its question');
 
     whyItem.en = 'The explanation, rewritten from the Vietnamese.';
     groupItems[0].en = 'New food group';
+    extraItems.forEach((t) => { t.en = t.field === 'labelEn' ? 'Tip' : 'Read the second half first.'; });
     fs.writeFileSync(todoFile, JSON.stringify(todo, null, 2));
     const applied = run('apply', todoFile);
-    assert(applied.indexOf('English written: ' + (sameGroup.length + 1) + ',') >= 0,
+    assert(applied.indexOf('English written: ' + (sameGroup.length + 3) + ',') >= 0,
       'apply writes the English at every place it stands (' + applied.trim().split('\n')[0] + ')');
+    const x = tread('worlds/unit14-workbook.json').exercises[ex].items[0].extra[0];
+    eq([x.labelEn, x.noteEn, x.labelVi, x.noteVi], ['Tip', 'Read the second half first.', undefined, undefined], 'the custom field has its English, its drafts filed');
+    const xcat = tread('locales/vi/worlds/unit14-workbook.json').entries;
+    eq([xcat['labelEn|Tip'], xcat['noteEn|Read the second half first.']], ['Mẹo', 'Nhìn vế sau trước.'], 'and its Vietnamese is in the catalogue under it');
 
     const after = tread('worlds/unit14-workbook.json').exercises[ex].items[0];
     eq(after.why, 'The explanation, rewritten from the Vietnamese.', 'the English is in the field');

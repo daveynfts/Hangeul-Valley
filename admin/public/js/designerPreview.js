@@ -299,7 +299,11 @@
             + '<div class="wb-why-en"' + at(p + '.en') + '>' + fmt(it, 'en', tr(it, 'en') || '') + '</div>'
             + '<div class="wb-why-body"' + at(p + '.why') + '>' + fmt(it, 'why', tr(it, 'why'), true) + '</div>'
             + '<div class="wb-why-gram' + (boxed(it, 'grammar') ? ' hv-unboxed' : '') + '"' + at(p + '.grammar') + '>📐 '
-            + fmt(it, 'grammar', tr(it, 'grammar'), true) + '</div></div>';
+            + fmt(it, 'grammar', tr(it, 'grammar'), true) + '</div>'
+            + extras(it, p).map((x) => '<div class="wb-why-extra">'
+              + (x.title ? '<b class="wb-why-extra-h"' + at(x.path + '.labelEn') + '>' + x.title + '</b>' : '')
+              + '<div' + at(x.path + '.noteEn') + '>' + x.body(true) + '</div></div>').join('')
+            + '</div>';
         }).join('');
       }
 
@@ -318,22 +322,49 @@
       if (mode === 'always') { applyGloss($('wb-instruction')); if (ex.example) applyGloss(exBox); }
       if (answers && mode !== 'off') applyGloss(explain);
 
+      // The exam explanation, js/ui.js wbTopikWhyHtml. Its paragraphs are picked one at a time —
+      // "why#0" is the thing to notice, "why#1"… each reasoning step — so a click on a step opens
+      // that step, not the whole explanation from its first line.
       function topikCard(it, p, sentence) {
-        const parts = R.fieldParagraphs(it, 'why', tr(it, 'why'), { lang })
-          || String(tr(it, 'why') || '').split(/\r?\n\s*\r?\n/).map((s) => s.trim()).filter(Boolean).map(esc);
-        const lead = parts.shift() || '';
-        const detail = parts.length
-          ? '<details class="wb-analysis" open><summary><span>선택지 비교 · FULL REASONING</span><b>' + parts.length + '단계</b></summary>'
-            + '<div class="wb-analysis-list">' + parts.map((s, k) => '<div class="wb-analysis-step"><span>' + String(k + 1).padStart(2, '0') + '</span><p>' + s + '</p></div>').join('')
+        const whyText = tr(it, 'why');
+        const parts = R.fieldParagraphs(it, 'why', whyText, { lang }) || R.textParagraphs(whyText).map(esc);
+        const cls = R.specClasses(R.specOf(it, 'why'), { noBox: true });
+        const pc = cls ? ' class="' + cls + '"' : '';
+        const para = (k) => at(p + '.why#' + k);
+        const lead = parts.length ? parts[0] : '';
+        const steps = parts.slice(1);
+        const detail = steps.length
+          ? '<details class="wb-analysis" open><summary><span>선택지 비교 · FULL REASONING</span><b>' + steps.length + '단계</b></summary>'
+            + '<div class="wb-analysis-list">' + steps.map((s, k) => '<div class="wb-analysis-step"' + para(k + 1) + '><span>'
+              + String(k + 1).padStart(2, '0') + '</span><p' + pc + '>' + s + '</p></div>').join('')
             + '</div></details>' : '';
         return '<article class="wb-why wb-why-topik ok"><div class="wb-topik-status"><span>정답 · CORRECT</span><b>정답 · ANSWER</b></div>'
           + '<div class="wb-why-head">' + esc(it.n) + ') ' + sentence + '</div>'
           + '<div class="wb-topik-meaning"><span>뜻 · MEANING</span><p' + at(p + '.en') + '>' + fmt(it, 'en', tr(it, 'en') || '') + '</p></div>'
           + '<div class="wb-learn-grid">'
-          + (lead ? '<section class="wb-learn-card wb-learn-clue"' + at(p + '.why') + '><span>01 · 핵심 단서 · WHAT TO NOTICE</span><p>' + lead + '</p></section>' : '')
+          + (lead ? '<section class="wb-learn-card wb-learn-clue"' + para(0) + '><span>01 · 핵심 단서 · WHAT TO NOTICE</span><p' + pc + '>' + lead + '</p></section>' : '')
           + (tr(it, 'grammar') ? '<section class="wb-learn-card wb-learn-rule"' + at(p + '.grammar') + '><span>02 · 문법 포인트 · RULE</span><p>'
             + fmt(it, 'grammar', tr(it, 'grammar')) + '</p></section>' : '')
-          + '</div>' + detail.replace('<details class="wb-analysis" open>', '<details class="wb-analysis" open' + at(p + '.why') + '>') + '</article>';
+          + extras(it, p).map((x, n) => '<section class="wb-learn-card wb-learn-extra"><span>' + String(n + 3).padStart(2, '0')
+            + (x.title ? ' · <b' + at(x.path + '.labelEn') + '>' + x.title + '</b>' : '') + '</span>'
+            + '<p' + at(x.path + '.noteEn') + '>' + x.body(false) + '</p></section>').join('')
+          + '</div>' + detail + '</article>';
+      }
+
+      // A question's own fields (item.extra), as the game draws them — with each one's path, and
+      // with one not yet written shown as a hint here, so it can be found and clicked.
+      function extras(it, p) {
+        return (Array.isArray(it.extra) ? it.extra : []).map((x, k) => {
+          if (!x) return null;
+          const body = tr(x, 'noteEn');
+          const title = String(tr(x, 'labelEn') || '').trim();
+          return {
+            path: p + '.extra.' + k,
+            title: title ? fmt(x, 'labelEn', title) : '',
+            body: (block) => (String(body || '').trim() ? fmt(x, 'noteEn', body, block)
+              : '<span class="hv-empty-hint">✎ …</span>')
+          };
+        }).filter(Boolean);
       }
     }
 
@@ -441,7 +472,14 @@
     if (sel) {
       sel.classList.add('hv-sel');
       if (selected.scroll) sel.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      return;
     }
+    // A field the page draws in pieces — an exam explanation, paragraph by paragraph — chosen
+    // whole: every piece of it.
+    if (!selected.path) return;
+    const pieces = doc.querySelectorAll('[data-hv-edit^="' + selected.path + '#"]');
+    pieces.forEach((el) => el.classList.add('hv-sel'));
+    if (selected.scroll && pieces[0]) pieces[0].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }
 
   window.HVDesignerPreview = { mount, render, markSelection, srcdoc };

@@ -72,7 +72,18 @@
     }
     return true;
   }
-  function fieldOfDraft(name) { const i = DRAFT_FIELDS.indexOf(name); return i >= 0 ? TEXT_FIELDS[i] : null; }
+  // Three draft names stand for two fields each — noteVi for noteEn and note, titleVi for titleEn
+  // and title, descriptionVi for descriptionEn and description — so the object decides: the
+  // field it actually holds. With neither (or both), the En form, as before.
+  function fieldOfDraft(name, obj) {
+    const all = TEXT_FIELDS.filter((f, i) => DRAFT_FIELDS[i] === name);
+    if (!all.length) return null;
+    if (all.length > 1 && obj && typeof obj === 'object') {
+      const held = all.filter((f) => typeof obj[f] === 'string');
+      if (held.length === 1) return held[0];
+    }
+    return all[0];
+  }
   function key(field, text) { return String(field) + '|' + String(text).trim(); }
 
   function list(obj, name) {
@@ -191,7 +202,7 @@
     walk(root, (obj, path) => {
       const fields = new Set(list(obj, TODO));
       Object.keys(obj).forEach((k) => {
-        const f = fieldOfDraft(k);
+        const f = fieldOfDraft(k, obj);
         if (f && typeof obj[k] === 'string' && obj[k].trim()) fields.add(f);
       });
       fields.forEach((f) => out.push({ path, field: f, state: list(obj, TODO).indexOf(f) >= 0 ? 'todo' : 'sync', obj }));
@@ -214,7 +225,7 @@
     if (!src || typeof src !== 'object') return out;
     const bad = (msg) => { throw new Error(where + ': ' + msg); };
     Object.keys(src).forEach((k) => {
-      const f = fieldOfDraft(k);
+      const f = fieldOfDraft(k, out);
       if (!f) return;
       const v = src[k];
       if (v === undefined || v === null || v === '') return;

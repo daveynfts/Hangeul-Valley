@@ -392,3 +392,24 @@
 .vf-compact[data-vf-state="ok"] .vf-slot { display: none; }
 .vf-compact .vf-slot { margin-left: 0; }
 .vf-compact .vf-link { font-size: var(--fs-xs); }
+
+/* One paragraph of an exam explanation open on its own: where it is among the others, and
+   the steps around it. */
+.dz-parabar {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin: 0 0 var(--sp-2);
+  padding: 5px 8px; border: 1px solid var(--border-card); border-radius: var(--radius-btn); background: rgba(15,23,42,.35);
+}
+.dz-parapos { font-size: var(--fs-xs); font-weight: 700; color: var(--text-secondary); }
+.dz-parabar .dz-link { font-size: var(--fs-xs); }
+.dz-danger-link { color: var(--accent-rose); }
+
+/* A question's own fields (item.extra), in the Question tab. */
+.dz-extras { margin: var(--sp-3) 0; }
+.dz-extra {
+  margin: 6px 0; padding: 8px 10px; border: 1px dashed rgba(20,184,166,.55); border-radius: var(--radius-btn);
+  background: rgba(20,184,166,.06);
+}
+.dz-extra-head { display: flex; align-items: center; gap: 5px; font-size: var(--fs-xs); color: #5eead4; }
+.dz-extra .dz-fbtn { margin-top: 4px; }
+/* A toolbar button whose style the caret's text already has. */
+.hre-b.on { background: #fde9c4; border-color: #b45309; color: #7a3e12; }

@@ -72,6 +72,7 @@ Vietnamese, or ask for a new English.
 | Bài học → Từ vựng | the meaning, the group name (typed once for the whole group — every word in it follows) and the example's translation |
 | Cấp độ (Levels) | a word's meaning; a level's name and description |
 | 💬 Meanings | a glossary word's meaning in Vietnamese, the English optional |
+| ❓ Question → Trường tùy chỉnh | a question's own fields — a heading and a text each (`extra[].labelEn` / `noteEn`, drafts `labelVi` / `noteVi`) |
 
 ### What a save stores
 
@@ -155,15 +156,13 @@ English; `ai --out f.json` lists Claude's unread English beside its Vietnamese, 
 
 ## What CI says
 
-`scripts/validate_content.js` counts the drafts, to-dos and unread AI English, and **fails on a
-line that has only Vietnamese** ("every line written in Vietnamese has its English before it is
-committed") — the unit's own suites would refuse a question with no English prose anyway. A
-draft over existing English does not fail anything.
-
-On the deployed admin a save commits straight to `main`. Changing the Vietnamese of existing
-lines is always safe there; **adding a new line in Vietnamese only turns CI red until the batch
-runs** — the save toast says how many English lines wait. Locally nothing is committed until
-the batch has run.
+`scripts/validate_content.js` counts the drafts, to-dos and unread AI English, and **lists the
+lines that have only Vietnamese** so far — as a note, not a failure. The deployed admin commits
+straight to `main`, and a custom field or any new line written there in Vietnamese waits for
+Claude's English by design; failing on it left `main` red, and Publish stopped, after every such
+save. English mode shows the Vietnamese for those lines meanwhile. (A brand-new *question* with
+no English prose still fails the unit's own suites, which want its meaning, why and grammar note
+in English — write those through the batch before relying on CI.)
 
 ## Limits
 
