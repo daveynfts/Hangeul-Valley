@@ -158,6 +158,10 @@
           {
             "ko": "-다가",
             "vi": "(Đang... thì...)\nChức năng: Chuyển đổi hành động khi vế trước đang diễn ra.\n- Hành động có chủ ý (의지): Đang làm A thì dừng lại chủ động làm B.\n- Tình huống bất ngờ / ngoài dự tính (의외): Đang làm A thì phát sinh sự cố ngoài ý muốn."
+          },
+          {
+            "ko": "-고 나서",
+            "vi": "(Sau khi... xong)\nChức năng: Trình tự thời gian dứt điểm. Kết thúc hoàn toàn hành động ở vế trước rồi mới tiến hành hành động ở vế sau."
           }
         ]
       }
