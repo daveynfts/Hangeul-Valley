@@ -3293,6 +3293,14 @@ const overlayIds = [
   check('the stylesheet draws the gloss and its tooltip',
     css.indexOf('.wb-gl') >= 0 && css.indexOf('content: attr(data-gl)') >= 0
     && css.indexOf('.wb-gl:focus-visible::after') >= 0);
+  // The meaning is a card (js/richText.js glossTips, drawn by css/rich.css). A title beside it
+  // made the browser draw the meaning a second time over the card, so a glossed word has none.
+  const richCss = read(path.join('css', 'rich.css'));
+  const applyGloss = gameJs.slice(gameJs.indexOf('function wbApplyGloss('), gameJs.indexOf('function wbApplyGloss(') + 2500);
+  check('and its meaning is drawn once, by the card — no title beside it',
+    /function glossTips\(/.test(read(path.join('js', 'richText.js')))
+    && richCss.indexOf('.hv-gtip-card') >= 0 && css.indexOf('html:not(.hv-gtip) .wb-gl:hover::after') >= 0
+    && applyGloss.indexOf("setAttribute('title'") < 0);
   check('a bank can hold its translation back until the row is checked',
     gameJs.indexOf('st.bank && st.bank.holdGloss') >= 0
     && gameJs.indexOf("holdGloss ? '' :") >= 0);

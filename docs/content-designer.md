@@ -10,7 +10,7 @@ the right change it:
 | ✏️ **Text** | Click any sentence on the page. Bold, italic, underline, strike, size, colour, highlight, font, a **meaning on hover** (💬), a reading above the text (ruby), lists, quotes, pictures inside the text. Below it: the whole field's size, alignment, **box** (note, tip, info, careful, important, grammar, example, quote, card, dashed), colour, font, bold, italic. |
 | 🎨 **Page** | Theme (parchment, notebook, mint, sky, blossom, lavender, sand), width, question **columns**, spacing, **zoom**, the Korean font, and when hover meanings appear — for this page, or as the default for every page of the bank. |
 | 🧱 **Blocks** | Text boxes, pictures and dividers placed between the page's sections: top, after the instruction, after the [보기], after the questions, with the answers, bottom. A text box can have a heading, an icon, a box style, two columns and a picture beside it; a picture has a width, alignment, frame and caption. Each can show always, only before checking, or only after. |
-| 💬 **Meanings** | The page's (or bank's) glossary — a word and the meaning it shows on hover, in Vietnamese and (optionally) English — the words never glossed automatically, and the list of words the game glosses by itself on this page, each with *Hide* and *Change*. |
+| 💬 **Meanings** | Every meaning a reader can meet on the page, one card each: the glossary's (this page's or the bank's), the ones written into the text with 💬, and the ones the game adds from the unit's word list — searched, filtered, edited where they are, pointed at on the page. See [Meanings on hover](#meanings-on-hover). |
 | ❓ **Question** | The rows themselves, for every exercise type: lines with their `{}` blanks, the buttons and which one is right, a second blank, the shared box, the English, the explanation, the grammar note, the recording, the picture key. Add, duplicate, move and delete questions. |
 
 The bar above holds the bank and page pickers, **Questions / Answers** (the page as the
@@ -115,6 +115,50 @@ it would otherwise light up inside every longer word.
 
 The desk quiz, the cassette scripts and the word cards do not read formatting yet.
 
+## Meanings on hover
+
+**The card.** A glossed word shows its meaning in a card — the word in amber (with the
+dictionary form when the sentence wears another shape of it: 썰렁한 · 썰렁하다), then the meaning
+exactly as written, line breaks and all. `HVRich.glossTips` (`js/richText.js`) draws it and
+starts by itself in any page that loads the file — the game, the Designer's preview, the admin
+itself, where a word in the text box shows each language it was given. It sits above the word,
+or below it when there is no room above, and always inside the window (a CSS bubble was cut off
+by the scrolling panel it sat in). It opens on hover, on keyboard focus and on a tap, which keeps
+it open until a tap elsewhere; a word broken over two lines gets the card over the half under
+the pointer. **No glossed word carries a `title`**: the browser drew it as a second tooltip on
+top of the card — the "shown twice" bug. The old CSS bubble in `css/game.css` stays only for a
+page the card never started in (`html:not(.hv-gtip)`); `tests/test_rich_text.js` and
+`validate_content.js` hold both.
+
+**Line breaks.** A meaning may run over several lines, up to 400 characters. In a glossary it is
+a JSON string with `\n`; in the text it is an attribute, stored as `&#10;` so a tag never breaks
+a line (`data-gl-vi="đang làm thì chuyển&#10;sang việc khác"`). The sanitizer tidies each line
+and keeps at most one empty line in a row; the text the overlay has to match is untouched.
+
+**The 💬 Meanings tab** lists every meaning on the page, one card each, coloured by source:
+
+| Card | Where it lives | What it can do |
+|---|---|---|
+| 📘 **Yours** (amber) | `design.glossary` of this page, or 📚 of the whole bank | the word and both meanings edited in place; ✕ removes it. It says which unit meaning it replaces, and when a page entry hides the bank's. |
+| ✍️ **In the text** (violet) | a `hv-gl` span in a field's overlay (or a text box), in the layer on screen | its meanings edited in place — only the attributes change; ✏️ opens the field; ✕ takes the meaning off the word. It cannot be emptied from here, which would renumber the cards under the cursor. |
+| ⚙️ **Automatic** (sky) | the unit's word list (`wbGlossTable`) | read only; 🙈 hides it here (`glossHide`), 👁 brings it back; **✏️ Write my own** makes it a glossary entry of yours, starting from the unit's meaning. |
+
+Above the list: where new words and hidden words go (this page or every page), when automatic
+meanings appear, a search (a word or a meaning, Vietnamese marks optional — *long may* finds
+*lông mày*), and filters with counts. Each card counts its word on the page as drawn now
+(Questions or Answers, VI or EN); the automatic ones are listed most-seen first, forty at a time
+on a long exam page. Hovering a card lights its word up on the page (the CSS Custom Highlight
+API — nothing in the page changes); 📍 scrolls to each place in turn. On the page itself, while
+this tab is open, **selecting a word** opens *＋ Add a word* with it filled in (or its card, when
+it has one), and **clicking an underlined word** brings its card into view. The add form says
+how often the word is on the page, catches a one-syllable word or one already in the glossary,
+and offers the meanings the page already has for it; Enter in the word box moves to the meaning,
+Ctrl+Enter adds.
+
+**The 💬 button in the Text tab** writes a meaning into the text: boxes that take line breaks
+(Enter), Ctrl+Enter to apply, Esc to close; the card drawn underneath as it will look; and the
+glossary's and the word list's meanings for the selected word one click away.
+
 ## An exam explanation, one paragraph at a time
 
 An exam page (`examView`, and the TOPIK paper) draws a question's `why` in pieces, split where
@@ -192,8 +236,8 @@ points at a picture that is not on disk. The picture picker also offers the game
 
 | File | Role |
 |---|---|
-| `js/richText.js` | Vocabulary, sanitizer, overlay reading, design helpers, validators — shared by game, admin and scripts |
-| `css/rich.css` | Every style the layer can emit; loaded by the game and the Designer |
+| `js/richText.js` | Vocabulary, sanitizer, overlay reading, design helpers, validators — shared by game, admin and scripts; the hover meaning's card (`glossTips`) |
+| `css/rich.css` | Every style the layer can emit, and the meaning card; loaded by the game and the Designer |
 | `js/ui.js` | The study-desk renderer reads `fmt` and `design` (`wbFmt`, `wbApplyDesign`, `wbGlossTable`) |
 | `admin/public/js/designer.js` | The tab: state, history, panels, pictures, save |
 | `admin/public/js/designerPreview.js` | The live page in an iframe |

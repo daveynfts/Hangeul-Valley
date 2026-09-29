@@ -159,8 +159,58 @@ assert(R.matches(hp.join('<br><br>'), tp.join('\n\n')) && hp.every((h, i) => R.m
 assert(R.specClasses({ size: 'lg', box: 'tip', color: 'blue' }, { noBox: true }) === 'hv-fmt hv-sz-lg hv-c-blue'
   && /hv-box-tip/.test(R.specClasses({ size: 'lg', box: 'tip' })), 'a paragraph drawn inside a card takes the field\'s styles, not its box');
 assert(R.show('<span class="hv-gl" data-gl="eyebrow" data-gl-vi="lông mày">눈썹</span>', 'vi')
-  === '<span class="hv-gl wb-gl" data-gl="lông mày" title="눈썹 — lông mày" tabindex="0">눈썹</span>',
+  === '<span class="hv-gl wb-gl" data-gl="lông mày" tabindex="0">눈썹</span>',
   'a meaning written into the text becomes the game’s own hover element, in the interface language, reachable by keyboard');
+// The browser drew a title as a second tooltip on top of the card, so there is none — here, or
+// in either automatic pass (js/ui.js, the Designer's preview).
+assert(!/title=/.test(R.show(keep, 'vi')) && !/title=/.test(R.show(keep)), 'a shown meaning carries no title');
+const uiSrc = read('js/ui.js');
+const applySrc = uiSrc.slice(uiSrc.indexOf('function wbApplyGloss('), uiSrc.indexOf('function wbApplyGloss(') + 2000);
+const previewSrc = read('admin/public/js/designerPreview.js');
+assert(applySrc.indexOf("setAttribute('title'") < 0 && previewSrc.indexOf("setAttribute('title'") < 0,
+  'neither automatic pass gives a glossed word a title');
+
+// A meaning over several lines: the breaks stay (the card draws them), stored as &#10; so a tag
+// never breaks a line, each line tidied, no more than one empty line in a row — and the words
+// the overlay has to match are untouched.
+const ml = R.sanitize('<span class="hv-gl" data-gl-vi="đang làm thì chuyển\r\n  sang   việc khác\n\n\n\n— cố ý hoặc tình cờ ">-다가</span>');
+assert(ml === '<span class="hv-gl" data-gl-vi="đang làm thì chuyển&#10;sang việc khác&#10;&#10;— cố ý hoặc tình cờ">-다가</span>',
+  'a meaning keeps its line breaks, tidied, written &#10; (got ' + ml + ')');
+assert(R.sanitize(ml) === ml && R.plain(ml) === '-다가', 'and it is stable, and the text is still only the word');
+assert(R.show(ml, 'vi').indexOf('data-gl="đang làm thì chuyển&#10;sang việc khác') >= 0, 'the game is handed the lines as written');
+assert(R.sanitize('<span class="hv-gl" data-gl="a{}b">x</span>') === '<span class="hv-gl" data-gl="ab">x</span>', 'a {} still cannot get into a meaning');
+assert(R.LIMITS.gloss === 400, 'a meaning may run to 400 characters');
+
+// The meanings a field carries, for the Designer's Meanings tab, and one of them changed there.
+const two = 'A <span class="hv-gl" data-gl="eyebrow" data-gl-vi="lông mày">눈썹</span> and '
+  + '<b><span class="hv-gl hv-c-red" data-gl-vi="mắt">눈</span></b>.';
+const found = R.glossesIn(two);
+assert(found.length === 2 && found[0].word === '눈썹' && found[0].gl === 'eyebrow' && found[0].vi === 'lông mày'
+  && found[1].word === '눈' && found[1].gl === '' && found[1].vi === 'mắt', 'every meaning in a field is found, in reading order');
+assert(R.setGlossIn(two, 1, { vi: 'con mắt\n(bộ phận)' }) === two.replace('data-gl-vi="mắt"', 'data-gl-vi="con mắt&#10;(bộ phận)"'),
+  'one meaning is changed in place, line break and all, the rest of the field byte for byte');
+assert(R.setGlossIn(two, 0, { gl: '' }) === two.replace(' data-gl="eyebrow"', ''), 'emptying one language keeps the other');
+assert(R.setGlossIn(two, 0, { gl: '', vi: '' }) === 'A 눈썹 and <b><span class="hv-gl hv-c-red" data-gl-vi="mắt">눈</span></b>.',
+  'emptying both takes the meaning off the word');
+assert(R.setGlossIn(two, 1, { vi: '' }) === 'A <span class="hv-gl" data-gl="eyebrow" data-gl-vi="lông mày">눈썹</span> and <b><span class="hv-c-red">눈</span></b>.',
+  'and a word that was also coloured keeps its colour');
+assert(R.matches(R.setGlossIn(two, 0, { gl: '', vi: '' }), R.plain(two)), 'the words never change');
+
+// The card's inside, shared by the game and the admin's preview of it.
+const tipCard = R.glossCardHtml('썰렁한', [{ text: 'cold,\n<dull>' }], '썰렁하다');
+assert(tipCard.indexOf('<div class="hv-gtip-word" lang="ko">썰렁한<span class="hv-gtip-head">썰렁하다</span></div>') === 0
+  && tipCard.indexOf('<div class="hv-gtip-body">cold,\n&lt;dull&gt;</div>') > 0, 'a card shows the word, its dictionary form and the meaning, escaped');
+assert(R.glossCardHtml('눈썹', [{ lang: 'vi', text: 'lông mày' }, { lang: 'en', text: 'eyebrow' }]).indexOf('<b class="hv-gtip-lang">VI</b><span>lông mày</span>') > 0,
+  'two meanings are labelled by language');
+assert(R.glossCardHtml('눈', [{ text: 'eye' }], '눈').indexOf('hv-gtip-head') < 0, 'a dictionary form the same as the word is not repeated');
+assert(typeof R.glossTips === 'function' && R.glossTips(null) === false, 'the card starts only in a page');
+const richCss = read('css/rich.css');
+assert(['.hv-gtip-card', '.hv-gtip-card.on', '.hv-gtip-card.below', '.hv-gtip-word', '.hv-gtip-body', '.hv-gtip-arrow', '.hv-gl-on']
+  .every((s) => richCss.indexOf(s) >= 0) && /\.hv-gtip-body \{[^}]*white-space: pre-line/.test(richCss),
+  'css/rich.css draws the card, keeping a meaning\'s line breaks');
+const gameCss = read('css/game.css');
+assert(gameCss.indexOf('html:not(.hv-gtip) .wb-gl:hover::after') >= 0 && richCss.indexOf('html:not(.hv-gtip) .hv-gl') >= 0,
+  'the old CSS bubbles stand down where the card runs, so a meaning is never drawn twice');
 
 // ── 4. The validators ────────────────────────────────────────────────────────
 console.log('\n--- 4. What a save refuses ---');
@@ -376,6 +426,19 @@ const stale = JSON.parse(JSON.stringify(bank));
 byId(stale, 'u12sgk-vocab-1').instructionKo = 'Different words now.';
 throws(() => wb.validateWorkbook(stale, 'worlds/unit12-textbook.json'), /Exercise \d+ fmt\.instructionKo: the formatted text no longer reads the same/,
   'and refuses an overlay the text has moved away from, naming the place');
+// A meaning written over several lines, in the glossary and in the text, saved from the
+// Meanings tab: it comes back as written, and saves again unchanged.
+const lined = JSON.parse(JSON.stringify(bank));
+const lEx = byId(lined, 'u12sgk-vocab-1');
+lEx.design.glossary = [{ ko: '눈썹', vi: 'lông mày\n— phần lông phía trên mắt', gl: 'eyebrow' }];
+lEx.items[0].lines[0].fmt = { ko: { html: '저는 <span class="hv-gl" data-gl-vi="lông mày&#10;(trên mắt)" data-gl="eyebrow">눈썹이</span> {} 사람이 좋아요.' } };
+const lSaved = wb.validateWorkbook(lined, 'worlds/unit12-textbook.json');
+const lsEx = lSaved.exercises.find((e) => e.id === 'u12sgk-vocab-1');
+assert(lsEx.design.glossary[0].vi === 'lông mày\n— phần lông phía trên mắt'
+  && lsEx.items[0].lines[0].fmt.ko.html.indexOf('data-gl-vi="lông mày&#10;(trên mắt)"') >= 0,
+  'a meaning over several lines is saved as written, in the glossary and in the text');
+assert(JSON.stringify(wb.validateWorkbook(JSON.parse(JSON.stringify(lSaved)), 'worlds/unit12-textbook.json')) === JSON.stringify(lSaved),
+  'and a second save changes nothing');
 
 console.log('\n' + passed + ' passed, ' + failed + ' failed');
 if (failed) process.exit(1);

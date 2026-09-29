@@ -157,14 +157,15 @@
 .dz-font span { font-size: 15px; }
 .dz-font small { font-size: 10px; color: #7a3e12; font-family: var(--font-sans); }
 .dz-font.on { border-color: var(--accent-indigo); box-shadow: 0 0 0 2px rgba(99,102,241,.4); }
-.dz-gmodes { display: flex; flex-direction: column; gap: 6px; }
+/* When the automatic meanings appear: three buttons in a row, the chosen one explained under them. */
+.dz-gmodes { display: flex; gap: 6px; }
 .dz-gmode {
-  text-align: left; display: flex; flex-direction: column; gap: 2px; padding: 8px 10px; cursor: pointer; font-family: inherit;
-  background: var(--bg-input); border: 1px solid var(--border-card); border-radius: var(--radius-btn); color: var(--text-primary);
+  flex: 1 1 0; padding: 7px 8px; cursor: pointer; font-family: inherit; font-size: var(--fs-sm); font-weight: 700;
+  background: var(--bg-input); border: 1px solid var(--border-card); border-radius: var(--radius-btn); color: var(--text-secondary);
 }
-.dz-gmode b { font-size: var(--fs-sm); }
-.dz-gmode small { font-size: var(--fs-xs); color: var(--text-muted); line-height: 1.4; }
-.dz-gmode.on { border-color: var(--accent-indigo); box-shadow: inset 3px 0 0 var(--accent-indigo); }
+.dz-gmode:hover { color: var(--text-primary); border-color: var(--border-input); }
+.dz-gmode.on { border-color: var(--accent-indigo); color: #fff; background: rgba(99,102,241,.18); box-shadow: inset 0 -2px 0 var(--accent-indigo); }
+.dz-gmode-note { margin-top: 6px; }
 
 /* ── Blocks panel ────────────────────────────────────────────────────────── */
 .dz-addbar { display: flex; gap: var(--sp-2); flex-wrap: wrap; margin: var(--sp-2) 0 var(--sp-3); }
@@ -190,26 +191,107 @@
 .dz-emojis button { background: var(--bg-input); border: 1px solid var(--border-card); border-radius: 6px; cursor: pointer; font-size: 15px; width: 30px; height: 28px; }
 .dz-emojis button:hover { border-color: var(--accent-indigo); }
 
-/* ── Meanings panel ──────────────────────────────────────────────────────── */
-.dz-gtable { display: flex; flex-direction: column; gap: 4px; }
-.dz-gtable .dz-grow { display: grid; grid-template-columns: 1fr 1.3fr 1.3fr 28px; gap: 4px; align-items: center; }
-.dz-gtable .form-input { padding: 5px 7px; font-size: var(--fs-sm); }
-.dz-ghead span { font-size: 10px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
-.dz-gtable button { background: var(--bg-input); color: var(--text-secondary); border: 1px solid var(--border-input); border-radius: 6px; height: 28px; cursor: pointer; }
-.dz-gtable button:hover { color: #fff; border-color: var(--accent-indigo); }
-.dz-gnew .form-input { border-style: dashed; }
+/* ── Meanings panel ──────────────────────────────────────────────────────────
+   One card for every meaning on the page, coloured by where it comes from: amber for the
+   author's glossary, violet for one written into the text, sky for the game's own. */
+.dz-gscope-row { margin-bottom: var(--sp-2); }
+.dz-gscope-row .dz-ctl-l { width: auto; flex: 0 0 auto; white-space: nowrap; }
+.dz-gtools { display: flex; gap: 6px; align-items: center; margin-top: var(--sp-4); }
+.dz-gtools .btn { white-space: nowrap; flex: 0 0 auto; }
+.dz-gsearch { flex: 1 1 auto; min-width: 0; padding: 6px 10px; font-size: var(--fs-sm); }
+.dz-gfilters { display: flex; flex-wrap: wrap; gap: 4px; margin: var(--sp-2) 0; }
+.dz-gfilters button {
+  background: var(--bg-input); border: 1px solid var(--border-input); color: var(--text-secondary); border-radius: var(--radius-pill);
+  padding: 3px 10px; font-size: var(--fs-xs); font-weight: 600; cursor: pointer; font-family: inherit;
+}
+.dz-gfilters button b { color: var(--text-primary); margin-left: 3px; }
+.dz-gfilters button:hover:not(:disabled) { border-color: var(--accent-indigo); }
+.dz-gfilters button.on { background: var(--accent-indigo); border-color: var(--accent-indigo); color: #fff; }
+.dz-gfilters button.on b { color: #fff; }
+.dz-gfilters button:disabled { opacity: .4; cursor: default; }
+.dz-glist { display: flex; flex-direction: column; gap: 6px; }
+.dz-gcard {
+  --gk: var(--border-input);
+  background: var(--bg-input); border: 1px solid var(--border-card); border-left: 3px solid var(--gk);
+  border-radius: var(--radius-btn); padding: 7px 9px 8px; transition: border-color .12s, box-shadow .12s;
+}
+.dz-gcard:hover { border-color: var(--accent-indigo); border-left-color: var(--gk); }
+.dz-gk-own { --gk: #f59e0b; }
+.dz-gk-inline { --gk: #a78bfa; }
+.dz-gk-auto { --gk: #38bdf8; }
+.dz-gcard.off { opacity: .6; }
+.dz-gcard.off .dz-gword-ro { text-decoration: line-through; }
+.dz-gcard-h { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.dz-gword { width: 124px; flex: 0 0 auto; padding: 4px 7px; font-weight: 700; font-size: var(--fs-md); font-family: 'Noto Sans KR', var(--font-sans); }
+.dz-gword-ro {
+  font-weight: 700; font-size: var(--fs-md); font-family: 'Noto Sans KR', var(--font-sans); color: var(--text-primary);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px;
+}
+.dz-ghead { color: var(--text-muted); font-family: 'Noto Sans KR', var(--font-sans); font-size: var(--fs-xs); white-space: nowrap; }
+.dz-gsrc {
+  font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: var(--radius-pill); white-space: nowrap;
+  background: rgba(148,163,184,.14); color: var(--text-secondary);
+}
+.dz-gsrc-page, .dz-gsrc-bank { background: rgba(245,158,11,.16); color: #fcd34d; }
+.dz-gsrc-inline { background: rgba(167,139,250,.18); color: #c4b5fd; }
+.dz-gsrc-auto { background: rgba(56,189,248,.15); color: #7dd3fc; }
+.dz-gcount { font-size: var(--fs-xs); color: var(--text-secondary); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.dz-gcount.none { color: var(--text-muted); }
+.dz-gbtn {
+  background: none; border: 1px solid transparent; border-radius: 6px; width: 26px; height: 26px; flex: 0 0 auto;
+  cursor: pointer; color: var(--text-secondary); font-size: 12px; padding: 0;
+}
+.dz-gbtn:hover { border-color: var(--accent-indigo); background: rgba(99,102,241,.14); }
+.dz-gbtn.dz-gdel:hover { border-color: var(--accent-rose); background: rgba(244,63,94,.14); color: #fecdd3; }
+.dz-gwhere { font-size: var(--fs-xs); color: var(--text-muted); margin-top: 3px; }
+.dz-gfield { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 6px; align-items: start; margin-top: 6px; }
+.dz-glab {
+  font-size: 9.5px; font-weight: 800; letter-spacing: .06em; text-align: center; padding: 6px 0; border-radius: 5px;
+  background: rgba(148,163,184,.14); color: var(--text-secondary);
+}
+.dz-glab-vi { background: rgba(244,63,94,.18); color: #fda4af; }
+.dz-glab-en { background: rgba(56,189,248,.18); color: #7dd3fc; }
+.dz-gta {
+  resize: vertical; min-height: 32px; max-height: 180px; padding: 5px 8px; font-size: var(--fs-sm); line-height: 1.45;
+  white-space: pre-wrap; font-family: 'Be Vietnam Pro', var(--font-sans);
+}
+.dz-gline { display: flex; align-items: flex-start; gap: 10px; margin-top: 4px; }
+.dz-gline .dz-link { flex: 0 0 auto; font-size: var(--fs-xs); padding-top: 1px; }
+.dz-gmeaning { flex: 1 1 auto; min-width: 0; font-size: var(--fs-sm); color: var(--text-primary); white-space: pre-line; line-height: 1.45; }
+.dz-gnote { font-size: var(--fs-xs); color: var(--text-muted); margin-top: 5px; line-height: 1.45; }
+.dz-gnote span { color: var(--text-secondary); white-space: pre-line; }
+.dz-gwarn { font-size: var(--fs-xs); color: #fbbf24; margin-top: 5px; }
+.dz-gwarn:empty { display: none; }
+.dz-gactions { display: flex; gap: var(--sp-3); margin-top: 5px; flex-wrap: wrap; }
+.dz-gactions .dz-link { font-size: var(--fs-xs); }
+.dz-gadd {
+  border: 1px dashed var(--accent-indigo); background: rgba(99,102,241,.08); border-radius: var(--radius-btn);
+  padding: 9px 10px 10px; margin-bottom: var(--sp-2);
+}
+.dz-gadd-h { display: flex; gap: 8px; align-items: baseline; font-size: var(--fs-sm); margin-bottom: 6px; }
+.dz-gadd-row { display: flex; gap: 8px; align-items: center; }
+.dz-gadd-row .dz-gword { width: 170px; }
+.dz-ghints { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; align-items: center; font-size: var(--fs-xs); color: var(--text-muted); }
+.dz-ghints:empty { display: none; }
+.dz-ghint {
+  background: var(--bg-card); border: 1px dashed var(--border-input); color: var(--text-primary); border-radius: 6px;
+  padding: 3px 8px; cursor: pointer; font-size: var(--fs-xs); font-family: inherit; max-width: 100%; text-align: left;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.dz-ghint small { color: #7dd3fc; font-weight: 700; margin-right: 5px; }
+.dz-ghint:hover { border-style: solid; border-color: var(--accent-indigo); }
+.dz-gadd-foot { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+.dz-gadd-foot .dz-gwarn { margin: 0; }
+.dz-gmore { width: 100%; margin-top: 2px; }
+.dz-gcard.dz-flash, .dz-gadd.dz-flash { animation: dz-flash 1.5s ease; }
+@keyframes dz-flash {
+  0%, 35% { box-shadow: 0 0 0 3px rgba(251,191,36,.8); }
+  100% { box-shadow: 0 0 0 0 rgba(251,191,36,0); }
+}
 .dz-chips { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
 .dz-tag { display: inline-flex; align-items: center; gap: 4px; background: var(--bg-input); border: 1px solid var(--border-input); border-radius: var(--radius-pill); padding: 2px 4px 2px 10px; font-size: var(--fs-sm); font-family: 'Noto Sans KR', var(--font-sans); }
 .dz-tag button { background: none; border: 0; color: var(--text-muted); cursor: pointer; }
 .dz-taginput { width: 130px; padding: 4px 8px; font-size: var(--fs-sm); }
-.dz-autolist { display: flex; flex-direction: column; gap: 3px; max-height: 320px; overflow-y: auto; }
-.dz-auto { display: grid; grid-template-columns: auto 1fr auto auto; gap: 6px; align-items: center; padding: 4px 6px; border-radius: 6px; background: var(--bg-input); font-size: var(--fs-sm); }
-.dz-auto b { font-family: 'Noto Sans KR', var(--font-sans); }
-.dz-auto span { color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.dz-auto.off { opacity: .5; }
-.dz-auto.off b { text-decoration: line-through; }
-.dz-auto button { background: none; border: 1px solid var(--border-input); color: var(--text-secondary); border-radius: 5px; font-size: var(--fs-xs); padding: 2px 6px; cursor: pointer; }
-.dz-auto button:hover { color: #fff; border-color: var(--accent-indigo); }
 
 /* ── Question panel ──────────────────────────────────────────────────────── */
 .dz-details { border: 1px solid var(--border-card); border-radius: var(--radius-btn); padding: 0 var(--sp-3); margin: var(--sp-2) 0; background: rgba(15,23,42,.3); }
@@ -298,6 +380,25 @@
 .hre-opt { font-weight: 400; color: #a08462; }
 .hre-pop-actions { display: flex; gap: 6px; margin-top: 8px; align-items: center; }
 .hre-pop-actions button { border: 1px solid #c4893a; background: #fff8e8; color: #4a2a0d; border-radius: 5px; padding: 5px 10px; cursor: pointer; font-size: 12px; }
+/* The meaning popover: boxes that take line breaks, the meanings the page already has, and
+   the card as the game will draw it. */
+.hre-pop.hre-pop-wide { width: 336px; max-width: calc(100vw - 24px); }
+.hre-ta { resize: vertical; min-height: 38px; max-height: 170px; line-height: 1.45; white-space: pre-wrap; }
+.hre-hints { display: flex; flex-wrap: wrap; gap: 4px; margin: 2px 0 4px; align-items: center; }
+.hre-hints-l { width: 100%; font-size: 10.5px; color: #7a3e12; font-weight: 600; }
+.hre-hint {
+  display: inline-flex; flex-direction: column; align-items: flex-start; max-width: 100%; text-align: left; cursor: pointer;
+  border: 1px dashed #c4893a; background: #fff8e8; color: #2a1a0a; border-radius: 6px; padding: 3px 7px; font-size: 12px; font-family: inherit;
+}
+.hre-hint small { font-size: 9.5px; color: #a16207; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+.hre-hint span { max-width: 290px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hre-hint:hover { border-style: solid; background: #fef3c7; }
+.hre-keys { font-size: 10.5px; color: #a08462; margin: -2px 0 6px; }
+.hre-gprev { background: #f6deaa; border: 1px solid #e0c48c; border-radius: 8px; padding: 6px 8px 8px; text-align: center; }
+.hre-gprev-l { font-size: 10px; font-weight: 700; color: #7a3e12; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; text-align: left; }
+.hre-gprev .hv-gtip-card { text-align: left; }
+.hre-gprev-w { font-family: 'Noto Sans KR', sans-serif; font-size: 13px; color: #2a1a0a; }
+.hre-lab { display: block; }
 .hre-btn-primary { background: #4f46e5 !important; border-color: #4f46e5 !important; color: #fff !important; }
 .hre-btn-danger { color: #b91c1c !important; border-color: #fca5a5 !important; }
 .hre-grow { flex: 1 1 auto; }
