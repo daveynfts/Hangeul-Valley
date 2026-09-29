@@ -103,7 +103,16 @@
           "keySource": "book",
           "bookKey": "①"
         }
-      ]
+      ],
+      "noteVi": "1. Tổng quan dạng bài (읽기 [1~2]번 유형)\nYêu cầu: Chọn ngữ pháp phù hợp nhất điền vào chỗ trống theo mạch câu.\nMục tiêu đánh giá: Khả năng hiểu và vận dụng ngữ pháp cơ bản.\nĐộ khó: Trọng tâm kiến thức nằm ở trình độ TOPIK cấp 3 (Trung cấp 1).  \n\n2. Bí kíp vàng làm bài (황금 레시피)\nChiến lược 1 Nắm vững kiến thức nền:\nPhải hiểu rõ ý nghĩa ngữ pháp và chức năng cụ thể của các cấu trúc trung cấp (ví dụ: nhóm chỉ lý do, điều kiện, nhượng bộ, mục đích hay sự chuyển hướng).\n\nChiến lược 2 Cách xử lý đuôi liên kết (연결어미):\nĐây là những ngữ pháp nằm ở giữa câu để nối hai mệnh đề.\nCách làm: Chia câu làm hai vế rõ ràng: vế trước (A) và vế sau (B). Phân tích mối quan hệ logic giữa A và B (A dẫn đến B, A tương phản với B, hay làm A để đạt được B) để chọn ngữ pháp liên kết chuẩn xác nhất.\n\nChiến lược 3 Cách xử lý đuôi kết thúc câu (종결어미):\nĐây là những cấu trúc đứng ở cuối câu, thể hiện ý định, cảm thán, dự đoán hay thái độ.\nCách làm: Xác định chuẩn xác thì (thời gian) của ngữ cảnh là quá khứ, hiện tại hay tương lai/phỏng đoán, từ đó loại trừ các phương án sai thì và chọn đuôi kết thúc tương ứng.",
+      "enTodo": [
+        "noteEn"
+      ],
+      "fmt": {
+        "noteEn": {
+          "vi": "<span class=\"hv-sz-lg\"><b>1. Tổng quan dạng bài (읽기 [1~2]번 유형)</b></span><br><b>Yêu cầu:</b> Chọn ngữ pháp phù hợp nhất điền vào chỗ trống theo mạch câu.<br><b>Mục tiêu đánh giá:</b> Khả năng hiểu và vận dụng ngữ pháp cơ bản.<br><b>Độ khó:</b> Trọng tâm kiến thức nằm ở trình độ <b>TOPIK cấp 3</b> (Trung cấp 1).  <br><br><b><span class=\"hv-sz-lg\">2. Bí kíp vàng làm bài (황금 레시피)</span></b><br>Chiến lược 1 Nắm vững kiến thức nền:<br>Phải hiểu rõ ý nghĩa ngữ pháp và chức năng cụ thể của các cấu trúc trung cấp (ví dụ: nhóm chỉ lý do, điều kiện, nhượng bộ, mục đích hay sự chuyển hướng).<br><br>Chiến lược 2 Cách xử lý đuôi liên kết (연결어미):<br>Đây là những ngữ pháp nằm ở giữa câu để nối hai mệnh đề.<br>Cách làm: Chia câu làm hai vế rõ ràng: vế trước (A) và vế sau (B). Phân tích mối quan hệ logic giữa A và B (A dẫn đến B, A tương phản với B, hay làm A để đạt được B) để chọn ngữ pháp liên kết chuẩn xác nhất.<br><br>Chiến lược 3 Cách xử lý đuôi kết thúc câu (종결어미):<br>Đây là những cấu trúc đứng ở cuối câu, thể hiện ý định, cảm thán, dự đoán hay thái độ.<br>Cách làm: Xác định chuẩn xác thì (thời gian) của ngữ cảnh là quá khứ, hiện tại hay tương lai/phỏng đoán, từ đó loại trừ các phương án sai thì và chọn đuôi kết thúc tương ứng."
+        }
+      }
     },
     {
       "id": "r1-grammar-conn",
