@@ -64,7 +64,21 @@
           "source": "제60회 TOPIK II 읽기 1번",
           "bookPage": 14,
           "keySource": "book",
-          "bookKey": "②"
+          "bookKey": "②",
+          "fmt": {
+            "why": {
+              "vi": "Áp dụng phương pháp phân tích hai vế A và B cho đuôi liên kết:<br>Vế A: 휴대 전화를 보다 (Xem/bấm điện thoại).<br>Vế B: 내려야 할 역을 지나쳤다 (Đi qua mất ga phải xuống).<br>Vế B là một tình huống ngoài ý muốn (의외의 결과/상황), xảy ra gián đoạn hoặc bắt nguồn từ việc đang duy trì hành vi ở vế A. Cấu trúc diễn đạt trọn vẹn hành động đang diễn ra thì bị ngắt quãng hoặc dẫn đến kết quả tiêu cực này là -다가.<br><br>교재 해설 · p.14 — 정답은 ②번. 휴대 전화를 보다 → 내려야 할 역을 지나쳤다. '내려야 할 역을 지나쳤다.'는 의외의 내용이다. 이때 호응하는 문법은 〈행동: 의외〉를 나타내는 '-다가'를 찾아야 한다. '-다가'는 앞의 내용을 하는 중에 뒤의 행동으로 바뀔 때 사용한다.<br><br>보든지 là -든지, 〈선택: 무관〉: làm gì cũng như nhau. Nó cần một từ để hỏi hoặc một lựa chọn thứ hai đi kèm (무엇을 하든지, 보든지 말든지), mà ở đây chẳng có gì để chọn.<br><br>보려면 là -(으)려면, 〈가정: 의도〉: nếu định xem. Vế sau phải là điều mà ý định đó cần — 보려면 앱을 켜야 한다 — còn đi quá ga thì chẳng phải điều kiện của ai cả.<br><br>보고서 là -고서: xong một bước rồi mới đến bước sau. Nó biến việc xem điện thoại thành việc đã xong, trong khi ý của câu là tôi vẫn đang xem thì tàu đã qua ga."
+            },
+            "grammar": {
+              "vi": "<span class=\"hv-f-sans\">Đuôi liên kết -다가 gắn sau thân động từ, thường xuất hiện trong TOPIK với hai tầng nghĩa:<br>Chuyển đổi hành động đang tiếp diễn: Hành động phía trước đang diễn ra thì dừng lại hoặc bị xen vào bởi hành động phía sau.<br><i>Ví dụ: <span class=\"hv-gl\" data-gl-vi=\"Đang ăn cơm thì dừng lại nghe điện thoại\">밥을 먹다가 전화를 받았다</span>. </i><br><br>Nguyên nhân dẫn đến kết quả tiêu cực / ngoài dự tính: Duy trì liên tục hành động vế trước là nguyên nhân trực tiếp kéo theo hệ quả xấu ở vế sau.<br>Các động từ hay đi kèm ở vế B trong đề thi: <span class=\"hv-gl\" data-gl-vi=\"lỡ/bỏ qua\">지나치다</span>, <span class=\"hv-gl\" data-gl-vi=\"bỏ lỡ tàu/xe\">놓치다</span> , <span class=\"hv-gl\" data-gl-vi=\"bị thương\">다치다 </span>, <span class=\"hv-gl\" data-gl-vi=\"ngã\">넘어지다</span>.<br>Trong câu này: Chính vì đang mải xem điện thoại nên mới dẫn tới việc lỡ mất ga dừng.</span>"
+            }
+          },
+          "whyVi": "Áp dụng phương pháp phân tích hai vế A và B cho đuôi liên kết:\nVế A: 휴대 전화를 보다 (Xem/bấm điện thoại).\nVế B: 내려야 할 역을 지나쳤다 (Đi qua mất ga phải xuống).\nVế B là một tình huống ngoài ý muốn (의외의 결과/상황), xảy ra gián đoạn hoặc bắt nguồn từ việc đang duy trì hành vi ở vế A. Cấu trúc diễn đạt trọn vẹn hành động đang diễn ra thì bị ngắt quãng hoặc dẫn đến kết quả tiêu cực này là -다가.\n\n교재 해설 · p.14 — 정답은 ②번. 휴대 전화를 보다 → 내려야 할 역을 지나쳤다. '내려야 할 역을 지나쳤다.'는 의외의 내용이다. 이때 호응하는 문법은 〈행동: 의외〉를 나타내는 '-다가'를 찾아야 한다. '-다가'는 앞의 내용을 하는 중에 뒤의 행동으로 바뀔 때 사용한다.\n\n보든지 là -든지, 〈선택: 무관〉: làm gì cũng như nhau. Nó cần một từ để hỏi hoặc một lựa chọn thứ hai đi kèm (무엇을 하든지, 보든지 말든지), mà ở đây chẳng có gì để chọn.\n\n보려면 là -(으)려면, 〈가정: 의도〉: nếu định xem. Vế sau phải là điều mà ý định đó cần — 보려면 앱을 켜야 한다 — còn đi quá ga thì chẳng phải điều kiện của ai cả.\n\n보고서 là -고서: xong một bước rồi mới đến bước sau. Nó biến việc xem điện thoại thành việc đã xong, trong khi ý của câu là tôi vẫn đang xem thì tàu đã qua ga.",
+          "enTodo": [
+            "why",
+            "grammar"
+          ],
+          "grammarVi": "Đuôi liên kết -다가 gắn sau thân động từ, thường xuất hiện trong TOPIK với hai tầng nghĩa:\nChuyển đổi hành động đang tiếp diễn: Hành động phía trước đang diễn ra thì dừng lại hoặc bị xen vào bởi hành động phía sau.\nVí dụ: 밥을 먹다가 전화를 받았다. \n\nNguyên nhân dẫn đến kết quả tiêu cực / ngoài dự tính: Duy trì liên tục hành động vế trước là nguyên nhân trực tiếp kéo theo hệ quả xấu ở vế sau.\nCác động từ hay đi kèm ở vế B trong đề thi: 지나치다, 놓치다 , 다치다 , 넘어지다.\nTrong câu này: Chính vì đang mải xem điện thoại nên mới dẫn tới việc lỡ mất ga dừng."
         },
         {
           "n": 2,
