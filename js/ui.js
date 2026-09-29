@@ -5077,6 +5077,8 @@ function wbGlossTable() {
   const sig = extra.map((g) => g.ko + '\u0001' + g.gloss).join('\u0002') + '\u0003' + [...hide].join('\u0002');
   if (wbGlossFor === words && wbGlossSig === sig) return wbGlossIndex;
   const map = new Map();
+  // The dictionary form behind a shape the sentence wears (썰렁한 → 썰렁하다), for the card.
+  const head = new Map();
   extra.forEach((g) => { if (g.ko.length >= 2 && !map.has(g.ko)) map.set(g.ko, g.gloss); });
   words.forEach((w) => {
     const gloss = String((w && tr(w, 'en')) || '').trim();
@@ -5084,21 +5086,22 @@ function wbGlossTable() {
     // A word may list the shapes it actually wears in a sentence. 썰렁하다 never appears as
     // 썰렁하다 — it turns up as 썰렁한 — and deriving that by rule would need a conjugator,
     // so the entry says so instead.
-    const keys = [String((w && w.ko) || '').trim()]
-      .concat(Array.isArray(w.forms) ? w.forms : []);
+    const ko = String((w && w.ko) || '').trim();
+    const keys = [ko].concat(Array.isArray(w.forms) ? w.forms : []);
     keys.forEach((k) => {
       const key = String(k || '').trim();
       // Two characters minimum: a single syllable matches half the sentence and the
       // explanation turns into a wall of dotted underlines.
       if (key.length < 2 || map.has(key) || hide.has(key)) return;
       map.set(key, gloss);
+      if (key !== ko) head.set(key, ko);
     });
   });
   const keys = [...map.keys()].sort((a, b) => b.length - a.length);
   wbGlossFor = words;
   wbGlossSig = sig;
   wbGlossIndex = keys.length
-    ? { map, re: new RegExp(keys.map(wbReEsc).join('|'), 'g') }
+    ? { map, head, re: new RegExp(keys.map(wbReEsc).join('|'), 'g') }
     : null;
   return wbGlossIndex;
 }
@@ -5125,9 +5128,9 @@ function wbApplyGloss(root) {
       const span = document.createElement('span');
       span.className = 'wb-gl';
       span.setAttribute('data-gl', idx.map.get(m[0]));
-      // A hover tooltip is unreachable by keyboard and invisible on a phone, so the same
-      // text goes in title as well. Two mechanisms, one string.
-      span.setAttribute('title', m[0] + ' — ' + idx.map.get(m[0]));
+      if (idx.head && idx.head.has(m[0])) span.setAttribute('data-ko', idx.head.get(m[0]));
+      // The card (js/richText.js glossTips) opens on hover, on a tap and on keyboard focus,
+      // hence the tab stop. No title: the browser drew it as a second tooltip over the card.
       span.setAttribute('tabindex', '0');
       span.textContent = m[0];
       frag.appendChild(span);

@@ -24,8 +24,9 @@
  *
  * One file serves four readers: the game (global `HVRich`), the admin designer and its
  * preview, the admin validators and scripts/validate_content.js (CommonJS). It touches no
- * DOM except `ensureFonts`, and the sanitizer is a string parser for the same reason: the
- * rules that decide what is safe to save are the rules that decide what is safe to draw.
+ * DOM except `ensureFonts` and the hover meaning's card (`glossTips`, which starts itself in a
+ * browser page), and the sanitizer is a string parser for the same reason: the rules that
+ * decide what is safe to save are the rules that decide what is safe to draw.
  */
 (function (root, factory) {
   'use strict';
@@ -88,7 +89,7 @@
 
   const LIMITS = {
     html: 20000,      // one field's formatted text
-    gloss: 240,       // one hover meaning
+    gloss: 400,       // one hover meaning, over several lines if it likes
     alt: 200,
     caption: 300,
     heading: 120,
@@ -114,8 +115,10 @@
     return String(v === null || v === undefined ? '' : v)
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
+  // A line break inside an attribute — a meaning written over two lines — is written &#10;, so
+  // stored markup never breaks a line in the middle of a tag.
   function escAttr(v) {
-    return escText(v).replace(/"/g, '&quot;');
+    return escText(v).replace(/"/g, '&quot;').replace(/\r?\n/g, '&#10;');
   }
 
   const NAMED = {
@@ -193,6 +196,21 @@
       .slice(0, max);
   }
 
+  // A hover meaning: the same, except that its line breaks stay — the card draws a meaning as
+  // written, over several lines — with the spaces in each line tidied and at most one empty
+  // line in a row.
+  function cleanGlossText(v, max) {
+    return decode(String(v === null || v === undefined ? '' : v))
+      .replace(/\r\n?/g, '\n')
+      .replace(/[\u0000-\u0009\u000b-\u001f\u007f]/g, ' ')
+      .replace(/\{\}/g, '')
+      .split('\n').map((line) => line.replace(/\s+/g, ' ').trim()).join('\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim()
+      .slice(0, max)
+      .trim();
+  }
+
   // The attribute list of one start tag, from just after its name. Quoted values may hold
   // `>`, which is why this is a scanner and not a regular expression over the whole tag.
   function scanTag(src, at) {
@@ -259,10 +277,10 @@
     if (gl >= 0) {
       // A meaning may be written in Vietnamese alone (the admin writes Vietnamese first); the
       // English one is then optional, and English mode shows the Vietnamese rather than nothing.
-      const meaning = cleanAttrText(raw['data-gl'], LIMITS.gloss);
+      const meaning = cleanGlossText(raw['data-gl'], LIMITS.gloss);
       const langs = {};
       LANGS.forEach((code) => {
-        const m = cleanAttrText(raw['data-gl-' + code], LIMITS.gloss);
+        const m = cleanGlossText(raw['data-gl-' + code], LIMITS.gloss);
         if (m) langs[code] = m;
       });
       if ((!meaning && !Object.keys(langs).length) || inGloss) cls.splice(gl, 1);
@@ -378,7 +396,8 @@
   // ── Writing the tree back ───────────────────────────────────────────────────
   // 'store' is the form saved to disk. 'show' is the form drawn in the game: a gloss span
   // becomes the same `.wb-gl` element the automatic pass builds, carrying the meaning for the
-  // interface language, a title for keyboard and touch, and a tab stop.
+  // interface language and a tab stop — glossTips draws its card on hover, focus and tap. No
+  // title: the browser drew that as a second tooltip on top of the card.
   function serialize(node, mode, lang) {
     let out = '';
     node.kids.forEach((k) => {
@@ -388,15 +407,14 @@
     return out;
   }
 
-  function attrString(el, mode, lang, word) {
+  function attrString(el, mode, lang) {
     const a = el.attrs;
     let cls = a['class'] || '';
     if (mode === 'show' && isGloss(el)) {
       const meaning = (lang && a['data-gl-' + lang]) || a['data-gl']
         || LANGS.map((code) => a['data-gl-' + code]).filter(Boolean)[0] || '';
       cls = (cls + ' wb-gl').trim();
-      return ' class="' + escAttr(cls) + '" data-gl="' + escAttr(meaning) + '"'
-        + ' title="' + escAttr((word ? word + ' — ' : '') + meaning) + '" tabindex="0"';
+      return ' class="' + escAttr(cls) + '" data-gl="' + escAttr(meaning) + '" tabindex="0"';
     }
     let s = cls ? ' class="' + escAttr(cls) + '"' : '';
     if (a['data-gl']) s += ' data-gl="' + escAttr(a['data-gl']) + '"';
@@ -417,8 +435,7 @@
     // noise the editor left behind when a selection was deleted.
     if (el.tag === 'span' && !el.attrs['class']) return serialize(el, mode, lang);
     if (!BLOCK[el.tag] && el.tag !== 'ruby' && !hasContent(el)) return serialize(el, mode, lang);
-    const word = mode === 'show' && isGloss(el) ? plainOf(el).replace(/\s+/g, ' ').trim() : '';
-    return '<' + el.tag + attrString(el, mode, lang, word) + '>' + serialize(el, mode, lang) + '</' + el.tag + '>';
+    return '<' + el.tag + attrString(el, mode, lang) + '>' + serialize(el, mode, lang) + '</' + el.tag + '>';
   }
 
   // The text a reader sees, which is what an overlay has to agree with: tags gone, entities
@@ -462,6 +479,61 @@
   // Does this html carry any markup at all? Text that is only text needs no overlay.
   function isRich(html) {
     return /</.test(sanitize(html));
+  }
+
+  // ── Meanings written into the text ──────────────────────────────────────────
+  // The hover meanings a formatted field carries, in reading order: the word each one explains,
+  // `gl` (the English, or the only meaning) and one entry per language. The Designer's
+  // Meanings tab lists them beside the glossary, and edits one through setGlossIn.
+  function glossesIn(html) {
+    const out = [];
+    (function walk(n) {
+      n.kids.forEach((k) => {
+        if (k.text !== undefined) return;
+        if (isGloss(k)) {
+          const g = { word: plainOf(k).replace(/\s+/g, ' ').trim(), gl: k.attrs['data-gl'] || '' };
+          LANGS.forEach((code) => { g[code] = k.attrs['data-gl-' + code] || ''; });
+          out.push(g);
+          return;
+        }
+        walk(k);
+      });
+    }(parse(html)));
+    return out;
+  }
+
+  // The same html, stored form, with its k-th meaning changed: `m.gl` and `m[lang]` replace
+  // what the word had ('' takes one away, a key left out keeps it). With no meaning left the
+  // word is no longer glossed: the span goes, or keeps only the size or colour it also had.
+  function setGlossIn(html, k, m) {
+    const tree = parse(html);
+    const want = m || {};
+    let seen = -1;
+    let done = false;
+    (function walk(n) {
+      for (let i = 0; i < n.kids.length && !done; i++) {
+        const el = n.kids[i];
+        if (el.text !== undefined) continue;
+        if (!isGloss(el)) { walk(el); continue; }
+        seen += 1;
+        if (seen !== k) continue;
+        done = true;
+        const next = {};
+        const put = (name, key) => {
+          const t = cleanGlossText(want[key] !== undefined ? want[key] : el.attrs[name], LIMITS.gloss);
+          delete el.attrs[name];
+          if (t) next[name] = t;
+        };
+        put('data-gl', 'gl');
+        LANGS.forEach((code) => put('data-gl-' + code, code));
+        if (Object.keys(next).length) Object.assign(el.attrs, next);
+        else {
+          const cls = el.attrs['class'].split(' ').filter((c) => c !== 'hv-gl');
+          if (cls.length) el.attrs['class'] = cls.join(' '); else delete el.attrs['class'];
+        }
+      }
+    }(tree));
+    return serialize(tree, 'store');
   }
 
   // ── Reading an overlay ──────────────────────────────────────────────────────
@@ -642,6 +714,193 @@
         head.appendChild(link);
       } catch (e) { /* a page without fonts still reads */ }
     });
+  }
+
+  // ── The hover meaning's card ────────────────────────────────────────────────
+  // A glossed word — .wb-gl in the game and the Designer's preview, .hv-gl in the admin's text
+  // box — shows its meaning in a card: the word (and the dictionary form it is a shape of), then
+  // the meaning as written, line breaks and all. Above the word, or below it when there is no
+  // room above, and always inside the window: a CSS bubble was cut off by the scrolling panel
+  // it sat in, and the title beside it made the browser draw the meaning a second time. Shown on
+  // hover, on keyboard focus and on a tap, which keeps it open until the next tap elsewhere.
+  // It starts by itself in any page this file is loaded into (the end of this file); css/rich.css
+  // draws it, and css/game.css keeps the old bubble for a page it has not started in.
+  const TIP_SEL = '.wb-gl, .hv-gl';
+
+  // The inside of a meaning's card, for glossTips and for the admin's preview of it: the word,
+  // the dictionary form it is a shape of when that differs, and each meaning — [{ text }], or
+  // [{ lang, text }, …] labelled when there is more than one.
+  function glossCardHtml(word, lines, head) {
+    const w = String(word || '').replace(/\s+/g, ' ').trim();
+    const h = String(head || '').trim();
+    const list = (lines || []).filter((l) => l && String(l.text || '').trim());
+    const tagged = list.length > 1;
+    return '<div class="hv-gtip-word" lang="ko">' + escText(w)
+      + (h && h !== w ? '<span class="hv-gtip-head">' + escText(h) + '</span>' : '') + '</div>'
+      + list.map((l) => '<div class="hv-gtip-body' + (tagged ? ' hv-gtip-tagged' : '') + '"' + (l.lang ? ' lang="' + escAttr(l.lang) + '"' : '') + '>'
+        + (tagged ? '<b class="hv-gtip-lang">' + escText(String(l.lang || '').toUpperCase()) + '</b><span>' + escText(l.text) + '</span>' : escText(l.text))
+        + '</div>').join('')
+      + '<i class="hv-gtip-arrow"></i>';
+  }
+
+  function glossTips(doc) {
+    if (!doc || !doc.documentElement || typeof doc.addEventListener !== 'function' || doc.__hvGlossTips) return false;
+    doc.__hvGlossTips = true;
+    const win = doc.defaultView || (typeof window !== 'undefined' ? window : null);
+    if (doc.documentElement.classList) doc.documentElement.classList.add('hv-gtip');
+    let card = null;
+    let shown = null;
+    let hovered = null;
+    let focused = null;
+    let pinned = null;
+    // Where the pointer last touched a word: one broken over two lines has two boxes, and the
+    // card points at the one under the pointer.
+    let point = null;
+
+    const tipOf = (node) => {
+      const t = node && node.nodeType === 1 ? node : (node && node.parentElement);
+      return t && typeof t.closest === 'function' ? t.closest(TIP_SEL) : null;
+    };
+    const focusVisible = (el) => {
+      try { return el.matches(':focus-visible'); } catch (e) { return true; }
+    };
+    // In the game a word carries the meaning for the interface language; in the admin's text
+    // box it carries every language it was given, and the card shows each, labelled.
+    function lines(el) {
+      if (el.classList.contains('wb-gl')) {
+        const m = el.getAttribute('data-gl');
+        return m ? [{ text: m }] : [];
+      }
+      const out = [];
+      LANGS.forEach((code) => {
+        const m = el.getAttribute('data-gl-' + code);
+        if (m) out.push({ lang: code, text: m });
+      });
+      const en = el.getAttribute('data-gl');
+      if (en) out.push({ lang: 'en', text: en });
+      return out;
+    }
+    function fill(el) {
+      const list = lines(el);
+      if (!list.length) return false;
+      if (!card || !card.isConnected) {
+        card = doc.createElement('div');
+        card.className = 'hv-gtip-card';
+        card.id = 'hv-gtip';
+        card.setAttribute('role', 'tooltip');
+        // Content, not interface: the admin's translation pass (and a browser's) leaves it be.
+        card.setAttribute('translate', 'no');
+        (doc.body || doc.documentElement).appendChild(card);
+      }
+      card.innerHTML = glossCardHtml(el.textContent, list, el.getAttribute('data-ko'));
+      return true;
+    }
+    // Inside the window, and not scrolled out of (or folded inside) the panel the word sits in —
+    // a card pointing at a word nobody can see would float over the panel's header.
+    function inView(r, vw, vh) {
+      if (r.bottom < 0 || r.top > vh || r.right < 0 || r.left > vw) return false;
+      if (!win || typeof win.getComputedStyle !== 'function') return true;
+      for (let p = shown.parentElement; p && p !== doc.body && p !== doc.documentElement; p = p.parentElement) {
+        const cs = win.getComputedStyle(p);
+        if (!/auto|scroll|hidden|clip/.test(cs.overflowX + ' ' + cs.overflowY)) continue;
+        const b = p.getBoundingClientRect();
+        if (r.bottom <= b.top || r.top >= b.bottom || r.right <= b.left || r.left >= b.right) return false;
+      }
+      return true;
+    }
+    function place() {
+      if (!shown || !card) return;
+      const vw = doc.documentElement.clientWidth || (win && win.innerWidth) || 0;
+      const vh = doc.documentElement.clientHeight || (win && win.innerHeight) || 0;
+      const rects = Array.prototype.slice.call(shown.getClientRects());
+      const away = (b) => (point ? Math.max(b.left - point.x, 0, point.x - b.right) + Math.max(b.top - point.y, 0, point.y - b.bottom) : 0);
+      const r = rects.length ? rects.reduce((best, b) => (away(b) < away(best) ? b : best)) : shown.getBoundingClientRect();
+      if (!inView(r, vw, vh)) { card.classList.remove('on'); return; }
+      const cw = card.offsetWidth;
+      const ch = card.offsetHeight;
+      const gap = 9;
+      const above = r.top - gap - 6;
+      const below = vh - r.bottom - gap - 6;
+      const flip = ch > above && below > above;
+      const top = Math.max(6, Math.min(flip ? r.bottom + gap : r.top - gap - ch, vh - ch - 6));
+      const mid = r.left + r.width / 2;
+      const left = Math.max(6, Math.min(mid - cw / 2, vw - cw - 6));
+      card.style.left = Math.round(left) + 'px';
+      card.style.top = Math.round(top) + 'px';
+      card.style.setProperty('--hv-ax', Math.round(Math.max(12, Math.min(mid - left, cw - 12))) + 'px');
+      card.classList.toggle('below', flip);
+      card.classList.add('on');
+    }
+    function release() {
+      if (!shown) return;
+      shown.classList.remove('hv-gl-on');
+      shown.removeAttribute('aria-describedby');
+      shown = null;
+    }
+    function hide() {
+      release();
+      if (card) card.classList.remove('on');
+    }
+    function update() {
+      const el = [pinned, hovered, focused].find((x) => x && x.isConnected) || null;
+      if (el === shown) { if (el) place(); return; }
+      release();
+      if (!el || !fill(el)) { hide(); return; }
+      shown = el;
+      el.classList.add('hv-gl-on');
+      el.setAttribute('aria-describedby', 'hv-gtip');
+      card.classList.remove('on');
+      place();
+    }
+    function reset() { pinned = null; hovered = null; focused = null; hide(); }
+
+    doc.addEventListener('mouseover', (ev) => {
+      const g = tipOf(ev.target);
+      if (g && !pinned) point = { x: ev.clientX, y: ev.clientY };
+      if (g !== hovered) { hovered = g; update(); }
+    }, true);
+    doc.addEventListener('mouseout', (ev) => {
+      if (hovered && !ev.relatedTarget) { hovered = null; update(); }
+    }, true);
+    // Keyboard focus only: a click focuses the word as well, and a click is handled below.
+    doc.addEventListener('focusin', (ev) => {
+      const g = tipOf(ev.target);
+      focused = g && focusVisible(g) ? g : null;
+      if (focused && !hovered && !pinned) point = null;
+      update();
+    }, true);
+    doc.addEventListener('focusout', () => { if (focused) { focused = null; update(); } }, true);
+    // A tap or a click keeps the card open; on the same word again, it lets go. In the admin's
+    // text box a click is for placing the caret, so there the card only follows the pointer.
+    doc.addEventListener('click', (ev) => {
+      const g = tipOf(ev.target);
+      const next = g && !g.isContentEditable && g !== pinned ? g : null;
+      if (next) point = { x: ev.clientX, y: ev.clientY };
+      if (next !== pinned) { pinned = next; update(); }
+    }, true);
+    // Escape closes the card first — the next one goes on to close the panel it sits in, as it
+    // always did. Typing in the admin's text box puts it away too.
+    doc.addEventListener('keydown', (ev) => {
+      if (!shown) return;
+      if (ev.key === 'Escape') {
+        if (card && card.classList.contains('on')) ev.stopPropagation();
+        reset();
+      } else if (ev.target && ev.target.isContentEditable) reset();
+    }, true);
+    // A scroll — the page's, or the panel's — carries the card along with its word (a focus
+    // moved by Tab scrolls the word into view first), and hides it while the word is out of sight.
+    if (win && typeof win.addEventListener === 'function') {
+      win.addEventListener('scroll', () => { if (shown) place(); }, true);
+      win.addEventListener('resize', () => { if (shown) place(); });
+    }
+    // A page redrawn under the card (a check, the Designer's preview) takes its word away.
+    if (win && typeof win.MutationObserver === 'function') {
+      try {
+        const mo = new win.MutationObserver(() => { if (shown && !shown.isConnected) reset(); });
+        if (typeof mo.observe === 'function') mo.observe(doc.documentElement, { childList: true, subtree: true });
+      } catch (e) { /* the card then goes with the next move of the pointer */ }
+    }
+    return true;
   }
 
   // ── Page design ─────────────────────────────────────────────────────────────
@@ -1101,6 +1360,11 @@
     return out;
   }
 
+  // Any page this file is loaded into: its glossed words get their card.
+  try {
+    if (typeof document !== 'undefined' && document) glossTips(document);
+  } catch (e) { /* no card; the words still read */ }
+
   return {
     // vocabulary
     SIZES, COLORS, HIGHLIGHTS, BOXES, ALIGNS, FONTS, THEMES, WIDTHS, DENSITIES, GLOSS_MODES,
@@ -1108,10 +1372,10 @@
     FONT_FAMILIES, LIMITS,
     // text
     esc, escText, escAttr, decode, sanitize, plain, show, fromText, norm, matches, isRich,
-    cleanSrc, parse,
+    cleanSrc, parse, glossesIn, setGlossIn,
     // reading overlays
     specOf, inlineFor, specClasses, field, fieldParts, fieldParagraphs, textParagraphs, paragraphsOf,
-    ensureFonts, fontsIn,
+    ensureFonts, fontsIn, glossTips, glossCardHtml,
     // design
     mergeDesign, designClasses, designScale, glossEntries, glossMode, blocksHtml, blockHtml,
     blockVisible,

@@ -71,7 +71,7 @@ Vietnamese, or ask for a new English.
 | Bài học → Quiz bàn học | the prompt and the four answers — each one either Vietnamese (**VI**) or Korean typed as itself (**한**); the switch beside the box says which a new answer is |
 | Bài học → Từ vựng | the meaning, the group name (typed once for the whole group — every word in it follows) and the example's translation |
 | Cấp độ (Levels) | a word's meaning; a level's name and description |
-| 💬 Meanings | a glossary word's meaning in Vietnamese, the English optional |
+| 💬 Meanings | a meaning on hover — a glossary word's, or one written into the text — in Vietnamese, the English optional; line breaks allowed |
 | ❓ Question → Trường tùy chỉnh | a question's own fields — a heading and a text each (`extra[].labelEn` / `noteEn`, drafts `labelVi` / `noteVi`) |
 
 ### What a save stores

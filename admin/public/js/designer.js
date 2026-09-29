@@ -37,6 +37,15 @@
     sel: null,
     row: -1,
     designScope: 'page',
+    // The Meanings tab: its search and filter, whether every automatic meaning is listed, a word
+    // being added ({ ko, vi, gl }), where 📍 went last ({ word, at }), and a card to bring into
+    // view after the next draw.
+    gq: '',
+    gfilter: 'all',
+    gall: false,
+    gadd: null,
+    gfind: null,
+    gfocus: null,
     history: [],
     future: [],
     world: null,
@@ -301,6 +310,8 @@
       S.history = [{ snap: S.saved, key: null, t: Date.now() }];
       S.future = [];
       if (!keepPlace) { S.exIndex = -1; S.sel = null; S.row = -1; }
+      S.gadd = null;
+      S.gfind = null;
       S.error = '';
       S.world = null;
       S.viBank = null;
@@ -410,7 +421,7 @@
       + '<div class="dz-error hidden" id="dz-error"></div>'
       + '<div class="dz-main">'
       + '<div class="dz-stage"><div class="dz-frame-wrap" id="dz-frame-wrap"><iframe id="dz-frame" class="dz-frame" title="Page preview"></iframe></div>'
-      + '<div class="dz-stage-hint">Click any text on the page to edit it · Click a question row to edit the question</div></div>'
+      + '<div class="dz-stage-hint" id="dz-stage-hint">Click any text on the page to edit it · Click a question row to edit the question</div></div>'
       + '<aside class="dz-side"><div class="dz-tabs" id="dz-tabs"></div><div class="dz-panel" id="dz-panel"></div></aside>'
       + '</div>'
       + '<div class="dz-modal hidden" id="dz-modal"></div>';
@@ -502,6 +513,8 @@
     S.exIndex = i;
     S.sel = null;
     S.row = -1;
+    S.gall = false;
+    S.gfind = null;
     if (i < 0) S.view = 'questions';
     renderAll();
   }
@@ -537,6 +550,8 @@
     } catch (e) {
       console.error('[designer] preview failed', e);
     }
+    // The Meanings tab counts its words on the page as it is now drawn.
+    if (S.tab === 'gloss') paintGlossCounts();
   }
 
   function layoutFrame() {
@@ -549,6 +564,17 @@
     const t = e.target;
     const open = t.closest('[data-hv-open]');
     if (open && S.exIndex < 0) { e.preventDefault(); openPage(Number(open.getAttribute('data-hv-open'))); return; }
+    // In the Meanings tab the page is for finding words, not for opening fields: a word selected
+    // on it is a word to give a meaning to, and a glossed word clicked is a card to find.
+    if (S.tab === 'gloss' && S.exIndex >= 0) {
+      const picked = String((S.frameWin.getSelection && S.frameWin.getSelection()) || '').replace(/\s+/g, ' ').trim();
+      const g = t.closest('.wb-gl');
+      if (!picked && !g) return;
+      e.preventDefault();
+      e.stopPropagation();
+      if (picked) glossPick(picked); else glossFocus(String(g.textContent || '').replace(/\s+/g, ' ').trim());
+      return;
+    }
     const blk = t.closest('[data-hv-block]');
     const edit = t.closest('[data-hv-edit]');
     const row = t.closest('[data-hv-row]');
@@ -581,6 +607,12 @@
     if (!tabs || !panel) return;
     tabs.innerHTML = TABS.map(([k, l]) => '<button type="button" data-tab="' + k + '" class="' + (k === S.tab ? 'on' : '') + '">' + l + '</button>').join('');
     tabs.querySelectorAll('button').forEach((b) => { b.onclick = () => { S.tab = b.getAttribute('data-tab'); renderInspector(); }; });
+    const hint = el('dz-stage-hint');
+    if (hint) {
+      hint.textContent = T(S.tab === 'gloss' && ex() ? 'Select a word on the page to give it a meaning · Click an underlined word to find its card'
+        : 'Click any text on the page to edit it · Click a question row to edit the question');
+    }
+    if (S.tab !== 'gloss') previewFind('');
     if (S.editor) { S.editor.destroy(); S.editor = null; }
     if (S.blockEditor) { S.blockEditor.destroy(); S.blockEditor = null; }
     if (!S.bank) { panel.innerHTML = '<p class="dz-muted">Pick a bank to begin.</p>'; return; }
@@ -777,6 +809,7 @@
       allowImages: MULTI_FIELDS.indexOf(field) >= 0,
       assetBase: S.assetBase,
       onPickImage: (cb) => openMedia(cb),
+      glossHints: glossHintsFor,
       onHistory: (dir) => (dir === 'redo' ? redo() : undo()),
       onChange: ({ html, text }) => {
         const o = getAt(S.bank, objPath);
@@ -927,8 +960,9 @@
 
   function glossModeControl(cur) {
     const mode = cur || 'checked';
-    return '<div class="dz-gmodes">' + R().GLOSS_MODES.map((g) => '<button type="button" data-gmode="' + g + '" class="dz-gmode' + (mode === g ? ' on' : '') + '">'
-      + '<b>' + GLOSS_LABEL[g][0] + '</b><small>' + GLOSS_LABEL[g][1] + '</small></button>').join('') + '</div>';
+    return '<div class="dz-gmodes">' + R().GLOSS_MODES.map((g) => '<button type="button" data-gmode="' + g + '" class="dz-gmode' + (mode === g ? ' on' : '') + '"'
+      + ' title="' + esc(T(GLOSS_LABEL[g][1])) + '">' + GLOSS_LABEL[g][0] + '</button>').join('') + '</div>'
+      + '<p class="dz-note dz-gmode-note">' + GLOSS_LABEL[mode][1] + '</p>';
   }
   function bindGlossMode(panel, fn) {
     panel.querySelectorAll('[data-gmode]').forEach((b) => { b.onclick = () => fn(b.getAttribute('data-gmode')); });
@@ -1121,6 +1155,7 @@
       S.blockEditor = window.HVRichEditor.create(hh, {
         html: cur, text: R().plain(cur), lang: vi ? 'vi' : 'en', multiline: true, allowImages: true, assetBase: S.assetBase,
         onPickImage: (cb) => openMedia(cb),
+        glossHints: glossHintsFor,
         onHistory: (dir) => (dir === 'redo' ? redo() : undo()),
         onChange: ({ html }) => upd((x) => {
           const h = R().sanitize(html);
@@ -1153,104 +1188,547 @@
     return bits.join('\n');
   }
 
+  // The unit's words with their Vietnamese filed in, whichever language the panel is showing:
+  // { ko, forms, en, vi } each, folded the way the game folds them (js/i18n.js hvLocalize).
+  function worldWords() {
+    if (!S.world) return [];
+    const words = clone(S.world.words);
+    const win = S.frameWin;
+    if (!win || typeof win.hvLocalize !== 'function' || !S.viWorldCat) return words;
+    const rel = 'worlds/' + S.world.worldId + '.json';
+    const body = { level: { words } };
+    win.hvRegisterCatalog(rel, S.viWorldCat);
+    win.hvLocalize(rel, body, 'vi');
+    return body.level.words;
+  }
+
+  // Every hover meaning a reader can meet on the page, however it got there: written into a
+  // glossary (the page's, then the bank's — the page's entry for a word wins), written into the
+  // text with 💬, or added by the game from the unit's word list. One entry each:
+  //   own     { scope, i, ko, vi, gl, replaces?, shadowed? }
+  //   inline  { path | block, layer, k, ko, vi, gl, langs, where }
+  //   auto    { ko, head, vi, gl, shown, hidden }
+  function glossModel() {
+    const e = ex();
+    const merged = R().mergeDesign(S.bank.design, e ? e.design : null) || {};
+    const hidden = new Set(merged.glossHide || []);
+    const list = [];
+    const own = new Map();
+    (e ? ['page', 'bank'] : ['bank']).forEach((scope) => {
+      ((designTarget(scope).design || {}).glossary || []).forEach((g, i) => {
+        const it = { kind: 'own', scope, i, ko: String(g.ko || ''), vi: g.vi || '', gl: g.gl || '' };
+        const key = it.ko.trim();
+        if (own.has(key)) it.shadowed = true; else own.set(key, it);
+        list.push(it);
+      });
+    });
+    const inline = (html, base) => R().glossesIn(html).forEach((g, k) => list.push(Object.assign(
+      { kind: 'inline', k, ko: g.word, vi: g.vi || '', gl: g.gl || '' }, base)));
+    fieldList().forEach((path) => {
+      const { obj: op, field } = splitField(path);
+      const o = getAt(S.bank, op);
+      const spec = specOf(o, field);
+      if (!spec) return;
+      const en = isEn(field, o);
+      // The layer the page is drawn from in the language on screen, while it still matches.
+      const layer = en && S.lang === 'vi' ? 'vi' : 'html';
+      const html = spec[layer];
+      if (!html || html.indexOf('hv-gl') < 0 || !R().matches(html, layer === 'vi' ? viText(path) : o[field])) return;
+      inline(html, { path, layer, langs: en ? [layer === 'vi' ? 'vi' : 'en'] : ['vi', 'en'], where: labelFor(path) });
+    });
+    blocksOf(e || S.bank).forEach((b) => {
+      if (b.kind !== 'text') return;
+      const layer = S.lang === 'vi' && b.vi && b.vi.html ? 'vi' : 'html';
+      const html = layer === 'vi' ? b.vi.html : b.html;
+      if (!html || html.indexOf('hv-gl') < 0) return;
+      inline(html, { block: b.id, layer, langs: [layer === 'vi' ? 'vi' : 'en'], where: blockSummary(b) });
+    });
+    if (e && S.world) {
+      const text = pageText();
+      const seen = new Set();
+      // As js/ui.js wbGlossTable: the first word to claim a shape keeps it, a glossary entry
+      // beats them all, and a hidden word is left alone.
+      worldWords().forEach((w) => {
+        const ko = String(w.ko || '').trim();
+        const en = String(w.en || '').trim();
+        const vi = String(w.vi || '').trim();
+        const shown = S.lang === 'vi' ? (vi || en) : (en || vi);
+        if (!shown) return;
+        [ko].concat(Array.isArray(w.forms) ? w.forms : []).forEach((k0) => {
+          const k = String(k0 || '').trim();
+          if (k.length < 2 || seen.has(k) || text.indexOf(k) < 0) return;
+          seen.add(k);
+          if (own.has(k)) { own.get(k).replaces = shown; return; }
+          list.push({ kind: 'auto', ko: k, head: k !== ko ? ko : '', vi, gl: en, shown, hidden: hidden.has(k) });
+        });
+      });
+    }
+    return list;
+  }
+
+  const GSRC = {
+    page: ['📘', 'Yours · this page'], bank: ['📚', 'Yours · every page'],
+    inline: ['✍️', 'In the text'], auto: ['⚙️', 'Automatic']
+  };
+  const AUTO_CAP = 40;
+  // As js/richText.js keeps a meaning: its line breaks, each line tidied, one empty line at most.
+  const tidyMeaning = (s) => String(s == null ? '' : s).replace(/\r\n?/g, '\n')
+    .split('\n').map((l) => l.replace(/\s+/g, ' ').trim()).join('\n').replace(/\n{3,}/g, '\n\n').trim();
+  // For the search: lower case, and Vietnamese without its marks, so "long may" finds "lông mày".
+  const fold = (s) => String(s == null ? '' : s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd');
+
+  // A box for a meaning grows with what is written in it, up to a point.
+  function growBox(ta) {
+    if (!ta || !ta.isConnected) return;
+    ta.style.height = 'auto';
+    const h = ta.scrollHeight;
+    ta.style.height = h ? Math.min(h + 2, 180) + 'px' : '';
+  }
+
+  function glossMeaningBox(f, v, placeholder, id) {
+    return '<label class="dz-gfield"><span class="dz-glab dz-glab-' + (f === 'gl' ? 'en' : f) + '">' + (f === 'gl' ? 'EN' : f.toUpperCase()) + '</span>'
+      + '<textarea class="form-input dz-gta" data-f="' + f + '"' + (id ? ' id="' + id + '"' : '') + ' rows="1" maxlength="' + R().LIMITS.gloss + '"'
+      + ' placeholder="' + esc(T(placeholder)) + '" translate="no">' + esc(v) + '</textarea></label>';
+  }
+
+  function glossCardHtml(it, n) {
+    const src = GSRC[it.kind === 'own' ? it.scope : it.kind];
+    const word = it.ko.trim();
+    let h = '<div class="dz-gcard dz-gk-' + it.kind + (it.hidden ? ' off' : '') + '" data-n="' + n + '" data-word="' + esc(word) + '">'
+      + '<div class="dz-gcard-h">'
+      + (it.kind === 'own'
+        ? '<input class="form-input dz-gword" data-f="ko" value="' + esc(it.ko) + '" maxlength="40" spellcheck="false" translate="no">'
+        : '<b class="dz-gword-ro" translate="no">' + esc(word) + '</b>' + (it.head ? '<small class="dz-ghead" translate="no">' + esc(it.head) + '</small>' : ''))
+      + '<span class="dz-gsrc dz-gsrc-' + (it.kind === 'own' ? it.scope : it.kind) + '">' + src[0] + ' ' + esc(T(src[1])) + '</span>'
+      + '<span class="dz-grow"></span>'
+      + (it.kind === 'inline' ? '' : '<span class="dz-gcount" data-count></span>')
+      + '<button type="button" class="dz-gbtn" data-act="find" title="' + esc(T('Show it on the page')) + '">📍</button>'
+      + (it.kind === 'inline'
+        ? '<button type="button" class="dz-gbtn" data-act="open" title="' + esc(T('Open it where it is written')) + '">✏️</button>'
+          + '<button type="button" class="dz-gbtn dz-gdel" data-act="unglue" title="' + esc(T('Take the meaning off this word')) + '">✕</button>'
+        : '')
+      + (it.kind === 'own' ? '<button type="button" class="dz-gbtn dz-gdel" data-act="del" title="' + esc(T('Remove from the glossary')) + '">✕</button>' : '')
+      + (it.kind === 'auto' ? '<button type="button" class="dz-gbtn" data-act="hide" title="'
+        + esc(T(it.hidden ? 'Show it again' : 'Hide it here — the game stops glossing it on this page')) + '">' + (it.hidden ? '👁' : '🙈') + '</button>' : '')
+      + '</div>';
+    if (it.kind === 'auto') {
+      h += '<div class="dz-gline"><div class="dz-gmeaning" translate="no">' + esc(it.shown) + '</div>'
+        + '<button type="button" class="dz-link" data-act="own" title="' + esc(T('A meaning of your own for this word, starting from this one')) + '">'
+        + esc(T('✏️ Write my own')) + '</button></div>';
+      return h + '</div>';
+    }
+    if (it.kind === 'inline') h += '<div class="dz-gwhere">' + esc(it.where) + '</div>';
+    const fields = it.kind === 'own' ? ['vi', 'gl'] : it.langs.map((l) => (l === 'en' ? 'gl' : l));
+    fields.forEach((f) => {
+      h += glossMeaningBox(f, it[f], f === 'vi' ? 'Vietnamese meaning — Enter for a new line'
+        : (fields.length > 1 ? 'English meaning (optional)' : 'English meaning — Enter for a new line'));
+    });
+    if (it.replaces) h += '<div class="dz-gnote">' + esc(T('Instead of the unit’s meaning:')) + ' <span translate="no">' + esc(it.replaces) + '</span></div>';
+    if (it.shadowed) h += '<div class="dz-gnote">' + esc(T('This page has its own entry for the word, and that one is shown.')) + '</div>';
+    return h + '<div class="dz-gwarn" data-warn></div></div>';
+  }
+
+  // What stops a glossary entry from being saved, said on its card while it is typed.
+  function ownProblem(it) {
+    const list = (designTarget(it.scope).design || {}).glossary || [];
+    const ko = it.ko.trim();
+    if (ko.length < 2) return T('The word needs two characters or more.');
+    if (list.filter((g) => String(g.ko || '').trim() === ko).length > 1) return T('"{ko}" is in this glossary twice.', { ko });
+    if (!tidyMeaning(it.vi) && !tidyMeaning(it.gl)) return T('Give it a meaning — an entry without one cannot be saved.');
+    return '';
+  }
+
+  // The meanings the page already has for a word — its glossaries', the unit's word list's —
+  // offered wherever a meaning is being written: the add form here, the text box's 💬.
+  function glossHintsFor(word) {
+    const w = String(word || '').replace(/\s+/g, ' ').trim();
+    if (w.length < 2 || !S.bank) return [];
+    const out = [];
+    const add = (from, vi, gl) => {
+      if ((!vi && !gl) || out.some((h) => h.vi === (vi || '') && h.gl === (gl || ''))) return;
+      out.push({ from: T(from), vi: vi || '', gl: gl || '' });
+    };
+    const e = ex();
+    const merged = R().mergeDesign(S.bank.design, e ? e.design : null) || {};
+    (merged.glossary || []).forEach((g) => { if (String(g.ko || '').trim() === w) add('Your glossary', g.vi, g.gl); });
+    worldWords().forEach((x) => {
+      const keys = [x.ko].concat(Array.isArray(x.forms) ? x.forms : []).map((k) => String(k || '').trim());
+      if (keys.indexOf(w) >= 0) add('Unit word list', String(x.vi || '').trim(), String(x.en || '').trim());
+    });
+    return out.slice(0, 4);
+  }
+
+  // A meaning written into the text, changed where it is: the field's overlay in the layer it
+  // is drawn from, or a text box's html. Only attributes change, so the words — and what the
+  // overlay has to match — stay exactly as they were.
+  function setInlineGloss(it, m) {
+    if (it.block) {
+      const target = ex() || S.bank;
+      setBlocks(target, blocksOf(target).map((b) => {
+        if (b.id !== it.block) return b;
+        const x = clone(b);
+        if (it.layer === 'vi') x.vi.html = R().setGlossIn(x.vi.html, it.k, m);
+        else x.html = R().setGlossIn(x.html, it.k, m);
+        return x;
+      }));
+      return;
+    }
+    const { obj: op, field } = splitField(it.path);
+    const o = getAt(S.bank, op);
+    const spec = specOf(o, field);
+    if (!spec || !spec[it.layer]) return;
+    const next = R().setGlossIn(spec[it.layer], it.k, m);
+    setSpec(o, field, it.layer, R().isRich(next) ? next : null);
+  }
+
+  // Hides a word from the automatic pass, or shows it again — off every list it is on, the
+  // page's and the bank's, since either one hides it.
+  function toggleHidden(word) {
+    const e = ex();
+    const holders = (e ? [e, S.bank] : [S.bank]).filter((t) => ((t.design || {}).glossHide || []).indexOf(word) >= 0);
+    if (holders.length) {
+      holders.forEach((t) => {
+        const next = t.design.glossHide.filter((w) => w !== word);
+        setDesign(t, 'glossHide', next.length ? next : undefined);
+      });
+      return;
+    }
+    const t = designTarget(e ? S.designScope : 'bank');
+    setDesign(t, 'glossHide', ((t.design || {}).glossHide || []).concat([word]));
+  }
+
+  function previewFind(word, at) {
+    const P = window.HVDesignerPreview;
+    return S.frameWin && P && P.findWord ? P.findWord(S.frameWin, word, at) : 0;
+  }
+
+  // How many times a word is on the page as it is drawn now — the view and the language on
+  // screen — for the cards, their order and the add form.
+  function pageCounter() {
+    const P = window.HVDesignerPreview;
+    const text = S.frameWin && P && P.visibleText ? P.visibleText(S.frameWin) : '';
+    return (w) => {
+      let n = 0;
+      if (w) for (let i = text.indexOf(w); i >= 0; i = text.indexOf(w, i + w.length)) n += 1;
+      return n;
+    };
+  }
+  function paintGlossCounts() {
+    const count = pageCounter();
+    document.querySelectorAll('#dz-glist .dz-gcard').forEach((card) => {
+      const slot = card.querySelector('[data-count]');
+      if (!slot) return;
+      const n = count(card.getAttribute('data-word'));
+      slot.textContent = n ? '×' + n : '—';
+      slot.classList.toggle('none', !n);
+      slot.title = n ? T('{n} time(s) on the page as it is shown', { n })
+        : T('Not on the page as it is shown — an explanation only shows in the Answers view');
+    });
+    const seen = el('dz-g-seen');
+    const ko = el('dz-g-ko');
+    if (seen && ko) {
+      const w = ko.value.trim();
+      const n = w.length >= 2 ? count(w) : 0;
+      seen.textContent = w.length < 2 ? '' : (n ? T('{n} time(s) on the page', { n }) : T('not on the page as it is shown'));
+      seen.classList.toggle('none', !n);
+    }
+  }
+
   function renderGlossPanel(panel) {
     const e = ex();
     const scope = e ? S.designScope : 'bank';
     const target = designTarget(scope);
     const d = target.design || {};
     const merged = R().mergeDesign(S.bank.design, e ? e.design : null) || {};
-    const gloss = d.glossary || [];
     const hide = d.glossHide || [];
-    const text = pageText();
-    const custom = new Set((merged.glossary || []).map((g) => g.ko));
-    const hidden = new Set(merged.glossHide || []);
-    const auto = [];
-    if (S.world && e) {
-      const f = folded();
-      (f.world ? f.world.words : S.world.words).forEach((w) => {
-        const keys = [String(w.ko || '').trim()].concat(Array.isArray(w.forms) ? w.forms : []).filter((k) => k && k.length >= 2);
-        const hit = keys.find((k) => text.indexOf(k) >= 0);
-        if (hit) auto.push({ ko: hit, gloss: (S.lang === 'vi' && w.vi) || w.en || '' });
-      });
-    }
     panel.innerHTML =
-      (e ? '<div class="dz-scope">' + seg('dz-gscope', [['page', 'This page'], ['bank', 'Every page of this bank']], scope) + '</div>' : '')
+      (e ? '<div class="dz-ctl dz-gscope-row"><span class="dz-ctl-l">Applies to</span>' + seg('dz-gscope', [['page', 'This page'], ['bank', 'Every page of this bank']], scope) + '</div>'
+        : '<p class="dz-note">Open a page to see every meaning on it. Here: the glossary every page of this bank shares.</p>')
       + '<h4 class="dz-h">When meanings appear</h4>' + glossModeControl(merged.glossMode)
-      + '<h4 class="dz-h">Glossary <small class="dz-muted">— words that show your meaning on hover</small></h4>'
-      // Vietnamese first: the meaning a Vietnamese learner reads, then the English, which may
-      // wait — English mode shows the Vietnamese until it is written.
-      + '<div class="dz-gtable"><div class="dz-grow dz-ghead"><span>Word (Korean)</span><span>Nghĩa (Tiếng Việt)</span><span>Meaning (English, optional)</span><span></span></div>'
-      + gloss.map((g, i) => '<div class="dz-grow" data-i="' + i + '"><input class="form-input" data-k="ko" value="' + esc(g.ko) + '" maxlength="40">'
-        + '<input class="form-input" data-k="vi" value="' + esc(g.vi || '') + '" maxlength="240"><input class="form-input" data-k="gl" value="' + esc(g.gl || '') + '" maxlength="240">'
-        + '<button type="button" data-del="' + i + '" title="Remove">✕</button></div>').join('')
-      + '<div class="dz-grow dz-gnew"><input class="form-input" id="dz-g-ko" placeholder="눈썹" maxlength="40"><input class="form-input" id="dz-g-vi" placeholder="lông mày" maxlength="240">'
-      + '<input class="form-input" id="dz-g-gl" placeholder="eyebrow" maxlength="240"><button type="button" id="dz-g-add" title="Add">＋</button></div></div>'
-      + '<p class="dz-note">Two characters or more — a single syllable would light up inside every longer word. For one occurrence, select the word in the Text tab and press 💬.</p>'
+      + '<div class="dz-gtools"><input type="search" class="form-input dz-gsearch" id="dz-gq" placeholder="Search a word or a meaning…" value="' + esc(S.gq) + '" spellcheck="false">'
+      + '<button type="button" class="btn btn-primary btn-sm" id="dz-gadd-open"' + (S.gadd ? ' disabled' : '') + '>＋ Add a word</button></div>'
+      + (S.gadd ? glossAddHtml(scope) : '')
+      + '<div class="dz-gfilters" id="dz-gfilters"></div>'
+      + '<div class="dz-glist" id="dz-glist"></div>'
+      + '<p class="dz-note">Enter starts a new line in a meaning, and the card shows it as written. Hover a card to light its word up on the page; 📍 goes to each place in turn. Select a word on the page to give it a meaning.</p>'
       + '<h4 class="dz-h">Hidden words <small class="dz-muted">— never glossed automatically here</small></h4>'
-      + '<div class="dz-chips">' + hide.map((w, i) => '<span class="dz-tag">' + esc(w) + '<button type="button" data-unhide="' + i + '">✕</button></span>').join('')
+      + '<div class="dz-chips">' + hide.map((w, i) => '<span class="dz-tag" translate="no">' + esc(w) + '<button type="button" data-unhide="' + i + '" title="' + esc(T('Show it again')) + '">✕</button></span>').join('')
       + '<input class="form-input dz-taginput" id="dz-hide-in" placeholder="add a word…" maxlength="40"></div>'
-      + (e ? '<h4 class="dz-h">Meanings the game adds by itself <small class="dz-muted">(' + auto.length + ')</small></h4>'
-        + (S.world ? (auto.length ? '<div class="dz-autolist">' + auto.map((a) => '<div class="dz-auto' + (hidden.has(a.ko) ? ' off' : '') + '"><b>' + esc(a.ko) + '</b><span>'
-          + esc(custom.has(a.ko) ? '→ your glossary' : a.gloss) + '</span>'
-          + '<button type="button" data-hide="' + esc(a.ko) + '">' + (hidden.has(a.ko) ? 'Show' : 'Hide') + '</button>'
-          + '<button type="button" data-own="' + esc(a.ko) + '" data-gl="' + esc(a.gloss) + '">Change</button></div>').join('') + '</div>'
-          : '<p class="dz-muted">None of the unit’s words appear on this page.</p>')
-          : '<p class="dz-muted">This bank has no word list of its own to take meanings from.</p>') : '');
+      + '<p class="dz-note">A word needs two characters or more — a single syllable would light up inside every longer word. For one place only, select it in the Text tab and press 💬.</p>';
     bindSeg('dz-gscope', (v) => { S.designScope = v; renderInspector(); });
     bindGlossMode(panel, (v) => { setDesign(target, 'glossMode', v === 'checked' ? null : v); commit(); renderInspector(); });
-    const setList = (k, list) => { setDesign(target, k, list.length ? list : undefined); commit('g:' + k); };
-    panel.querySelectorAll('.dz-gtable .dz-grow[data-i]').forEach((row) => {
-      const i = Number(row.getAttribute('data-i'));
-      row.querySelectorAll('input').forEach((inp) => {
-        inp.oninput = () => {
-          const list = clone(gloss);
-          const k = inp.getAttribute('data-k');
-          if (inp.value.trim()) list[i][k] = inp.value; else if (k === 'ko') list[i][k] = ''; else delete list[i][k];
-          gloss[i] = list[i];
-          setList('glossary', list);
-        };
-      });
-      row.querySelector('[data-del]').onclick = () => { setList('glossary', gloss.filter((_, k) => k !== i)); renderInspector(); };
+    const q = el('dz-gq');
+    let typing = 0;
+    q.oninput = () => { S.gq = q.value; clearTimeout(typing); typing = setTimeout(paintGlossList, 120); };
+    q.onkeydown = (ev) => { if (ev.key === 'Escape' && q.value) { ev.preventDefault(); q.value = ''; S.gq = ''; paintGlossList(); } };
+    el('dz-gadd-open').onclick = () => { S.gadd = { ko: '', vi: '', gl: '' }; S.gfocus = { add: 'ko' }; renderInspector(); };
+    if (S.gadd) bindGlossAdd(target);
+    panel.querySelectorAll('[data-unhide]').forEach((b) => {
+      b.onclick = () => {
+        const next = hide.filter((_, k) => k !== Number(b.getAttribute('data-unhide')));
+        setDesign(target, 'glossHide', next.length ? next : undefined);
+        commit();
+        renderInspector();
+      };
     });
-    el('dz-g-add').onclick = () => {
-      const ko = el('dz-g-ko').value.trim();
-      const gl = el('dz-g-gl').value.trim();
-      const vi = el('dz-g-vi').value.trim();
-      if (ko.length < 2) { window.Toast.warning(esc(T('The word needs two characters or more.')), esc(T('Glossary'))); return; }
-      if (!gl && !vi) { window.Toast.warning(esc(T('Give it a meaning.')), esc(T('Glossary'))); return; }
-      if (gloss.some((g) => g.ko === ko)) { window.Toast.warning(esc(T('"{ko}" is already in the glossary.', { ko })), esc(T('Glossary'))); return; }
-      const entry = { ko };
-      if (gl) entry.gl = gl;
-      if (vi) entry.vi = vi;
-      setList('glossary', gloss.concat([entry]));
-      renderInspector();
-    };
-    panel.querySelectorAll('[data-unhide]').forEach((b) => { b.onclick = () => { setList('glossHide', hide.filter((_, k) => k !== Number(b.getAttribute('data-unhide')))); renderInspector(); }; });
     const hin = el('dz-hide-in');
     hin.onkeydown = (ev) => {
       if (ev.key !== 'Enter') return;
       const w = hin.value.trim();
       if (!w || hide.indexOf(w) >= 0) return;
-      setList('glossHide', hide.concat([w]));
+      setDesign(target, 'glossHide', hide.concat([w]));
+      commit();
       renderInspector();
     };
-    panel.querySelectorAll('[data-hide]').forEach((b) => {
-      b.onclick = () => {
-        const w = b.getAttribute('data-hide');
-        setList('glossHide', hide.indexOf(w) >= 0 ? hide.filter((x) => x !== w) : hide.concat([w]));
+    paintGlossList();
+  }
+
+  // The filter chips and the cards — drawn again on their own while the search is typed, so the
+  // search box keeps its focus.
+  function paintGlossList() {
+    const box = el('dz-glist');
+    const bar = el('dz-gfilters');
+    if (!box || !bar) return;
+    const model = glossModel();
+    const counts = { all: model.length, own: 0, inline: 0, auto: 0, hidden: 0 };
+    model.forEach((it) => { counts[it.kind] += 1; if (it.hidden) counts.hidden += 1; });
+    if (S.gfilter !== 'all' && !counts[S.gfilter]) S.gfilter = 'all';
+    const q = fold(S.gq.trim());
+    const matching = model.map((it, n) => ({ it, n })).filter(({ it }) => {
+      if (S.gfilter === 'hidden' ? !it.hidden : (S.gfilter !== 'all' && it.kind !== S.gfilter)) return false;
+      return !q || [it.ko, it.head, it.vi, it.gl, it.shown, it.where].some((s) => fold(s).indexOf(q) >= 0);
+    });
+    // The author's own meanings first, as written; then the game's, the words a reader meets
+    // most on the page as it is drawn now first — and on a long exam page only the first
+    // AUTO_CAP of those until asked, so the list stays one to read rather than to scroll.
+    const count = pageCounter();
+    const auto = matching.filter(({ it }) => it.kind === 'auto')
+      .map((x) => Object.assign(x, { seen: count(x.it.ko.trim()) }))
+      .sort((a, b) => (b.seen - a.seen) || (a.n - b.n));
+    const more = !q && !S.gall && auto.length > AUTO_CAP ? auto.length - AUTO_CAP : 0;
+    const shown = matching.filter(({ it }) => it.kind !== 'auto').concat(more ? auto.slice(0, AUTO_CAP) : auto);
+    bar.innerHTML = [['all', 'All'], ['own', 'Yours'], ['inline', 'In the text'], ['auto', 'Automatic'], ['hidden', 'Hidden']]
+      .map(([k, l]) => '<button type="button" data-gf="' + k + '" class="' + (S.gfilter === k ? 'on' : '') + '"'
+        + (counts[k] || k === 'all' ? '' : ' disabled') + '>' + l + ' <b>' + counts[k] + '</b></button>').join('');
+    bar.querySelectorAll('[data-gf]').forEach((b) => { b.onclick = () => { S.gfilter = b.getAttribute('data-gf'); paintGlossList(); }; });
+    box.innerHTML = (shown.length ? shown.map(({ it, n }) => glossCardHtml(it, n)).join('')
+      : '<div class="dz-empty dz-empty-sm">' + (model.length ? 'Nothing here matches.'
+        : (ex() ? 'No meanings on this page yet. Select a word on the page to give it one, or press ＋ Add a word.' : 'The bank’s glossary is empty.')) + '</div>')
+      + (more ? '<button type="button" class="btn btn-secondary btn-sm dz-gmore" id="dz-gmore">' + esc(T('Show {n} more automatic meanings', { n: more })) + '</button>' : '');
+    box.querySelectorAll('.dz-gcard').forEach((card) => bindGlossCard(card, model[Number(card.getAttribute('data-n'))]));
+    const moreBtn = el('dz-gmore');
+    if (moreBtn) moreBtn.onclick = () => { S.gall = true; paintGlossList(); };
+    paintGlossCounts();
+    applyGlossFocus();
+  }
+
+  function bindGlossCard(card, it) {
+    const word = () => card.getAttribute('data-word');
+    const warn = (msg) => { const w = card.querySelector('[data-warn]'); if (w) w.textContent = msg || ''; };
+    const act = (name, fn) => { const b = card.querySelector('[data-act="' + name + '"]'); if (b) b.onclick = fn; };
+    card.addEventListener('mouseenter', () => previewFind(word()));
+    card.addEventListener('mouseleave', () => previewFind(''));
+    card.querySelectorAll('textarea').forEach(growBox);
+    act('find', () => {
+      const w = word();
+      S.gfind = S.gfind && S.gfind.word === w ? { word: w, at: S.gfind.at + 1 } : { word: w, at: 0 };
+      if (!previewFind(w, S.gfind.at)) {
+        window.Toast.info(esc(T('“{w}” is not on the page as it is shown — an explanation only shows in the Answers view.', { w })), esc(T('Meanings')));
+      }
+    });
+    if (it.kind === 'own') {
+      const target = designTarget(it.scope);
+      card.querySelectorAll('[data-f]').forEach((inp) => {
+        inp.addEventListener('input', () => {
+          const f = inp.getAttribute('data-f');
+          const list = clone((target.design || {}).glossary || []);
+          const g = list[it.i];
+          if (!g) return;
+          it[f] = inp.value;
+          if (f === 'ko') {
+            g.ko = inp.value.trim();
+            card.setAttribute('data-word', g.ko);
+          } else if (inp.value.trim()) g[f] = inp.value;
+          else delete g[f];
+          setDesign(target, 'glossary', list);
+          commit('g:' + it.scope + ':' + it.i + ':' + f);
+          if (inp.tagName === 'TEXTAREA') growBox(inp);
+          warn(ownProblem(it));
+          if (f === 'ko') paintGlossCounts();
+        });
+      });
+      warn(ownProblem(it));
+      act('del', () => {
+        const list = ((target.design || {}).glossary || []).filter((_, k) => k !== it.i);
+        setDesign(target, 'glossary', list.length ? list : undefined);
+        commit();
         renderInspector();
+      });
+    } else if (it.kind === 'inline') {
+      card.querySelectorAll('textarea[data-f]').forEach((ta) => {
+        ta.addEventListener('input', () => {
+          growBox(ta);
+          const f = ta.getAttribute('data-f');
+          const after = { vi: it.vi, gl: it.gl };
+          after[f] = tidyMeaning(ta.value);
+          // Emptied, the word would stop being glossed, and every card after it would change
+          // number under the cursor: ✕ does that, on purpose.
+          if (!after.vi && !after.gl) { warn(T('A meaning written into the text cannot be empty — ✕ takes it off the word.')); return; }
+          warn('');
+          it[f] = after[f];
+          const m = {};
+          m[f] = ta.value;
+          setInlineGloss(it, m);
+          commit('gi:' + (it.path || it.block) + ':' + it.layer + ':' + it.k + ':' + f);
+        });
+      });
+      act('unglue', () => { setInlineGloss(it, { gl: '', vi: '' }); commit(); renderInspector(); });
+      act('open', () => {
+        if (it.block) { S.sel = { block: it.block, scroll: true }; S.tab = 'blocks'; renderInspector(); drawPreview(); }
+        else selectField(it.path);
+      });
+    } else {
+      act('own', () => {
+        const target = designTarget(ex() ? S.designScope : 'bank');
+        const entry = { ko: it.ko };
+        if (it.vi) entry.vi = it.vi;
+        if (it.gl) entry.gl = it.gl;
+        setDesign(target, 'glossary', ((target.design || {}).glossary || []).concat([entry]));
+        commit();
+        S.gfilter = 'all';
+        S.gfocus = { word: it.ko, field: S.lang === 'en' ? 'gl' : 'vi' };
+        renderInspector();
+      });
+      act('hide', () => { toggleHidden(it.ko); commit(); renderInspector(); });
+    }
+  }
+
+  function glossAddHtml(scope) {
+    const g = S.gadd;
+    return '<div class="dz-gadd" id="dz-gadd">'
+      + '<div class="dz-gadd-h"><b>' + esc(T('New word')) + '</b><small class="dz-muted">'
+      + esc(T(scope === 'bank' ? 'for every page of this bank' : 'for this page')) + '</small></div>'
+      + '<div class="dz-gadd-row"><input class="form-input dz-gword" id="dz-g-ko" maxlength="40" spellcheck="false" translate="no"'
+      + ' placeholder="' + esc(T('Korean word, e.g. 눈썹')) + '" value="' + esc(g.ko) + '"><span class="dz-gcount" id="dz-g-seen"></span></div>'
+      + '<div class="dz-ghints" id="dz-g-hints"></div>'
+      + glossMeaningBox('vi', g.vi, 'Vietnamese meaning — Enter for a new line', 'dz-g-vi')
+      + glossMeaningBox('gl', g.gl, 'English meaning (optional)', 'dz-g-gl')
+      + '<div class="dz-gadd-foot"><span class="dz-gwarn" id="dz-g-msg"></span><span class="dz-grow"></span>'
+      + '<button type="button" class="dz-link" id="dz-g-cancel">Cancel</button>'
+      + '<button type="button" class="btn btn-primary btn-sm" id="dz-g-add">＋ Add</button></div></div>';
+  }
+
+  function bindGlossAdd(target) {
+    const ko = el('dz-g-ko');
+    const vi = el('dz-g-vi');
+    const gl = el('dz-g-gl');
+    const msg = el('dz-g-msg');
+    const keep = () => { S.gadd = { ko: ko.value, vi: vi.value, gl: gl.value }; };
+    const problem = () => {
+      const w = ko.value.trim();
+      if (!w) return '';
+      if (w.length < 2) return T('The word needs two characters or more.');
+      if (((target.design || {}).glossary || []).some((g) => String(g.ko || '').trim() === w)) return T('"{ko}" is already in the glossary.', { ko: w });
+      return '';
+    };
+    const hints = () => {
+      const box = el('dz-g-hints');
+      const list = glossHintsFor(ko.value);
+      box.innerHTML = list.length ? '<span>' + esc(T('Meanings the page has for it:')) + '</span>'
+        + list.map((h, i) => '<button type="button" class="dz-ghint" data-h="' + i + '"><small>' + esc(h.from) + '</small>'
+          + '<span translate="no">' + esc(String(h.vi || h.gl).split('\n')[0]) + '</span></button>').join('') : '';
+      box.querySelectorAll('[data-h]').forEach((b) => {
+        b.onclick = () => {
+          const h = list[Number(b.getAttribute('data-h'))];
+          if (h.vi) vi.value = h.vi;
+          if (h.gl) gl.value = h.gl;
+          [vi, gl].forEach(growBox);
+          keep();
+        };
+      });
+    };
+    const add = () => {
+      const w = ko.value.trim();
+      const v = tidyMeaning(vi.value);
+      const g = tidyMeaning(gl.value);
+      const p = problem() || (w ? '' : T('Write the Korean word first.')) || (v || g ? '' : T('Give it a meaning.'));
+      if (p) { msg.textContent = p; (!w || problem() ? ko : (S.lang === 'en' ? gl : vi)).focus(); return; }
+      const entry = { ko: w };
+      if (v) entry.vi = v;
+      if (g) entry.gl = g;
+      setDesign(target, 'glossary', ((target.design || {}).glossary || []).concat([entry]));
+      commit();
+      S.gadd = null;
+      S.gq = '';
+      S.gfilter = 'all';
+      S.gfocus = { word: w };
+      renderInspector();
+    };
+    const cancel = () => { S.gadd = null; renderInspector(); };
+    ko.oninput = () => { keep(); msg.textContent = problem(); hints(); paintGlossCounts(); };
+    ko.onkeydown = (ev) => {
+      if (ev.key === 'Enter') { ev.preventDefault(); (S.lang === 'en' ? gl : vi).focus(); }
+      if (ev.key === 'Escape') cancel();
+    };
+    [vi, gl].forEach((ta) => {
+      growBox(ta);
+      ta.oninput = () => { keep(); growBox(ta); };
+      ta.onkeydown = (ev) => {
+        if (ev.key === 'Enter' && (ev.ctrlKey || ev.metaKey)) { ev.preventDefault(); add(); }
+        if (ev.key === 'Escape') cancel();
       };
     });
-    panel.querySelectorAll('[data-own]').forEach((b) => {
-      b.onclick = () => {
-        // The meaning the game would have shown, in the language it is being shown in.
-        const box = el(S.lang === 'vi' ? 'dz-g-vi' : 'dz-g-gl');
-        el('dz-g-ko').value = b.getAttribute('data-own');
-        box.value = b.getAttribute('data-gl');
-        box.focus();
-        box.select();
-      };
-    });
+    el('dz-g-add').onclick = add;
+    el('dz-g-cancel').onclick = cancel;
+    msg.textContent = problem();
+    hints();
+  }
+
+  // After a draw: bring the card (or the add form) the last action pointed at into view.
+  function applyGlossFocus() {
+    const f = S.gfocus;
+    if (!f) return;
+    S.gfocus = null;
+    const flash = (node) => { node.classList.remove('dz-flash'); void node.offsetWidth; node.classList.add('dz-flash'); };
+    if (f.add) {
+      const form = el('dz-gadd');
+      if (!form) return;
+      form.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      flash(form);
+      const t = el(f.add === 'ko' || !el('dz-g-ko').value.trim() ? 'dz-g-ko' : (S.lang === 'en' ? 'dz-g-gl' : 'dz-g-vi'));
+      if (t) t.focus();
+      return;
+    }
+    const cards = Array.from(document.querySelectorAll('#dz-glist .dz-gcard')).filter((c) => c.getAttribute('data-word') === f.word);
+    const card = cards.find((c) => c.classList.contains('dz-gk-own')) || cards[0];
+    if (!card) return;
+    card.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    flash(card);
+    const t = f.field ? card.querySelector('textarea[data-f="' + f.field + '"]') : null;
+    if (t) { t.focus(); t.setSelectionRange(t.value.length, t.value.length); }
+  }
+
+  // On the page, in the Meanings tab: a word selected is a word to give a meaning to — its card
+  // when it has one, else the add form with it filled in.
+  function glossPick(text) {
+    const w = String(text || '').replace(/\s+/g, ' ').trim();
+    if (!w) return;
+    if (w.length > 40) { window.Toast.info(esc(T('Select a word or a short phrase — forty characters at most.')), esc(T('Meanings'))); return; }
+    try { S.frameWin.getSelection().removeAllRanges(); } catch (e) { /* nothing selected any more */ }
+    S.gq = '';
+    S.gfilter = 'all';
+    if (glossModel().some((it) => it.kind === 'own' && !it.shadowed && it.ko.trim() === w)) S.gfocus = { word: w, field: S.lang === 'en' ? 'gl' : 'vi' };
+    else { S.gadd = { ko: w, vi: '', gl: '' }; S.gfocus = { add: 'meaning' }; }
+    renderInspector();
+  }
+  // …and a glossed word clicked is its card, brought into view.
+  function glossFocus(word) {
+    S.gq = '';
+    S.gfilter = 'all';
+    // Its card may be past the first automatic ones on a long page.
+    S.gall = true;
+    S.gfocus = { word };
+    renderInspector();
   }
 
   // ── Question ─────────────────────────────────────────────────────────────

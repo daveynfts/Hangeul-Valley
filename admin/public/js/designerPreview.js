@@ -49,6 +49,10 @@
       + '.hv-sel{outline:3px solid #4f46e5 !important;outline-offset:2px;border-radius:3px;box-shadow:0 0 0 6px rgba(79,70,229,.18);}'
       + '.hv-row-sel{box-shadow:0 0 0 3px rgba(79,70,229,.55) !important;}'
       + '.hv-empty-hint{font:600 12px "Be Vietnam Pro",sans-serif;color:#9a6a3a;border:1.5px dashed #c4893a;border-radius:6px;padding:8px 10px;text-align:center;}'
+      // A word the Meanings tab is pointing at, everywhere it is written.
+      + '::highlight(hv-find){background-color:rgba(250,204,21,.62);color:inherit;}'
+      + '::highlight(hv-find-now){background-color:#fb923c;color:#1a1208;}'
+      + '.hv-find-el{background:rgba(250,204,21,.62)!important;border-radius:2px;}.hv-find-now{background:#fb923c!important;}'
       + 'button{pointer-events:auto;}'
       + '</style>'
       + '<script>function artUrl(r){return "sprites/"+String(r).replace(/^sprites\\//,"");}'
@@ -418,15 +422,18 @@
     function applyGloss(rootEl) {
       if (!rootEl) return;
       const map = new Map();
+      const head = new Map();
       R.glossEntries(design, lang).forEach((g) => { if (g.ko.length >= 2 && !map.has(g.ko)) map.set(g.ko, g.gloss); });
       const hide = new Set((design && design.glossHide) || []);
       ((m.world && m.world.words) || []).forEach((w) => {
         const gloss = String(tr(w, 'en') || '').trim();
         if (!gloss) return;
-        [String(w.ko || '').trim()].concat(Array.isArray(w.forms) ? w.forms : []).forEach((k) => {
+        const ko = String(w.ko || '').trim();
+        [ko].concat(Array.isArray(w.forms) ? w.forms : []).forEach((k) => {
           const key = String(k || '').trim();
           if (key.length < 2 || map.has(key) || hide.has(key)) return;
           map.set(key, gloss);
+          if (key !== ko) head.set(key, ko);
         });
       });
       if (!map.size) return;
@@ -451,7 +458,8 @@
           const span = doc.createElement('span');
           span.className = 'wb-gl hv-auto-gl';
           span.setAttribute('data-gl', map.get(mm[0]));
-          span.setAttribute('title', mm[0] + ' — ' + map.get(mm[0]));
+          if (head.has(mm[0])) span.setAttribute('data-ko', head.get(mm[0]));
+          span.setAttribute('tabindex', '0');
           span.textContent = mm[0];
           frag.appendChild(span);
           pos = mm.index + mm[0].length;
@@ -482,5 +490,64 @@
     if (selected.scroll && pieces[0]) pieces[0].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }
 
-  window.HVDesignerPreview = { mount, render, markSelection, srcdoc };
+  // The text nodes a reader can see on the page — not those in a part the view hides.
+  function shownTextNodes(win) {
+    const doc = win.document;
+    const panel = doc.getElementById('workbook-panel');
+    const out = [];
+    if (!panel) return out;
+    const walker = doc.createTreeWalker(panel, win.NodeFilter.SHOW_TEXT, null);
+    let node;
+    while ((node = walker.nextNode())) {
+      const p = node.parentElement;
+      if (p && node.nodeValue.trim() && p.getClientRects().length) out.push(node);
+    }
+    return out;
+  }
+
+  // What the page reads as, one text node per line, for counting a word on it — the Meanings
+  // tab's "×2 on the page".
+  function visibleText(win) {
+    return win && win.document ? shownTextNodes(win).map((n) => n.nodeValue).join('\n') : '';
+  }
+
+  // Every place `word` is written on the page, marked for the Meanings tab — with the CSS Custom
+  // Highlight API where the browser has it (nothing in the page changes), else by tinting the
+  // element each sits in. With `at`, that one (counting round) is scrolled into view and marked
+  // as the current one. No word takes the marks away. Returns how many places there are.
+  function findWord(win, word, at) {
+    const doc = win && win.document;
+    if (!doc) return 0;
+    const hl = win.CSS && win.CSS.highlights && typeof win.Highlight === 'function' ? win.CSS.highlights : null;
+    if (hl) { hl.delete('hv-find'); hl.delete('hv-find-now'); }
+    doc.querySelectorAll('.hv-find-el, .hv-find-now').forEach((n) => n.classList.remove('hv-find-el', 'hv-find-now'));
+    const w = String(word || '').trim();
+    if (!w) return 0;
+    const ranges = [];
+    shownTextNodes(win).forEach((node) => {
+      const t = node.nodeValue;
+      for (let i = t.indexOf(w); i >= 0; i = t.indexOf(w, i + w.length)) {
+        const r = doc.createRange();
+        r.setStart(node, i);
+        r.setEnd(node, i + w.length);
+        ranges.push(r);
+      }
+    });
+    if (!ranges.length) return 0;
+    if (hl) hl.set('hv-find', new win.Highlight(...ranges));
+    else ranges.forEach((r) => r.startContainer.parentElement.classList.add('hv-find-el'));
+    if (at !== undefined && at !== null) {
+      const r = ranges[((at % ranges.length) + ranges.length) % ranges.length];
+      const p = r.startContainer.parentElement;
+      p.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      if (hl) {
+        const now = new win.Highlight(r);
+        now.priority = 1;
+        hl.set('hv-find-now', now);
+      } else p.classList.add('hv-find-now');
+    }
+    return ranges.length;
+  }
+
+  window.HVDesignerPreview = { mount, render, markSelection, srcdoc, findWord, visibleText };
 }());

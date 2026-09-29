@@ -315,17 +315,31 @@
     // ── The small popovers: a meaning, a reading, a size/colour/font menu ─────
     function closePop() { pop.classList.add('hidden'); pop.innerHTML = ''; }
 
-    function openPop(anchorBtn, html, bind) {
+    function openPop(anchorBtn, html, bind, wide) {
       pop.innerHTML = html;
+      pop.classList.toggle('hre-pop-wide', !!wide);
       pop.classList.remove('hidden');
       const b = anchorBtn.getBoundingClientRect();
       const h = root.getBoundingClientRect();
-      pop.style.left = Math.max(0, Math.min(b.left - h.left, h.width - 280)) + 'px';
+      pop.style.left = Math.max(0, Math.min(b.left - h.left, h.width - (pop.offsetWidth || 280))) + 'px';
       pop.style.top = (b.bottom - h.top + 4) + 'px';
       bind(pop);
-      const first = pop.querySelector('input, button');
-      if (first && first.tagName === 'INPUT') first.focus();
+      const first = pop.querySelector('input, textarea');
+      if (first) {
+        first.focus();
+        if (first.tagName === 'TEXTAREA') first.setSelectionRange(first.value.length, first.value.length);
+      }
     }
+
+    // A box for a meaning grows with what is written in it, up to a point.
+    function autoGrow(ta) {
+      ta.style.height = 'auto';
+      ta.style.height = Math.min(Math.max(ta.scrollHeight + 2, 38), 170) + 'px';
+    }
+    // As js/richText.js keeps a meaning: its line breaks, each line's spaces tidied, no more
+    // than one empty line in a row.
+    const tidyMeaning = (s) => String(s == null ? '' : s).replace(/\r\n?/g, '\n')
+      .split('\n').map((l) => l.replace(/\s+/g, ' ').trim()).join('\n').replace(/\n{3,}/g, '\n\n').trim();
 
     function glossAt() {
       const r = recall();
@@ -334,31 +348,67 @@
       return n ? n.closest('.hv-gl') : null;
     }
 
+    // A meaning is written in boxes that take line breaks — the card shows it as written — with
+    // that card drawn underneath as it will look, and the meanings the page already has for the
+    // word (the glossary's, the unit's word list's) one click away.
     function openGloss(btn) {
       const existing = glossAt();
       const r = recall();
       if (!existing && (!r || r.collapsed)) { say('Select the word first, then give it a meaning.', 'info'); return; }
-      const word = existing ? existing.textContent : r.toString();
+      const word = (existing ? existing.textContent : r.toString()).replace(/\s+/g, ' ').trim();
       const gl = existing ? existing.getAttribute('data-gl') || '' : '';
       const vi = existing ? existing.getAttribute('data-gl-vi') || '' : '';
       // Which meanings can ever be seen here. Vietnamese text is only shown in Vietnamese and
       // Claude's English only in English, so each asks for its own; Korean is shown in both,
       // Vietnamese first, with the English optional (English mode falls back to the Vietnamese).
       const lang = o.lang || 'ko';
-      const viBox = '<label>Nghĩa (Tiếng Việt)<input class="hre-in" data-k="vi" value="' + esc(vi) + '" maxlength="240"></label>';
-      const enBox = '<label>Meaning (English)' + (lang === 'en' ? '' : ' <span class="hre-opt">optional</span>')
-        + '<input class="hre-in" data-k="gl" value="' + esc(gl) + '" maxlength="240"></label>';
-      openPop(btn, '<div class="hre-pop-title">💬 Meaning on hover · <b>' + esc(word) + '</b></div>'
+      const max = (R().LIMITS && R().LIMITS.gloss) || 400;
+      const box = (k, label, v, optional) => '<label><span class="hre-lab">' + label + (optional ? ' <span class="hre-opt">optional</span>' : '') + '</span>'
+        + '<textarea class="hre-in hre-ta" data-k="' + k + '" rows="2" maxlength="' + max + '" translate="no">' + esc(v) + '</textarea></label>';
+      const viBox = box('vi', 'Nghĩa (Tiếng Việt)', vi, false);
+      const enBox = box('gl', 'Meaning (English)', gl, lang !== 'en');
+      const hints = (typeof o.glossHints === 'function' ? o.glossHints(word) || [] : [])
+        .filter((h) => h && ((lang !== 'en' && h.vi) || (lang !== 'vi' && h.gl)));
+      openPop(btn, '<div class="hre-pop-title">💬 Meaning on hover · <b translate="no">' + esc(word) + '</b></div>'
+        + (hints.length ? '<div class="hre-hints"><span class="hre-hints-l">Use a meaning the page has:</span>'
+          + hints.map((h, i) => '<button type="button" class="hre-hint" data-hint="' + i + '"><small>' + esc(h.from) + '</small>'
+            + '<span translate="no">' + esc(String((lang === 'en' ? h.gl : h.vi || h.gl) || '').split('\n')[0]) + '</span></button>').join('') + '</div>' : '')
         + (lang === 'en' ? enBox : (lang === 'vi' ? viBox : viBox + enBox))
+        + '<div class="hre-keys">Enter: new line · Ctrl+Enter: apply · Esc: close</div>'
+        + '<div class="hre-gprev"><div class="hre-gprev-l">How it looks</div>'
+        + '<div class="hv-gtip-card hv-gtip-static on" translate="no"></div>'
+        + '<div class="hre-gprev-w" translate="no"><span class="hv-gl">' + esc(word) + '</span></div></div>'
         + '<div class="hre-pop-actions">'
         + (existing ? '<button type="button" class="hre-btn-danger" data-act="remove">Remove</button>' : '')
         + '<span class="hre-grow"></span><button type="button" data-act="cancel">Cancel</button>'
         + '<button type="button" class="hre-btn-primary" data-act="ok">Apply</button></div>', (p) => {
         // A box that is not shown keeps what the meaning already had.
         const val = (k, keep) => {
-          const box = p.querySelector('[data-k="' + k + '"]');
-          return box ? box.value.replace(/\s+/g, ' ').trim() : keep;
+          const b = p.querySelector('[data-k="' + k + '"]');
+          return b ? tidyMeaning(b.value) : keep;
         };
+        const card = p.querySelector('.hv-gtip-static');
+        const paint = () => {
+          const lines = [];
+          if (lang !== 'en' && val('vi', vi)) lines.push({ lang: 'vi', text: val('vi', vi) });
+          if (lang !== 'vi' && val('gl', gl)) lines.push({ lang: 'en', text: val('gl', gl) });
+          card.innerHTML = R().glossCardHtml(word, lines.length ? lines : [{ text: '…' }]);
+        };
+        p.querySelectorAll('textarea').forEach((ta) => {
+          autoGrow(ta);
+          ta.addEventListener('input', () => { autoGrow(ta); paint(); });
+        });
+        paint();
+        p.querySelectorAll('[data-hint]').forEach((b) => {
+          b.onclick = () => {
+            const h = hints[Number(b.getAttribute('data-hint'))];
+            [['vi', h.vi], ['gl', h.gl]].forEach(([k, v]) => {
+              const ta = p.querySelector('[data-k="' + k + '"]');
+              if (ta && v) { ta.value = v; autoGrow(ta); }
+            });
+            paint();
+          };
+        });
         const put = (node, name, v) => { if (v) node.setAttribute(name, v); else node.removeAttribute(name); };
         const ok = () => {
           const m = val('gl', gl);
@@ -385,8 +435,14 @@
         p.querySelector('[data-act="cancel"]').onclick = closePop;
         const rm = p.querySelector('[data-act="remove"]');
         if (rm) rm.onclick = () => { unwrap(existing); closePop(); changed(); };
-        p.querySelectorAll('input').forEach((i) => { i.onkeydown = (e) => { if (e.key === 'Enter') { e.preventDefault(); ok(); } if (e.key === 'Escape') closePop(); }; });
-      });
+        // Enter starts a new line of the meaning; Ctrl+Enter (⌘+Enter) applies it.
+        p.querySelectorAll('textarea').forEach((ta) => {
+          ta.onkeydown = (e) => {
+            if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); ok(); }
+            if (e.key === 'Escape') { e.preventDefault(); closePop(); }
+          };
+        });
+      }, true);
     }
 
     function openRuby(btn) {

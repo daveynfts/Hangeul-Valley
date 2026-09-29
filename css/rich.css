@@ -78,16 +78,69 @@ img.hv-img-md { height: 4em; width: auto; }
 img.hv-img-lg { height: 7em; width: auto; }
 img.hv-img-xl { display: block; width: 100%; height: auto; margin: 0.4em 0; }
 
-/* A meaning written into the text. In the game the span also carries .wb-gl and takes the
-   tooltip game.css draws for the automatic ones; in the admin editor it is only underlined,
-   with the meaning in its own tooltip, so the author can see which words carry one. */
+/* A meaning written into the text. In the game the span also carries .wb-gl, like the
+   automatic ones; in the admin editor it is underlined and tinted, so the author can see which
+   words carry one. Either way the card below shows the meaning (HVRich.glossTips). */
 .hv-gl { border-bottom: 1px dotted #a16207; cursor: help; }
 .hv-gl:not(.wb-gl) { position: relative; background: rgba(254, 243, 199, 0.55); }
-.hv-gl:not(.wb-gl):hover::after {
+/* Only where the card never started (html without .hv-gtip). */
+html:not(.hv-gtip) .hv-gl:not(.wb-gl):hover::after {
   content: attr(data-gl); position: absolute; left: 0; bottom: 100%; transform: translateY(-5px);
   background: #3b2410; color: #fdf6e3; font-size: 11px; font-weight: 500; font-style: normal;
-  line-height: 1.4; padding: 4px 7px; border-radius: 4px; white-space: normal;
+  line-height: 1.4; padding: 4px 7px; border-radius: 4px; white-space: pre-line;
   width: max-content; max-width: 240px; z-index: 30; pointer-events: none;
+}
+
+/* ── The hover meaning's card (js/richText.js glossTips) ─────────────────────
+   One per page, placed by script beside the word and kept inside the window. The word in
+   amber, then the meaning with the line breaks it was written with; in the admin's text box,
+   each language it was given, labelled. */
+.hv-gtip-card {
+  position: fixed; left: 0; top: 0; z-index: 2147483000; box-sizing: border-box;
+  width: max-content; min-width: 104px; max-width: min(300px, calc(100vw - 12px));
+  padding: 8px 12px 9px; border-radius: 10px; border: 1px solid #b7791f;
+  background: linear-gradient(180deg, #47290e 0%, #2c190a 100%); color: #fdf6e3;
+  box-shadow: 0 14px 32px rgba(20, 10, 2, .42), 0 2px 6px rgba(20, 10, 2, .3), inset 0 1px 0 rgba(255, 236, 179, .14);
+  font: 500 12.5px/1.55 'Be Vietnam Pro', 'Noto Sans KR', system-ui, sans-serif;
+  font-style: normal; letter-spacing: 0; text-align: left; text-transform: none;
+  pointer-events: none; visibility: hidden; opacity: 0; transform: translateY(5px);
+  transition: opacity .14s ease, transform .14s ease, visibility 0s linear .14s;
+}
+.hv-gtip-card.below { transform: translateY(-5px); }
+.hv-gtip-card.on {
+  visibility: visible; opacity: 1; transform: none;
+  transition: opacity .14s ease, transform .14s ease, visibility 0s;
+}
+.hv-gtip-word {
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px 8px;
+  font: 700 14.5px/1.3 'Noto Sans KR', sans-serif; color: #fcd34d;
+}
+.hv-gtip-head { font-size: 11px; font-weight: 500; color: #e9cf9c; }
+.hv-gtip-head::before { content: '· '; }
+.hv-gtip-body {
+  margin-top: 6px; padding-top: 6px; border-top: 1px solid rgba(252, 211, 77, .24);
+  white-space: pre-line; overflow-wrap: anywhere;
+}
+.hv-gtip-body + .hv-gtip-body { margin-top: 5px; border-top-style: dashed; }
+.hv-gtip-tagged { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0 8px; align-items: baseline; }
+.hv-gtip-lang {
+  font-size: 9.5px; font-weight: 800; letter-spacing: .06em; line-height: 1.5;
+  color: #2c190a; background: #fcd34d; border-radius: 4px; padding: 0 4px;
+}
+.hv-gtip-arrow {
+  position: absolute; left: var(--hv-ax, 50%); bottom: -6px; width: 10px; height: 10px; margin-left: -5px;
+  background: #2c190a; border: solid #b7791f; border-width: 0 1px 1px 0; transform: rotate(45deg);
+}
+.hv-gtip-card.below .hv-gtip-arrow { top: -6px; bottom: auto; background: #47290e; border-width: 1px 0 0 1px; }
+/* The same card standing still, where the admin previews a meaning as it is written. */
+.hv-gtip-card.hv-gtip-static {
+  position: relative; left: auto; top: auto; z-index: auto; margin: 0 auto 8px;
+  max-width: 100%; visibility: visible; opacity: 1; transform: none; transition: none;
+}
+/* The word the card is showing. */
+.wb-gl.hv-gl-on, .hv-gl.hv-gl-on { background: #fef3c7; border-bottom-style: solid; }
+@media (prefers-reduced-motion: reduce) {
+  .hv-gtip-card, .hv-gtip-card.below, .hv-gtip-card.on { transform: none; transition: none; }
 }
 
 /* ── Boxes ───────────────────────────────────────────────────────────────────
