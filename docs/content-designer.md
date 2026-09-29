@@ -115,6 +115,30 @@ it would otherwise light up inside every longer word.
 
 The desk quiz, the cassette scripts and the word cards do not read formatting yet.
 
+## An exam explanation, one paragraph at a time
+
+An exam page (`examView`, and the TOPIK paper) draws a question's `why` in pieces, split where
+its writer left a blank line: the first paragraph is the card **01 · 핵심 단서 · WHAT TO
+NOTICE**, the rest are the numbered steps under **선택지 비교 · FULL REASONING**. On that page
+each piece is picked on its own — the preview tags them `…items.3.why#0`, `…why#1`… — and the
+Text panel edits only that paragraph: what is typed replaces it in the whole field, text and
+formatting alike (`R.textParagraphs` and `R.paragraphsOf` split the two at the same places),
+and a blank line typed into it makes two steps of it. The bar above the editor moves to the
+paragraph before or after, adds a step after this one, deletes this one, or opens the whole
+field. In EN the words are Claude's, so only formatting can change there. The field's size,
+colour, font and emphasis reach every paragraph; its box does not, the cards being boxes already.
+
+## Custom fields on a question
+
+**❓ Question → Trường tùy chỉnh** adds fields of the author's own to a question: a heading and
+a text each, stored as `item.extra = [{ id, labelEn, noteEn }]`. They are prose like the rest of
+the row — written in Vietnamese first (drafts `labelVi` / `noteVi`, the English on `enTodo`),
+filed in the catalogue by the batch, formatted in the Text panel like any field — and they show
+with the answer: on an exam page as more cards after the clue and the rule (03, 04…), elsewhere
+as boxes under the grammar note (`.wb-learn-extra`, `.wb-why-extra` in `css/rich.css`). One left
+empty is dropped on save; a question holds at most twelve. For content that belongs to the page
+rather than to one question, use a text box in 🧱 Blocks.
+
 ## Pictures — `media/`
 
 Uploads live in `media/`, not `sprites/` (every PNG under `sprites/` must be a catalogued
@@ -152,6 +176,17 @@ points at a picture that is not on disk. The picture picker also offers the game
 - **The Workbooks tab** still edits the same files in its compact form. Editing a formatted
   field's words there drops that field's formatted copy (keeping its box and size), because a
   copy of other words would be refused on save; it says so when it happens.
+- **Taking a style off part of a styled run works.** Removing the colour, size, highlight or
+  font from a few words inside a longer run — or clearing formatting from them — splits the run
+  around them (`liftOut` in `richEditor.js`) rather than putting the words back inside it.
+  *Clear formatting* with nothing selected keeps the meanings, pictures and line breaks.
+- **Pasting from Word or Google Docs** keeps bold, italic, underline and strike written as
+  styles, and no longer turns a whole Docs paste bold (Docs wraps it in
+  `<b style="font-weight:normal">`).
+- **A field's line breaks live in its formatting layer.** The game's explanation boxes collapse
+  plain newlines, so a Vietnamese text with its own line breaks keeps a layer of `<br>`s even
+  with no other formatting — the field list shows it as formatted, and *Remove all formatting*
+  keeps those breaks.
 
 ## Files
 

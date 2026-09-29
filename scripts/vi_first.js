@@ -80,11 +80,17 @@ function koreanOf(obj) {
   return bits.join(' / ');
 }
 // An object with no Korean of its own (a quiz's answers) takes its context from the one holding it.
+// A custom field (items.3.extra.0) sits two levels under its question, so the climb goes on
+// until something has Korean in it, and stops at the question's own group.
 function contextOf(body, p, obj) {
-  const own = koreanOf(obj);
-  if (own || !p || p.indexOf('.') < 0) return own;
-  const parent = getAt(body, p.split('.').slice(0, -1).join('.'));
-  return parent && typeof parent === 'object' ? koreanOf(parent) : '';
+  let own = koreanOf(obj);
+  let at = p || '';
+  for (let up = 0; !own && at.indexOf('.') >= 0 && up < 3; up++) {
+    at = at.split('.').slice(0, -1).join('.');
+    const parent = getAt(body, at);
+    own = parent && typeof parent === 'object' && !Array.isArray(parent) ? koreanOf(parent) : '';
+  }
+  return own;
 }
 function whereOf(body, p) {
   const ps = p ? p.split('.') : [];
@@ -96,6 +102,8 @@ function whereOf(body, p) {
   }
   const ii = ps.indexOf('items');
   if (ii >= 0) bits.push('question ' + (Number(ps[ii + 1]) + 1));
+  const xi = ps.indexOf('extra');
+  if (xi >= 0) bits.push('custom field ' + (Number(ps[xi + 1]) + 1));
   const qi = ps.indexOf('questions');
   if (qi >= 0) bits.push('quiz question ' + (Number(ps[qi + 1]) + 1));
   const wi = ps.indexOf('words');
@@ -191,7 +199,7 @@ function settleFile(rel, entry, body) {
   const moves = [];
   vi.walk(body, (obj, p) => {
     Object.keys(obj).forEach((k) => {
-      const field = vi.fieldOfDraft(k);
+      const field = vi.fieldOfDraft(k, obj);
       if (!field || typeof obj[k] !== 'string' || !obj[k].trim()) return;
       if (vi.list(obj, vi.TODO).indexOf(field) >= 0) return;
       const en = typeof obj[field] === 'string' ? obj[field].trim() : '';

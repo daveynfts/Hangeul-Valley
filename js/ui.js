@@ -5421,6 +5421,9 @@ function wbTopikWhyHtml(ex, item, view) {
   // a plain one is split on its blank lines and escaped here.
   const parts = wbFmtParagraphs(item, 'why', tr(item, 'why'))
     || wbWhyParagraphs(tr(item, 'why')).map(vbEsc);
+  // The whole field's size, colour, font and emphasis, set in the designer, go on each
+  // paragraph; a box does not — the cards are boxes already.
+  const pc = wbParaClass(item, 'why');
   const lead = parts.shift() || '';
   const detail = parts;
   const state = view.ok ? '정답 · CORRECT' : '다시 보기 · REVIEW';
@@ -5429,7 +5432,7 @@ function wbTopikWhyHtml(ex, item, view) {
         '<summary><span>선택지 비교 · FULL REASONING</span><b>' + detail.length + '단계</b></summary>' +
         '<div class="wb-analysis-list">' + detail.map((p, k) =>
           '<div class="wb-analysis-step"><span>' + String(k + 1).padStart(2, '0') + '</span>' +
-          '<p>' + p + '</p></div>').join('') + '</div>' +
+          '<p' + pc + '>' + p + '</p></div>').join('') + '</div>' +
       '</details>'
     : '';
   return '<article class="wb-why wb-why-topik ' + (view.ok ? 'ok' : 'bad') + '">' +
@@ -5442,11 +5445,45 @@ function wbTopikWhyHtml(ex, item, view) {
     '<div class="wb-topik-meaning"><span>뜻 · MEANING</span><p>' + wbFmt(item, 'en', tr(item, 'en') || '') + '</p></div>' +
     '<div class="wb-learn-grid">' +
       (lead ? '<section class="wb-learn-card wb-learn-clue"><span>01 · 핵심 단서 · WHAT TO NOTICE</span>' +
-        '<p>' + lead + '</p></section>' : '') +
+        '<p' + pc + '>' + lead + '</p></section>' : '') +
       (tr(item, 'grammar') ? '<section class="wb-learn-card wb-learn-rule"><span>02 · 문법 포인트 · RULE</span>' +
         '<p>' + wbFmt(item, 'grammar', tr(item, 'grammar')) + '</p></section>' : '') +
+      wbExtraCards(item) +
     '</div>' + detailHtml +
   '</article>';
+}
+
+// A field's block styles for one paragraph of it: the attribute to put on its <p>, or ''.
+function wbParaClass(obj, name) {
+  const R = wbRich();
+  const cls = R ? R.specClasses(R.specOf(obj, name), { noBox: true }) : '';
+  return cls ? ' class="' + cls + '"' : '';
+}
+
+// Fields an author added to a question in the designer (item.extra): a heading and a body,
+// written in Vietnamese first and read through tr() like every other line of prose. On an exam
+// page they are more cards beside the clue and the rule; elsewhere, boxes under the grammar.
+function wbExtras(item) {
+  return (item && Array.isArray(item.extra) ? item.extra : [])
+    .filter((x) => x && String(tr(x, 'noteEn') || '').trim());
+}
+function wbExtraTitle(x) {
+  const title = String(tr(x, 'labelEn') || '').trim();
+  return title ? wbFmt(x, 'labelEn', title) : '';
+}
+function wbExtraCards(item) {
+  return wbExtras(item).map((x, k) => {
+    const title = wbExtraTitle(x);
+    return '<section class="wb-learn-card wb-learn-extra"><span>' + String(k + 3).padStart(2, '0') +
+      (title ? ' · ' + title : '') + '</span><p>' + wbFmt(x, 'noteEn', tr(x, 'noteEn')) + '</p></section>';
+  }).join('');
+}
+function wbExtraBoxes(item) {
+  return wbExtras(item).map((x) => {
+    const title = wbExtraTitle(x);
+    return '<div class="wb-why-extra">' + (title ? '<b class="wb-why-extra-h">' + title + '</b>' : '') +
+      wbFmt(x, 'noteEn', tr(x, 'noteEn'), true) + '</div>';
+  }).join('');
 }
 
 function renderWorkbook() {
@@ -5788,6 +5825,7 @@ function renderWorkbook() {
           '<div class="wb-why-body">' + wbFmt(item, 'why', tr(item, 'why'), true) + '</div>' +
           '<div class="wb-why-gram' + (wbFmtBoxed(item, 'grammar') ? ' hv-unboxed' : '') + '">📐 '
             + wbFmt(item, 'grammar', tr(item, 'grammar'), true) + '</div>' +
+          wbExtraBoxes(item) +
         '</div>';
       }).join('');
       // Every headword this world teaches becomes hoverable inside the explanation — unless

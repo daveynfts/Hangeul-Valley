@@ -192,11 +192,62 @@
       p.removeChild(el);
     }
 
+    // Take the selection out of the elements around it that `match`: each is split in two where
+    // the selection starts and ends, the pieces before and after keep it, and the selection
+    // leaves it — keeping only the classes `keep` returns, or none. Without this, a word picked
+    // inside a red run could not lose its red: what was taken out and put back went straight
+    // back inside the same red span. Markers hold the selection's ends through the surgery.
+    function liftOut(r, match, keep) {
+      const m1 = document.createElement('span');
+      const m2 = document.createElement('span');
+      const endAt = r.cloneRange(); endAt.collapse(false); endAt.insertNode(m2);
+      const startAt = r.cloneRange(); startAt.collapse(true); startAt.insertNode(m1);
+      for (let guard = 0; guard < 16; guard++) {
+        let anc = m1.parentElement;
+        while (anc && anc !== area && !(match(anc) && anc.contains(m2))) anc = anc.parentElement;
+        if (!anc || anc === area || !area.contains(anc)) break;
+        const parent = anc.parentNode;
+        const left = document.createRange();
+        left.setStart(anc, 0); left.setEndBefore(m1);
+        const leftFrag = left.extractContents();
+        const right = document.createRange();
+        right.setStartAfter(m2); right.setEnd(anc, anc.childNodes.length);
+        const rightFrag = right.extractContents();
+        const before = anc.cloneNode(false); before.appendChild(leftFrag);
+        const after = anc.cloneNode(false); after.appendChild(rightFrag);
+        const cls = keep ? keep(anc) : '';
+        parent.insertBefore(before, anc);
+        if (cls) {
+          const mid = anc.cloneNode(false);
+          mid.className = cls;
+          while (anc.firstChild) mid.appendChild(anc.firstChild);
+          parent.insertBefore(mid, anc);
+        } else {
+          while (anc.firstChild) parent.insertBefore(anc.firstChild, anc);
+        }
+        parent.insertBefore(after, anc);
+        parent.removeChild(anc);
+        [before, after].forEach((x) => { if (!x.textContent && !x.querySelector('img, br')) x.remove(); });
+      }
+      const out = document.createRange();
+      out.setStartAfter(m1);
+      out.setEndBefore(m2);
+      m1.remove();
+      m2.remove();
+      return out;
+    }
+    const classesOf = (el) => String(el.className || '').split(/\s+/).filter(Boolean);
+    const isKept = (el) => el.classList.contains('hre-blank') || el.classList.contains('hv-gl');
+
     // Wrap the selection in a span with one class, replacing any class of the same family
-    // already inside it. An empty class removes the family instead.
+    // already inside it or around it. An empty class removes the family instead.
     function applyClass(prefix, cls) {
-      const r = recall();
+      let r = recall();
       if (!r || r.collapsed) { say('Select some text first.', 'info'); return; }
+      r = liftOut(r,
+        (el) => (el.tagName === 'SPAN' || el.tagName === 'MARK') && !isKept(el)
+          && (el.tagName === 'MARK' ? prefix === 'hv-hl-' : classesOf(el).some((c) => c.indexOf(prefix) === 0)),
+        (el) => (el.tagName === 'MARK' ? '' : classesOf(el).filter((c) => c.indexOf(prefix) !== 0).join(' ')));
       const frag = r.extractContents();
       strip(frag, prefix);
       if (cls) {
@@ -228,21 +279,30 @@
       changed();
     }
 
-    // Everything inline goes; line breaks, pictures, blanks and meanings stay.
+    // Everything inline goes; line breaks, pictures, blanks and meanings stay — with nothing
+    // selected, from the whole text, by the same rule (it used to drop the meanings and the
+    // pictures too). A selection inside a bold or coloured run is taken out of it first.
+    const FORMAT_TAGS = { B: 1, STRONG: 1, I: 1, EM: 1, U: 1, S: 1, STRIKE: 1, SUB: 1, SUP: 1, SMALL: 1, MARK: 1, SPAN: 1, FONT: 1 };
     function clearFormatting() {
-      const r = recall();
+      let r = recall();
       if (!r || r.collapsed) {
         if (!window.confirm('Remove all formatting from this text?')) return;
-        area.innerHTML = R().fromText(R().plain(read()));
-        decorate(area);
-        changed();
-        return;
+        r = document.createRange();
+        r.selectNodeContents(area);
+      } else {
+        r = liftOut(r, (el) => !!FORMAT_TAGS[el.tagName] && !isKept(el), null);
       }
       const frag = r.extractContents();
       const holder = document.createElement('div');
       holder.appendChild(frag);
       holder.querySelectorAll('b, strong, i, em, u, s, strike, sub, sup, small, mark, span, font').forEach((el) => {
-        if (el.classList.contains('hre-blank') || el.classList.contains('hv-gl')) return;
+        if (isKept(el)) return;
+        unwrap(el);
+      });
+      holder.querySelectorAll('ul, ol, blockquote, h3, h4, p').forEach((el) => {
+        // A list, a quote or a heading comes apart into its lines.
+        el.querySelectorAll('li').forEach((li) => { li.appendChild(document.createElement('br')); unwrap(li); });
+        if (el.tagName === 'P' || el.tagName === 'H3' || el.tagName === 'H4') el.appendChild(document.createElement('br'));
         unwrap(el);
       });
       const out = document.createDocumentFragment();
@@ -434,14 +494,17 @@
         if (!o.multiline) { e.preventDefault(); return; }
         if (!inList) { e.preventDefault(); document.execCommand('insertLineBreak'); changed(); }
       }
-      if ((e.ctrlKey || e.metaKey) && !e.shiftKey && (e.key === 'b' || e.key === 'i' || e.key === 'u')) {
+      // Lower-cased: with Shift or Caps Lock the key reads "Z", and Ctrl+Shift+Z went to the
+      // browser's own redo inside the box instead of the Designer's.
+      const key = String(e.key || '').toLowerCase();
+      if ((e.ctrlKey || e.metaKey) && !e.shiftKey && (key === 'b' || key === 'i' || key === 'u')) {
         e.preventDefault();
-        exec({ b: 'bold', i: 'italic', u: 'underline' }[e.key]);
+        exec({ b: 'bold', i: 'italic', u: 'underline' }[key]);
       }
       // Undo and redo belong to the Designer's history, which covers every edit on the page.
-      if ((e.ctrlKey || e.metaKey) && (e.key === 'z' || e.key === 'y')) {
+      if ((e.ctrlKey || e.metaKey) && (key === 'z' || key === 'y')) {
         e.preventDefault();
-        if (typeof o.onHistory === 'function') o.onHistory(e.key === 'y' || e.shiftKey ? 'redo' : 'undo');
+        if (typeof o.onHistory === 'function') o.onHistory(key === 'y' || e.shiftKey ? 'redo' : 'undo');
       }
     });
     area.addEventListener('beforeinput', (e) => {
@@ -456,7 +519,7 @@
       const cd = e.clipboardData;
       const html = cd && cd.getData('text/html');
       const text = cd && cd.getData('text/plain');
-      const clean = html ? R().sanitize(html) : R().fromText(text || '');
+      const clean = html ? R().sanitize(fromOffice(html)) : R().fromText(text || '');
       document.execCommand('insertHTML', false, o.multiline ? clean : clean.replace(/<br>/g, ' '));
       decorate(area);
       changed();
@@ -467,7 +530,23 @@
       const g = e.target.closest && e.target.closest('.hv-gl');
       if (g) { selectNode(g); openGloss(root.querySelector('[data-cmd="gloss"]')); }
     });
-    document.addEventListener('mousedown', (e) => { if (!root.contains(e.target)) closePop(); });
+
+    // Bold, italic, underline, strike, super- and subscript light up for the text the caret is in.
+    const STATE_CMDS = ['bold', 'italic', 'underline', 'strikeThrough', 'superscript', 'subscript'];
+    function paintState() {
+      if (!range()) return;
+      STATE_CMDS.forEach((c) => {
+        const b = root.querySelector('[data-cmd="' + c + '"]');
+        let on = false;
+        try { on = document.queryCommandState(c); } catch (e) { on = false; }
+        if (b) b.classList.toggle('on', !!on);
+      });
+    }
+    // Two listeners on the document, taken off again with the editor: the Designer makes a new
+    // editor every time its panel redraws, and each one used to leave its listener behind.
+    const onDocDown = (e) => { if (!root.contains(e.target)) closePop(); };
+    document.addEventListener('mousedown', onDocDown);
+    document.addEventListener('selectionchange', paintState);
 
     load(o.html, o.text);
 
@@ -478,8 +557,47 @@
       getValue() { const html = read(); return { html, text: R().plain(html) }; },
       setLockedText(text) { o.text = text; },
       focus() { area.focus(); placeCaretAtEnd(); },
-      destroy() { root.remove(); }
+      destroy() {
+        document.removeEventListener('mousedown', onDocDown);
+        document.removeEventListener('selectionchange', paintState);
+        root.remove();
+      }
     };
+  }
+
+  // Word and Google Docs say bold and italic with styles, which the sanitizer drops — and Docs
+  // wraps a whole paste in <b style="font-weight:normal">, which it would keep, making everything
+  // pasted bold. The pasted HTML is read in a detached document first, and those are turned into
+  // the tags they mean.
+  function fromOffice(html) {
+    let doc;
+    try { doc = new DOMParser().parseFromString(String(html || ''), 'text/html'); } catch (e) { return html; }
+    const body = doc && doc.body;
+    if (!body) return html;
+    const weight = (el) => String((el.style && el.style.fontWeight) || '').toLowerCase();
+    const heavy = (w) => w === 'bold' || w === 'bolder' || (/^\d+$/.test(w) && Number(w) >= 600);
+    const unwrapIn = (el) => { const p = el.parentNode; while (el.firstChild) p.insertBefore(el.firstChild, el); p.removeChild(el); };
+    body.querySelectorAll('b, strong').forEach((el) => {
+      const w = weight(el);
+      if (w && !heavy(w)) unwrapIn(el);
+    });
+    body.querySelectorAll('span, font').forEach((el) => {
+      const st = el.style || {};
+      const wrap = (tag) => {
+        const w = doc.createElement(tag);
+        while (el.firstChild) w.appendChild(el.firstChild);
+        el.appendChild(w);
+      };
+      if (heavy(weight(el))) wrap('b');
+      if (String(st.fontStyle || '').toLowerCase() === 'italic') wrap('i');
+      const deco = String(st.textDecorationLine || st.textDecoration || '').toLowerCase();
+      if (deco.indexOf('underline') >= 0) wrap('u');
+      if (deco.indexOf('line-through') >= 0) wrap('s');
+      const va = String(st.verticalAlign || '').toLowerCase();
+      if (va === 'super') wrap('sup');
+      else if (va === 'sub') wrap('sub');
+    });
+    return body.innerHTML;
   }
 
   function toolbarHtml(o) {

@@ -78,7 +78,10 @@ game's own stylesheets; click any sentence to make it bold, italic, larger, colo
 or boxed, or to give a word a meaning on hover. A page (or a whole bank) takes a theme, a width,
 question columns, a zoom and a Korean font; text boxes, pictures and dividers can be placed
 between its sections; and every question type is editable, including the per-question ones the
-Workbooks tab only lists. Formatting is stored beside the text (`fmt` and `design` in the bank),
+Workbooks tab only lists. On an exam page each paragraph of an explanation — the clue, each
+reasoning step — is picked and edited on its own, and a question can carry **custom fields** of
+the author's own (`item.extra`: a heading and a text, shown with the answer as more cards or
+boxes). Formatting is stored beside the text (`fmt` and `design` in the bank),
 never inside it, so translations, recordings and answer checks read exactly what they read
 before, and a bank nobody has formatted renders byte for byte as it did. Uploaded pictures go to
 `media/`. [docs/content-designer.md](docs/content-designer.md) covers the storage, the sanitizer

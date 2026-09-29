@@ -4781,10 +4781,14 @@ STATIC_FILES.forEach(([rel]) => {
     });
     unread += viFirst.countAI(body);
   });
-  check('every line written in Vietnamese has its English before it is committed',
-    bare.length === 0,
-    bare.length + ' line(s) have only Vietnamese — ask Claude to write their English (node scripts/vi_first.js todo): '
-      + bare.slice(0, 6).join(', '));
+  // A line with only its Vietnamese is said, not failed. The deployed admin commits straight to
+  // main, and a custom field or a new line written there in Vietnamese waits for Claude's
+  // English by design; the game shows the Vietnamese in English mode meanwhile (js/i18n.js
+  // tr()). Failing here would leave main red, and Publish stopped, after every such save.
+  if (bare.length) {
+    console.log('      Vietnamese first: ' + bare.length + ' line(s) have only Vietnamese so far — ask Claude to write'
+      + ' their English (node scripts/vi_first.js todo): ' + bare.slice(0, 6).join(', '));
+  }
   if (owed || drafts || unread) {
     console.log(`      Vietnamese first: ${owed} English line(s) to rewrite, ${drafts} draft(s) to file, ${unread} AI English line(s) unread`);
   }

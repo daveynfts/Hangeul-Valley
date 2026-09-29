@@ -482,7 +482,9 @@
     return null;
   }
 
-  function specClasses(spec) {
+  // `noBox`: for a piece of a field drawn inside a card of its own (a paragraph of an exam
+  // explanation), where a box around each piece would read as a box inside a box.
+  function specClasses(spec, opts) {
     if (!spec) return '';
     const c = [];
     if (SIZES.indexOf(spec.size) >= 0) c.push('hv-sz-' + spec.size);
@@ -491,7 +493,7 @@
     if (FONTS.indexOf(spec.font) >= 0) c.push('hv-f-' + spec.font);
     if (spec.bold === true) c.push('hv-bold');
     if (spec.italic === true) c.push('hv-italic');
-    if (BOXES.indexOf(spec.box) >= 0) c.push('hv-box', 'hv-box-' + spec.box);
+    if (BOXES.indexOf(spec.box) >= 0 && !(opts && opts.noBox)) c.push('hv-box', 'hv-box-' + spec.box);
     return c.length ? 'hv-fmt ' + c.join(' ') : '';
   }
 
@@ -556,6 +558,24 @@
       .map((seg) => ({ tag: '#root', attrs: {}, kids: seg }))
       .filter(hasContent)
       .map((node) => serialize(node, 'show', o.lang).replace(/^(?:<br>|\s)+|(?:<br>|\s)+$/g, ''))
+      .filter(Boolean);
+  }
+
+  // The same paragraphs of plain text: split where the writer left a blank line (js/ui.js
+  // wbWhyParagraphs is this rule too). The index of a paragraph means the same in both.
+  function textParagraphs(text) {
+    return String(text === null || text === undefined ? '' : text)
+      .split(/\r?\n\s*\r?\n/).map((p) => p.trim()).filter(Boolean);
+  }
+
+  // A formatted field's paragraphs as stored html, for editing one of them on its own — the
+  // pieces fieldParagraphs shows, before a hover meaning becomes its game form. Joining them
+  // with a blank line (<br><br>) gives the field back.
+  function paragraphsOf(html) {
+    return splitParas(parse(html).kids)
+      .map((seg) => ({ tag: '#root', attrs: {}, kids: seg }))
+      .filter(hasContent)
+      .map((node) => serialize(node, 'store').replace(/^(?:<br>|\s)+|(?:<br>|\s)+$/g, ''))
       .filter(Boolean);
   }
 
@@ -1090,7 +1110,8 @@
     esc, escText, escAttr, decode, sanitize, plain, show, fromText, norm, matches, isRich,
     cleanSrc, parse,
     // reading overlays
-    specOf, inlineFor, specClasses, field, fieldParts, fieldParagraphs, ensureFonts, fontsIn,
+    specOf, inlineFor, specClasses, field, fieldParts, fieldParagraphs, textParagraphs, paragraphsOf,
+    ensureFonts, fontsIn,
     // design
     mergeDesign, designClasses, designScale, glossEntries, glossMode, blocksHtml, blockHtml,
     blockVisible,

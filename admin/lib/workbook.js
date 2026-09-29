@@ -187,7 +187,39 @@ function cleanItem(item, i, where, type, chipIds) {
     if (art.indexOf('..') >= 0) throw new Error(`${at}: art cannot walk out of the tree (got "${art}")`);
     out.art = art;
   }
+  const extra = cleanExtra(item.extra, at);
+  if (extra) out.extra = extra;
   return withFmt(out, item, at);
+}
+
+// Fields an author added to a question in the Designer: a heading (labelEn) and a body
+// (noteEn), shown with the answer. Both are prose, so they go the way the rest of a row's prose
+// goes — written in Vietnamese first, the English by Claude (drafts labelVi / noteVi and
+// enTodo carried by withFmt), and formatted beside the text. One with nothing to say, in
+// either language, is dropped rather than refused: it is a field that was added and never
+// filled in.
+const EXTRA_MAX = 12;
+function cleanExtra(list, at) {
+  if (list === undefined || list === null) return null;
+  if (!Array.isArray(list)) throw new Error(`${at}: extra must be a list of fields`);
+  const ids = new Set();
+  const out = [];
+  list.forEach((x, k) => {
+    const where = `${at} custom field ${k + 1}`;
+    if (!x || typeof x !== 'object' || Array.isArray(x)) throw new Error(`${where}: must be an object`);
+    const noteEn = str(x.noteEn);
+    const labelEn = str(x.labelEn);
+    if (!noteEn && !viFirst.hasDraft(x, 'noteEn')) return;
+    let id = str(x.id) || 'x' + (k + 1);
+    if (!/^[A-Za-z0-9_-]{1,24}$/.test(id)) throw new Error(`${where}: id "${id}" must be letters, digits, - or _`);
+    while (ids.has(id)) id += '_';
+    ids.add(id);
+    if (noteEn.length > 4000) throw new Error(`${where}: the text is longer than 4000 characters`);
+    if (labelEn.length > 120) throw new Error(`${where}: the heading is longer than 120 characters`);
+    out.push(withFmt({ id, labelEn, noteEn }, x, where));
+  });
+  if (out.length > EXTRA_MAX) throw new Error(`${at}: at most ${EXTRA_MAX} custom fields on one question`);
+  return out.length ? out : null;
 }
 
 // One set of buttons for one blank. There has to be something to get wrong — a
@@ -325,6 +357,8 @@ function cleanChoiceItem(item, i, where, type) {
     const v = str(item[k]);
     if (v) out[k] = v;
   });
+  const extra = cleanExtra(item.extra, at);
+  if (extra) out.extra = extra;
   return withFmt(out, item, at);
 }
 

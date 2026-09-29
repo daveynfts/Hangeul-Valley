@@ -276,3 +276,13 @@ span.hv-box-dashed { box-shadow: none; outline: 1.5px dashed #c4893a; outline-of
    and later, so a boxed row keeps its colours on a themed page; still not once it is marked. */
 #workbook-panel .wb-row.hv-fmt.hv-box:not(.ok):not(.bad):not(.drop) { background: var(--hv-bg); border-color: var(--hv-bd); }
 #workbook-panel .wb-row.hv-box-quote:not(.ok):not(.bad) { border-left: 4px solid #a16207; }
+
+/* Fields an author added to a question in the designer (item.extra): on an exam page a card
+   beside the clue and the rule, elsewhere a box under the grammar note. */
+.wb-learn-extra { border-left: 4px solid #0f766e; background: #f0fdfa; }
+.wb-learn-extra > span { color: #0f766e; }
+.wb-why-extra {
+  font-size: 12.5px; color: #134e4a; margin-top: 7px; line-height: 1.6;
+  background: #f0fdfa; border: 1px solid #14b8a6; border-radius: 3px; padding: 6px 8px;
+}
+.wb-why-extra-h { display: block; font-size: 11px; letter-spacing: .04em; color: #0f766e; margin-bottom: 2px; }

@@ -188,6 +188,24 @@ async function runTests() {
       assert(fresh <= 6, 'and nothing else moved — the setting and one comma (' + fresh + ' new lines)');
     });
 
+    await test('a question keeps the custom fields written on it, in Vietnamese, formatted', async () => {
+      const open = await request(port, 'GET', url);
+      const bank = open.body.data.body;
+      const it = bank.exercises[0].items[1];
+      it.extra = [
+        { id: 'x1', labelEn: '', labelVi: 'Mẹo nhớ', noteEn: '', noteVi: 'Nhìn vế sau trước.', fmt: { noteEn: { vi: 'Nhìn <b>vế sau</b> trước.' } } },
+        { id: 'x2', labelEn: '', noteEn: '' }
+      ];
+      const r = await request(port, 'PUT', url, bank);
+      assert(r.status === 200, 'status ' + r.status + ' ' + JSON.stringify(r.body).slice(0, 300));
+      const disk = JSON.parse(fs.readFileSync(path.join(sandbox, 'worlds', 'unit12-textbook.json'), 'utf8'));
+      const x = disk.exercises[0].items[1].extra;
+      assert(Array.isArray(x) && x.length === 1, 'the filled field is kept and the empty one dropped: ' + JSON.stringify(x));
+      assert(x[0].labelVi === 'Mẹo nhớ' && x[0].noteVi === 'Nhìn vế sau trước.' && x[0].fmt.noteEn.vi === 'Nhìn <b>vế sau</b> trước.',
+        'with its Vietnamese and its formatting');
+      assert(JSON.stringify(x[0].enTodo) === JSON.stringify(['noteEn', 'labelEn']), 'and the English it owes: ' + JSON.stringify(x[0].enTodo));
+    });
+
     await test('formatting written for other words is refused, by place', async () => {
       const open = await request(port, 'GET', url);
       const bank = open.body.data.body;

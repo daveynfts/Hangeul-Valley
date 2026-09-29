@@ -111,11 +111,17 @@
     if (!path) return root;
     return parts(path).reduce((o, k) => (o == null ? undefined : o[k]), root);
   }
+  // "exercises.0.items.3.why#2": the third paragraph of that field, as an exam page draws it.
+  function splitPara(path) {
+    const m = /^(.*)#(\d+)$/.exec(String(path || ''));
+    return m ? { path: m[1], para: Number(m[2]) } : { path: String(path || ''), para: -1 };
+  }
   function splitField(path) {
     const ps = String(path).split('.');
     return { obj: ps.slice(0, -1).join('.'), field: ps[ps.length - 1] };
   }
-  function labelFor(path) {
+  function labelFor(fullPath) {
+    const { path, para } = splitPara(fullPath);
     const p = parts(path);
     const field = p[p.length - 1];
     const bits = [];
@@ -125,6 +131,12 @@
       bits.push(T('Question {n}', { n: (item && item.n) || (p[qi + 1] + 1) }));
     }
     if (p.indexOf('example') >= 0) bits.push(T('Example [보기]'));
+    const xi = p.indexOf('extra');
+    if (xi >= 0) {
+      bits.push(T('Custom field {n}', { n: p[xi + 1] + 1 }));
+      bits.push(T(field === 'labelEn' ? 'Heading' : 'Content'));
+      return bits.join(' · ');
+    }
     const li = p.indexOf('lines');
     if (li >= 0) {
       const line = getAt(S.bank, p.slice(0, li + 2).join('.'));
@@ -134,6 +146,7 @@
     const ci = p.indexOf('choices') >= 0 ? p.indexOf('choices') : p.indexOf('choices2');
     if (ci >= 0) { bits.push((p[ci] === 'choices2' ? T('second blank') + ' · ' : '') + T('button {n}', { n: p[ci + 1] + 1 })); return bits.join(' · '); }
     bits.push(FIELD_LABEL[field] ? T(FIELD_LABEL[field]) : field);
+    if (para >= 0) bits.push(para === 0 ? T('What to notice') : T('Reasoning step {n}', { n: para }));
     return bits.join(' · ');
   }
   // A field the game reads a translation for — prose written for the learner, not Korean.
@@ -173,7 +186,7 @@
   }
   function restoreView() {
     if (S.exIndex >= (S.bank.exercises || []).length) S.exIndex = -1;
-    if (S.sel && S.sel.path && getAt(S.bank, S.sel.path) === undefined) S.sel = null;
+    if (S.sel && S.sel.path && getAt(S.bank, splitPara(S.sel.path).path) === undefined) S.sel = null;
     renderToolbar();
     renderInspector();
     schedulePreview();
@@ -582,7 +595,12 @@
   function fieldList() {
     const out = [];
     const e = ex();
-    const add = (path) => { const v = getAt(S.bank, path); if (typeof v === 'string' && v.trim()) out.push(path); };
+    const add = (path) => {
+      const v = getAt(S.bank, path);
+      if (typeof v !== 'string') return;
+      const { obj, field } = splitField(path);
+      if (v.trim() || VF().draftOf(getAt(S.bank, obj), field)) out.push(path);
+    };
     if (!e) {
       add('pickKo'); add('pickEn');
       (S.bank.exercises || []).forEach((x, i) => add('exercises.' + i + '.blurbEn'));
@@ -601,12 +619,37 @@
       (it.choices || []).forEach((c, k) => add(p + '.choices.' + k + '.ko'));
       (it.choices2 || []).forEach((c, k) => add(p + '.choices2.' + k + '.ko'));
       add(p + '.en'); add(p + '.why'); add(p + '.grammar');
+      (it.extra || []).forEach((x, k) => { add(p + '.extra.' + k + '.labelEn'); add(p + '.extra.' + k + '.noteEn'); });
     });
     return out;
   }
 
+  // A field split into its paragraphs — as text, and as html when its formatting lines up with
+  // them paragraph for paragraph (`htmls` is null when it does not, and each paragraph then
+  // starts again from its plain words).
+  function paraModel(text, html) {
+    const texts = R().textParagraphs(text);
+    let htmls = null;
+    if (html) {
+      const h = R().paragraphsOf(html);
+      if (h.length === texts.length && h.every((x, i) => R().matches(x, texts[i]))) htmls = h;
+    }
+    return { texts, htmls };
+  }
+  // The field again, with paragraph k replaced (a paragraph emptied is dropped, as a blank line
+  // would leave nothing to draw) — text joined by a blank line, html by <br><br>.
+  function joinParas(model, k, text, html) {
+    const texts = model.texts.slice();
+    const htmls = model.htmls ? model.htmls.slice() : model.texts.map((t) => R().fromText(t));
+    texts[k] = String(text == null ? '' : text).trim();
+    htmls[k] = html || R().fromText(texts[k]);
+    const keep = texts.map((t, i) => i).filter((i) => texts[i]);
+    return { text: keep.map((i) => texts[i]).join('\n\n'), html: keep.map((i) => htmls[i]).join('<br><br>') };
+  }
+
   function renderTextPanel(panel) {
-    const path = S.sel && S.sel.path;
+    const sel = S.sel && S.sel.path ? splitPara(S.sel.path) : null;
+    const path = sel ? sel.path : null;
     const val = path ? getAt(S.bank, path) : undefined;
     if (!path || typeof val !== 'string') {
       const list = fieldList();
@@ -636,20 +679,47 @@
     const blanks = /\.(lines\.\d+\.ko|stemKo)$/.test(path) && val.indexOf('{}') >= 0;
     const spec = specOf(obj, field) || {};
     const viNow = en ? viText(path) : '';
-    const shownText = viMode ? viNow : val;
+    const layer = viMode ? 'vi' : 'html';
+    const fullText = viMode ? viNow : val;
+    const fullHtml = spec[layer] && R().matches(spec[layer], fullText) ? spec[layer] : '';
+    // One paragraph of it, when a paragraph was picked on the page: the model is taken now, so
+    // what the editor holds always replaces the paragraph it opened with — even once a blank
+    // line typed into it has made two of it.
+    const base = sel.para >= 0 ? paraModel(fullText, fullHtml) : null;
+    const para = base && sel.para < base.texts.length ? sel.para : -1;
+    if (base && para < 0) { S.sel = { path }; renderTextPanel(panel); return; }
+    const shownText = para >= 0 ? base.texts[para] : fullText;
+    const shownHtml = para >= 0 ? (base.htmls ? base.htmls[para] : '') : fullHtml;
     const warn = [];
     if (!viMode && spec.html && !R().matches(spec.html, val)) warn.push(T('The formatting here was written for different words and is not shown. Format it again.'));
     if (viMode && spec.vi && viNow && !R().matches(spec.vi, viNow)) warn.push(T('The Vietnamese styling was made for different words and is not shown. Style it again.'));
+    // The other language beside it — the matching paragraph, when both have the same number.
+    const otherText = viMode ? val : viNow;
+    const otherParas = para >= 0 ? R().textParagraphs(otherText) : null;
+    const otherShown = otherParas && otherParas.length === base.texts.length ? otherParas[para] : otherText;
     const companion = !en ? ''
       : '<div class="dz-companion"><div class="dz-companion-h"><b>' + (viMode ? 'English' : 'Tiếng Việt') + '</b>'
         + '<span id="dz-state-slot">' + stateChip(obj, field) + '</span></div>'
-        + '<div class="dz-companion-t" translate="no">' + esc((viMode ? val : viNow) || '—') + '</div>'
+        + '<div class="dz-companion-t" translate="no">' + esc(otherShown || '—') + '</div>'
         + '<div class="dz-companion-a" id="dz-companion-a"></div></div>';
+    // Moving between the paragraphs, adding one, removing one — the words can only be
+    // changed where they are written, so not in Claude's English.
+    const canWrite = !enMode;
+    const paraBar = para < 0 ? ''
+      : '<div class="dz-parabar">'
+        + '<button type="button" class="dz-mini" data-pa="prev" title="' + esc(T('Previous paragraph')) + '"' + (para > 0 ? '' : ' disabled') + '>◀</button>'
+        + '<span class="dz-parapos">' + esc(T('Paragraph {a} of {b}', { a: para + 1, b: base.texts.length })) + '</span>'
+        + '<button type="button" class="dz-mini" data-pa="next" title="' + esc(T('Next paragraph')) + '"' + (para < base.texts.length - 1 ? '' : ' disabled') + '>▶</button>'
+        + '<span class="dz-grow"></span>'
+        + (canWrite ? '<button type="button" class="dz-link" data-pa="add">' + esc(T('＋ Add a step after this')) + '</button>'
+          + '<button type="button" class="dz-link dz-danger-link" data-pa="del">' + esc(T('Delete this paragraph')) + '</button>' : '')
+        + '<button type="button" class="dz-link" data-pa="whole">' + esc(T('Edit the whole field')) + '</button></div>';
 
     panel.innerHTML =
-      '<div class="dz-field-head"><div><div class="dz-field-label">' + esc(labelFor(path)) + '</div>'
-      + '<div class="dz-field-path" translate="no">' + esc(path) + '</div></div>'
+      '<div class="dz-field-head"><div><div class="dz-field-label">' + esc(labelFor(S.sel.path)) + '</div>'
+      + '<div class="dz-field-path" translate="no">' + esc(S.sel.path) + '</div></div>'
       + '<span class="dz-chip dz-chip-' + (viMode ? 'vi' : (en ? 'en' : 'ko')) + '">' + (viMode ? 'VI' : (en ? 'EN · AI' : 'KO')) + '</span></div>'
+      + paraBar
       + (warn.length ? '<div class="dz-warn">' + warn.map(esc).join('<br>') + '</div>' : '')
       + '<div id="dz-editor-host"></div>'
       + (viMode ? '<p class="dz-note">Write in Vietnamese — this is the text you own. Claude writes the English from it when you ask.</p>'
@@ -668,7 +738,7 @@
       const o = getAt(S.bank, objPath);
       const st = VF().status(o, field, entries());
       box.innerHTML = (st === 'ai' ? '<button type="button" class="dz-link" data-ca="read">✓ Mark the English as read</button>' : '')
-        + (st !== 'todo' && (val || viNow) ? '<button type="button" class="dz-link" data-ca="ask">✍ Ask Claude for a new English</button>' : '')
+        + (st !== 'todo' && st !== 'source' && (val || viNow) ? '<button type="button" class="dz-link" data-ca="ask">✍ Ask Claude for a new English</button>' : '')
         + (st === 'todo' && val ? '<button type="button" class="dz-link" data-ca="cancel">Keep the English as it is</button>' : '');
       box.querySelectorAll('[data-ca]').forEach((b) => {
         b.onclick = () => {
@@ -682,12 +752,26 @@
       });
     };
 
+    // Writes the field's text (whole) and its formatting in the layer being edited.
+    const write = (o, text, html) => {
+      const rich = html && R().isRich(html) ? R().sanitize(html) : null;
+      if (viMode) {
+        VF().setVi(o, field, text, entries());
+        setSpec(o, field, 'vi', rich);
+      } else if (enMode) {
+        setSpec(o, field, 'html', rich);
+      } else {
+        if (R().norm(text) !== R().norm(o[field])) o[field] = text;
+        setSpec(o, field, 'html', rich);
+      }
+    };
+
     S.editor = window.HVRichEditor.create(el('dz-editor-host'), {
-      html: viMode ? (spec.vi && R().matches(spec.vi, viNow) ? spec.vi : '') : (spec.html && R().matches(spec.html, val) ? spec.html : ''),
+      html: shownHtml,
       text: shownText,
       lang: viMode ? 'vi' : (en ? 'en' : 'ko'),
       placeholder: viMode ? T('Write the Vietnamese here…') : '',
-      multiline: MULTI_FIELDS.indexOf(field) >= 0 || /\.why$|\.grammar$|\.noteEn$/.test(path),
+      multiline: para >= 0 || MULTI_FIELDS.indexOf(field) >= 0 || /\.why$|\.grammar$|\.noteEn$/.test(path),
       keepBlanks: blanks,
       lockText: enMode,
       allowImages: MULTI_FIELDS.indexOf(field) >= 0,
@@ -696,25 +780,53 @@
       onHistory: (dir) => (dir === 'redo' ? redo() : undo()),
       onChange: ({ html, text }) => {
         const o = getAt(S.bank, objPath);
-        const rich = R().isRich(html) ? R().sanitize(html) : null;
-        if (viMode) {
-          VF().setVi(o, field, text, entries());
-          setSpec(o, field, 'vi', rich);
-        } else if (enMode) {
-          setSpec(o, field, 'html', rich);
+        if (para >= 0) {
+          const piece = R().isRich(html) ? R().sanitize(html) : '';
+          const out = joinParas(base, para, enMode ? base.texts[para] : text, piece);
+          write(o, out.text, out.html);
         } else {
-          if (R().norm(text) !== R().norm(o[field])) o[field] = text;
-          setSpec(o, field, 'html', rich);
+          write(o, text, html);
         }
-        commit('field:' + path + ':' + S.lang);
+        commit('field:' + S.sel.path + ':' + S.lang);
         if (en) paintActions();
       }
     });
     if (en) paintActions();
     bindStyleControls(panel, 'fs', (k, v) => { setSpec(getAt(S.bank, objPath), field, k, v); commit(); renderInspector(); });
+    panel.querySelectorAll('[data-pa]').forEach((b) => {
+      b.onclick = () => {
+        const act = b.getAttribute('data-pa');
+        const o = getAt(S.bank, objPath);
+        if (act === 'whole') { selectField(path); return; }
+        if (act === 'prev' || act === 'next') { selectField(path + '#' + (para + (act === 'next' ? 1 : -1))); return; }
+        const texts = base.texts.slice();
+        const htmls = base.htmls ? base.htmls.slice() : base.texts.map((t) => R().fromText(t));
+        if (act === 'add') {
+          texts.splice(para + 1, 0, '…');
+          htmls.splice(para + 1, 0, '…');
+        } else {
+          if (!window.confirm(T('Delete this paragraph?'))) return;
+          texts.splice(para, 1);
+          htmls.splice(para, 1);
+        }
+        write(o, texts.join('\n\n'), htmls.join('<br><br>'));
+        commit();
+        selectField(texts.length ? path + '#' + Math.min(act === 'add' ? para + 1 : Math.max(0, para - 1), texts.length - 1) : path);
+      };
+    });
     el('dz-clear-field').onclick = () => {
       const o = getAt(S.bank, objPath);
-      if (o.fmt) { delete o.fmt[field]; if (!Object.keys(o.fmt).length) delete o.fmt; }
+      const s = specOf(o, field);
+      if (!s) return;
+      // Only what is on screen: the layer being edited and the field's styles. The words' own
+      // line breaks stay — they are the text, and the game draws them only from the layer.
+      const kept = {};
+      const other = layer === 'vi' ? 'html' : 'vi';
+      if (s[other]) kept[other] = s[other];
+      const now = viMode ? viNow : o[field];
+      if (/\n/.test(String(now || ''))) kept[layer] = R().fromText(now);
+      if (Object.keys(kept).length) o.fmt[field] = kept; else delete o.fmt[field];
+      if (!Object.keys(o.fmt).length) delete o.fmt;
       commit();
       renderInspector();
     };
@@ -1289,6 +1401,7 @@
     html += qField(it, p, 'en', 'Meaning')
       + qField(it, p, 'why', 'Why this is the answer', true)
       + qField(it, p, 'grammar', 'Grammar note', true)
+      + extraEditor(it, p)
       + check(it, 'holdGloss', 'Hold this row’s English until checked');
     if (perItem) {
       const a = it.audio || {};
@@ -1298,8 +1411,31 @@
         + '<label class="dz-lab">Label<input class="form-input" data-au="labelEn" value="' + esc(a.labelEn || '') + '"></label></div></details>';
     }
     html += '<div class="dz-fbtns">' + ['phraseKo', 'en', 'why', 'grammar'].filter((k) => typeof it[k] === 'string' && it[k])
-      .map((k) => '<button type="button" class="dz-fbtn" data-fbtn="' + esc(p + '.' + k) + '">✏️ Format ' + esc(FIELD_LABEL[k] || k) + '</button>').join('') + '</div>';
+      .map((k) => '<button type="button" class="dz-fbtn" data-fbtn="' + esc(p + '.' + k) + '">'
+        + esc(T('✏️ Format {field}', { field: T(FIELD_LABEL[k] || k) })) + '</button>').join('') + '</div>';
     return html + '</div>';
+  }
+
+  // A question's own fields (item.extra): a heading and a text each, written in Vietnamese like
+  // the rest of the row's prose and shown with the answer — more cards beside the clue and the
+  // rule on an exam page, boxes under the grammar note elsewhere.
+  function extraEditor(it, p) {
+    const list = Array.isArray(it.extra) ? it.extra : [];
+    return '<div class="dz-extras"><div class="dz-lab">' + esc(T('Custom fields')) + ' <small class="dz-muted">'
+      + esc(T('— shown with the answer; one left empty is not saved')) + '</small></div>'
+      + list.map((x, k) => {
+        const xp = p + '.extra.' + k;
+        return '<div class="dz-extra"><div class="dz-extra-head"><b>' + esc(T('Custom field {n}', { n: k + 1 })) + '</b><span class="dz-grow"></span>'
+          + '<button type="button" class="dz-mini" data-xa="up:' + k + '" title="' + esc(T('Move up')) + '"' + (k ? '' : ' disabled') + '>↑</button>'
+          + '<button type="button" class="dz-mini" data-xa="down:' + k + '" title="' + esc(T('Move down')) + '"' + (k < list.length - 1 ? '' : ' disabled') + '>↓</button>'
+          + '<button type="button" class="dz-mini dz-danger" data-xa="del:' + k + '" title="' + esc(T('Delete this field')) + '">✕</button></div>'
+          + qField(x, xp, 'labelEn', 'Heading')
+          + qField(x, xp, 'noteEn', 'Content', true)
+          + '<button type="button" class="dz-fbtn" data-fbtn="' + esc(xp + '.noteEn') + '">' + esc(T('✏️ Format {field}', { field: T('Content') })) + '</button>'
+          + '</div>';
+      }).join('')
+      + (list.length < 12 ? '<button type="button" class="dz-link" id="dz-x-add">' + esc(T('＋ Add a custom field')) + '</button>' : '')
+      + '</div>';
   }
 
   function choiceEditor(it, listKey, ansKey, label, p) {
@@ -1327,8 +1463,15 @@
       };
     });
     panel.querySelectorAll('[data-qvi]').forEach((inp) => {
-      const key = inp.getAttribute('data-qvi').split('.').pop();
-      inp.oninput = () => { VF().setVi(it, key, inp.value, entries()); commit('qvi:' + p + ':' + key); };
+      // The row's own fields and its custom fields alike: the object is the one the path names.
+      const full = inp.getAttribute('data-qvi');
+      const { obj: op, field: key } = splitField(full);
+      inp.oninput = () => {
+        const o = getAt(S.bank, op);
+        if (!o) return;
+        VF().setVi(o, key, inp.value, entries());
+        commit('qvi:' + full);
+      };
       // The chips beside the field say whether the English now owes a rewrite.
       inp.onchange = () => renderInspector();
     });
@@ -1337,7 +1480,7 @@
         const act = b.getAttribute('data-qa');
         const list = e.items;
         const i = S.row;
-        if (act === 'del') { if (!window.confirm('Delete question ' + it.n + '?')) return; list.splice(i, 1); S.row = Math.min(i, list.length - 1); }
+        if (act === 'del') { if (!window.confirm(T('Delete question {n}?', { n: it.n }))) return; list.splice(i, 1); S.row = Math.min(i, list.length - 1); }
         else if (act === 'dup') { const c = clone(it); list.splice(i + 1, 0, c); S.row = i + 1; }
         else { const j = act === 'up' ? i - 1 : i + 1; const t = list[i]; list[i] = list[j]; list[j] = t; S.row = j; }
         list.forEach((q, k) => { q.n = k + 1; });
@@ -1383,6 +1526,37 @@
         redraw();
       };
     });
+    panel.querySelectorAll('[data-xa]').forEach((b) => {
+      b.onclick = () => {
+        const [act, ks] = b.getAttribute('data-xa').split(':');
+        const k = Number(ks);
+        const list = (it.extra || []).slice();
+        if (act === 'del') {
+          if (!window.confirm(T('Delete custom field {n}?', { n: k + 1 }))) return;
+          list.splice(k, 1);
+        } else {
+          const j = act === 'up' ? k - 1 : k + 1;
+          if (j < 0 || j >= list.length) return;
+          const t = list[k]; list[k] = list[j]; list[j] = t;
+        }
+        if (list.length) it.extra = list; else delete it.extra;
+        redraw();
+      };
+    });
+    const xadd = el('dz-x-add');
+    if (xadd) {
+      xadd.onclick = () => {
+        const list = it.extra || [];
+        const used = new Set(list.map((x) => x && x.id));
+        let n = list.length + 1;
+        while (used.has('x' + n)) n++;
+        it.extra = list.concat([{ id: 'x' + n, labelEn: '', noteEn: '' }]);
+        redraw();
+        // Straight into its heading.
+        const box = document.querySelector('[data-qvi="' + p + '.extra.' + (it.extra.length - 1) + '.labelEn"]');
+        if (box) box.focus();
+      };
+    }
     const c2 = el('dz-c2-add');
     if (c2) c2.onclick = () => { it.choices2 = [{ id: 'd1', ko: '' }, { id: 'd2', ko: '' }]; it.answer2 = 'd1'; redraw(); };
     const ans = el('dz-q-ans');
