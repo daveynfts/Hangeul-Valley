@@ -56,10 +56,13 @@ and in the test's pin together, and the row's `keySource` becomes `"book"` with 
 
 ## How the pages are shown
 
-- **1-2** — the sentence with its gap, and the four endings.
-- **3-4** — the TOPIK world's layout: the sentence as printed in the header, then again with a gap
-  where the underline was. The screen cannot underline, and read aloud the row is then a sentence
-  with the right paraphrase in it rather than a sentence followed by a fragment.
+- **1-2** — the sentence with its gap, once, and the four endings. `phraseKo` keeps the sentence
+  with the paper's `(   )`, but the desk does not print a headline that only repeats the row's
+  line (`wbHeadline` in `js/ui.js`).
+- **3-4** — the TOPIK world's layout: the sentence as printed in the header, its underlined part
+  underlined — the desk finds it as the words the gap line leaves out — then again with a gap
+  where the underline was, so read aloud the row is a sentence with the right paraphrase in it
+  rather than a sentence followed by a fragment.
 - **5-8** — the ad's lines, and `{}에 대한 글`, which is what every one of these questions asks.
 
 The bank sets `holdGloss` (an exam gloss is its answer), `keepOrder` (the 해설 says 정답은 ②번,
