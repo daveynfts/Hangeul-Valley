@@ -266,6 +266,36 @@ to benefit. A new bank can still vary it — Unit 12's 교과서 does, so the fi
 "the first one" to any reader that bypasses the renderer — but the deal is what protects the
 learner.
 
+### The headline, and a question read once
+
+A `build` row's `phraseKo` is printed above its lines as the headline. The exam banks put the
+question itself there — the 합격 레시피's `운동장에서 (   ) 친구와 부딪혀서 넘어졌다.` over a line
+reading the same with its gap, the TOPIK passages their first sentence over the passage — so
+every question was read twice. `wbHeadline` in `js/ui.js` does not print a headline that only
+repeats one of the row's own lines, `(   )` and `{}` counting as the same gap; anything else —
+a dictionary form, a cue, a 밑줄 excerpt, a label — is printed as before. So a bank may keep the
+sentence in `phraseKo` (the lists and the admin still read it) without the page repeating it.
+
+On a page whose instruction asks about an underlined part (밑줄), a headline that is the sentence
+as printed, over one line with a gap where the underline was, is drawn with the words between
+the two underlined. Formatting written for the headline in the Designer wins over that.
+
+A row that holds its gloss back (`holdGloss`) is a test question and draws its options as an
+even grid, as wide as its longest option needs (`wbQuestionClasses`). The admin Designer's
+preview carries copies of both rules, and `tests/test_workbook_headline.js` holds the two to the
+same answer on every row of every bank.
+
+### One question at a time
+
+Any page of several questions can be taken one at a time: the 🎲 above its questions
+(`wbSetDraw`) draws one from the same bag the TOPIK paper uses, checking it opens its answer and
+explanation alone, and the button — or Enter — draws the next; 📋 puts the whole page back, and
+leaving for the list ends it. A drawn question is paid its share of the page (a tenth of a
+clean page's XP, on a page of ten) and no honour, since paying each one a whole sitting's base
+and clean-page bonus made the same questions worth more than twice as much taken singly. A
+`drawOne` bank has no switch — it never shows a whole page — and is paid per sitting as before.
+`tests/test_workbook_draw.js`.
+
 ### Worked examples
 
 `example` on a `build` exercise carries the finished text (`answerKo`,

@@ -3227,14 +3227,17 @@ const overlayIds = [
   }());
 
   const uiForDraw = read(path.join('js', 'ui.js'));
+  // Any page can also be drawn a question at a time when the learner asks (st.draw, the 🎲 on
+  // the page — tests/test_workbook_draw.js); the paper's own draw is the same call.
   check('openWorkbookExercise draws instead of opening the whole paper',
-    /const ex = wbDrawOne\(st\.bank, whole\)/.test(uiForDraw));
-  check('and a bank that did not ask for it is handed back untouched',
-    /if \(!bank \|\| !bank\.drawOne \|\| items\.length < 2\) return ex;/.test(uiForDraw));
+    /const ex = wbDrawOne\(st\.bank, whole, !!st\.draw\)/.test(uiForDraw));
+  check('and a bank that did not ask for it is handed back untouched, unless the learner did',
+    /if \(!bank \|\| !\(bank\.drawOne \|\| force\) \|\| items\.length < 2\) return ex;/.test(uiForDraw));
   check('the draw is a bag, not a bare Math.random on every press',
     uiForDraw.indexOf('wbDrawBags') >= 0 && /bag\.left\.pop\(\)/.test(uiForDraw));
   check('after checking, a drawn paper offers the next question rather than the same one',
-    /btn\.onclick = drawn \? \(\) => openWorkbookExercise\(st\.ex\.id\) : resetWorkbook;/.test(uiForDraw));
+    /btn\.onclick = wbAfterCheck;/.test(uiForDraw)
+    && /if \(wbDrawn\(st\)\) openWorkbookExercise\(st\.ex\.id\);\s*else resetWorkbook\(\);/.test(uiForDraw));
   // Glossing the question before it is answered underlines the words it turns on, which is
   // most of the way to answering it. Once the answer is out there is nothing left to give away.
   // A page's design may ask for the meanings up front ('always', a reading aid) — but only by

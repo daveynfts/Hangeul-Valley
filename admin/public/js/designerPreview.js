@@ -89,6 +89,43 @@
     });
   }
 
+  // ── A question row's headline and shape — js/ui.js wbHeadline and wbQuestionClasses ──
+  // The game leaves out a headline that only repeats one of the row's lines (the exam pages'
+  // sentence with its "(   )"), underlines the part a 밑줄 question is about, and draws a test
+  // question's options as an even grid. The same rules, so the page here is the learner's page;
+  // tests/test_workbook_headline.js holds the two copies to the same answers on every bank.
+  function gapFlat(s) {
+    return String(s || '').replace(/\(\s*\)/g, '{}').replace(/\s+/g, ' ').trim();
+  }
+  function headline(ex, item) {
+    const text = String((item && item.phraseKo) || '');
+    const flat = gapFlat(text);
+    if (!flat) return null;
+    const lines = ((item && item.lines) || []).map((l) => gapFlat(l && l.ko));
+    if (lines.indexOf(flat) >= 0) return null;
+    const asks = /밑줄/.test(String((ex && ex.instructionKo) || '') + ' ' + String(item.instructionKo || ''));
+    const gapped = asks ? lines.filter((l) => l.split('{}').length === 2) : [];
+    if (gapped.length === 1) {
+      const [pre, post] = gapped[0].split('{}');
+      if ((pre.trim() || post.trim()) && flat.length > pre.length + post.length
+        && flat.indexOf(pre) === 0 && flat.endsWith(post)) {
+        const mm = flat.slice(pre.length, flat.length - post.length).match(/^(\s*)([\s\S]*?)(\s*)$/);
+        if (mm[2]) return { text, under: [pre + mm[1], mm[2], mm[3] + post] };
+      }
+    }
+    return { text, under: null };
+  }
+  function questionClasses(bank, ex, item, head, art) {
+    if (!ex || ex.type !== 'build' || !item || item.choices2) return '';
+    const choices = item.choices || [];
+    if (!choices.length || choices.some((c) => c && c.art)) return '';
+    if (!((bank && bank.holdGloss) || ex.holdGloss || item.holdGloss)) return '';
+    const longest = Math.max(...choices.map((c) => String((c && c.ko) || '').length));
+    let cls = ' wb-q' + (longest > 20 ? ' wb-q-long' : (longest > 9 ? ' wb-q-wide' : ''));
+    if (!head && !art && !(item.audio && item.audio.src)) cls += ' wb-q-bare';
+    return cls;
+  }
+
   // ── Drawing ─────────────────────────────────────────────────────────────────
   function render(win, m) {
     const doc = win.document;
@@ -121,6 +158,10 @@
       return out === null ? esc(shown) : out;
     };
     const boxed = (obj, f) => { const s = R.specOf(obj, f); return !!(s && R.BOXES.indexOf(s.box) >= 0); };
+    // js/ui.js wbHeadlineHtml: the designer's own formatting of a headline wins over the underline.
+    const headlineHtml = (it, head) => (head.under && !R.specOf(it, 'phraseKo')
+      ? esc(head.under[0]) + '<u class="wb-under">' + esc(head.under[1]) + '</u>' + esc(head.under[2])
+      : fmt(it, 'phraseKo', head.text));
     const at = (path) => ' data-hv-edit="' + esc(path) + '"';
     const icon = (key, px) => (typeof win.workbookIconSvg === 'function' ? win.workbookIconSvg(key, px) : '');
 
@@ -250,6 +291,7 @@
         if (perItem) {
           const hold = (holdAll || it.holdGloss) && !answers;
           const art = icon(it.art || it.phraseKo || it.ko || '', 4);
+          const head = headline(ex, it);
           const two = !!(it.choices2 || it.answer2);
           const right1 = answers ? answerText(choice(it, it.answer, 1)) : '';
           const right2 = answers && two ? answerText(choice(it, it.answer2, 2)) : '';
@@ -270,9 +312,9 @@
             picks += '<span class="wb-exp-sep"></span>' + ['yes', 'no'].map((v) =>
               '<button type="button" class="wb-pick-own"><span class="wb-chip-key">' + (++key) + '</span>' + esc(own[v] || '') + '</button>').join('');
           }
-          return '<div class="' + rowCls + '" data-hv-row="' + i + '"><span class="wb-n">' + esc(it.n) + ')</span>'
+          return '<div class="' + rowCls + questionClasses(bank, ex, it, head, art) + '" data-hv-row="' + i + '"><span class="wb-n">' + esc(it.n) + ')</span>'
             + '<div class="wb-exp"><div class="wb-exp-head">' + art
-            + '<span class="wb-exp-phrase"' + at(p + '.phraseKo') + '>' + fmt(it, 'phraseKo', it.phraseKo || '') + '</span>'
+            + (head ? '<span class="wb-exp-phrase"' + at(p + '.phraseKo') + '>' + headlineHtml(it, head) + '</span>' : '')
             + (hold ? '' : '<span class="wb-exp-en"' + at(p + '.en') + '>' + fmt(it, 'en', tr(it, 'en') || '') + '</span>')
             + (it.audio && it.audio.src ? '<button type="button" class="wb-say book">🔊</button>' : '')
             + '</div><div class="wb-exp-line">' + lineHtml(ex, it, right1, { second: right2, path: p }) + '</div>'
@@ -343,7 +385,7 @@
               + String(k + 1).padStart(2, '0') + '</span><p' + pc + '>' + s + '</p></div>').join('')
             + '</div></details>' : '';
         return '<article class="wb-why wb-why-topik ok"><div class="wb-topik-status"><span>정답 · CORRECT</span><b>정답 · ANSWER</b></div>'
-          + '<div class="wb-why-head">' + esc(it.n) + ') ' + sentence + '</div>'
+          + '<div class="wb-why-head"><span class="wb-why-n">' + esc(it.n) + ')</span><div class="wb-why-lines">' + sentence + '</div></div>'
           + '<div class="wb-topik-meaning"><span>뜻 · MEANING</span><p' + at(p + '.en') + '>' + fmt(it, 'en', tr(it, 'en') || '') + '</p></div>'
           + '<div class="wb-learn-grid">'
           + (lead ? '<section class="wb-learn-card wb-learn-clue"' + para(0) + '><span>01 · 핵심 단서 · WHAT TO NOTICE</span><p' + pc + '>' + lead + '</p></section>' : '')
@@ -549,5 +591,5 @@
     return ranges.length;
   }
 
-  window.HVDesignerPreview = { mount, render, markSelection, srcdoc, findWord, visibleText };
+  window.HVDesignerPreview = { mount, render, markSelection, srcdoc, findWord, visibleText, headline, questionClasses };
 }());

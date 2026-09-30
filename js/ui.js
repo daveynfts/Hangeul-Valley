@@ -4594,7 +4594,9 @@ function renderDictation() {
 function openWorkbook(bank) {
   if (!bank || !(bank.exercises || []).length) return;
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
-  workbookState = { bank: bank, mode: 'pick', ex: null, pick: 0 };
+  // `draw` is the learner asking for one question at a time on a page that shows them all
+  // (wbSetDraw); a drawOne bank does that by itself and never sets it.
+  workbookState = { bank: bank, mode: 'pick', ex: null, pick: 0, draw: false };
   renderWorkbook();
   setModalState('workbook-overlay', true);
 }
@@ -4636,11 +4638,18 @@ function wbDrawIndex(key, count) {
 
 // A shallow clone carrying one item. Everything downstream reads ex.items — the renderer, the
 // scorer, the explanation, the gloss — so none of them need to know a draw happened.
-function wbDrawOne(bank, ex) {
+//
+// A drawOne bank always draws. Any other page draws when `force` says the learner asked for one
+// question at a time (the 🎲 above its questions), from the same bag, so a round still meets
+// every question once before any comes back. `drawnSeen` is how far into that round this one is.
+function wbDrawOne(bank, ex, force) {
   const items = (ex && ex.items) || [];
-  if (!bank || !bank.drawOne || items.length < 2) return ex;
-  const i = wbDrawIndex(String(bank.id || '') + '/' + String(ex.id || ''), items.length);
-  return Object.assign({}, ex, { items: [items[i]], drawnFrom: items.length, drawnAt: i });
+  if (!bank || !(bank.drawOne || force) || items.length < 2) return ex;
+  const key = String(bank.id || '') + '/' + String(ex.id || '');
+  const i = wbDrawIndex(key, items.length);
+  const bag = wbDrawBags.get(key);
+  const seen = bag ? bag.count - bag.left.length : 1;
+  return Object.assign({}, ex, { items: [items[i]], drawnFrom: items.length, drawnAt: i, drawnSeen: seen });
 }
 
 // A sitting deals the buttons in an order of its own. The banks are written with the right
@@ -4701,7 +4710,7 @@ function openWorkbookExercise(id) {
   if (!st) return;
   const whole = (st.bank.exercises || []).find(e => e.id === id);
   if (!whole) return;
-  const ex = wbDrawOne(st.bank, whole);
+  const ex = wbDrawOne(st.bank, whole, !!st.draw);
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
   // One exercise's recording has nothing to say over another's.
   if (!st.ex || st.ex.id !== ex.id) wbStopTrack();
@@ -4725,6 +4734,69 @@ function openWorkbookExercise(id) {
   renderWorkbook();
 }
 
+// ── One question at a time ───────────────────────────────────────────────────
+// Ten questions on a page and, once checked, ten explanations under them is a lot to hold at
+// once. So any page of several questions can be taken one at a time instead: a question drawn
+// at random, its own answer and explanation when it is checked, and then the next one. It is
+// the TOPIK paper's draw, asked for by the learner rather than set by the bank — which is why a
+// drawOne bank offers no switch: it never shows a whole page to switch from.
+function wbCanDraw() {
+  const st = workbookState;
+  if (!wbInExercise() || (st.bank && st.bank.drawOne)) return false;
+  const whole = (st.bank.exercises || []).find(e => e.id === st.ex.id);
+  return !!whole && (whole.items || []).length > 1;
+}
+
+// A page showing one drawn question, whoever asked for the draw.
+function wbDrawn(st) {
+  return !!(st && st.ex && st.ex.drawnFrom > 1);
+}
+
+function wbSetDraw(on) {
+  const st = workbookState;
+  if (!wbCanDraw()) return;
+  st.draw = !!on;
+  openWorkbookExercise(st.ex.id);
+}
+
+// What the page does once its answers are out, from the button and from Enter alike: a drawn
+// question moves on to the next one, and a whole page is dealt again.
+function wbAfterCheck() {
+  const st = workbookState;
+  if (!wbInExercise() || !st.checked) return;
+  if (wbDrawn(st)) openWorkbookExercise(st.ex.id);
+  else resetWorkbook();
+}
+
+// The strip above the questions: the switch to one at a time and back, and, while a drawn
+// question is up, which one it is and how far into the round it comes. A drawOne bank gets the
+// line without the switch; the list of exercises gets neither.
+function wbRenderDrawBar() {
+  const bar = $('wb-draw');
+  if (!bar) return;
+  const st = workbookState;
+  const drawn = !!(st && st.mode === 'exercise' && wbDrawn(st));
+  const can = wbCanDraw();
+  bar.innerHTML = '';
+  if (!drawn && !can) { bar.className = 'wb-hidden'; return; }
+  bar.className = drawn ? 'on' : '';
+  if (drawn) {
+    const item = (st.ex.items || [])[0] || {};
+    const line = document.createElement('span');
+    line.className = 'wb-draw-status';
+    line.textContent = hvT('ui.wb.draw.status', { n: item.n, seen: st.ex.drawnSeen || 1, total: st.ex.drawnFrom });
+    bar.appendChild(line);
+  }
+  if (can) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'wb-draw-btn';
+    b.textContent = drawn ? hvT('ui.wb.draw.all', { n: st.ex.drawnFrom }) : hvT('ui.wb.draw.one');
+    b.onclick = () => wbSetDraw(!drawn);
+    bar.appendChild(b);
+  }
+}
+
 function backToWorkbookList() {
   const st = workbookState;
   if (!st) return;
@@ -4733,6 +4805,8 @@ function backToWorkbookList() {
   st.mode = 'pick';
   st.ex = null;
   st.checked = false;
+  // The next page opens whole: one at a time is a choice made on a page, not a setting.
+  st.draw = false;
   renderWorkbook();
 }
 
@@ -4780,6 +4854,74 @@ function wbSlots(item) {
 }
 function wbSlotTotal(ex) {
   return (ex && ex.items || []).reduce((n, it) => n + wbSlots(it), 0);
+}
+
+// The headline a row prints above the sentence it builds. It names the task — a dictionary
+// form, a topic, what a picture shows — and most rows need it. An exam row does not: the 합격
+// 레시피 and TOPIK pages carried their sentence as the headline, with the paper's (   ), and
+// again as the line to fill, so every question was read twice, and the TOPIK passages printed
+// their opening sentence twice the same way. A headline that only repeats one of the row's own
+// lines — ( ) and {} being the same gap — names nothing, and the row goes without it.
+//
+// One headline that looks like a repeat is not. On a page asking about an underlined part (밑줄),
+// the sentence as printed is the only place the underlined words are: the line under it has a
+// gap where they were. The two agree up to the gap and again after it, so the words in between
+// are the underlined part, and they are drawn underlined, the way the paper prints them.
+//
+// null for no headline; otherwise { text, under }, where `under`, when there is one, is the
+// headline cut into what comes before the underlined part, the part, and what follows.
+function wbGapFlat(s) {
+  return String(s || '').replace(/\(\s*\)/g, '{}').replace(/\s+/g, ' ').trim();
+}
+function wbHeadline(ex, item) {
+  const text = String((item && item.phraseKo) || '');
+  const flat = wbGapFlat(text);
+  if (!flat) return null;
+  const lines = ((item && item.lines) || []).map(l => wbGapFlat(l && l.ko));
+  if (lines.indexOf(flat) >= 0) return null;
+  const asks = /밑줄/.test(String((ex && ex.instructionKo) || '') + ' ' + String(item.instructionKo || ''));
+  const gapped = asks ? lines.filter(l => l.split('{}').length === 2) : [];
+  if (gapped.length === 1) {
+    const [pre, post] = gapped[0].split('{}');
+    if ((pre.trim() || post.trim()) && flat.length > pre.length + post.length
+      && flat.indexOf(pre) === 0 && flat.endsWith(post)) {
+      // Spaces at either end of the part belong to the sentence, not to the underline.
+      const m = flat.slice(pre.length, flat.length - post.length).match(/^(\s*)([\s\S]*?)(\s*)$/);
+      if (m[2]) return { text, under: [pre + m[1], m[2], m[3] + post] };
+    }
+  }
+  return { text, under: null };
+}
+function wbHeadlineHtml(item, head) {
+  // Formatting written for the headline in the designer is the author's own reading of it, and
+  // wins over the underline worked out here.
+  const R = wbRich();
+  if (head.under && !(R && R.specOf(item, 'phraseKo'))) {
+    return vbEsc(head.under[0]) + '<u class="wb-under">' + vbEsc(head.under[1]) + '</u>' + vbEsc(head.under[2]);
+  }
+  return wbFmt(item, 'phraseKo', head.text);
+}
+
+// A test question, drawn as one: its options in an even grid under the sentence, the way a paper
+// sets them out, rather than a ragged strip of buttons. A row is a test question when it holds
+// its translation back until checking — the gloss would answer it — and asks for one choice
+// among words rather than pictures. A test question with nothing above its sentence (no
+// headline, no picture, no recording) opens on the sentence, so its number sits on the
+// sentence's first line, and a lone line loses its speaker chip, which labels nothing once
+// there is nothing else on the row. The width of the grid's columns follows the longest option,
+// so a four-word ending sits four across and a headline-length option gets a line of its own.
+//
+// Asked of the data rather than of what is on screen, so a row keeps its shape when checking
+// brings its translation and its 🔊 in above the sentence.
+function wbQuestionClasses(st, ex, item, head, art) {
+  if (!ex || ex.type !== 'build' || !item || wbSlots(item) !== 1) return '';
+  const choices = item.choices || [];
+  if (!choices.length || choices.some(c => c && c.art)) return '';
+  if (!((st && st.bank && st.bank.holdGloss) || ex.holdGloss || item.holdGloss)) return '';
+  const longest = Math.max(...choices.map(c => String((c && c.ko) || '').length));
+  let cls = ' wb-q' + (longest > 20 ? ' wb-q-long' : (longest > 9 ? ' wb-q-wide' : ''));
+  if (!head && !art && !(item.audio && item.audio.src)) cls += ' wb-q-bare';
+  return cls;
 }
 
 function wbChip(id, item) {
@@ -4908,10 +5050,19 @@ function checkWorkbook() {
   // the other for the same amount of work.
   if (typeof ensurePlayerRank === 'function') ensurePlayerRank();
   if (typeof studySessionXp === 'function' && typeof addPlayerXp === 'function') {
-    const xp = studySessionXp(st.score, total);
+    // A question the learner drew from a page is paid its share of that page, as though every
+    // question on it had gone the way this one did. A sitting's pay carries a base and a bonus
+    // for a clean page, and paid on every question the same ten questions would earn more than
+    // twice as much taken one at a time (44 XP each against 17), with the honour for a clean
+    // page one question away. The TOPIK paper's own draw is paid as it always was: a sitting
+    // there is one question by design.
+    const share = (st.draw && !st.bank.drawOne && wbDrawn(st)) ? st.ex.drawnFrom : 1;
+    const xp = share > 1
+      ? Math.round(studySessionXp(st.score * share, total * share) / share)
+      : studySessionXp(st.score, total);
     const after = addPlayerXp(xp);
     st.gain = { xp: xp, leveled: after.leveled, level: after.level };
-    if (st.score === total && typeof addHonor === 'function') addHonor(2);
+    if (st.score === total && share === 1 && typeof addHonor === 'function') addHonor(2);
     if (typeof persistSave === 'function') persistSave();
     if (typeof updateRankHUD === 'function') updateRankHUD();
   }
@@ -5440,10 +5591,12 @@ function wbTopikWhyHtml(ex, item, view) {
     : '';
   return '<article class="wb-why wb-why-topik ' + (view.ok ? 'ok' : 'bad') + '">' +
     '<div class="wb-topik-status"><span>' + state + '</span><b>정답 · ANSWER</b></div>' +
-    '<div class="wb-why-head">' + item.n + ') ' +
+    // The number beside the sentence rather than on a line above it, the way the question
+    // itself is drawn (css/game.css .wb-why-lines).
+    '<div class="wb-why-head"><span class="wb-why-n">' + item.n + ')</span><div class="wb-why-lines">' +
       wbLineHtml(ex, item, wbAnswerText(view.correct), {
         plain: true, own: view.own, second: view.correct2 ? wbAnswerText(view.correct2) : ''
-      }) + '</div>' +
+      }) + '</div></div>' +
     (view.ok ? '' : '<div class="wb-why-yours">내 답 · YOU PUT: ' + vbEsc(view.yours) + '</div>') +
     '<div class="wb-topik-meaning"><span>뜻 · MEANING</span><p>' + wbFmt(item, 'en', tr(item, 'en') || '') + '</p></div>' +
     '<div class="wb-learn-grid">' +
@@ -5562,6 +5715,8 @@ function renderWorkbook() {
     }
   }
 
+  wbRenderDrawBar();
+
   // A match exercise whose prompts are pictures is drawn as the book draws it:
   // two columns, pictures down one side and names down the other. Stacking the
   // names above the pictures instead — which is what every other type does —
@@ -5628,6 +5783,8 @@ function renderWorkbook() {
         // again is a round trip through the parser for nothing.
         const art = (typeof workbookIconSvg === 'function')
           ? workbookIconSvg(item.art || item.phraseKo || item.ko || '', 4) : '';
+        const headline = wbHeadline(ex, item);
+        row.className += wbQuestionClasses(st, ex, item, headline, art);
         const num = document.createElement('span');
         num.className = 'wb-n';
         num.textContent = item.n + ')';
@@ -5643,8 +5800,9 @@ function renderWorkbook() {
         // "I did badly in the exam" beside the row answers it before anyone presses play. And
         // so can one row — a question on a culture page whose gloss ends "— Winter."
         const holdGloss = !!((st.bank && st.bank.holdGloss) || ex.holdGloss || item.holdGloss) && !st.checked;
+        // Nothing at all leaves the head empty, and css/game.css takes an empty head off the row.
         head.innerHTML = art +
-          '<span class="wb-exp-phrase">' + wbFmt(item, 'phraseKo', item.phraseKo || '') + '</span>' +
+          (headline ? '<span class="wb-exp-phrase">' + wbHeadlineHtml(item, headline) + '</span>' : '') +
           (holdGloss ? '' : '<span class="wb-exp-en">' + wbFmt(item, 'en', tr(item, 'en') || '') + '</span>');
         // And the same row keeps its voice until then. With no recording of its own the button
         // reads the row out with the right answers in it — the drill's model, and on a held row
@@ -5854,13 +6012,14 @@ function renderWorkbook() {
   if (btn) {
     btn.className = '';
     if (st.checked) {
-      // Re-asking a question whose answer is on screen teaches nothing, so a draw-one bank
-      // offers the next question instead of the same one again.
-      const drawn = !!(st.bank.drawOne && st.ex && st.ex.drawnFrom > 1);
+      // Re-asking a question whose answer is on screen teaches nothing, so a drawn question —
+      // a draw-one bank's, or one the learner asked for — offers the next question instead of
+      // the same one again.
+      const drawn = wbDrawn(st);
       btn.textContent = drawn
         ? (st.bank.nextKo || '다음 문제') + ' →'
         : (st.bank.againKo || '다시 풀기');
-      btn.onclick = drawn ? () => openWorkbookExercise(st.ex.id) : resetWorkbook;
+      btn.onclick = wbAfterCheck;
       btn.disabled = false;
     } else {
       btn.textContent = (st.bank.checkKo || '확인') + ' ' + (tr(st.bank, 'checkEn') || hvT('ui.wb.checkWord'));
@@ -5892,6 +6051,7 @@ function renderWorkbookPicker() {
   }
   const exBox = $('wb-example');
   if (exBox) { exBox.innerHTML = ''; exBox.className = 'wb-hidden'; }
+  wbRenderDrawBar();
   const bank = $('wb-bank');
   if (bank) { bank.innerHTML = ''; bank.className = 'wb-hidden'; }
   const explain = $('wb-explain');
@@ -6056,7 +6216,9 @@ if (typeof window !== 'undefined' && window.addEventListener) {
     // is reached with the button or Esc-then-reopen instead.
     if (e.key === 'Enter') {
       e.preventDefault();
-      if (st.checked) resetWorkbook(); else checkWorkbook();
+      // Once checked, Enter presses what the button says: 다시 풀기 on a whole page, the next
+      // question on a drawn one.
+      if (st.checked) wbAfterCheck(); else checkWorkbook();
     } else if (e.key === 'ArrowDown') {
       e.preventDefault(); wbMoveFocus(1);
     } else if (e.key === 'ArrowUp') {
@@ -6138,6 +6300,7 @@ if (typeof window !== 'undefined') {
   window.wbSetOwn = wbSetOwn;
   window.wbComplete = wbComplete;
   window.resetWorkbook = resetWorkbook;
+  window.wbSetDraw = wbSetDraw;
   window.openRankCard = openRankCard;
   window.closeRankCard = closeRankCard;
   window.closeRankUp = closeRankUp;
